@@ -27,7 +27,7 @@ const Hero: React.FC = () => {
           </button>
         ))}
       </div>
-      <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-semibold tracking-tight leading-[1.05] text-foreground">
+      <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-semibold tracking-tight leading-[1.05] text-foreground">
         I’m a systems thinker with a high bar for quality. From process to pixels, I’ll collaborate with you, learn from you, and help make something we’re proud of.
       </h1>
       <p className="mt-6 text-lg text-muted-foreground">
