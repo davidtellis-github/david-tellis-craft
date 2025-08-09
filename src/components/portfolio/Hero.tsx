@@ -71,8 +71,8 @@ const Hero: React.FC = () => {
 
       <div className="mb-4 text-sm text-muted-foreground">Hello there,</div>
 
-      <Tabs value={active} onValueChange={setActive} className="w-full">
-        <TabsList className="h-auto p-0 bg-transparent border-0 flex flex-wrap gap-6 text-sm text-muted-foreground">
+      <Tabs value={active} onValueChange={setActive} className="w-full text-left pt-4">
+        <TabsList className="h-auto p-0 bg-transparent border-0 flex flex-wrap gap-6 justify-start text-sm text-muted-foreground">
           {tabsData.map((t) => (
             <TabsTrigger
               key={t.key}
