@@ -10,15 +10,15 @@ import w8 from "@/assets/work-8.jpg";
 import w9 from "@/assets/work-9.jpg";
 
 const projects = [
-  { title: "Design System Platform", img: w1 },
-  { title: "Insights Dashboard", img: w2 },
-  { title: "Mobile Banking IA", img: w3 },
-  { title: "Commerce Checkout", img: w4 },
-  { title: "Team Collaboration", img: w5 },
-  { title: "Patient Portal", img: w6 },
-  { title: "Creator Tools", img: w7 },
-  { title: "Maps & Mobility", img: w8 },
-  { title: "AI-assisted Editor", img: w9 },
+  { title: "Design System Platform", img: w1, slug: "design-system-platform" },
+  { title: "Insights Dashboard", img: w2, slug: "insights-dashboard" },
+  { title: "Mobile Banking IA", img: w3, slug: "mobile-banking-ia" },
+  { title: "Commerce Checkout", img: w4, slug: "commerce-checkout" },
+  { title: "Team Collaboration", img: w5, slug: "team-collaboration" },
+  { title: "Patient Portal", img: w6, slug: "patient-portal" },
+  { title: "Creator Tools", img: w7, slug: "creator-tools" },
+  { title: "Maps & Mobility", img: w8, slug: "maps-and-mobility" },
+  { title: "AI-assisted Editor", img: w9, slug: "ai-assisted-editor" },
 ];
 
 const WorkGrid: React.FC = () => {

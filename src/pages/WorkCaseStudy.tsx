@@ -1,0 +1,313 @@
+import React, { useEffect } from "react";
+import { useParams } from "react-router-dom";
+
+function titleCaseFromSlug(slug?: string) {
+  if (!slug) return "Case Study";
+  return slug
+    .split("-")
+    .map((s) => s.charAt(0).toUpperCase() + s.slice(1))
+    .join(" ");
+}
+
+const WorkCaseStudy: React.FC = () => {
+  const { slug } = useParams();
+  const productName = titleCaseFromSlug(slug);
+
+  // Simple SEO: title, description, canonical
+  useEffect(() => {
+    const title = `${productName} – Case Study`;
+    document.title = title;
+
+    const descText = `${productName}: Case study overview, role & scope, context, jobs, key bet, process, experiments, outcomes.`;
+    let meta = document.querySelector('meta[name="description"]');
+    if (!meta) {
+      meta = document.createElement("meta");
+      meta.setAttribute("name", "description");
+      document.head.appendChild(meta);
+    }
+    meta.setAttribute("content", descText);
+
+    let canonical = document.querySelector('link[rel="canonical"]');
+    if (!canonical) {
+      canonical = document.createElement("link");
+      canonical.setAttribute("rel", "canonical");
+      document.head.appendChild(canonical);
+    }
+    canonical.setAttribute("href", window.location.href);
+  }, [productName]);
+
+  return (
+    <div className="min-h-screen bg-background text-foreground">
+      {/* Top Nav */}
+      <header className="sticky top-0 z-40 backdrop-blur supports-[backdrop-filter]:bg-background/70 bg-background/80 border-b border-border">
+        <div className="container mx-auto px-6 lg:px-10 py-3 flex items-center gap-4">
+          <div className="font-semibold tracking-tight">Case Study · 0→1</div>
+          <nav className="hidden md:flex gap-3 text-sm text-muted-foreground">
+            {[
+              ["hero", "Hero"],
+              ["scope", "Role & Scope"],
+              ["context", "Context"],
+              ["jobs", "Users & Jobs"],
+              ["bet", "Key Bet"],
+              ["how", "How I Worked"],
+              ["system", "System Snapshot"],
+              ["moments", "Key Moments"],
+              ["experiments", "Experiments"],
+              ["outcomes", "Outcomes"],
+              ["next", "What’s Next"],
+              ["credits", "Credits"],
+              ["receipts", "Receipts"],
+            ].map(([id, label]) => (
+              <a key={id} href={`#${id}`} className="px-2 py-1 rounded-lg hover:bg-muted">
+                {label}
+              </a>
+            ))}
+          </nav>
+        </div>
+      </header>
+
+      {/* Page Body */}
+      <main className="container mx-auto px-6 lg:px-10 pb-24">
+        {/* HERO */}
+        <section id="hero" className="pt-8 md:pt-12">
+          <div className="grid md:grid-cols-12 gap-6 md:gap-8 items-start">
+            <div className="md:col-span-7">
+              <h1 className="text-2xl md:text-4xl font-bold tracking-tight">
+                {productName} — One‑line value prop that names the audience & outcome
+              </h1>
+              <p className="mt-3 text-muted-foreground max-w-prose">
+                40–60 words: Why this matters in the market; what problem we chose; the business goal; the constraint
+                window. Keep it punchy and outcome‑oriented.
+              </p>
+              <div className="mt-4 flex flex-wrap gap-2">
+                {[
+                  "Activation ▲X%",
+                  "Time‑to‑value −Y%",
+                  "Revenue +Z%",
+                ].map((m) => (
+                  <span key={m} className="text-xs font-medium bg-muted rounded-full px-3 py-1 border border-border">
+                    {m}
+                  </span>
+                ))}
+              </div>
+            </div>
+            <aside className="md:col-span-5">
+              <div className="rounded-2xl border border-dashed border-border p-4 shadow-sm bg-card">
+                <div className="text-xs uppercase tracking-wide text-muted-foreground">Role & Scope</div>
+                <ul className="mt-2 text-sm leading-6">
+                  <li><strong>Role:</strong> Lead Product Designer (IC + Strategy)</li>
+                  <li><strong>Timeline:</strong> Q1–Q3 ’YY (≈ N weeks)</li>
+                  <li><strong>Surfaces:</strong> Mobile • Web • Console</li>
+                  <li><strong>Team:</strong> PM • Eng • Data • Ops</li>
+                  <li><strong>Constraints:</strong> e.g., security sign‑off, cold‑start, multi‑cloud</li>
+                </ul>
+              </div>
+            </aside>
+          </div>
+        </section>
+
+        {/* TWO‑COLUMN NARRATIVE + EVIDENCE */}
+        <section className="mt-10 grid md:grid-cols-12 gap-6 md:gap-8">
+          {/* Left: Narrative */}
+          <div className="md:col-span-7 space-y-8">
+            {/* Context */}
+            <article id="context">
+              <h2 className="text-lg font-semibold">Context</h2>
+              <p className="mt-2 text-muted-foreground">Describe the market trend, user pain, and business goal. 50 words max.</p>
+              <div className="mt-3 grid sm:grid-cols-3 gap-2">
+                {[
+                  "Audience",
+                  "Problem",
+                  "Business Goal",
+                ].map((t) => (
+                  <div key={t} className="rounded-xl border border-dashed border-border p-3 text-sm bg-card">
+                    <div className="text-muted-foreground text-xs uppercase">{t}</div>
+                    <div className="mt-1 h-10 bg-muted rounded-md" />
+                  </div>
+                ))}
+              </div>
+            </article>
+
+            {/* Users & Jobs */}
+            <article id="jobs">
+              <h2 className="text-lg font-semibold">Users & Jobs</h2>
+              <ul className="mt-2 space-y-2 list-disc pl-5">
+                <li>Primary user → job to be done</li>
+                <li>Secondary user → job to be done</li>
+                <li className="italic text-muted-foreground">Anti‑goal: what we intentionally did not do</li>
+              </ul>
+            </article>
+
+            {/* Key Bet */}
+            <article id="bet">
+              <h2 className="text-lg font-semibold">Key Bet</h2>
+              <p className="mt-2">One sentence: If we <em>do X</em>, we unlock <em>Y</em> because <em>Z</em>.</p>
+              <div className="mt-3 rounded-xl border border-dashed border-border p-4 bg-muted">
+                <div className="text-xs uppercase text-muted-foreground">Decision Log</div>
+                <ul className="mt-2 text-sm list-disc pl-5">
+                  <li>Decision → Rationale → Trade‑off</li>
+                  <li>Decision → Rationale → Trade‑off</li>
+                  <li>Decision → Rationale → Trade‑off</li>
+                </ul>
+              </div>
+            </article>
+
+            {/* How I Worked */}
+            <article id="how">
+              <h2 className="text-lg font-semibold">How I Worked</h2>
+              <div className="mt-2 flex flex-wrap gap-2">
+                {[
+                  "Research", "Strategy", "IA", "Flows", "Design System", "Prototyping", "Delivery",
+                ].map((chip) => (
+                  <span key={chip} className="text-xs bg-muted px-3 py-1 rounded-full border border-border">{chip}</span>
+                ))}
+              </div>
+            </article>
+
+            {/* Three Key Moments */}
+            <article id="moments">
+              <h2 className="text-lg font-semibold">Three Key Moments</h2>
+              <div className="mt-3 grid sm:grid-cols-3 gap-3">
+                {[1,2,3].map((i) => (
+                  <div key={i} className="rounded-2xl border border-dashed border-border p-3 bg-card">
+                    <div className="h-24 bg-muted rounded-lg" />
+                    <div className="mt-2 text-sm">
+                      <div className="font-medium">Moment {i}</div>
+                      <div className="text-muted-foreground">Problem → Decision → Outcome</div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </article>
+
+            {/* Experiments */}
+            <article id="experiments">
+              <h2 className="text-lg font-semibold">Experiments</h2>
+              <div className="mt-3 overflow-hidden rounded-2xl border border-border">
+                <table className="w-full text-sm">
+                  <thead className="bg-muted text-muted-foreground">
+                    <tr>
+                      <th className="text-left p-3">Hypothesis</th>
+                      <th className="text-left p-3">Variant</th>
+                      <th className="text-left p-3">Result</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {[1,2,3].map((r) => (
+                      <tr key={r} className="border-t border-border">
+                        <td className="p-3">Short statement here</td>
+                        <td className="p-3">A vs. B</td>
+                        <td className="p-3">▲/▼ X%</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </article>
+
+            {/* Outcomes */}
+            <article id="outcomes">
+              <h2 className="text-lg font-semibold">Outcomes</h2>
+              <div className="mt-3 grid sm:grid-cols-3 gap-3">
+                {[
+                  ["Activation", "baseline → result"],
+                  ["Retention", "baseline → result"],
+                  ["Revenue/Speed", "baseline → result"],
+                ].map(([title, caption]) => (
+                  <div key={title} className="rounded-2xl border border-dashed border-border p-4 bg-card">
+                    <div className="h-20 bg-muted rounded-lg" />
+                    <div className="mt-2 text-sm">
+                      <div className="font-medium">{title}</div>
+                      <div className="text-muted-foreground">{caption}</div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </article>
+
+            {/* Next */}
+            <article id="next">
+              <h2 className="text-lg font-semibold">What I’d Do Next</h2>
+              <ul className="mt-2 list-disc pl-5 space-y-1">
+                <li>Iteration bet</li>
+                <li>Iteration bet</li>
+                <li>Iteration bet</li>
+              </ul>
+            </article>
+          </div>
+
+          {/* Right: Evidence Rail */}
+          <aside className="md:col-span-5 space-y-6">
+            {/* System Snapshot */}
+            <section id="system" className="rounded-2xl border border-dashed border-border p-4 bg-muted">
+              <div className="text-xs uppercase tracking-wide text-muted-foreground">System Snapshot</div>
+              <div className="mt-3 grid grid-cols-3 gap-2">
+                <div className="h-16 bg-card rounded-lg border border-border" />
+                <div className="h-16 bg-card rounded-lg border border-border" />
+                <div className="h-16 bg-card rounded-lg border border-border" />
+                <div className="h-16 bg-card rounded-lg border border-border" />
+                <div className="h-16 bg-card rounded-lg border border-border" />
+                <div className="h-16 bg-card rounded-lg border border-border" />
+              </div>
+              <p className="mt-3 text-xs text-muted-foreground">Tokens • Components • Objects • Key flows</p>
+            </section>
+
+            {/* Prototype / Before-After */}
+            <section className="rounded-2xl border border-dashed border-border p-4 bg-muted">
+              <div className="text-xs uppercase tracking-wide text-muted-foreground">Prototype / Before ↔ After</div>
+              <div className="mt-3 relative overflow-hidden rounded-xl border border-border bg-card aspect-[4/3] grid place-items-center">
+                <div className="absolute inset-0 grid grid-cols-2">
+                  <div className="border-r border-border grid place-items-center text-sm text-muted-foreground">Before</div>
+                  <div className="grid place-items-center text-sm text-muted-foreground">After</div>
+                </div>
+                <div className="absolute bottom-3 left-1/2 -translate-x-1/2 w-3/4">
+                  <input type="range" min="0" max="100" defaultValue="50" className="w-full" aria-label="Comparison slider (decorative)" />
+                </div>
+              </div>
+              <p className="mt-2 text-xs text-muted-foreground">Tip: replace with a GIF or live prototype.</p>
+            </section>
+
+            {/* Constraint Cards */}
+            <section className="rounded-2xl border border-dashed border-border p-4 bg-muted">
+              <div className="text-xs uppercase tracking-wide text-muted-foreground">Constraints</div>
+              <div className="mt-3 grid sm:grid-cols-3 gap-2 text-sm">
+                {[
+                  "Team: 2 Eng, 1 PM",
+                  "Timeline: 9 wks",
+                  "Risk: Security sign‑off",
+                ].map((c) => (
+                  <div key={c} className="rounded-xl bg-card border border-border p-3">{c}</div>
+                ))}
+              </div>
+            </section>
+          </aside>
+        </section>
+
+        {/* Credits & Receipts */}
+        <section id="credits" className="mt-12">
+          <h2 className="text-lg font-semibold">Credits</h2>
+          <p className="mt-2 text-muted-foreground text-sm">PM [name], Eng [names], Ops [name]</p>
+        </section>
+
+        <section id="receipts" className="mt-6">
+          <h2 className="text-lg font-semibold">Receipts</h2>
+          <ul className="mt-2 text-sm text-primary underline underline-offset-2">
+            <li><a href="#">Figma (redacted)</a></li>
+            <li><a href="#">Prototype GIF</a></li>
+            <li><a href="#">Release Notes</a></li>
+          </ul>
+          <div className="mt-8 text-xs text-muted-foreground">NDA note: Replace exact metrics with ranges if needed.</div>
+        </section>
+      </main>
+
+      {/* Footer */}
+      <footer className="border-t border-border mt-12">
+        <div className="container mx-auto px-6 lg:px-10 py-8 text-sm text-muted-foreground">
+          One‑page case study wireframe · Duplicate this page per product.
+        </div>
+      </footer>
+    </div>
+  );
+};
+
+export default WorkCaseStudy;
