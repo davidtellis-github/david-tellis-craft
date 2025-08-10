@@ -12,7 +12,7 @@ const sections = [
 
 const SideNav: React.FC = () => {
   return (
-    <nav className="hidden lg:block sticky top-10 h-[80vh] pt-6" aria-label="Section navigation">
+    <nav className="hidden lg:block sticky top-1/2 -translate-y-1/2 pt-6 mr-8 md:mr-10 lg:mr-12" aria-label="Section navigation">
       <ul className="space-y-3 text-muted-foreground">
         {sections.map((s) => (
           <li key={s.id}>
