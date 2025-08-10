@@ -25,7 +25,7 @@ const SplashScreen: React.FC = () => {
       ].join(" ")}
       aria-hidden={!show}
     >
-      <div className="h-full w-full flex items-end justify-start p-6 md:p-10">
+      <div className="h-full w-full flex items-center justify-start p-6 md:p-10 text-left">
         <div
           className={[
             "transition-all duration-700 ease-out",
@@ -33,10 +33,10 @@ const SplashScreen: React.FC = () => {
           ].join(" ")}
         >
           <h1 className="font-semibold tracking-tight leading-[0.95] text-5xl sm:text-6xl md:text-7xl lg:text-8xl">
-            Billy Sweeney
+            David tellis
           </h1>
-          <p className="mt-2 font-semibold tracking-tight leading-[0.95] text-5xl sm:text-6xl md:text-7xl lg:text-8xl">
-            —Designer
+          <p className="mt-4 text-base sm:text-lg md:text-xl lg:text-2xl italic text-muted-foreground">
+            Product designer
           </p>
         </div>
       </div>
