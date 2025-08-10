@@ -35,7 +35,7 @@ const SplashScreen: React.FC = () => {
           <h1 className="font-semibold tracking-tight leading-[0.95] text-5xl sm:text-6xl md:text-7xl lg:text-8xl">
             David tellis
           </h1>
-          <p className="mt-4 font-regular font-medium tracking-tight leading-[1.1] text-2xl sm:text-3xl md:text-4xl lg:text-5xl">
+          <p className="mt-4 font-regular font-medium tracking-tight leading-[1.1] text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-muted-foreground">
             —Digital Product Designer
           </p>
         </div>
