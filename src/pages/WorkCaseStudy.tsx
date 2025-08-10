@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
+import { ArrowLeft } from "lucide-react";
 
 function titleCaseFromSlug(slug?: string) {
   if (!slug) return "Case Study";
@@ -41,28 +42,15 @@ const WorkCaseStudy: React.FC = () => {
       {/* Top Nav */}
       <header className="sticky top-0 z-40 backdrop-blur supports-[backdrop-filter]:bg-background/70 bg-background/80 border-b border-border">
         <div className="container mx-auto px-6 lg:px-10 py-3 flex items-center gap-4">
+          <Link
+            to="/"
+            className="inline-flex items-center gap-2 rounded-lg px-3 py-1.5 border border-border hover:bg-muted text-sm"
+            aria-label="Back to work"
+          >
+            <ArrowLeft className="h-4 w-4" aria-hidden="true" />
+            Back
+          </Link>
           <div className="font-semibold tracking-tight">Case Study · 0→1</div>
-          <nav className="hidden md:flex gap-3 text-sm text-muted-foreground">
-            {[
-              ["hero", "Hero"],
-              ["scope", "Role & Scope"],
-              ["context", "Context"],
-              ["jobs", "Users & Jobs"],
-              ["bet", "Key Bet"],
-              ["how", "How I Worked"],
-              ["system", "System Snapshot"],
-              ["moments", "Key Moments"],
-              ["experiments", "Experiments"],
-              ["outcomes", "Outcomes"],
-              ["next", "What’s Next"],
-              ["credits", "Credits"],
-              ["receipts", "Receipts"],
-            ].map(([id, label]) => (
-              <a key={id} href={`#${id}`} className="px-2 py-1 rounded-lg hover:bg-muted">
-                {label}
-              </a>
-            ))}
-          </nav>
         </div>
       </header>
 
