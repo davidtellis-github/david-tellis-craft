@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import w1 from "@/assets/work-1.jpg";
 import w2 from "@/assets/work-2.jpg";
 import w3 from "@/assets/work-3.jpg";
@@ -27,17 +28,24 @@ const WorkGrid: React.FC = () => {
       <h2 className="sr-only">Work</h2>
       <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
         {projects.map((p) => (
-          <article key={p.title} className="group relative overflow-hidden rounded-lg border border-border bg-card">
-            <img
-              src={p.img}
-              alt={`Project — ${p.title} by David Tellis`}
-              loading="lazy"
-              className="h-60 w-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
-            />
-            <div className="absolute inset-x-0 bottom-0 p-4 bg-gradient-to-t from-background/80 to-transparent">
-              <h3 className="text-lg font-medium tracking-tight">{p.title}</h3>
-            </div>
-          </article>
+          <Link
+            key={p.title}
+            to={`/work/${p.slug}`}
+            aria-label={`View case study: ${p.title}`}
+            className="group relative block overflow-hidden rounded-lg border border-border bg-card focus:outline-none focus:ring-2 focus:ring-primary"
+          >
+            <article>
+              <img
+                src={p.img}
+                alt={`Project — ${p.title} case study cover`}
+                loading="lazy"
+                className="h-60 w-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+              />
+              <div className="absolute inset-x-0 bottom-0 p-4 bg-gradient-to-t from-background/80 to-transparent">
+                <h3 className="text-lg font-medium tracking-tight">{p.title}</h3>
+              </div>
+            </article>
+          </Link>
         ))}
       </div>
     </section>
