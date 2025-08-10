@@ -6,7 +6,7 @@ const SplashScreen: React.FC = () => {
 
   React.useEffect(() => {
     const fadeTimer = setTimeout(() => setFade(true), 2000); // show for 2s
-    const hideTimer = setTimeout(() => setShow(false), 2700); // allow fade-out to complete
+    const hideTimer = setTimeout(() => setShow(false), 4000); // allow fade-out to complete
     return () => {
       clearTimeout(fadeTimer);
       clearTimeout(hideTimer);
@@ -35,7 +35,7 @@ const SplashScreen: React.FC = () => {
           <h1 className="font-semibold tracking-tight leading-[0.95] text-5xl sm:text-6xl md:text-7xl lg:text-8xl">
             David tellis
           </h1>
-          <p className="mt-4 italic font-medium tracking-tight leading-[1.1] text-2xl sm:text-3xl md:text-4xl lg:text-5xl">
+          <p className="mt-4 font-regular font-medium tracking-tight leading-[1.1] text-2xl sm:text-3xl md:text-4xl lg:text-5xl">
             Product designer
           </p>
         </div>
