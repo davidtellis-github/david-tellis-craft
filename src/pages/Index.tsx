@@ -19,7 +19,7 @@ const Index = () => {
             <WorkGrid />
             <ValuesSection />
             <BackgroundTimeline />
-            <section id="about" className="pt-28">
+            <section id="about" className="min-h-screen w-full flex items-center pt-28">
               <h2 className="text-3xl md:text-4xl font-semibold tracking-tight mb-4">About</h2>
               <p className="text-muted-foreground max-w-2xl">I design tools and systems that help teams move faster. My focus: clarity, momentum, and measurable outcomes. Previously led design for data-rich workflows and design systems.</p>
             </section>

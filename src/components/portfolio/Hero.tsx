@@ -63,7 +63,7 @@ const Hero: React.FC = () => {
   const activeLabel = tabsData.find((t) => t.key === active)?.label ?? "anyone";
 
   return (
-    <header id="intro" className="relative pt-16 lg:pt-24">
+    <header id="intro" className="relative min-h-screen w-full flex items-center pt-16 lg:pt-24">
       <div
         aria-hidden
         className="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(1000px_600px_at_70%_40%,hsl(var(--foreground)/0.05),transparent_60%)]"

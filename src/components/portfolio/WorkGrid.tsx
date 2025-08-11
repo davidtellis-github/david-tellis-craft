@@ -24,7 +24,7 @@ const projects = [
 
 const WorkGrid: React.FC = () => {
   return (
-    <section id="work" className="pt-28">
+    <section id="work" className="min-h-screen w-full flex items-center pt-28">
       <h2 className="sr-only">Work</h2>
       <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
         {projects.map((p) => (
