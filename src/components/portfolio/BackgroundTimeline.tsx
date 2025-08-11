@@ -25,7 +25,7 @@ const roles = [
 ];
 
 const BackgroundTimeline: React.FC = () => (
-  <section id="background" className="pt-28">
+  <section id="background" className="min-h-screen flex flex-col justify-center py-20">
     <h2 className="text-3xl md:text-4xl font-semibold tracking-tight mb-8">Background</h2>
     <ol className="space-y-12">
       {roles.map((r) => (
