@@ -1,7 +1,7 @@
 import React from "react";
 
 const Contact: React.FC = () => (
-  <section id="contact" className="min-h-screen w-full flex items-center pt-28 pb-24">
+  <section id="contact" className="pt-28 pb-24">
     <h2 className="text-3xl md:text-4xl font-semibold tracking-tight mb-8">Contact</h2>
     <div className="grid lg:grid-cols-2 gap-10 items-start">
       <div className="space-y-4">
