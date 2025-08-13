@@ -11,7 +11,7 @@ const Index = () => {
   return (
     <div className="min-h-screen bg-background text-foreground">
       <AmbientSpotlight />
-      <main className="container mx-auto px-6 lg:px-10">
+      <main className="w-[90vw] mx-auto px-4 md:px-6">
         <div className="grid lg:grid-cols-[220px_1fr] gap-10">
           <SideNav />
           <section>
