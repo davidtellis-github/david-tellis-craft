@@ -12,8 +12,8 @@ const sections = [
 
 const SideNav: React.FC = () => {
   return (
-    <nav className="hidden lg:block sticky top-10 h-[80vh] pt-6" aria-label="Section navigation">
-      <ul className="space-y-3 text-muted-foreground">
+    <nav className="hidden lg:block sticky flex jusitfy-center items-center h-[80vh] pt-6" aria-label="Section navigation">
+      <ul className="space-y-1 text-muted-foreground">
         {sections.map((s) => (
           <li key={s.id}>
             <a href={`#${s.id}`} className="hover:text-foreground transition-colors">{s.label}</a>
