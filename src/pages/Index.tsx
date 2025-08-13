@@ -11,18 +11,14 @@ const Index = () => {
   return (
     <div className="min-h-screen bg-background text-foreground">
       <AmbientSpotlight />
-      <main className="w-[90vw] mx-auto px-4 md:px-6">
-        <div className="grid lg:grid-cols-[220px_1fr] gap-10">
+      <main className="w-[98vw] mx-auto px-4 md:px-6">
+        <div className="flex lg:grid-cols-[220px_1fr] gap-10">
           <SideNav />
           <section>
             <Hero />
             <WorkGrid />
             <ValuesSection />
             <BackgroundTimeline />
-            <section id="about" className="min-h-screen flex flex-col justify-center py-20">
-              <h2 className="text-3xl md:text-4xl font-semibold tracking-tight mb-4">About</h2>
-              <p className="text-muted-foreground max-w-2xl">I design tools and systems that help teams move faster. My focus: clarity, momentum, and measurable outcomes. Previously led design for data-rich workflows and design systems.</p>
-            </section>
             <Testimonials />
             <Contact />
           </section>

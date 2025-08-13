@@ -1,3 +1,4 @@
+
 import React from "react";
 
 const sections = [
@@ -12,14 +13,46 @@ const sections = [
 
 const SideNav: React.FC = () => {
   return (
-    <nav className="hidden lg:block sticky flex jusitfy-center items-center h-[80vh] pt-6" aria-label="Section navigation">
-      <ul className="space-y-1 text-muted-foreground">
-        {sections.map((s) => (
-          <li key={s.id}>
-            <a href={`#${s.id}`} className="hover:text-foreground transition-colors">{s.label}</a>
-          </li>
-        ))}
-      </ul>
+ 
+    <nav
+      aria-label="Section navigation"
+      className="
+        hidden lg:block sticky top-0 h-svh w-[min(18rem,24vw)] px-0
+      "
+    >
+      <div className="relative h-full">
+        {/* Big logo */}
+        {/* <a
+          href="#intro"
+          aria-label="Home"
+          className="
+                leading-none select-none text-foreground
+            text-[clamp(28px,4vmin,48px)]
+          "
+        >
+          D
+        </a> */}
+
+        {/* Vertically centered menu */}
+        <ul
+          className="
+            absolute left-0 top-1/2 -translate-y-1/2
+            space-y-2 text-muted-foreground
+            text-[clamp(14px,1.6vmin,18px)]
+          "
+        >
+          {sections.map((s) => (
+            <li key={s.id}>
+              <a
+                href={`#${s.id}`}
+                className="hover:text-foreground transition-colors"
+              >
+                {s.label}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
     </nav>
   );
 };

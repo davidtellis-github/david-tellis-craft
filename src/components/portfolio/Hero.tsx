@@ -7,7 +7,7 @@ const tabsData: { key: string; label: string; headline: React.ReactNode }[] = [
     label: "For anyone",
     headline: (
       <>
-        I’m a designer who creates <span className="underline underline-offset-8 decoration-[hsl(var(--foreground)/0.4)]">digital products</span> and inspiring interfaces to help startups and business owners.
+        I’m a who creates <span className="underline underline-offset-8 decoration-[hsl(var(--foreground)/0.4)]">digital products</span> and inspiring interfaces to help startups and business owners.
       </>
     ),
   },
