@@ -63,21 +63,14 @@ const Hero: React.FC = () => {
   const activeLabel = tabsData.find((t) => t.key === active)?.label ?? "anyone";
 
   return (
-    <header id="intro" className="relative pt-16 lg:pt-24">
-      <div
-        aria-hidden
-        className="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(1000px_600px_at_70%_40%,hsl(var(--foreground)/0.05),transparent_60%)]"
-      />
-
-      <div className="mb-4 text-sm text-muted-foreground">Hello there,</div>
-
-      <Tabs value={active} onValueChange={setActive} className="w-full text-left pt-4">
-        <TabsList className="h-auto p-0 bg-transparent border-0 flex flex-wrap gap-6 justify-start text-sm text-muted-foreground">
+    <header id="intro" className="relative min-h-screen flex flex-col justify-center py-32">
+      <Tabs value={active} onValueChange={setActive} className="w-full text-left">
+        <TabsList className="h-auto p-0 bg-transparent border-0 flex flex-wrap gap-8 justify-start text-base text-muted-foreground mb-12">
           {tabsData.map((t) => (
             <TabsTrigger
               key={t.key}
               value={t.key}
-              className="px-0 py-1 bg-transparent data-[state=active]:text-foreground data-[state=active]:underline data-[state=active]:underline-offset-8 data-[state=active]:decoration-[hsl(var(--foreground)/0.6)]"
+              className="px-0 py-2 bg-transparent text-base data-[state=active]:text-foreground data-[state=active]:font-medium transition-colors"
             >
               {t.label}
             </TabsTrigger>
@@ -85,17 +78,13 @@ const Hero: React.FC = () => {
         </TabsList>
 
         {tabsData.map((t) => (
-          <TabsContent key={t.key} value={t.key} className="mt-6 focus:outline-none">
-            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-semibold tracking-tight leading-[1.1] text-foreground">
+          <TabsContent key={t.key} value={t.key} className="focus:outline-none">
+            <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-normal tracking-tight leading-[0.9] text-foreground max-w-5xl">
               {t.headline}
             </h1>
           </TabsContent>
         ))}
       </Tabs>
-
-      <p className="mt-6 text-lg text-muted-foreground">
-        Currently open to impactful, product-focused opportunities — especially {activeLabel.toLowerCase()}.
-      </p>
     </header>
   );
 };
