@@ -1,6 +1,6 @@
 import React from "react";
 
-const words = ["Relentless.", "Considered.", "Curious.", "Uncompromising."];
+const words = ["Egoless.","Adaptive.","Curious.","Craft‑obsessed."];
 
 const ValuesSection: React.FC = () => (
   <section id="values" className="min-h-screen flex flex-col justify-center py-20">
