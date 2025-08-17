@@ -26,7 +26,7 @@ const SideNav: React.FC = () => {
           href="#intro"
           aria-label="Home"
           className="
-                leading-none select-none text-foreground
+                leading-none select-none text-foreground pt-10
             text-[clamp(28px,4vmin,48px)]
           "
         >
@@ -36,8 +36,8 @@ const SideNav: React.FC = () => {
         {/* Vertically centered menu */}
         <ul
           className="
-            absolute left-0 top-1/2 -translate-y-1/2
-            space-y-2 text-muted-foreground
+            absolute left-0 top-[22vh] lg:pt-[20vh] -translate-y-1/2
+            space-y-2 text-muted-foreground pt-24 lg:pt-[20vh]
             text-[clamp(14px,1.6vmin,18px)]
           "
         >
