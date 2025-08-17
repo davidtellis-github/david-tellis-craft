@@ -7,7 +7,9 @@ const tabsData: { key: string; label: string; headline: React.ReactNode }[] = [
     label: "For anyone",
     headline: (
       <>
-        I’m a who creates <span className="underline underline-offset-8 decoration-[hsl(var(--foreground)/0.4)]">digital products</span> and inspiring interfaces to help startups and business owners.
+        Hello there, I'm a designer/artist <br></br>
+         {/* <span className="underline underline-offset-8 decoration-[hsl(var(--foreground)/0.4)]">Designer/Artist</span>  */}
+         I turn ideas into beautiful, functional things that actually work.
       </>
     ),
   },
@@ -16,7 +18,7 @@ const tabsData: { key: string; label: string; headline: React.ReactNode }[] = [
     label: "Recruiters",
     headline: (
       <>
-        I ship clear, reliable design work—<span className="underline underline-offset-8 decoration-[hsl(var(--foreground)/0.4)]">from process to pixels</span>—that helps teams move faster.
+        2+ years designing fintech, <br></br>AI tools, marketplaces, and health apps. From landing pages to design systems—everything converts, scales, and ships.. I move fast, learn faster. You’ll want to pay me more.
       </>
     ),
   },
@@ -34,7 +36,7 @@ const tabsData: { key: string; label: string; headline: React.ReactNode }[] = [
     label: "Product Designers",
     headline: (
       <>
-        Collaborative and pragmatic—strong in IA, flows, and component architecture; <span className="underline underline-offset-8 decoration-[hsl(var(--foreground)/0.4)]">we’ll learn and ship</span> together.
+       Clean files, tighter systems, and zero drama. I juggle projects, stay curious, and talk dev. I know the rules, when to break them, and how to make it look good.
       </>
     ),
   },
@@ -43,8 +45,8 @@ const tabsData: { key: string; label: string; headline: React.ReactNode }[] = [
     label: "Product Managers",
     headline: (
       <>
-        I turn ambiguous problems into crisp decisions and <span className="underline underline-offset-8 decoration-[hsl(var(--foreground)/0.4)]">measurable outcomes</span>.
-      </>
+ I won’t just tick boxes. I’ll fill the gaps, clean the chaos, and ship stuff that works in real life;<br></br> Ask nicely, and I’ll deliver ahead of schedule. 
+        we’ll learn and ship together.      </>
     ),
   },
   {
@@ -52,8 +54,7 @@ const tabsData: { key: string; label: string; headline: React.ReactNode }[] = [
     label: "Engineers",
     headline: (
       <>
-        Thoughtful partner who sweats details and constraints—<span className="underline underline-offset-8 decoration-[hsl(var(--foreground)/0.4)]">production-ready design</span> that respects the system.
-      </>
+I’ve studied code and lived with designers—so I get both worlds. <br></br> I design with logic, label things right, and ask smart questions early.  </>
     ),
   },
 ];
@@ -63,15 +64,21 @@ const Hero: React.FC = () => {
   const activeLabel = tabsData.find((t) => t.key === active)?.label ?? "anyone";
 
   return (
-    <header id="intro" className="relative min-h-screen flex flex-col justify-center py-32">
-      <Tabs value={active} onValueChange={setActive} className="w-full text-left">
-        <TabsList className="h-auto p-0 bg-transparent border-0 flex flex-wrap gap-8 justify-start text-base text-muted-foreground mb-12">
+    // <div id="intro" className="relative pt-24 lg:pt-[20vh]">
+    //   <div
+    //     aria-hidden
+    //     className="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(1000px_600px_at_70%_40%,hsl(var(--foreground)/0.05),transparent_60%)]"
+    //   />
+    //   <Tabs value={active} onValueChange={setActive} className="w-full text-left ">
+    //     <TabsList className="h-auto p-0 bg-transparent border-0 flex flex-wrap  gap-6 justify-start text-sm text-muted-foreground">
+    <div id="intro" className="relative min-h-screen flex flex-col justify-start py-[20vh]">
+      <Tabs value={active} onValueChange={setActive} className="w-full text-left gap-0">
+        <TabsList className="h-auto p-0 bg-transparent border-0 flex flex-wrap overflow-x-auto gap-8 justify-start text-base text-muted-foreground ">
           {tabsData.map((t) => (
             <TabsTrigger
               key={t.key}
               value={t.key}
-              className="px-0 py-2 bg-transparent text-base data-[state=active]:text-foreground data-[state=active]:font-medium transition-colors"
-            >
+  className="px-0 py-2 bg-transparent text-base data-[state=active]:text-foreground data-[state=active]:font-medium transition-colors"            >
               {t.label}
             </TabsTrigger>
           ))}
@@ -79,13 +86,16 @@ const Hero: React.FC = () => {
 
         {tabsData.map((t) => (
           <TabsContent key={t.key} value={t.key} className="focus:outline-none">
-            <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-normal tracking-tight leading-[0.9] text-foreground max-w-5xl">
-              {t.headline}
+<h1 className="text-5xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-normal tracking-loose leading-[0] text-foreground max-w-5xl">              {t.headline}
             </h1>
           </TabsContent>
         ))}
       </Tabs>
-    </header>
+
+      <p className="mt-6 text-lg text-muted-foreground">
+        Currently open to impactful, product-focused opportunities — especially {activeLabel.toLowerCase()}.
+      </p>
+    </div>
   );
 };
 
