@@ -3,7 +3,7 @@ import { useParams, Link } from "react-router-dom";
 import { ArrowLeft } from "lucide-react";
 
 function titleCaseFromSlug(slug?: string) {
-  if (!slug) return "Case Study";
+  if (!slug) return "Wedding verse";
   return slug
     .split("-")
     .map((s) => s.charAt(0).toUpperCase() + s.slice(1))
