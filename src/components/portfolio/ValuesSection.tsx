@@ -7,8 +7,9 @@ const ValuesSection: React.FC = () => (
     <h2 className="sr-only">Values</h2>
     <div className="space-y-2 sm:space-y-3 md:space-y-4 lg:space-y-5">
       {words.map((w) => (
-        <div key={w} className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-extrabold tracking-tight text-foreground">{w}</div>
+        <div key={w} className="text-5xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-normal tracking-loose leading-[0] text-foreground max-w-5xl">{w}</div>
       ))}
+     
     </div>
     <p className="mt-10 max-w-3xl text-base sm:text-lg md:text-xl leading-relaxed text-muted-foreground">
       I make things that actually work — and work well. I’m allergic to “good enough,” “we’ll fix it later,” and anything that smells like it was designed for a presentation, not a human. I ask the awkward questions, obsess over the small details, and refuse to let a sloppy handoff ruin a solid design.
