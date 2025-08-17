@@ -60,18 +60,17 @@ const WorkCaseStudy: React.FC = () => {
         <section id="hero" className="pt-8 md:pt-12">
           <div className="grid md:grid-cols-12 gap-6 md:gap-8 items-start">
             <div className="md:col-span-7">
-              <h1 className="text-2xl md:text-4xl font-bold tracking-tight">
-                {productName} — One‑line value prop that names the audience & outcome
+               <h1 className="text-2xl md:text-4xl font-bold tracking-tight">
+                Weddingverse — a shared workspace for couples, planners, and vendors that turns inspiration into booked services.
               </h1>
               <p className="mt-3 text-muted-foreground max-w-prose">
-                40–60 words: Why this matters in the market; what problem we chose; the business goal; the constraint
-                window. Keep it punchy and outcome‑oriented.
+                Weddings are multi-stakeholder and decision-dense. Couples juggle boards, sheets, and chats; vendors get low-context leads. We built a guided workspace that compresses decisions into "packages," improving clarity and velocity under timeline.
               </p>
               <div className="mt-4 flex flex-wrap gap-2">
                 {[
                   "Activation ▲X%",
-                  "Time‑to‑value −Y%",
-                  "Revenue +Z%",
+                  "Time-to-book −Y%",
+                  "Vendor reply rate ▲Z%",
                 ].map((m) => (
                   <span key={m} className="text-xs font-medium bg-muted rounded-full px-3 py-1 border border-border">
                     {m}
@@ -101,7 +100,7 @@ const WorkCaseStudy: React.FC = () => {
             {/* Context */}
             <article id="context">
               <h2 className="text-lg font-semibold">Context</h2>
-              <p className="mt-2 text-muted-foreground">Describe the market trend, user pain, and business goal. 50 words max.</p>
+              <p className="mt-2 text-muted-foreground">The market is fragmented across inspiration, planning, and procurement. Couples feel overwhelmed, planners herd cats, vendors waste time qualifying. The business goal: prove marketplace liquidity fast and lift lead→book conversion in N weeks.</p>
               <div className="mt-3 grid sm:grid-cols-3 gap-2">
                 {[
                   "Audience",
@@ -120,16 +119,17 @@ const WorkCaseStudy: React.FC = () => {
             <article id="jobs">
               <h2 className="text-lg font-semibold">Users & Jobs</h2>
               <ul className="mt-2 space-y-2 list-disc pl-5">
-                <li>Primary user → job to be done</li>
-                <li>Secondary user → job to be done</li>
-                <li className="italic text-muted-foreground">Anti‑goal: what we intentionally did not do</li>
+                <li><strong>Couple:</strong> decide, align, and track budget without overwhelm.</li>
+                <li><strong>Planner:</strong> coordinate vendors and approvals.</li>
+                <li><strong>Vendor:</strong> receive qualified, context-rich leads.</li>
+                <li className="italic text-muted-foreground">Anti‑goal: full CRM replacement.</li>
               </ul>
             </article>
 
             {/* Key Bet */}
             <article id="bet">
               <h2 className="text-lg font-semibold">Key Bet</h2>
-              <p className="mt-2">One sentence: If we <em>do X</em>, we unlock <em>Y</em> because <em>Z</em>.</p>
+              <p className="mt-2">If we center "decision packages" (brief → shortlist → trade-offs → book), we shorten time-to-book and raise vendor win-rate.</p>
               <div className="mt-3 rounded-xl border border-dashed border-border p-4 bg-muted">
                 <div className="text-xs uppercase text-muted-foreground">Decision Log</div>
                 <ul className="mt-2 text-sm list-disc pl-5">
@@ -145,23 +145,28 @@ const WorkCaseStudy: React.FC = () => {
               <h2 className="text-lg font-semibold">How I Worked</h2>
               <div className="mt-2 flex flex-wrap gap-2">
                 {[
-                  "Research", "Strategy", "IA", "Flows", "Design System", "Prototyping", "Delivery",
+                  "Research", "JTBD mapping", "Service blueprint", "IA", "Component library", "Flows", "Prototyping", "Delivery",
                 ].map((chip) => (
                   <span key={chip} className="text-xs bg-muted px-3 py-1 rounded-full border border-border">{chip}</span>
                 ))}
               </div>
+              <p className="mt-3 text-sm text-muted-foreground">Weekly PM/Eng/BD triad; live vendor pilots.</p>
             </article>
 
             {/* Three Key Moments */}
             <article id="moments">
               <h2 className="text-lg font-semibold">Three Key Moments</h2>
               <div className="mt-3 grid sm:grid-cols-3 gap-3">
-                {[1,2,3].map((i) => (
+                {[
+                  { title: "Cold-start", content: "Seeded \"starter briefs\" templates → activation ▲X%" },
+                  { title: "Decision paralysis", content: "Compare-cards with 3 explicit trade-offs → time-to-decision −Y%" },
+                  { title: "Vendor mismatch", content: "Structured brief + price bands → vendor reply rate ▲Z%" }
+                ].map((moment, i) => (
                   <div key={i} className="rounded-2xl border border-dashed border-border p-3 bg-card">
                     <div className="h-24 bg-muted rounded-lg" />
                     <div className="mt-2 text-sm">
-                      <div className="font-medium">Moment {i}</div>
-                      <div className="text-muted-foreground">Problem → Decision → Outcome</div>
+                      <div className="font-medium">{moment.title}</div>
+                      <div className="text-muted-foreground">{moment.content}</div>
                     </div>
                   </div>
                 ))}
@@ -181,13 +186,21 @@ const WorkCaseStudy: React.FC = () => {
                     </tr>
                   </thead>
                   <tbody>
-                    {[1,2,3].map((r) => (
-                      <tr key={r} className="border-t border-border">
-                        <td className="p-3">Short statement here</td>
-                        <td className="p-3">A vs. B</td>
-                        <td className="p-3">▲/▼ X%</td>
-                      </tr>
-                    ))}
+                    <tr className="border-t border-border">
+                      <td className="p-3">Shortlist prominence reduces bounce</td>
+                      <td className="p-3">control vs. sticky shortlist</td>
+                      <td className="p-3">bounce −x%</td>
+                    </tr>
+                    <tr className="border-t border-border">
+                      <td className="p-3">Budget entry earlier increases realism</td>
+                      <td className="p-3">onboarding order</td>
+                      <td className="p-3">vendor acceptance ▲y%</td>
+                    </tr>
+                    <tr className="border-t border-border">
+                      <td className="p-3">Template library improves activation</td>
+                      <td className="p-3">6 vs. 12 templates</td>
+                      <td className="p-3">activation ▲z%</td>
+                    </tr>
                   </tbody>
                 </table>
               </div>
@@ -198,9 +211,9 @@ const WorkCaseStudy: React.FC = () => {
               <h2 className="text-lg font-semibold">Outcomes</h2>
               <div className="mt-3 grid sm:grid-cols-3 gap-3">
                 {[
-                  ["Activation", "baseline → result"],
-                  ["Retention", "baseline → result"],
-                  ["Revenue/Speed", "baseline → result"],
+                  ["Lead→book", "a% → a+Δ% in n weeks"],
+                  ["Day-7 active couples", "b% → b+Δ%"],
+                  ["Vendor response time", "th → t−Δh"],
                 ].map(([title, caption]) => (
                   <div key={title} className="rounded-2xl border border-dashed border-border p-4 bg-card">
                     <div className="h-20 bg-muted rounded-lg" />
@@ -217,9 +230,9 @@ const WorkCaseStudy: React.FC = () => {
             <article id="next">
               <h2 className="text-lg font-semibold">What I’d Do Next</h2>
               <ul className="mt-2 list-disc pl-5 space-y-1">
-                <li>Iteration bet</li>
-                <li>Iteration bet</li>
-                <li>Iteration bet</li>
+                <li>Price transparency experiments</li>
+                <li>Vendor SLA nudges</li>
+                <li>Planner pro tooling</li>
               </ul>
             </article>
           </div>
@@ -237,7 +250,7 @@ const WorkCaseStudy: React.FC = () => {
                 <div className="h-16 bg-card rounded-lg border border-border" />
                 <div className="h-16 bg-card rounded-lg border border-border" />
               </div>
-              <p className="mt-3 text-xs text-muted-foreground">Tokens • Components • Objects • Key flows</p>
+              <p className="mt-3 text-xs text-muted-foreground">Tokens: brand neutrals + accent<br/>Components: checklist, shortlist, compare cards<br/>Objects: budget, vendor, decision<br/>Flows: inspiration → brief → shortlist → book</p>
             </section>
 
             {/* Prototype / Before-After */}
