@@ -25,13 +25,13 @@
 
 // export default Contact;
 import React from "react";
-import profile from "/workspaces/david-tellis-craft/src/assets/portrait.png";
+import profile from "/workspaces/david-tellis-craft/src/assets/portrait.jpg";
 const Contact: React.FC = () => (
   <section
     id="contact"
-    className="relative min-h-screen flex flex-col justify-center px-6 lg:px-12 bg-background"
+    className="relative min-h-screen flex flex-col justify-start py-[20vh]  lg: bg-background"
   >
-    <div className="grid lg:grid-cols-2 gap-16 items-center">
+    <div className="grid lg:grid-cols-2  items-start">
       
       {/* Left column - Text content */}
       <div className="flex flex-col gap-6">

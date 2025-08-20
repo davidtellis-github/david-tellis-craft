@@ -21,14 +21,34 @@ const quotes = [
     author: "K. Lowden",
     role: "Staff Product Designer",
   },
+  {
+    text: "Incredibly thoughtful and pragmatic—great partner to engineers and PMs.",
+    author: "K. Lowden",
+    role: "Staff Product Designer",
+  },
+  {
+    text: "Incredibly thoughtful and pragmatic—great partner to engineers and PMs.",
+    author: "K. Lowden",
+    role: "Staff Product Designer",
+  },
+  {
+    text: "Incredibly thoughtful and pragmatic—great partner to engineers and PMs.",
+    author: "K. Lowden",
+    role: "Staff Product Designer",
+  },
+  {
+    text: "Incredibly thoughtful and pragmatic—great partner to engineers and PMs.",
+    author: "K. Lowden",
+    role: "Staff Product Designer",
+  },
 ];
 
 const Testimonials: React.FC = () => (
-  <section id="references" className="min-h-screen flex flex-col justify-start pt-[20vh]">
-    <div className="grid md:grid-cols-2 gap-10">
+  <section id="references" className="relative min-h-screen flex flex-col justify-start py-[20vh]">
+    <div className="grid md:grid-cols-2 gap-[8vh]">
       {quotes.map((q, i) => (
-        <figure key={i} className="space-y-3">
-          <blockquote className="text-xl text-foreground leading-relaxed">“{q.text}”</blockquote>
+        <figure key={i} className="space-y-1">
+          <blockquote className="text-2xl text-foreground leading-tight">“{q.text}”</blockquote>
           <figcaption className="text-sm text-muted-foreground">
             <span className="underline underline-offset-4">{q.author}</span>
             <span className="ml-2">{q.role}</span>

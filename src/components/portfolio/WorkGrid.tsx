@@ -21,7 +21,7 @@ const projects = [
 const WorkGrid: React.FC = () => {
   return (
     <section id="work" className="min-h-screen flex flex-col justify-center ">
-      <h2 className="sr-only">Work</h2>
+    
       <div className="grid sm:grid-cols-2 lg:grid-cols-2 gap-6">
         {projects.map((p) => (
           <Link
@@ -35,7 +35,7 @@ const WorkGrid: React.FC = () => {
                 src={p.img}
                 alt={`Project — ${p.title} case study cover`}
                 loading="lazy"
-                className="h-60 w-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+                className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
               />
               <div className="absolute inset-x-0 bottom-0 p-4 bg-gradient-to-t from-background/80 to-transparent">
                 <h3 className="text-lg font-medium tracking-tight">{p.title}</h3>

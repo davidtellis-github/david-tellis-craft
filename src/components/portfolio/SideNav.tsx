@@ -21,7 +21,6 @@ const SideNav: React.FC = () => {
         const el = document.getElementById(s.id);
         if (el) {
           const rect = el.getBoundingClientRect();
-          // Adjust threshold: smaller value = section activates earlier
           if (rect.top <= window.innerHeight * 0.3 && rect.bottom >= 0) {
             current = s.id;
             break;
@@ -33,7 +32,7 @@ const SideNav: React.FC = () => {
     };
 
     window.addEventListener("scroll", handleScroll, { passive: true });
-    handleScroll(); // run once on mount
+    handleScroll();
 
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
@@ -43,24 +42,42 @@ const SideNav: React.FC = () => {
     e.preventDefault();
     const el = document.getElementById(id);
     if (el) {
-      // Smooth + fast scroll
       el.scrollIntoView({ behavior: "smooth", block: "start" });
-      setActiveSection(id); // set active immediately
+      setActiveSection(id);
     }
-    // Updates the URL hash
     window.history.pushState(null, "", `#${id}`);
   };
 
   return (
     <nav
       aria-label="Section navigation"
-      className="hidden lg:block sticky top-0 h-svh w-[min(18rem,24vw)] px-0"
+      className="hidden lg:block sticky top-0 h-svh w-[min(18rem,24vw)]  "
     >
-      <div className="relative h-full">
+      <div className="relative h-full flex flex-col gap-[14vh]">
+        {/* --- Animated Logo --- */}
+       <a
+  href="#intro"
+  aria-label="Home"
+  className="pt-10 leading-none select-none text-foreground 
+             text-[clamp(20px,4vmin,32px)]  font-normal flex group relative"
+>
+  {/* Always-visible "D" */}
+    <span className="inline-block">D</span>
+  <span
+    className="
+      inline-block opacity-0
+      group-hover:animate-spreadOut
+      group-hover:opacity-100
+    "
+  >
+    avid Tellis
+  </span>
+</a>
+
+        {/* --- Nav Menu --- */}
         <ul
           className="
-            absolute left-0 top-[22vh] lg:pt-[20vh] -translate-y-1/2
-            /* ↓ Adjust spacing between menu items here ↓ */
+        
             space-y-1 
             text-muted-foreground
             text-[clamp(12px,1.6vmin,16px)]
@@ -73,11 +90,10 @@ const SideNav: React.FC = () => {
                 onClick={handleClick(s.id)}
                 className={`
                   transition-colors 
-                  /* ↓ Hover state color ↓ */
                   hover:text-foreground 
                   ${
                     activeSection === s.id
-                      ? "text-foreground font-normal" // Active style
+                      ? "text-foreground font-normal"
                       : ""
                   }
                 `}
@@ -93,20 +109,3 @@ const SideNav: React.FC = () => {
 };
 
 export default SideNav;
-
-
-
-
-        {/* Big logo */}
-        {/* <a
-          href="#intro"
-          aria-label="Home"
-          className="
-                leading-none select-none text-foreground pt-10
-            text-[clamp(28px,4vmin,48px)]
-          "
-        >
-          D
-        </a> */}
-
-        {/* Vertically centered menu */}
