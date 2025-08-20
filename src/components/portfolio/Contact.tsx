@@ -25,7 +25,7 @@
 
 // export default Contact;
 import React from "react";
-import profile from "/workspaces/david-tellis-craft/src/assets/portrait.jpg";
+import profile from "/src/assets/portrait.jpg";
 const Contact: React.FC = () => (
   <section
     id="contact"
