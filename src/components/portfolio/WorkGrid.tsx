@@ -15,18 +15,14 @@ const projects = [
   { title: "Insights Dashboard", img: w2, slug: "insights-dashboard" },
   { title: "Mobile Banking IA", img: w3, slug: "mobile-banking-ia" },
   { title: "Commerce Checkout", img: w4, slug: "commerce-checkout" },
-  { title: "Team Collaboration", img: w5, slug: "team-collaboration" },
-  { title: "Patient Portal", img: w6, slug: "patient-portal" },
-  { title: "Creator Tools", img: w7, slug: "creator-tools" },
-  { title: "Maps & Mobility", img: w8, slug: "maps-and-mobility" },
-  { title: "AI-assisted Editor", img: w9, slug: "ai-assisted-editor" },
+
 ];
 
 const WorkGrid: React.FC = () => {
   return (
-    <section id="work" className="min-h-screen flex flex-col justify-center py-20">
+    <section id="work" className="min-h-screen flex flex-col justify-center ">
       <h2 className="sr-only">Work</h2>
-      <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div className="grid sm:grid-cols-2 lg:grid-cols-2 gap-6">
         {projects.map((p) => (
           <Link
             key={p.title}

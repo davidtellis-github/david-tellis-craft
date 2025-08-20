@@ -24,8 +24,7 @@ const quotes = [
 ];
 
 const Testimonials: React.FC = () => (
-  <section id="references" className="min-h-screen flex flex-col justify-center py-20">
-    <h2 className="text-3xl md:text-4xl font-semibold tracking-tight mb-8">References</h2>
+  <section id="references" className="min-h-screen flex flex-col justify-start pt-[20vh]">
     <div className="grid md:grid-cols-2 gap-10">
       {quotes.map((q, i) => (
         <figure key={i} className="space-y-3">
