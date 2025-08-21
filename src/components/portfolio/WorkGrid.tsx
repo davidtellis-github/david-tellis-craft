@@ -42,7 +42,13 @@ const WorkGrid: React.FC = () => {
 
         {/* Projects List */}
         <div className="space-y-8">
-          {projects.map((project, index) => <div key={project.title} className="border-t border-border pt-8 first:border-t-0 first:pt-0">
+          {projects.map((project, index) => (
+            <div 
+              key={project.title} 
+              className={`border-t border-border pt-8 first:border-t-0 first:pt-0 group transition-all duration-500 ${
+                index === 0 ? '' : 'hover:bg-muted/5'
+              }`}
+            >
               <div className="grid lg:grid-cols-12 gap-8 items-start">
                 {/* Number */}
                 <div className="lg:col-span-1">
@@ -59,21 +65,40 @@ const WorkGrid: React.FC = () => {
                   <h3 className="text-2xl lg:text-3xl font-bold uppercase tracking-tight">
                     {project.title}
                   </h3>
-                  {index === 0 && <Link to={`/work/${project.slug}`} className="inline-block mt-4 px-6 py-3 border-2 border-primary text-primary hover:bg-primary hover:text-primary-foreground transition-colors duration-300 font-medium tracking-wide">
+                  {index === 0 && (
+                    <Link 
+                      to={`/work/${project.slug}`} 
+                      className="inline-block mt-4 px-6 py-3 border-2 border-primary text-primary hover:bg-primary hover:text-primary-foreground transition-colors duration-300 font-medium tracking-wide"
+                    >
                       VIEW CASE STUDY
-                    </Link>}
+                    </Link>
+                  )}
                 </div>
                 
-                {/* Description */}
-                <div className="lg:col-span-6 space-y-4">
+                {/* Description - Hidden for cards after first, shown on hover */}
+                <div className={`lg:col-span-6 space-y-4 transition-all duration-500 ${
+                  index === 0 
+                    ? 'opacity-100 max-h-none' 
+                    : 'opacity-0 max-h-0 overflow-hidden group-hover:opacity-100 group-hover:max-h-96'
+                }`}>
                   <p className="text-foreground">
                     {project.description}
                   </p>
                   <ul className="space-y-2">
-                    {project.details.map((detail, i) => <li key={i} className="text-sm text-muted-foreground">
+                    {project.details.map((detail, i) => (
+                      <li key={i} className="text-sm text-muted-foreground">
                         {detail}
-                      </li>)}
+                      </li>
+                    ))}
                   </ul>
+                  {index !== 0 && (
+                    <Link 
+                      to={`/work/${project.slug}`} 
+                      className="inline-block mt-4 px-6 py-3 border-2 border-primary text-primary hover:bg-primary hover:text-primary-foreground transition-colors duration-300 font-medium tracking-wide"
+                    >
+                      VIEW CASE STUDY
+                    </Link>
+                  )}
                 </div>
                 
                 {/* Arrow */}
@@ -87,7 +112,8 @@ const WorkGrid: React.FC = () => {
                   </Link>
                 </div>
               </div>
-            </div>)}
+            </div>
+          ))}
         </div>
       </div>
     </section>;
