@@ -36,7 +36,7 @@ const projects = [{
 }];
 const WorkGrid: React.FC = () => {
   return <section id="work" className="min-h-screen flex flex-col justify-center py-20">
-      <div className="container mx-auto px-6 lg:px-10">
+      <div className="container mx-autogit ">
         {/* Header */}
         
 
@@ -51,28 +51,21 @@ const WorkGrid: React.FC = () => {
             >
               <div className="grid lg:grid-cols-12 gap-8 items-start">
                 {/* Number */}
-                <div className="lg:col-span-1">
+                {/* <div className="lg:col-span-1">
                   <div className="text-2xl font-bold text-muted-foreground">
                     {String(index + 1).padStart(2, '0')}
                   </div>
                   <div className="text-xs text-muted-foreground mt-2">
                     Complete solution<br />from 0 to 100%
                   </div>
-                </div>
+                </div> */}
                 
                 {/* Title */}
                 <div className="lg:col-span-3">
                   <h3 className="text-2xl lg:text-3xl font-bold uppercase tracking-tight">
                     {project.title}
                   </h3>
-                  {index === 0 && (
-                    <Link 
-                      to={`/work/${project.slug}`} 
-                      className="inline-block mt-4 px-6 py-3 border-2 border-primary text-primary hover:bg-primary hover:text-primary-foreground transition-colors duration-300 font-medium tracking-wide"
-                    >
-                      VIEW CASE STUDY
-                    </Link>
-                  )}
+               
                 </div>
                 
                 {/* Description - Hidden for cards after first, shown on hover */}
