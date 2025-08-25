@@ -10,29 +10,29 @@ import w7 from "@/assets/work-7.jpg";
 import w8 from "@/assets/work-8.jpg";
 import w9 from "@/assets/work-9.jpg";
 const projects = [{
-  title: "Design System Platform",
+  title: "Wedding Verse",
   img: w1,
-  slug: "design-system-platform",
-  description: "We built a comprehensive design system that scales across multiple product teams, improving consistency and development velocity.",
-  details: ["Determine the design principles and component architecture for scalable systems.", "Develop a plan for adoption across engineering teams and design workflows.", "Create documentation and governance for long-term maintenance."]
+  slug: "wedding-verse",
+  description: "A shared workspace for couples, planners, and vendors that turns inspiration into booked services.",
+  details: ["Guided workspace that compresses decisions into packages", "Multi-stakeholder collaboration platform", "Improved clarity and velocity under wedding timeline constraints"]
 }, {
-  title: "Insights Dashboard",
+  title: "Futurcraft AI",
   img: w2,
-  slug: "insights-dashboard",
-  description: "A data visualization platform that transforms complex analytics into actionable business insights.",
-  details: ["Transform raw data into meaningful visual narratives for stakeholders.", "Design intuitive interfaces that make complex data accessible.", "Implement real-time updates and interactive exploration features."]
+  slug: "futurcraft-ai",
+  description: "A brand-aligned AI content engine for creating consistent, multi-format content at scale.",
+  details: ["Brand DNA capture for AI-generated consistency", "Multi-format content creation and repurposing", "Reduced content turnaround by 70%"]
 }, {
-  title: "Mobile Banking IA",
+  title: "Turbocloud",
   img: w3,
-  slug: "mobile-banking-ia",
-  description: "Redesigned information architecture for a mobile banking app serving millions of users.",
-  details: ["Restructure complex financial workflows into intuitive user journeys.", "Ensure security compliance while maintaining seamless user experience.", "Optimize for accessibility and performance across diverse user needs."]
+  slug: "turbocloud",
+  description: "FinOps platform for monitoring and optimizing cloud costs across AWS, Azure, and GCP.",
+  details: ["Unified cloud cost visibility and management", "CI/CD workflow integration with cost tracking", "Automated optimization recommendations"]
 }, {
-  title: "Commerce Checkout",
+  title: "Outrange",
   img: w4,
-  slug: "commerce-checkout",
-  description: "Streamlined checkout experience that reduced cart abandonment and increased conversion rates.",
-  details: ["Simplify the purchase flow while maintaining payment security standards.", "Design for multiple payment methods and international requirements.", "Implement progressive disclosure to reduce cognitive load during checkout."]
+  slug: "outrange",
+  description: "Conceptual lifestyle app exploring community-driven adventure planning and discovery.",
+  details: ["Moodboard-driven experience discovery", "Collaborative group planning with polls", "Interactive map interface for adventure planning"]
 }];
 const WorkGrid: React.FC = () => {
   return <section id="work" className="min-h-screen flex flex-col justify-center py-20">

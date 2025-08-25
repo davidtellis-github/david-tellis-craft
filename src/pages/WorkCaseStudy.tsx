@@ -3,16 +3,159 @@ import { useParams, Link } from "react-router-dom";
 import { ArrowLeft } from "lucide-react";
 
 function titleCaseFromSlug(slug?: string) {
-  if (!slug) return "Wedding verse";
+  if (!slug) return "Wedding Verse";
   return slug
     .split("-")
     .map((s) => s.charAt(0).toUpperCase() + s.slice(1))
     .join(" ");
 }
 
+// Case study data for each project
+const caseStudyData = {
+  "wedding-verse": {
+    title: "Wedding Verse",
+    subtitle: "a shared workspace for couples, planners, and vendors",
+    description: "Weddings are multi-stakeholder and decision-dense. Couples juggle boards, sheets, and chats; vendors get low-context leads. We built a guided workspace that compresses decisions into \"packages,\" improving clarity and velocity under timeline.",
+    role: {
+      role: "Lead Product Designer (IC + Strategy)",
+      timeline: "Q1–Q3 '24 (≈ 12 weeks)",
+      surfaces: "Mobile • Web • Console",
+      team: "PM • Eng • Data • Ops",
+      constraints: "security sign‑off, cold‑start, multi‑stakeholder"
+    },
+    context: "The market is fragmented across inspiration, planning, and procurement. Couples feel overwhelmed, planners herd cats, vendors waste time qualifying. The business goal: prove marketplace liquidity fast and lift lead→book conversion in 12 weeks.",
+    users: [
+      { role: "Couple", job: "decide, align, and track budget without overwhelm" },
+      { role: "Planner", job: "coordinate vendors and approvals" },
+      { role: "Vendor", job: "receive qualified, context-rich leads" }
+    ],
+    keyBet: "If we center \"decision packages\" (brief → shortlist → trade-offs → book), we shorten time-to-book and raise vendor win-rate.",
+    howWorked: ["Research", "JTBD mapping", "Service blueprint", "IA", "Component library", "Flows", "Prototyping", "Delivery"],
+    keyMoments: [
+      { title: "Cold-start", content: "Seeded \"starter briefs\" templates → activation ▲35%" },
+      { title: "Decision paralysis", content: "Compare-cards with 3 explicit trade-offs → time-to-decision −40%" },
+      { title: "Vendor mismatch", content: "Structured brief + price bands → vendor reply rate ▲60%" }
+    ],
+    experiments: [
+      { hypothesis: "Shortlist prominence reduces bounce", variant: "control vs. sticky shortlist", result: "bounce −15%" },
+      { hypothesis: "Budget entry earlier increases realism", variant: "onboarding order", result: "vendor acceptance ▲25%" },
+      { hypothesis: "Template library improves activation", variant: "6 vs. 12 templates", result: "activation ▲35%" }
+    ],
+    outcomes: [
+      ["Lead→book", "12% → 18% in 12 weeks"],
+      ["Day-7 active couples", "45% → 62%"],
+      ["Vendor response time", "48h → 18h"]
+    ],
+    next: ["Price transparency experiments", "Vendor SLA nudges", "Planner pro tooling"]
+  },
+  "futurcraft-ai": {
+    title: "Futurcraft AI",
+    subtitle: "a brand-aligned AI content engine",
+    description: "Content teams juggle multiple tools, struggle with brand consistency, and waste time repurposing across formats. Futurcraft AI set out to be a one-stop AI engine for branded, multi-format content creation.",
+    role: {
+      role: "Product Designer (Product Strategy + UI + Prototyping)",
+      timeline: "Mar–Jun '25 (3 months)",
+      surfaces: "Web App (Desktop-first, Mobile-responsive)",
+      team: "PM, AI Engineer, Ops",
+      constraints: "Early MVP, AI integration feasibility, speed-to-market"
+    },
+    context: "Content teams juggle multiple tools, struggle with brand consistency, and waste time repurposing across formats. Futurcraft AI set out to be a one-stop AI engine for branded, multi-format content creation.",
+    users: [
+      { role: "Marketer", job: "create branded content at scale without agencies" },
+      { role: "Founder", job: "streamline thought leadership into multiple formats" },
+      { role: "Designer/Writer", job: "save time by focusing on creativity, not formatting" }
+    ],
+    keyBet: "If we capture brand DNA upfront (tone, values, style) → we can ensure every AI-generated piece is consistent and on-brand → reducing edits and accelerating publishing.",
+    howWorked: ["Workshops", "Journey Mapping", "Wireframes", "High-fidelity UI", "Prototyping", "Waitlist Campaign Assets"],
+    keyMoments: [
+      { title: "Brand DNA capture", content: "defining structure to \"teach\" AI brand context" },
+      { title: "Multi-format creation", content: "blog → YouTube script → LinkedIn post" },
+      { title: "Repurposing loop", content: "one idea → cross-platform outputs in clicks" }
+    ],
+    experiments: [
+      { hypothesis: "Custom-trained AI = higher satisfaction", variant: "Generic LLM vs. tuned Futurcraft model", result: "Users rated output quality consistently 5⭐ vs 3⭐ baseline" }
+    ],
+    outcomes: [
+      ["Waitlist signups", "300+ in first 2 weeks"],
+      ["Prototype demo", "used for early investor pitch"],
+      ["Content turnaround", "reduced average by 70%"]
+    ],
+    next: ["Build integrations (Notion, Canva, Webflow)", "Expand multi-user collaboration features", "Analytics on engagement impact of generated content"]
+  },
+  "turbocloud": {
+    title: "Turbocloud",
+    subtitle: "FinOps platform for monitoring & optimization",
+    description: "Cloud cost management is fragmented across AWS, Azure, GCP. Businesses overspend due to lack of visibility + optimization insights. Turbocloud wanted to unify FinOps workflows into one console.",
+    role: {
+      role: "Lead Product Designer (Dashboards + Flows)",
+      timeline: "Jan–Apr '25",
+      surfaces: "Web Console",
+      team: "PM, 2 Engineers, CIO stakeholder",
+      constraints: "Heavy data, security sign-off, stepper CI/CD logic"
+    },
+    context: "Cloud cost management is fragmented across AWS, Azure, GCP. Businesses overspend due to lack of visibility + optimization insights. Turbocloud wanted to unify FinOps workflows into one console.",
+    users: [
+      { role: "Developer", job: "deploy through CI/CD with clarity" },
+      { role: "CIO", job: "monitor spend & receive cost-saving suggestions" },
+      { role: "Admin", job: "configure permissions, track usage" }
+    ],
+    keyBet: "If we simplify cost visibility + CI/CD workflows, we reduce waste and accelerate adoption.",
+    howWorked: ["Stakeholder Interviews", "Flow Mapping", "Dashboard Wireframes", "Prototyping", "Usability Testing"],
+    keyMoments: [
+      { title: "Unified logs dashboard", content: "single view across all cloud providers" },
+      { title: "Stepper-style CI/CD", content: "Dev → Preprod → Prod workflow clarity" },
+      { title: "FinOps insight cards", content: "\"Close unused VMs → save $X\" recommendations" }
+    ],
+    experiments: [
+      { hypothesis: "Visual spend breakdown = more action", variant: "Numeric tables vs. graphs", result: "Graphical view increased adoption of insights by 2.3×" }
+    ],
+    outcomes: [
+      ["Waste detection", "CIOs could spot waste in <5 mins (previously hours)"],
+      ["CI/CD clarity", "Developers rated clarity 8.5/10"],
+      ["Stakeholder buy-in", "increased → moving toward MVP build"]
+    ],
+    next: ["Build recommendation engine for VM shutdowns", "Add alerts for CPU over/under utilization", "Role-based dashboard customization"]
+  },
+  "outrange": {
+    title: "Outrange",
+    subtitle: "Conceptual Product",
+    description: "To balance my portfolio with creativity, I designed Outrange (a conceptual lifestyle app) that explores community-driven adventure planning.",
+    role: {
+      role: "Solo Designer",
+      timeline: "Concept project, 4 weeks",
+      surfaces: "Mobile-first",
+      team: "Solo project",
+      constraints: "Pure design exploration"
+    },
+    context: "To balance my portfolio with creativity, I designed Outrange (a conceptual lifestyle app) that explores community-driven adventure planning.",
+    users: [
+      { role: "Explorer", job: "discover new experiences" },
+      { role: "Friend groups", job: "co-plan trips" },
+      { role: "Vendors", job: "showcase experiences" }
+    ],
+    keyBet: "If we center on collaborative exploration, people find & commit to adventures faster.",
+    howWorked: ["Sketching", "Rapid Wireframes", "Visual UI", "Motion Prototypes"],
+    keyMoments: [
+      { title: "Moodboard-driven discovery", content: "visual inspiration over text lists" },
+      { title: "Group planning + polls", content: "collaborative decision making" },
+      { title: "Interactive map UI", content: "spatial adventure discovery" }
+    ],
+    experiments: [
+      { hypothesis: "Moodboards > lists for inspiration", variant: "Text vs. Visual planning", result: "Visual-first flow increased completion of plans by 2× (in tests)" }
+    ],
+    outcomes: [
+      ["Design community", "Concept well-received by design peers"],
+      ["Recognition", "Shortlisted in community showcases"],
+      ["Portfolio impact", "Demonstrates creative range"]
+    ],
+    next: ["Explore AR integration for immersive previews", "Test MVP with a small user base"]
+  }
+};
+
 const WorkCaseStudy: React.FC = () => {
   const { slug } = useParams();
-  const productName = titleCaseFromSlug(slug);
+  const data = slug ? caseStudyData[slug as keyof typeof caseStudyData] : caseStudyData["wedding-verse"];
+  const productName = data?.title || titleCaseFromSlug(slug);
 
   // Simple SEO: title, description, canonical
   useEffect(() => {
@@ -61,19 +204,15 @@ const WorkCaseStudy: React.FC = () => {
           <div className="grid md:grid-cols-12 gap-6 md:gap-8 items-start">
             <div className="md:col-span-7">
                <h1 className="text-2xl md:text-4xl font-bold tracking-tight">
-                Weddingverse — a shared workspace for couples, planners, and vendors that turns inspiration into booked services.
+                {data.title} — {data.subtitle}
               </h1>
               <p className="mt-3 text-muted-foreground max-w-prose">
-                Weddings are multi-stakeholder and decision-dense. Couples juggle boards, sheets, and chats; vendors get low-context leads. We built a guided workspace that compresses decisions into "packages," improving clarity and velocity under timeline.
+                {data.description}
               </p>
               <div className="mt-4 flex flex-wrap gap-2">
-                {[
-                  "Activation ▲X%",
-                  "Time-to-book −Y%",
-                  "Vendor reply rate ▲Z%",
-                ].map((m) => (
-                  <span key={m} className="text-xs font-medium bg-muted rounded-full px-3 py-1 border border-border">
-                    {m}
+                {data.outcomes.map(([metric, value]) => (
+                  <span key={metric} className="text-xs font-medium bg-muted rounded-full px-3 py-1 border border-border">
+                    {metric}: {value}
                   </span>
                 ))}
               </div>
@@ -82,11 +221,11 @@ const WorkCaseStudy: React.FC = () => {
               <div className="rounded-2xl border border-dashed border-border p-4 shadow-sm bg-card">
                 <div className="text-xs uppercase tracking-wide text-muted-foreground">Role & Scope</div>
                 <ul className="mt-2 text-sm leading-6">
-                  <li><strong>Role:</strong> Lead Product Designer (IC + Strategy)</li>
-                  <li><strong>Timeline:</strong> Q1–Q3 ’YY (≈ N weeks)</li>
-                  <li><strong>Surfaces:</strong> Mobile • Web • Console</li>
-                  <li><strong>Team:</strong> PM • Eng • Data • Ops</li>
-                  <li><strong>Constraints:</strong> e.g., security sign‑off, cold‑start, multi‑cloud</li>
+                  <li><strong>Role:</strong> {data.role.role}</li>
+                  <li><strong>Timeline:</strong> {data.role.timeline}</li>
+                  <li><strong>Surfaces:</strong> {data.role.surfaces}</li>
+                  <li><strong>Team:</strong> {data.role.team}</li>
+                  <li><strong>Constraints:</strong> {data.role.constraints}</li>
                 </ul>
               </div>
             </aside>
@@ -100,7 +239,7 @@ const WorkCaseStudy: React.FC = () => {
             {/* Context */}
             <article id="context">
               <h2 className="text-lg font-semibold">Context</h2>
-              <p className="mt-2 text-muted-foreground">The market is fragmented across inspiration, planning, and procurement. Couples feel overwhelmed, planners herd cats, vendors waste time qualifying. The business goal: prove marketplace liquidity fast and lift lead→book conversion in N weeks.</p>
+              <p className="mt-2 text-muted-foreground">{data.context}</p>
               <div className="mt-3 grid sm:grid-cols-3 gap-2">
                 {[
                   "Audience",
@@ -119,49 +258,33 @@ const WorkCaseStudy: React.FC = () => {
             <article id="jobs">
               <h2 className="text-lg font-semibold">Users & Jobs</h2>
               <ul className="mt-2 space-y-2 list-disc pl-5">
-                <li><strong>Couple:</strong> decide, align, and track budget without overwhelm.</li>
-                <li><strong>Planner:</strong> coordinate vendors and approvals.</li>
-                <li><strong>Vendor:</strong> receive qualified, context-rich leads.</li>
-                <li className="italic text-muted-foreground">Anti‑goal: full CRM replacement.</li>
+                {data.users.map((user, i) => (
+                  <li key={i}><strong>{user.role}:</strong> {user.job}.</li>
+                ))}
               </ul>
             </article>
 
             {/* Key Bet */}
             <article id="bet">
               <h2 className="text-lg font-semibold">Key Bet</h2>
-              <p className="mt-2">If we center "decision packages" (brief → shortlist → trade-offs → book), we shorten time-to-book and raise vendor win-rate.</p>
-              <div className="mt-3 rounded-xl border border-dashed border-border p-4 bg-muted">
-                <div className="text-xs uppercase text-muted-foreground">Decision Log</div>
-                <ul className="mt-2 text-sm list-disc pl-5">
-                  <li>Decision → Rationale → Trade‑off</li>
-                  <li>Decision → Rationale → Trade‑off</li>
-                  <li>Decision → Rationale → Trade‑off</li>
-                </ul>
-              </div>
+              <p className="mt-2">{data.keyBet}</p>
             </article>
 
             {/* How I Worked */}
             <article id="how">
               <h2 className="text-lg font-semibold">How I Worked</h2>
               <div className="mt-2 flex flex-wrap gap-2">
-                {[
-                  "Research", "JTBD mapping", "Service blueprint", "IA", "Component library", "Flows", "Prototyping", "Delivery",
-                ].map((chip) => (
+                {data.howWorked.map((chip) => (
                   <span key={chip} className="text-xs bg-muted px-3 py-1 rounded-full border border-border">{chip}</span>
                 ))}
               </div>
-              <p className="mt-3 text-sm text-muted-foreground">Weekly PM/Eng/BD triad; live vendor pilots.</p>
             </article>
 
             {/* Three Key Moments */}
             <article id="moments">
               <h2 className="text-lg font-semibold">Three Key Moments</h2>
               <div className="mt-3 grid sm:grid-cols-3 gap-3">
-                {[
-                  { title: "Cold-start", content: "Seeded \"starter briefs\" templates → activation ▲X%" },
-                  { title: "Decision paralysis", content: "Compare-cards with 3 explicit trade-offs → time-to-decision −Y%" },
-                  { title: "Vendor mismatch", content: "Structured brief + price bands → vendor reply rate ▲Z%" }
-                ].map((moment, i) => (
+                {data.keyMoments.map((moment, i) => (
                   <div key={i} className="rounded-2xl border border-dashed border-border p-3 bg-card">
                     <div className="h-24 bg-muted rounded-lg" />
                     <div className="mt-2 text-sm">
@@ -186,21 +309,13 @@ const WorkCaseStudy: React.FC = () => {
                     </tr>
                   </thead>
                   <tbody>
-                    <tr className="border-t border-border">
-                      <td className="p-3">Shortlist prominence reduces bounce</td>
-                      <td className="p-3">control vs. sticky shortlist</td>
-                      <td className="p-3">bounce −x%</td>
-                    </tr>
-                    <tr className="border-t border-border">
-                      <td className="p-3">Budget entry earlier increases realism</td>
-                      <td className="p-3">onboarding order</td>
-                      <td className="p-3">vendor acceptance ▲y%</td>
-                    </tr>
-                    <tr className="border-t border-border">
-                      <td className="p-3">Template library improves activation</td>
-                      <td className="p-3">6 vs. 12 templates</td>
-                      <td className="p-3">activation ▲z%</td>
-                    </tr>
+                    {data.experiments.map((exp, i) => (
+                      <tr key={i} className="border-t border-border">
+                        <td className="p-3">{exp.hypothesis}</td>
+                        <td className="p-3">{exp.variant}</td>
+                        <td className="p-3">{exp.result}</td>
+                      </tr>
+                    ))}
                   </tbody>
                 </table>
               </div>
@@ -210,11 +325,7 @@ const WorkCaseStudy: React.FC = () => {
             <article id="outcomes">
               <h2 className="text-lg font-semibold">Outcomes</h2>
               <div className="mt-3 grid sm:grid-cols-3 gap-3">
-                {[
-                  ["Lead→book", "a% → a+Δ% in n weeks"],
-                  ["Day-7 active couples", "b% → b+Δ%"],
-                  ["Vendor response time", "th → t−Δh"],
-                ].map(([title, caption]) => (
+                {data.outcomes.map(([title, caption]) => (
                   <div key={title} className="rounded-2xl border border-dashed border-border p-4 bg-card">
                     <div className="h-20 bg-muted rounded-lg" />
                     <div className="mt-2 text-sm">
@@ -228,11 +339,11 @@ const WorkCaseStudy: React.FC = () => {
 
             {/* Next */}
             <article id="next">
-              <h2 className="text-lg font-semibold">What I’d Do Next</h2>
+              <h2 className="text-lg font-semibold">What I'd Do Next</h2>
               <ul className="mt-2 list-disc pl-5 space-y-1">
-                <li>Price transparency experiments</li>
-                <li>Vendor SLA nudges</li>
-                <li>Planner pro tooling</li>
+                {data.next.map((item, i) => (
+                  <li key={i}>{item}</li>
+                ))}
               </ul>
             </article>
           </div>
