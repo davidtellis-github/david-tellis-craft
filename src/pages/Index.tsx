@@ -12,11 +12,15 @@ const Index = () => {
   return (
     <div className="min-h-screen bg-background text-foreground">
       <AmbientSpotlight />
-      <main className="w-full mx-auto px-4 sm:px-6 lg:px-8">
+      <main className="w-[98vw] mx-auto px-4 md:px-6">
+        {/* New Header on top */}
+       
+
         {/* Main layout with SideNav + sections */}
-        <div className="flex flex-col lg:flex-row lg:gap-8 xl:gap-12 2xl:gap-16">
+        <div className="flex lg:grid-cols-[220px_1fr] gap-[10vh]">
           <SideNav />
-          <section className="flex flex-col w-full lg:w-[calc(100%-18rem)] xl:w-[calc(100%-20rem)] lg:max-w-5xl">
+          <section className="flex flex-col w-[70vw] ">
+             
             <Hero />
             <WorkGrid />
             <ValuesSection />
