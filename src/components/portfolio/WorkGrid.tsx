@@ -125,38 +125,11 @@ const WorkGrid: React.FC = () => {
                   ></iframe>
                 </div>
                 
-                {/* Project Card */}
-                <div className="grid lg:grid-cols-2 gap-8 items-start">
-                  {/* Project Image */}
-                  <div className="aspect-[4/3] overflow-hidden rounded-lg">
-                    <img 
-                      src={project.img} 
-                      alt={project.title}
-                      className={`w-full h-full object-cover transition-transform duration-500 ${
-                        isExpanded ? 'scale-105' : 'scale-100'
-                      }`}
-                    />
-                  </div>
-                  
-                  {/* Project Details */}
-                  <div className="space-y-4">
-                    <p className="text-foreground">
-                      {project.description}
-                    </p>
-                    <ul className="space-y-2">
-                      {project.details.map((detail, i) => (
-                        <li key={i} className="text-sm text-muted-foreground">
-                          {detail}
-                        </li>
-                      ))}
-                    </ul>
-                    <Link 
-                      to={`/project/${project.slug}`} 
-                      className="inline-block mt-4 px-6 py-3 border-2 border-primary text-primary hover:bg-primary hover:text-primary-foreground transition-colors duration-300 font-medium tracking-wide"
-                    >
-                      VIEW CASE STUDY
-                    </Link>
-                  </div>
+                {/* Project Description Only */}
+                <div className="max-w-2xl">
+                  <p className="text-foreground text-lg leading-relaxed">
+                    {project.description}
+                  </p>
                 </div>
               </div>
             </div>
