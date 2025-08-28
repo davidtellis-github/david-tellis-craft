@@ -169,33 +169,13 @@ const Portfolio = () => {
       {/* Hero Section */}
       <section className="pt-24 pb-12 px-6">
         <div className="max-w-7xl mx-auto">
-          <div className="space-y-6">
+          <div className="space-y-6 text-right">
             <h1 className="text-6xl md:text-8xl font-bold tracking-tight">
               My Work
             </h1>
-            <p className="text-xl md:text-2xl text-muted-foreground max-w-2xl">
+            <p className="text-xl md:text-2xl text-muted-foreground max-w-2xl ml-auto">
               A mix of live projects, audience-loved designs, freelance gigs, and passion projects
             </p>
-          </div>
-        </div>
-      </section>
-
-      {/* Full-screen Featured Project */}
-      <section className="px-6 py-8">
-        <div className="relative overflow-hidden rounded-2xl">
-          <div className="relative min-h-[85vh]">
-            <img 
-              src={featuredProject.image} 
-              alt={featuredProject.title}
-              className="w-full h-full object-cover rounded-2xl"
-            />
-            {featuredProject.hasVideo && (
-              <div className="absolute inset-0 flex items-center justify-center">
-                <div className="w-24 h-24 bg-primary/90 rounded-full flex items-center justify-center hover:scale-110 transition-transform cursor-pointer">
-                  <Play className="w-10 h-10 text-primary-foreground ml-1" />
-                </div>
-              </div>
-            )}
           </div>
         </div>
       </section>
@@ -212,7 +192,7 @@ const Portfolio = () => {
           {getAllProjectsByCategory().map((categoryData, categoryIndex) => (
             <div key={categoryData.category}>
               {/* Category Section */}
-              <div id={`category-${categoryData.category}`} className="scroll-mt-32 mb-16">
+              <div id={`category-${categoryData.category}`} className="scroll-mt-20 mb-16">
                 {categoryData.projects.length >= 2 ? (
                   // Horizontal scroll for 2+ cards
                   <div className="overflow-x-auto pb-4">
@@ -316,6 +296,26 @@ const Portfolio = () => {
           ))}
         </section>
       </div>
+
+      {/* Featured Project - Moved to end */}
+      <section className="px-6 py-8">
+        <div className="relative overflow-hidden rounded-2xl">
+          <div className="relative min-h-[85vh]">
+            <img 
+              src={featuredProject.image} 
+              alt={featuredProject.title}
+              className="w-full h-full object-cover rounded-2xl"
+            />
+            {featuredProject.hasVideo && (
+              <div className="absolute inset-0 flex items-center justify-center">
+                <div className="w-24 h-24 bg-primary/90 rounded-full flex items-center justify-center hover:scale-110 transition-transform cursor-pointer">
+                  <Play className="w-10 h-10 text-primary-foreground ml-1" />
+                </div>
+              </div>
+            )}
+          </div>
+        </div>
+      </section>
 
       {/* Call to Action */}
       <section className="py-20 px-6">

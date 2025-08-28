@@ -18,13 +18,13 @@ interface PortfolioNavProps {
 const PortfolioNav: React.FC<PortfolioNavProps> = ({ activeCategory, onCategoryChange }) => {
   const [isVisible, setIsVisible] = useState(false);
 
-  // Show navigation after scrolling past the featured project
+  // Show navigation after scrolling past the hero section
   useEffect(() => {
     const handleScroll = () => {
       const scrollPosition = window.scrollY;
       const windowHeight = window.innerHeight;
-      // Show nav after scrolling past ~80% of viewport (roughly where featured project ends)
-      setIsVisible(scrollPosition > windowHeight * 0.8);
+      // Show nav after scrolling past ~30% of viewport (after hero section)
+      setIsVisible(scrollPosition > windowHeight * 0.3);
     };
 
     window.addEventListener("scroll", handleScroll, { passive: true });
@@ -32,6 +32,25 @@ const PortfolioNav: React.FC<PortfolioNavProps> = ({ activeCategory, onCategoryC
 
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  // Track active section based on scroll position
+  useEffect(() => {
+    const handleScroll = () => {
+      const sections = categories.map(cat => document.getElementById(`category-${cat.id}`));
+      const scrollPosition = window.scrollY + window.innerHeight * 0.3;
+
+      for (let i = sections.length - 1; i >= 0; i--) {
+        const section = sections[i];
+        if (section && section.offsetTop <= scrollPosition) {
+          onCategoryChange(categories[i].id);
+          break;
+        }
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [onCategoryChange]);
 
   const handleClick = (id: string) => (e: React.MouseEvent) => {
     e.preventDefault();
@@ -47,7 +66,7 @@ const PortfolioNav: React.FC<PortfolioNavProps> = ({ activeCategory, onCategoryC
   return (
     <nav
       aria-label="Portfolio navigation"
-      className={`hidden lg:block sticky top-32 h-[calc(100vh-8rem)] w-[min(18rem,24vw)] ml-6 z-[56] transition-opacity duration-300 ${
+      className={`hidden lg:block sticky top-20 h-[calc(100vh-5rem)] w-[min(18rem,24vw)] ml-6 z-[56] transition-opacity duration-300 ${
         isVisible ? "opacity-100" : "opacity-0 pointer-events-none"
       }`}
     >
