@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 import { ArrowLeft, Play, ExternalLink, Github, Figma } from "lucide-react";
-import Header from "@/components/ui/Header";
 
 const ProjectDetails: React.FC = () => {
   const { slug } = useParams();
@@ -86,12 +85,10 @@ const ProjectDetails: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-background text-foreground">
-      <Header />
-      
       {/* Navigation - Minimalistic */}
-      <div className="absolute top-8 left-20 z-40">
+      <div className="absolute top-8 left-8 z-50">
         <Link
-          to="/portfolio"
+          to="/"
           className="inline-flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors text-sm"
         >
           <ArrowLeft className="h-4 w-4" />

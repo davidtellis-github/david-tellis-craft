@@ -6,18 +6,20 @@ import ValuesSection from "@/components/portfolio/ValuesSection";
 import BackgroundTimeline from "@/components/portfolio/BackgroundTimeline";
 import Testimonials from "@/components/portfolio/Testimonials";
 import Contact from "@/components/portfolio/Contact";
-import Header from "@/components/ui/Header";
+import Header from "@/components/portfolio/Header"; // <-- new
 
 const Index = () => {
   return (
     <div className="min-h-screen bg-background text-foreground">
       <AmbientSpotlight />
-      <Header />
       <main className="w-[98vw] mx-auto px-4 md:px-6">
-        <SideNav />
-        {/* Main layout without SideNav taking space */}
-        <div className="w-full">
-          <section className="flex flex-col">
+        {/* New Header on top */}
+       
+
+        {/* Main layout with SideNav + sections */}
+        <div className="flex gap-[4vw] lg:gap-[6vw]">
+          <SideNav />
+          <section className="flex flex-col flex-1 min-w-0">
             <Hero />
             <WorkGrid />
             <ValuesSection />
