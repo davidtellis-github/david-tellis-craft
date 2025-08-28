@@ -5,6 +5,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Play, ExternalLink, ArrowUpRight, ArrowLeft } from "lucide-react";
 import PortfolioNav from "@/components/portfolio/PortfolioNav";
+import Header from "@/components/ui/Header";
 
 // Import work images
 import w1 from "@/assets/work-1.jpg";
@@ -131,16 +132,8 @@ const Portfolio = () => {
 
   return (
     <div className="min-h-screen bg-background text-foreground">
-      {/* Back Button */}
-      <div className="fixed top-6 left-6 z-50">
-        <Link 
-          to="/" 
-          className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-muted/80 backdrop-blur-sm hover:bg-muted transition-colors"
-        >
-          <ArrowLeft className="w-4 h-4" />
-        </Link>
-      </div>
-
+      <Header />
+      
       {/* Hero Section */}
       <section className="pt-24 pb-12 px-6">
         <div className="max-w-7xl mx-auto">
