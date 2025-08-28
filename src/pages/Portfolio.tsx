@@ -3,8 +3,8 @@ import { Link } from "react-router-dom";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Play, ExternalLink, ArrowUpRight, ArrowLeft } from "lucide-react";
+import PortfolioNav from "@/components/portfolio/PortfolioNav";
 
 // Import work images
 import w1 from "@/assets/work-1.jpg";
@@ -175,78 +175,70 @@ const Portfolio = () => {
         </div>
       </section>
 
-      {/* Project Categories */}
-      <section className="py-20 px-6">
-        <div className="max-w-7xl mx-auto">
-          <Tabs value={activeCategory} onValueChange={setActiveCategory} className="w-full">
-            <div className="flex justify-center mb-12">
-              <TabsList className="grid grid-cols-2 md:grid-cols-5 w-full max-w-2xl">
-                <TabsTrigger value="all" className="text-sm">All</TabsTrigger>
-                <TabsTrigger value="live" className="text-sm">Live Projects</TabsTrigger>
-                <TabsTrigger value="audience" className="text-sm">Mass Audience</TabsTrigger>
-                <TabsTrigger value="freelance" className="text-sm">Freelance</TabsTrigger>
-                <TabsTrigger value="passion" className="text-sm">Passion UI</TabsTrigger>
-              </TabsList>
-            </div>
-
-            <TabsContent value={activeCategory} className="mt-0">
-              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                {getFilteredProjects().map((project) => (
-                  <Card 
-                    key={project.id} 
-                    className="group overflow-hidden border hover:border-primary/20 hover:shadow-lg transition-all duration-300"
-                  >
-                    <div className="relative overflow-hidden">
-                      <img 
-                        src={project.image} 
-                        alt={project.title}
-                        className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-500"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                      <div className="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                        <div className="w-8 h-8 bg-primary/90 rounded-full flex items-center justify-center">
-                          <ArrowUpRight className="w-4 h-4 text-primary-foreground" />
-                        </div>
-                      </div>
+      {/* Main layout with Navigation + Projects */}
+      <div className="flex gap-[4vw] lg:gap-[6vw]">
+        <PortfolioNav 
+          activeCategory={activeCategory} 
+          onCategoryChange={setActiveCategory} 
+        />
+        
+        {/* Projects Section */}
+        <section id="projects-section" className="flex flex-col flex-1 min-w-0 py-20">
+          <div className="grid md:grid-cols-2 lg:grid-cols-2 gap-8">
+            {getFilteredProjects().map((project) => (
+              <Card 
+                key={project.id} 
+                className="group overflow-hidden border hover:border-primary/20 hover:shadow-lg transition-all duration-300"
+              >
+                <div className="relative overflow-hidden">
+                  <img 
+                    src={project.image} 
+                    alt={project.title}
+                    className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-500"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                  <div className="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    <div className="w-8 h-8 bg-primary/90 rounded-full flex items-center justify-center">
+                      <ArrowUpRight className="w-4 h-4 text-primary-foreground" />
                     </div>
-                    
-                    <CardContent className="p-6 space-y-4">
-                      <div className="flex flex-wrap gap-1">
-                        {project.tags.map((tag) => (
-                          <Badge key={tag} variant="outline" className="text-xs">
-                            {tag}
-                          </Badge>
-                        ))}
-                      </div>
-                      
-                      <div>
-                        <h3 className="text-xl font-bold text-foreground mb-2 group-hover:text-primary transition-colors">
-                          {project.title}
-                        </h3>
-                        <p className="text-sm text-muted-foreground leading-relaxed">
-                          {project.tagline}
-                        </p>
-                      </div>
-                      
-                      <Link 
-                        to={project.link}
-                        className="inline-flex items-center text-sm font-medium text-primary hover:text-primary/80 transition-colors"
-                      >
-                        View Project
-                        <ArrowUpRight className="w-3 h-3 ml-1" />
-                      </Link>
-                    </CardContent>
-                  </Card>
-                ))}
-              </div>
-            </TabsContent>
-          </Tabs>
-        </div>
-      </section>
+                  </div>
+                </div>
+                
+                <CardContent className="p-6 space-y-4">
+                  <div className="flex flex-wrap gap-1">
+                    {project.tags.map((tag) => (
+                      <Badge key={tag} variant="outline" className="text-xs">
+                        {tag}
+                      </Badge>
+                    ))}
+                  </div>
+                  
+                  <div>
+                    <h3 className="text-xl font-bold text-foreground mb-2 group-hover:text-primary transition-colors">
+                      {project.title}
+                    </h3>
+                    <p className="text-sm text-muted-foreground leading-relaxed">
+                      {project.tagline}
+                    </p>
+                  </div>
+                  
+                  <Link 
+                    to={project.link}
+                    className="inline-flex items-center text-sm font-medium text-primary hover:text-primary/80 transition-colors"
+                  >
+                    View Project
+                    <ArrowUpRight className="w-3 h-3 ml-1" />
+                  </Link>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        </section>
+      </div>
 
       {/* Call to Action */}
       <section className="py-20 px-6">
-        <div className="max-w-7xl mx-auto space-y-12">
+        <div className="max-w-7xl mx-auto ml-[22vw] space-y-12">
           <div className="space-y-4">
             <h2 className="text-4xl md:text-5xl font-bold tracking-tight">
               Like what you see?
