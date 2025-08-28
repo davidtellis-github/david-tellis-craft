@@ -17,10 +17,9 @@ const Index = () => {
        
 
         {/* Main layout with SideNav + sections */}
-        <div className="flex lg:grid-cols-[220px_1fr] gap-[10vh]">
+        <div className="flex gap-[4vw] lg:gap-[6vw]">
           <SideNav />
-          <section className="flex flex-col w-[70vw] ">
-             
+          <section className="flex flex-col flex-1 min-w-0">
             <Hero />
             <WorkGrid />
             <ValuesSection />
