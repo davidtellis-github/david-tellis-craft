@@ -51,39 +51,37 @@ const SideNav: React.FC = () => {
   return (
     <nav
       aria-label="Section navigation"
-      className="hidden lg:block sticky top-0 h-svh w-[min(18rem,24vw)]"
+      className="hidden lg:block absolute top-[60vh] left-6 w-[min(18rem,24vw)] z-40"
     >
-      <div className="relative h-full flex flex-col gap-[14vh]">
-        {/* Navigation Menu - Logo removed, now handled by Header component */}
-        <div className="pt-20">
-          <ul
-            className="
-              space-y-1 
-              text-muted-foreground
-              text-[clamp(12px,1.6vmin,16px)]
-            "
-          >
-            {sections.map((s) => (
-              <li key={s.id}>
-                <a
-                  href={`#${s.id}`}
-                  onClick={handleClick(s.id)}
-                  className={`
-                    transition-colors 
-                    hover:text-foreground 
-                    ${
-                      activeSection === s.id
-                        ? "text-foreground font-normal"
-                        : ""
-                    }
-                  `}
-                >
-                  {s.label}
-                </a>
-              </li>
-            ))}
-          </ul>
-        </div>
+      <div className="flex flex-col">
+        {/* Navigation Menu positioned at hero tab content height */}
+        <ul
+          className="
+            space-y-1 
+            text-muted-foreground
+            text-[clamp(12px,1.6vmin,16px)]
+          "
+        >
+          {sections.map((s) => (
+            <li key={s.id}>
+              <a
+                href={`#${s.id}`}
+                onClick={handleClick(s.id)}
+                className={`
+                  transition-colors 
+                  hover:text-foreground 
+                  ${
+                    activeSection === s.id
+                      ? "text-foreground font-normal"
+                      : ""
+                  }
+                `}
+              >
+                {s.label}
+              </a>
+            </li>
+          ))}
+        </ul>
       </div>
     </nav>
   );

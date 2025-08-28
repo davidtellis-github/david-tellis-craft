@@ -14,10 +14,10 @@ const Index = () => {
       <AmbientSpotlight />
       <Header />
       <main className="w-[98vw] mx-auto px-4 md:px-6">
-        {/* Main layout with SideNav + sections */}
-        <div className="flex gap-[4vw] lg:gap-[6vw]">
-          <SideNav />
-          <section className="flex flex-col flex-1 min-w-0">
+        <SideNav />
+        {/* Main layout without SideNav taking space */}
+        <div className="w-full">
+          <section className="flex flex-col">
             <Hero />
             <WorkGrid />
             <ValuesSection />

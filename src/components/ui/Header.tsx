@@ -3,11 +3,11 @@ import { Link } from "react-router-dom";
 
 const Header: React.FC = () => {
   return (
-    <div className="fixed top-6 left-6 z-50">
+    <header className="fixed top-6 left-6 z-50">
       <Link
         to="/"
         aria-label="Home"
-        className="pt-10 leading-none select-none text-foreground 
+        className="leading-none select-none text-foreground 
                    text-[clamp(20px,4vmin,32px)] font-normal flex group relative"
       >
         {/* Always-visible "D" */}
@@ -22,7 +22,7 @@ const Header: React.FC = () => {
           avid Tellis
         </span>
       </Link>
-    </div>
+    </header>
   );
 };
 
