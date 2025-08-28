@@ -16,23 +16,6 @@ interface PortfolioNavProps {
 }
 
 const PortfolioNav: React.FC<PortfolioNavProps> = ({ activeCategory, onCategoryChange }) => {
-  const [isVisible, setIsVisible] = useState(false);
-
-  // Show navigation after scrolling past the hero section
-  useEffect(() => {
-    const handleScroll = () => {
-      const scrollPosition = window.scrollY;
-      const windowHeight = window.innerHeight;
-      // Show nav after scrolling past ~30% of viewport (after hero section)
-      setIsVisible(scrollPosition > windowHeight * 0.3);
-    };
-
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    handleScroll();
-
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
   // Track active section based on scroll position
   useEffect(() => {
     const handleScroll = () => {
@@ -66,37 +49,16 @@ const PortfolioNav: React.FC<PortfolioNavProps> = ({ activeCategory, onCategoryC
   return (
     <nav
       aria-label="Portfolio navigation"
-      className={`hidden lg:block sticky top-20 h-[calc(100vh-5rem)] w-[min(18rem,24vw)] ml-6 z-[56] transition-opacity duration-300 ${
-        isVisible ? "opacity-100" : "opacity-0 pointer-events-none"
-      }`}
+      className="hidden lg:block sticky top-20 h-[calc(100vh-5rem)] w-[min(18rem,24vw)] ml-6 z-[56]"
     >
       <div className="relative h-full flex flex-col gap-[14vh]">
-        {/* Logo */}
-        <a
-          href="/"
-          aria-label="Home"
-          className="pt-10 leading-none select-none text-foreground 
-                     text-[clamp(20px,4vmin,32px)] font-normal flex group relative"
-        >
-          {/* Always-visible "D" */}
-          <span className="inline-block">D</span>
-          <span
-            className="
-              inline-block opacity-0
-              group-hover:animate-spreadOut
-              group-hover:opacity-100
-            "
-          >
-            avid Tellis
-          </span>
-        </a>
-
         {/* Category Menu */}
         <ul
           className="
             space-y-1 
             text-muted-foreground
             text-[clamp(12px,1.6vmin,16px)]
+            pt-10
           "
         >
           {categories.map((category) => (

@@ -6,16 +6,14 @@ import ValuesSection from "@/components/portfolio/ValuesSection";
 import BackgroundTimeline from "@/components/portfolio/BackgroundTimeline";
 import Testimonials from "@/components/portfolio/Testimonials";
 import Contact from "@/components/portfolio/Contact";
-import Header from "@/components/portfolio/Header"; // <-- new
+import Header from "@/components/ui/Header";
 
 const Index = () => {
   return (
     <div className="min-h-screen bg-background text-foreground">
       <AmbientSpotlight />
+      <Header />
       <main className="w-[98vw] mx-auto px-4 md:px-6">
-        {/* New Header on top */}
-       
-
         {/* Main layout with SideNav + sections */}
         <div className="flex gap-[4vw] lg:gap-[6vw]">
           <SideNav />
