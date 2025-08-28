@@ -156,62 +156,21 @@ const Portfolio = () => {
       </section>
 
       {/* Full-screen Featured Project */}
-      <section className="w-full">
-        <div className="relative overflow-hidden bg-muted/20">
-          <div className="grid lg:grid-cols-2 min-h-[80vh]">
-            {/* Image */}
-            <div className="relative overflow-hidden">
-              <img 
-                src={featuredProject.image} 
-                alt={featuredProject.title}
-                className="w-full h-full object-cover"
-              />
-              {featuredProject.hasVideo && (
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <div className="w-20 h-20 bg-primary/90 rounded-full flex items-center justify-center hover:scale-110 transition-transform cursor-pointer">
-                    <Play className="w-8 h-8 text-primary-foreground ml-1" />
-                  </div>
-                </div>
-              )}
-            </div>
-            
-            {/* Content */}
-            <div className="p-8 lg:p-16 flex flex-col justify-center">
-              <div className="space-y-8">
-                <div className="flex flex-wrap gap-2">
-                  {featuredProject.tags.map((tag) => (
-                    <Badge key={tag} variant="secondary" className="text-sm px-3 py-1">
-                      {tag}
-                    </Badge>
-                  ))}
-                </div>
-                
-                <div className="space-y-4">
-                  <h2 className="text-4xl md:text-5xl font-bold tracking-tight">
-                    {featuredProject.title}
-                  </h2>
-                  <p className="text-xl text-muted-foreground">
-                    {featuredProject.tagline}
-                  </p>
-                  <p className="text-lg leading-relaxed text-foreground/80">
-                    {featuredProject.description}
-                  </p>
-                </div>
-                
-                <div className="flex gap-4 pt-4">
-                  <Button size="lg" asChild>
-                    <Link to={featuredProject.link}>
-                      View Case Study
-                      <ArrowUpRight className="w-4 h-4 ml-2" />
-                    </Link>
-                  </Button>
-                  <Button size="lg" variant="outline">
-                    <ExternalLink className="w-4 h-4 mr-2" />
-                    Live Project
-                  </Button>
+      <section className="px-6 py-8">
+        <div className="relative overflow-hidden rounded-2xl">
+          <div className="relative min-h-[85vh]">
+            <img 
+              src={featuredProject.image} 
+              alt={featuredProject.title}
+              className="w-full h-full object-cover rounded-2xl"
+            />
+            {featuredProject.hasVideo && (
+              <div className="absolute inset-0 flex items-center justify-center">
+                <div className="w-24 h-24 bg-primary/90 rounded-full flex items-center justify-center hover:scale-110 transition-transform cursor-pointer">
+                  <Play className="w-10 h-10 text-primary-foreground ml-1" />
                 </div>
               </div>
-            </div>
+            )}
           </div>
         </div>
       </section>
