@@ -193,6 +193,16 @@ const Portfolio = () => {
         
         {/* Projects Section */}
         <section id="projects-section" className="flex flex-col flex-1 min-w-0 py-20">
+          {/* Section Title and Description */}
+          <div className="mb-16 px-6">
+            <h2 className="text-4xl md:text-5xl font-bold tracking-tight mb-4">
+              My Work
+            </h2>
+            <p className="text-xl text-muted-foreground">
+              These are my works please do not judge
+            </p>
+          </div>
+
           {getAllProjectsByCategory().map((categoryData, categoryIndex) => (
             <div key={categoryData.category}>
               {/* Category Section */}
