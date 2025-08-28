@@ -9,8 +9,6 @@ const Header = () => {
         className="leading-none select-none text-foreground 
                    text-[clamp(20px,4vmin,32px)] font-normal flex group relative"
       >
-        {/* Always-visible "D" */}
-        <span className="inline-block">D</span>
         <span
           className="
             inline-block opacity-0
