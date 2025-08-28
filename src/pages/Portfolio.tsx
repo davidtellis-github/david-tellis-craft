@@ -4,7 +4,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Play, ExternalLink, ArrowUpRight } from "lucide-react";
+import { Play, ExternalLink, ArrowUpRight, ArrowLeft } from "lucide-react";
 
 // Import work images
 import w1 from "@/assets/work-1.jpg";
@@ -130,94 +130,95 @@ const Portfolio = () => {
   };
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background text-foreground">
+      {/* Back Button */}
+      <div className="fixed top-6 left-6 z-50">
+        <Link 
+          to="/" 
+          className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-muted/80 backdrop-blur-sm hover:bg-muted transition-colors"
+        >
+          <ArrowLeft className="w-4 h-4" />
+        </Link>
+      </div>
+
       {/* Hero Section */}
-      <section className="py-20 px-6">
-        <div className="max-w-6xl mx-auto">
-          <div className="text-center space-y-6">
-            <h1 className="text-5xl md:text-7xl font-bold text-foreground tracking-tight">
+      <section className="pt-24 pb-12 px-6">
+        <div className="max-w-7xl mx-auto">
+          <div className="space-y-6">
+            <h1 className="text-6xl md:text-8xl font-bold tracking-tight">
               My Work
             </h1>
-            <p className="text-xl md:text-2xl text-muted-foreground max-w-3xl mx-auto">
+            <p className="text-xl md:text-2xl text-muted-foreground max-w-2xl">
               A mix of live projects, audience-loved designs, freelance gigs, and passion projects
             </p>
           </div>
         </div>
       </section>
 
-      {/* Featured Project Section */}
-      <section className="py-16 px-6">
-        <div className="max-w-6xl mx-auto">
-          <div className="mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
-              Featured Project
-            </h2>
-            <div className="w-20 h-1 bg-primary"></div>
-          </div>
-
-          <Card className="overflow-hidden border-2 hover:border-primary/20 transition-all duration-500 group">
-            <div className="grid lg:grid-cols-2 gap-0">
-              {/* Image */}
-              <div className="relative overflow-hidden">
-                <img 
-                  src={featuredProject.image} 
-                  alt={featuredProject.title}
-                  className="w-full h-64 lg:h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                />
-                {featuredProject.hasVideo && (
-                  <div className="absolute inset-0 flex items-center justify-center bg-background/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                    <div className="w-16 h-16 bg-primary/90 rounded-full flex items-center justify-center">
-                      <Play className="w-6 h-6 text-primary-foreground ml-1" />
-                    </div>
-                  </div>
-                )}
-              </div>
-              
-              {/* Content */}
-              <CardContent className="p-8 lg:p-12 flex flex-col justify-center">
-                <div className="space-y-6">
-                  <div className="flex flex-wrap gap-2">
-                    {featuredProject.tags.map((tag) => (
-                      <Badge key={tag} variant="secondary">
-                        {tag}
-                      </Badge>
-                    ))}
-                  </div>
-                  
-                  <div>
-                    <h3 className="text-2xl md:text-3xl font-bold text-foreground mb-3">
-                      {featuredProject.title}
-                    </h3>
-                    <p className="text-lg text-muted-foreground mb-4">
-                      {featuredProject.tagline}
-                    </p>
-                    <p className="text-foreground leading-relaxed">
-                      {featuredProject.description}
-                    </p>
-                  </div>
-                  
-                  <div className="flex gap-4">
-                    <Button asChild>
-                      <Link to={featuredProject.link}>
-                        View Case Study
-                        <ArrowUpRight className="w-4 h-4 ml-2" />
-                      </Link>
-                    </Button>
-                    <Button variant="outline">
-                      <ExternalLink className="w-4 h-4 mr-2" />
-                      Live Project
-                    </Button>
+      {/* Full-screen Featured Project */}
+      <section className="w-full">
+        <div className="relative overflow-hidden bg-muted/20">
+          <div className="grid lg:grid-cols-2 min-h-[80vh]">
+            {/* Image */}
+            <div className="relative overflow-hidden">
+              <img 
+                src={featuredProject.image} 
+                alt={featuredProject.title}
+                className="w-full h-full object-cover"
+              />
+              {featuredProject.hasVideo && (
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <div className="w-20 h-20 bg-primary/90 rounded-full flex items-center justify-center hover:scale-110 transition-transform cursor-pointer">
+                    <Play className="w-8 h-8 text-primary-foreground ml-1" />
                   </div>
                 </div>
-              </CardContent>
+              )}
             </div>
-          </Card>
+            
+            {/* Content */}
+            <div className="p-8 lg:p-16 flex flex-col justify-center">
+              <div className="space-y-8">
+                <div className="flex flex-wrap gap-2">
+                  {featuredProject.tags.map((tag) => (
+                    <Badge key={tag} variant="secondary" className="text-sm px-3 py-1">
+                      {tag}
+                    </Badge>
+                  ))}
+                </div>
+                
+                <div className="space-y-4">
+                  <h2 className="text-4xl md:text-5xl font-bold tracking-tight">
+                    {featuredProject.title}
+                  </h2>
+                  <p className="text-xl text-muted-foreground">
+                    {featuredProject.tagline}
+                  </p>
+                  <p className="text-lg leading-relaxed text-foreground/80">
+                    {featuredProject.description}
+                  </p>
+                </div>
+                
+                <div className="flex gap-4 pt-4">
+                  <Button size="lg" asChild>
+                    <Link to={featuredProject.link}>
+                      View Case Study
+                      <ArrowUpRight className="w-4 h-4 ml-2" />
+                    </Link>
+                  </Button>
+                  <Button size="lg" variant="outline">
+                    <ExternalLink className="w-4 h-4 mr-2" />
+                    Live Project
+                  </Button>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 
       {/* Project Categories */}
-      <section className="py-16 px-6">
-        <div className="max-w-6xl mx-auto">
+      <section className="py-20 px-6">
+        <div className="max-w-7xl mx-auto">
           <Tabs value={activeCategory} onValueChange={setActiveCategory} className="w-full">
             <div className="flex justify-center mb-12">
               <TabsList className="grid grid-cols-2 md:grid-cols-5 w-full max-w-2xl">
@@ -285,15 +286,17 @@ const Portfolio = () => {
       </section>
 
       {/* Call to Action */}
-      <section className="py-20 px-6 border-t border-border">
-        <div className="max-w-4xl mx-auto text-center space-y-8">
-          <h2 className="text-3xl md:text-4xl font-bold text-foreground">
-            Like what you see?
-          </h2>
-          <p className="text-xl text-muted-foreground">
-            Let's collaborate on your next project and create something amazing together.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+      <section className="py-20 px-6">
+        <div className="max-w-7xl mx-auto space-y-12">
+          <div className="space-y-4">
+            <h2 className="text-4xl md:text-5xl font-bold tracking-tight">
+              Like what you see?
+            </h2>
+            <p className="text-xl text-muted-foreground max-w-2xl">
+              Let's collaborate on your next project and create something amazing together.
+            </p>
+          </div>
+          <div className="flex flex-col sm:flex-row gap-4">
             <Button size="lg" asChild>
               <Link to="/contact">
                 Start a Project
