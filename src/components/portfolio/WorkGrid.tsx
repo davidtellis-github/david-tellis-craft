@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import w1 from "@/assets/work-1.jpg";
 import w2 from "@/assets/work-2.jpg";
@@ -39,6 +39,35 @@ const projects = [{
   details: ["Moodboard-driven experience discovery", "Collaborative group planning with polls", "Interactive map interface for adventure planning"]
 }];
 const WorkGrid: React.FC = () => {
+  const [expandedProjects, setExpandedProjects] = useState<Set<number>>(new Set());
+  const projectRefs = useRef<(HTMLDivElement | null)[]>([]);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const index = parseInt(entry.target.getAttribute('data-index') || '0');
+            // Add a staggered delay for sequential opening
+            setTimeout(() => {
+              setExpandedProjects(prev => new Set(prev).add(index));
+            }, index * 300);
+          }
+        });
+      },
+      { 
+        threshold: 0.3,
+        rootMargin: '-100px 0px'
+      }
+    );
+
+    projectRefs.current.forEach((ref) => {
+      if (ref) observer.observe(ref);
+    });
+
+    return () => observer.disconnect();
+  }, []);
+
   return <section id="work" className="min-h-screen flex flex-col justify-center py-20">
       <div className="container mx-auto lg:px-10 px-0">
         {/* Header */}
@@ -46,8 +75,15 @@ const WorkGrid: React.FC = () => {
 
         {/* Projects List */}
         <div className="space-y-8">
-          {projects.map((project, index) => (
-            <div key={project.title} className="border-t border-border pt-8 first:border-t-0 first:pt-0 group transition-all duration-500 hover:bg-muted/5">
+          {projects.map((project, index) => {
+            const isExpanded = expandedProjects.has(index);
+            return (
+            <div 
+              key={project.title} 
+              ref={el => projectRefs.current[index] = el}
+              data-index={index}
+              className="border-t border-border pt-8 first:border-t-0 first:pt-0 transition-all duration-500"
+            >
               {/* Title Row - Full Width */}
               <div className="flex items-center justify-between w-full">
                 <div className="flex items-center gap-8">
@@ -72,8 +108,12 @@ const WorkGrid: React.FC = () => {
                 </Link>
               </div>
 
-              {/* Video and Content - Hidden by default, shown on hover */}
-              <div className="opacity-0 max-h-0 overflow-hidden group-hover:opacity-100 group-hover:max-h-[800px] transition-all duration-500 mt-6">
+              {/* Video and Content - Shown based on scroll */}
+              <div className={`overflow-hidden transition-all duration-700 mt-6 ${
+                isExpanded 
+                  ? 'opacity-100 max-h-[800px]' 
+                  : 'opacity-0 max-h-0'
+              }`}>
                 {/* Video Preview */}
                 <div className="aspect-video w-full mb-6">
                   <iframe
@@ -92,7 +132,9 @@ const WorkGrid: React.FC = () => {
                     <img 
                       src={project.img} 
                       alt={project.title}
-                      className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                      className={`w-full h-full object-cover transition-transform duration-500 ${
+                        isExpanded ? 'scale-105' : 'scale-100'
+                      }`}
                     />
                   </div>
                   
@@ -118,7 +160,8 @@ const WorkGrid: React.FC = () => {
                 </div>
               </div>
             </div>
-          ))}
+            );
+          })}
         </div>
         
         {/* View All Work CTA */}
