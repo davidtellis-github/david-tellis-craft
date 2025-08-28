@@ -122,24 +122,31 @@ const WorkGrid: React.FC = () => {
         </div>
         
         {/* View All Work CTA */}
-        <div className="border-t border-border pt-8 mt-8">
-          <div className="flex items-center justify-between w-full group">
-            <div className="flex items-center gap-8">
-              <div className="text-2xl font-bold text-muted-foreground">
-                —
+        <div className="border-t border-border pt-12 mt-12">
+          <div className="bg-muted/20 rounded-lg p-8 group hover:bg-muted/30 transition-colors duration-300">
+            <div className="flex items-center justify-between w-full">
+              <div className="flex items-center gap-8">
+                <div className="text-3xl font-bold text-primary">
+                  +
+                </div>
+                <div>
+                  <h3 className="text-3xl lg:text-4xl font-bold uppercase tracking-tight mb-2">
+                    View All Work
+                  </h3>
+                  <p className="text-muted-foreground text-lg">
+                    Explore my complete portfolio
+                  </p>
+                </div>
               </div>
-              <h3 className="text-2xl lg:text-3xl font-bold uppercase tracking-tight">
-                View All Work
-              </h3>
+              
+              <Link to="/portfolio" className="group" aria-label="View all work">
+                <div className="w-12 h-12 flex items-center justify-center text-primary group-hover:translate-x-2 group-hover:scale-110 transition-all duration-300 bg-primary/10 rounded-full">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-6 h-6">
+                    <path d="M7 17L17 7M17 7H7M17 7V17" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                  </svg>
+                </div>
+              </Link>
             </div>
-            
-            <Link to="/portfolio" className="group" aria-label="View all work">
-              <div className="w-8 h-8 flex items-center justify-center text-primary group-hover:translate-x-1 transition-transform duration-300">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-6 h-6">
-                  <path d="M7 17L17 7M17 7H7M17 7V17" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                </svg>
-              </div>
-            </Link>
           </div>
         </div>
       </div>
