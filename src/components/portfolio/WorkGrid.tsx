@@ -73,7 +73,7 @@ const WorkGrid: React.FC = () => {
               </div>
 
               {/* Video and Content - Hidden by default, shown on hover */}
-              <div className="opacity-0 max-h-0 overflow-hidden group-hover:opacity-100 group-hover:max-h-none transition-all duration-500 mt-6">
+              <div className="opacity-0 max-h-0 overflow-hidden group-hover:opacity-100 group-hover:max-h-[800px] transition-all duration-500 mt-6">
                 {/* Video Preview */}
                 <div className="aspect-video w-full mb-6">
                   <iframe
