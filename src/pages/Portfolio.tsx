@@ -168,12 +168,12 @@ const Portfolio = () => {
 
       {/* Hero Section */}
       <section className="pt-24 pb-12 px-6">
-        <div className="max-w-7xl mx-auto">
-          <div className="space-y-6 text-right">
-            <h1 className="text-6xl md:text-8xl font-bold tracking-tight">
+        <div className="max-w-4xl mx-auto">
+          <div className="space-y-6">
+            <h1 className="text-3xl md:text-4xl font-bold tracking-tight">
               My Work
             </h1>
-            <p className="text-xl md:text-2xl text-muted-foreground max-w-2xl ml-auto">
+            <p className="text-xl md:text-2xl text-muted-foreground max-w-2xl">
               A mix of live projects, audience-loved designs, freelance gigs, and passion projects
             </p>
           </div>
