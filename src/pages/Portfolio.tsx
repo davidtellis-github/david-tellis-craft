@@ -39,7 +39,7 @@ const projects = {
       category: "b2c",
       tags: ["Product Design", "UX Research", "2024"],
       image: w1,
-      link: "/work/wedding-verse"
+      link: "/project/wedding-verse"
     },
     {
       id: "project-alpha",
@@ -59,7 +59,7 @@ const projects = {
       category: "ai",
       tags: ["AI/ML", "Content Tools", "2025"],
       image: w2,
-      link: "/work/futurcraft-ai"
+      link: "/project/futurcraft-ai"
     }
   ],
   healthcare: [
@@ -81,7 +81,7 @@ const projects = {
       category: "finops", 
       tags: ["Dashboard Design", "Enterprise UX", "2025"],
       image: w3,
-      link: "/work/turbocloud"
+      link: "/project/turbocloud"
     }
   ],
   webdesigns: [
