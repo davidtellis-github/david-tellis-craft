@@ -30,72 +30,76 @@ const featuredProject = {
 };
 
 const projects = {
-  live: [
+  b2c: [
     {
       id: "wedding-verse",
       title: "Wedding Verse",
       tagline: "Shared workspace for wedding stakeholders",
-      category: "live",
+      category: "b2c",
       tags: ["Product Design", "UX Research", "2024"],
       image: w1,
       link: "/work/wedding-verse"
     },
     {
-      id: "turbocloud",
-      title: "Turbocloud",
-      tagline: "FinOps platform for cloud optimization",
-      category: "live", 
-      tags: ["Dashboard Design", "Enterprise UX", "2025"],
-      image: w3,
-      link: "/work/turbocloud"
+      id: "project-alpha",
+      title: "Project Alpha",
+      tagline: "E-commerce redesign for fashion brand",
+      category: "b2c",
+      tags: ["E-commerce", "Visual Design", "2024"],
+      image: w5,
+      link: "/project/project-alpha"
     }
   ],
-  audience: [
+  ai: [
     {
       id: "futurcraft-ai",
       title: "Futurcraft AI",
       tagline: "Brand-aligned AI content engine",
-      category: "audience",
+      category: "ai",
       tags: ["AI/ML", "Content Tools", "2025"],
       image: w2,
       link: "/work/futurcraft-ai"
     }
   ],
-  freelance: [
+  healthcare: [
     {
-      id: "project-alpha",
-      title: "Project Alpha",
-      tagline: "E-commerce redesign for fashion brand",
-      category: "freelance",
-      tags: ["E-commerce", "Visual Design", "2024"],
-      image: w5,
-      link: "/project/project-alpha"
-    },
-    {
-      id: "project-beta", 
-      title: "Project Beta",
-      tagline: "SaaS dashboard for analytics platform",
-      category: "freelance",
-      tags: ["SaaS", "Data Viz", "2023"],
-      image: w6,
-      link: "/project/project-beta"
+      id: "health-project",
+      title: "HealthCare Platform",
+      tagline: "Patient management system",
+      category: "healthcare",
+      tags: ["Healthcare", "UX Design", "2024"],
+      image: w4,
+      link: "/project/health-project"
     }
   ],
-  passion: [
+  finops: [
     {
-      id: "outrange",
-      title: "Outrange",
-      tagline: "Community-driven adventure planning concept",
-      category: "passion",
-      tags: ["Concept", "Mobile UI", "2024"],
-      image: w4,
-      link: "/work/outrange"
-    },
+      id: "turbocloud",
+      title: "Turbocloud",
+      tagline: "FinOps platform for cloud optimization",
+      category: "finops", 
+      tags: ["Dashboard Design", "Enterprise UX", "2025"],
+      image: w3,
+      link: "/work/turbocloud"
+    }
+  ],
+  webdesigns: [
+    {
+      id: "web-design-1",
+      title: "Corporate Website",
+      tagline: "Modern corporate identity redesign",
+      category: "webdesigns",
+      tags: ["Web Design", "Branding", "2024"],
+      image: w6,
+      link: "/project/web-design-1"
+    }
+  ],
+  interactions: [
     {
       id: "ui-exploration-1",
       title: "UI Exploration #1",
       tagline: "Banking app interface exploration",
-      category: "passion",
+      category: "interactions",
       tags: ["Mobile UI", "FinTech", "2024"],
       image: w7,
       link: "/project/ui-exploration-1"
@@ -104,28 +108,41 @@ const projects = {
       id: "ui-exploration-2",
       title: "UI Exploration #2", 
       tagline: "Music streaming app concept",
-      category: "passion",
+      category: "interactions",
       tags: ["Music", "Mobile UI", "2024"],
       image: w8,
       link: "/project/ui-exploration-2"
+    }
+  ],
+  b2b: [
+    {
+      id: "project-beta", 
+      title: "Project Beta",
+      tagline: "SaaS dashboard for analytics platform",
+      category: "b2b",
+      tags: ["SaaS", "Data Viz", "2023"],
+      image: w9,
+      link: "/project/project-beta"
     }
   ]
 };
 
 const Portfolio = () => {
-  const [activeCategory, setActiveCategory] = useState("all");
+  const [activeCategory, setActiveCategory] = useState("b2c");
 
   const getAllProjects = () => {
     return [
-      ...projects.live,
-      ...projects.audience,
-      ...projects.freelance,
-      ...projects.passion
+      ...projects.b2c,
+      ...projects.ai,
+      ...projects.healthcare,
+      ...projects.finops,
+      ...projects.webdesigns,
+      ...projects.interactions,
+      ...projects.b2b
     ];
   };
 
   const getFilteredProjects = () => {
-    if (activeCategory === "all") return getAllProjects();
     return projects[activeCategory as keyof typeof projects] || [];
   };
 
@@ -186,51 +203,45 @@ const Portfolio = () => {
         <section id="projects-section" className="flex flex-col flex-1 min-w-0 py-20">
           <div className="grid md:grid-cols-2 lg:grid-cols-2 gap-8">
             {getFilteredProjects().map((project) => (
-              <Card 
-                key={project.id} 
-                className="group overflow-hidden border hover:border-primary/20 hover:shadow-lg transition-all duration-300"
+              <Link 
+                key={project.id}
+                to={project.link}
+                className="group block"
               >
-                <div className="relative overflow-hidden">
-                  <img 
-                    src={project.image} 
-                    alt={project.title}
-                    className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-500"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                  <div className="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                    <div className="w-8 h-8 bg-primary/90 rounded-full flex items-center justify-center">
-                      <ArrowUpRight className="w-4 h-4 text-primary-foreground" />
+                <Card className="overflow-hidden border-0 bg-transparent hover:scale-105 transition-transform duration-300">
+                  <div className="relative overflow-hidden rounded-2xl aspect-[4/3]">
+                    <img 
+                      src={project.image} 
+                      alt={project.title}
+                      className="w-full h-full object-cover"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+                    
+                    {/* Content overlay */}
+                    <div className="absolute bottom-6 left-6 right-6">
+                      <div className="flex flex-wrap gap-2 mb-3">
+                        {project.tags.map((tag) => (
+                          <Badge key={tag} variant="secondary" className="text-xs bg-white/20 text-white border-white/30">
+                            {tag}
+                          </Badge>
+                        ))}
+                      </div>
+                      
+                      <h3 className="text-xl font-bold text-white mb-2">
+                        {project.title}
+                      </h3>
+                      <p className="text-sm text-white/80 leading-relaxed">
+                        {project.tagline}
+                      </p>
+                    </div>
+                    
+                    {/* Arrow icon */}
+                    <div className="absolute top-4 right-4 w-8 h-8 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                      <ArrowUpRight className="w-4 h-4 text-white" />
                     </div>
                   </div>
-                </div>
-                
-                <CardContent className="p-6 space-y-4">
-                  <div className="flex flex-wrap gap-1">
-                    {project.tags.map((tag) => (
-                      <Badge key={tag} variant="outline" className="text-xs">
-                        {tag}
-                      </Badge>
-                    ))}
-                  </div>
-                  
-                  <div>
-                    <h3 className="text-xl font-bold text-foreground mb-2 group-hover:text-primary transition-colors">
-                      {project.title}
-                    </h3>
-                    <p className="text-sm text-muted-foreground leading-relaxed">
-                      {project.tagline}
-                    </p>
-                  </div>
-                  
-                  <Link 
-                    to={project.link}
-                    className="inline-flex items-center text-sm font-medium text-primary hover:text-primary/80 transition-colors"
-                  >
-                    View Project
-                    <ArrowUpRight className="w-3 h-3 ml-1" />
-                  </Link>
-                </CardContent>
-              </Card>
+                </Card>
+              </Link>
             ))}
           </div>
         </section>

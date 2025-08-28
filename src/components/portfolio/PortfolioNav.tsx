@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from "react";
 
 const categories = [
-  { id: "all", label: "All" },
-  { id: "live", label: "Live Projects" },
-  { id: "audience", label: "Mass Audience" },
-  { id: "freelance", label: "Freelance" },
-  { id: "passion", label: "Passion UI" },
+  { id: "b2c", label: "B2C" },
+  { id: "ai", label: "AI" },
+  { id: "healthcare", label: "Healthcare" },
+  { id: "finops", label: "Finops" },
+  { id: "webdesigns", label: "Web designs" },
+  { id: "interactions", label: "Interactions" },
+  { id: "b2b", label: "B2B" },
 ];
 
 interface PortfolioNavProps {
@@ -45,7 +47,7 @@ const PortfolioNav: React.FC<PortfolioNavProps> = ({ activeCategory, onCategoryC
   return (
     <nav
       aria-label="Portfolio navigation"
-      className={`hidden lg:block sticky top-0 h-svh w-[min(18rem,24vw)] transition-opacity duration-300 ${
+      className={`hidden lg:block sticky top-0 h-svh w-[min(18rem,24vw)] ml-6 transition-opacity duration-300 ${
         isVisible ? "opacity-100" : "opacity-0 pointer-events-none"
       }`}
     >
