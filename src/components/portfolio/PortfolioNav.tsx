@@ -37,10 +37,10 @@ const PortfolioNav: React.FC<PortfolioNavProps> = ({ activeCategory, onCategoryC
     e.preventDefault();
     onCategoryChange(id);
     
-    // Scroll to projects section
-    const projectsSection = document.getElementById("projects-section");
-    if (projectsSection) {
-      projectsSection.scrollIntoView({ behavior: "smooth", block: "start" });
+    // Scroll to specific category section
+    const categorySection = document.getElementById(`category-${id}`);
+    if (categorySection) {
+      categorySection.scrollIntoView({ behavior: "smooth", block: "start" });
     }
   };
 
