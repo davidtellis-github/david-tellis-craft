@@ -1,9 +1,6 @@
 import React, { useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
-import { ArrowLeft, Play, ExternalLink, Github, Figma, Clock, Users, Monitor } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
-import { Card, CardContent } from "@/components/ui/card";
+import { ArrowLeft, Play, ExternalLink, Github, Figma } from "lucide-react";
 
 const ProjectDetails: React.FC = () => {
   const { slug } = useParams();
@@ -88,258 +85,203 @@ const ProjectDetails: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-background text-foreground">
-      {/* Navigation */}
-      <header className="sticky top-0 z-40 backdrop-blur supports-[backdrop-filter]:bg-background/70 bg-background/80 border-b border-border">
-        <div className="container mx-auto px-6 py-4 flex items-center gap-4">
-          <Link
-            to="/"
-            className="inline-flex items-center gap-2 rounded-lg px-3 py-1.5 border border-border hover:bg-muted text-sm transition-colors"
-          >
-            <ArrowLeft className="h-4 w-4" />
-            Back to Portfolio
-          </Link>
-        </div>
-      </header>
+      {/* Navigation - Minimalistic */}
+      <div className="absolute top-8 left-8 z-50">
+        <Link
+          to="/"
+          className="inline-flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors text-sm"
+        >
+          <ArrowLeft className="h-4 w-4" />
+          Back to Portfolio
+        </Link>
+      </div>
 
-      <main className="container mx-auto px-6 py-12 max-w-6xl">
+      <main className="px-8 py-16 max-w-5xl mx-auto">
         {/* Hero Section */}
-        <section className="mb-16">
-          <div className="grid lg:grid-cols-12 gap-8 items-start">
-            <div className="lg:col-span-7 space-y-6">
+        <section className="mb-32 pt-16">
+          <div className="mb-16">
+            <h1 className="text-6xl md:text-7xl lg:text-8xl font-bold tracking-tight leading-[0.9] mb-8">
+              {project.title}
+            </h1>
+            <p className="text-2xl text-muted-foreground mb-12">
+              {project.subtitle}
+            </p>
+            
+            <div className="grid md:grid-cols-2 gap-16 mb-16">
               <div>
-                <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight leading-tight mb-4">
-                  {project.title}
-                </h1>
-                <p className="text-xl text-muted-foreground mb-6">
-                  {project.subtitle}
-                </p>
-                <p className="text-muted-foreground max-w-2xl">
+                <p className="text-lg text-muted-foreground leading-relaxed">
                   {project.description}
                 </p>
               </div>
+              
+              <div className="space-y-6">
+                <div>
+                  <p className="text-sm uppercase tracking-wider text-muted-foreground mb-2">Role</p>
+                  <p className="text-lg">{project.role.title}</p>
+                </div>
+                <div>
+                  <p className="text-sm uppercase tracking-wider text-muted-foreground mb-2">Duration</p>
+                  <p className="text-lg">{project.role.duration}</p>
+                </div>
+                <div>
+                  <p className="text-sm uppercase tracking-wider text-muted-foreground mb-2">Team</p>
+                  <p className="text-lg">{project.role.team}</p>
+                </div>
+                <div>
+                  <p className="text-sm uppercase tracking-wider text-muted-foreground mb-2">Tools</p>
+                  <p className="text-lg">{project.role.tools.join(" • ")}</p>
+                </div>
+              </div>
+            </div>
+          </div>
 
-              <div className="flex flex-wrap gap-2">
+          {/* Video Section */}
+          <div className="relative aspect-video bg-muted/50 rounded-2xl overflow-hidden group cursor-pointer">
+            <div className="absolute inset-0 bg-gradient-to-br from-background/20 to-background/5 flex items-center justify-center">
+              <div className="bg-background/90 rounded-full p-8 group-hover:scale-110 transition-transform">
+                <Play className="h-12 w-12 text-foreground ml-1" />
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Context Section */}
+        <section className="mb-32">
+          <h2 className="text-5xl font-bold mb-16">Context & Challenge</h2>
+          <div className="grid md:grid-cols-2 gap-16">
+            <div>
+              <h3 className="text-xl font-semibold mb-4 text-muted-foreground uppercase tracking-wider">Problem</h3>
+              <p className="text-lg leading-relaxed mb-8">
+                {project.context.problem}
+              </p>
+              
+              <h3 className="text-xl font-semibold mb-4 text-muted-foreground uppercase tracking-wider">Objective</h3>
+              <p className="text-lg leading-relaxed">
+                {project.context.objective}
+              </p>
+            </div>
+            <div className="bg-muted/30 rounded-2xl h-80"></div>
+          </div>
+        </section>
+
+        {/* Role & Impact */}
+        <section className="mb-32">
+          <h2 className="text-5xl font-bold mb-16">My Role & Impact</h2>
+          <div className="grid md:grid-cols-2 gap-16">
+            <div className="bg-muted/30 rounded-2xl h-80"></div>
+            <div>
+              <h3 className="text-xl font-semibold mb-6 text-muted-foreground uppercase tracking-wider">Key Responsibilities</h3>
+              <ul className="space-y-3 text-lg mb-12">
+                <li>Led end-to-end product design strategy</li>
+                <li>Conducted user research and stakeholder interviews</li>
+                <li>Designed multi-role dashboard experiences</li>
+                <li>Created and maintained design system</li>
+                <li>Collaborated closely with engineering team</li>
+              </ul>
+              
+              <h3 className="text-xl font-semibold mb-6 text-muted-foreground uppercase tracking-wider">Outcomes</h3>
+              <div className="space-y-4">
                 {project.outcomes.map((outcome, index) => (
-                  <Badge key={index} variant="secondary" className="text-xs">
-                    {outcome.metric}: {outcome.value}
-                  </Badge>
+                  <div key={index} className="flex justify-between items-center py-2 border-b border-border/20">
+                    <span className="text-lg">{outcome.metric}</span>
+                    <span className="text-lg font-mono">{outcome.value}</span>
+                  </div>
                 ))}
               </div>
             </div>
-
-            <div className="lg:col-span-5">
-              <Card className="border-2 border-dashed border-border/50">
-                <CardContent className="p-6 space-y-4">
-                  <h3 className="font-semibold text-sm uppercase tracking-wide text-muted-foreground">
-                    Role & Scope
-                  </h3>
-                  <div className="space-y-3 text-sm">
-                    <div className="flex items-center gap-2">
-                      <Users className="h-4 w-4 text-muted-foreground" />
-                      <span><strong>Role:</strong> {project.role.title}</span>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <Clock className="h-4 w-4 text-muted-foreground" />
-                      <span><strong>Duration:</strong> {project.role.duration}</span>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <Monitor className="h-4 w-4 text-muted-foreground" />
-                      <span><strong>Team:</strong> {project.role.team}</span>
-                    </div>
-                    <div className="flex flex-wrap gap-2 mt-3">
-                      {project.role.tools.map((tool, index) => (
-                        <Badge key={index} variant="outline" className="text-xs">
-                          {tool}
-                        </Badge>
-                      ))}
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-            </div>
-          </div>
-
-          {/* Video Thumbnail */}
-          <div className="mt-12">
-            <div className="relative aspect-video bg-muted rounded-2xl border border-border overflow-hidden group cursor-pointer">
-              <div className="absolute inset-0 bg-gradient-to-br from-primary/10 to-primary/5 flex items-center justify-center">
-                <div className="bg-background/90 rounded-full p-6 border border-border shadow-lg group-hover:scale-110 transition-transform">
-                  <Play className="h-8 w-8 text-primary ml-1" />
-                </div>
-              </div>
-              <div className="absolute bottom-4 left-4 text-sm text-muted-foreground">
-                Project Walkthrough • 2:30
-              </div>
-            </div>
           </div>
         </section>
 
-        {/* About the Project */}
-        <section className="mb-16">
-          <h2 className="text-2xl font-bold mb-8">About the Project</h2>
-          <div className="grid md:grid-cols-3 gap-8">
-            <Card>
-              <CardContent className="p-6">
-                <h3 className="font-semibold mb-3">Problem</h3>
-                <p className="text-sm text-muted-foreground">
-                  {project.context.problem}
-                </p>
-              </CardContent>
-            </Card>
-            <Card>
-              <CardContent className="p-6">
-                <h3 className="font-semibold mb-3">Objective</h3>
-                <p className="text-sm text-muted-foreground">
-                  {project.context.objective}
-                </p>
-              </CardContent>
-            </Card>
-            <Card>
-              <CardContent className="p-6">
-                <h3 className="font-semibold mb-3">Audience</h3>
-                <p className="text-sm text-muted-foreground">
-                  {project.context.audience}
-                </p>
-              </CardContent>
-            </Card>
-          </div>
-        </section>
-
-        {/* My Role */}
-        <section className="mb-16">
-          <h2 className="text-2xl font-bold mb-8">My Role</h2>
-          <Card className="bg-accent/50 border-2">
-            <CardContent className="p-8">
-              <div className="grid md:grid-cols-2 gap-6">
-                <div>
-                  <h3 className="font-semibold mb-4">Key Responsibilities</h3>
-                  <ul className="space-y-2 text-sm text-muted-foreground">
-                    <li>• Led end-to-end product design strategy</li>
-                    <li>• Conducted user research and stakeholder interviews</li>
-                    <li>• Designed multi-role dashboard experiences</li>
-                    <li>• Created and maintained design system</li>
-                    <li>• Collaborated closely with engineering team</li>
-                  </ul>
-                </div>
-                <div>
-                  <h3 className="font-semibold mb-4">Impact & Outcomes</h3>
-                  <ul className="space-y-2 text-sm text-muted-foreground">
-                    <li>• Increased conversion rate by 50%</li>
-                    <li>• Reduced vendor response time by 62%</li>
-                    <li>• Improved user activation by 38%</li>
-                    <li>• Delivered on time within 12-week timeline</li>
-                  </ul>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-        </section>
-
-        {/* Features & Complexity */}
-        <section className="mb-16">
-          <h2 className="text-2xl font-bold mb-8">Features & Complexity</h2>
-          <div className="grid md:grid-cols-2 gap-6">
+        {/* Features */}
+        <section className="mb-32">
+          <h2 className="text-5xl font-bold mb-16">Features & Complexity</h2>
+          <div className="grid md:grid-cols-2 gap-8">
             {project.features.map((feature, index) => (
-              <Card key={index} className="hover:shadow-lg transition-shadow">
-                <CardContent className="p-6">
-                  <div className="flex items-start gap-4">
-                    <div className="text-2xl">{feature.icon}</div>
-                    <div>
-                      <h3 className="font-semibold mb-2">{feature.title}</h3>
-                      <p className="text-sm text-muted-foreground">
-                        {feature.description}
-                      </p>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
+              <div key={index} className="border-l-2 border-border/20 pl-8 py-6">
+                <h3 className="text-2xl font-semibold mb-4">{feature.title}</h3>
+                <p className="text-lg text-muted-foreground leading-relaxed">
+                  {feature.description}
+                </p>
+              </div>
             ))}
           </div>
         </section>
 
-        {/* Process & Approach */}
-        <section className="mb-16">
-          <h2 className="text-2xl font-bold mb-8">Process & Approach</h2>
-          <div className="relative">
-            {/* Process Timeline */}
-            <div className="grid md:grid-cols-5 gap-4">
-              {project.process.map((phase, index) => (
-                <div key={index} className="relative">
-                  <Card className="text-center">
-                    <CardContent className="p-6">
-                      <div className="text-3xl mb-3">{phase.icon}</div>
-                      <h3 className="font-semibold mb-2">{phase.step}</h3>
-                      <p className="text-xs text-muted-foreground">
-                        {phase.description}
-                      </p>
-                    </CardContent>
-                  </Card>
-                  {index < project.process.length - 1 && (
-                    <div className="hidden md:block absolute top-1/2 -right-2 w-4 h-px bg-border z-10" />
-                  )}
+        {/* Process */}
+        <section className="mb-32">
+          <h2 className="text-5xl font-bold mb-16">Process & Approach</h2>
+          <div className="space-y-12">
+            {project.process.map((phase, index) => (
+              <div key={index} className="flex items-start gap-8">
+                <div className="text-4xl font-mono text-muted-foreground">
+                  {String(index + 1).padStart(2, '0')}
                 </div>
-              ))}
-            </div>
+                <div>
+                  <h3 className="text-2xl font-semibold mb-2">{phase.step}</h3>
+                  <p className="text-lg text-muted-foreground">{phase.description}</p>
+                </div>
+              </div>
+            ))}
           </div>
         </section>
 
         {/* Video Walkthrough */}
-        <section className="mb-16">
-          <h2 className="text-2xl font-bold mb-8">Video Walkthrough</h2>
-          <div className="relative aspect-video bg-muted rounded-2xl border border-border overflow-hidden">
-            <div className="absolute inset-0 bg-gradient-to-br from-primary/10 to-primary/5 flex items-center justify-center">
+        <section className="mb-32">
+          <h2 className="text-5xl font-bold mb-16">Video Walkthrough</h2>
+          <div className="relative aspect-video bg-muted/50 rounded-2xl overflow-hidden">
+            <div className="absolute inset-0 bg-gradient-to-br from-background/20 to-background/5 flex items-center justify-center">
               <div className="text-center">
-                <div className="bg-background/90 rounded-full p-8 border border-border shadow-lg mb-4 inline-block">
-                  <Play className="h-12 w-12 text-primary ml-1" />
+                <div className="bg-background/90 rounded-full p-12 mb-6 inline-block">
+                  <Play className="h-16 w-16 text-foreground ml-2" />
                 </div>
-                <p className="text-muted-foreground">Product Demo • 60 seconds</p>
+                <p className="text-xl text-muted-foreground">Product Demo • 60 seconds</p>
               </div>
             </div>
           </div>
         </section>
 
-        {/* Reflection & Learnings */}
-        <section className="mb-16">
-          <h2 className="text-2xl font-bold mb-8">Reflection & Learnings</h2>
-          <Card>
-            <CardContent className="p-8">
-              <p className="text-muted-foreground leading-relaxed">
-                {project.reflection}
-              </p>
-            </CardContent>
-          </Card>
+        {/* Reflection */}
+        <section className="mb-32">
+          <h2 className="text-5xl font-bold mb-16">Reflection & Learnings</h2>
+          <div className="max-w-3xl">
+            <p className="text-xl text-muted-foreground leading-relaxed">
+              {project.reflection}
+            </p>
+          </div>
         </section>
 
         {/* CTA Section */}
         <section className="text-center">
-          <Card className="border-2 border-dashed border-primary/20 bg-primary/5">
-            <CardContent className="p-8">
-              <h2 className="text-2xl font-bold mb-4">Interested in Learning More?</h2>
-              <p className="text-muted-foreground mb-6 max-w-2xl mx-auto">
-                View the live project, explore the prototype, or dive deeper into the design process.
-              </p>
-              <div className="flex flex-wrap gap-4 justify-center">
-                <Button asChild>
-                  <a href={project.links.live} target="_blank" rel="noopener noreferrer">
-                    <ExternalLink className="h-4 w-4 mr-2" />
-                    View Live Project
-                  </a>
-                </Button>
-                <Button variant="outline" asChild>
-                  <a href={project.links.figma} target="_blank" rel="noopener noreferrer">
-                    <Figma className="h-4 w-4 mr-2" />
-                    View in Figma
-                  </a>
-                </Button>
-                <Button variant="outline" asChild>
-                  <a href={project.links.github} target="_blank" rel="noopener noreferrer">
-                    <Github className="h-4 w-4 mr-2" />
-                    View Code
-                  </a>
-                </Button>
-              </div>
-            </CardContent>
-          </Card>
+          <h2 className="text-4xl font-bold mb-8">View the Project</h2>
+          <div className="flex flex-wrap gap-6 justify-center">
+            <a 
+              href={project.links.live} 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 bg-foreground text-background px-8 py-4 rounded-full hover:bg-foreground/90 transition-colors text-lg font-medium"
+            >
+              <ExternalLink className="h-5 w-5" />
+              Live Project
+            </a>
+            <a 
+              href={project.links.figma} 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 border border-border px-8 py-4 rounded-full hover:bg-muted/50 transition-colors text-lg font-medium"
+            >
+              <Figma className="h-5 w-5" />
+              Figma
+            </a>
+            <a 
+              href={project.links.github} 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 border border-border px-8 py-4 rounded-full hover:bg-muted/50 transition-colors text-lg font-medium"
+            >
+              <Github className="h-5 w-5" />
+              GitHub
+            </a>
+          </div>
         </section>
       </main>
     </div>
