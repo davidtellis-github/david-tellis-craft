@@ -47,7 +47,7 @@ const PortfolioNav: React.FC<PortfolioNavProps> = ({ activeCategory, onCategoryC
   return (
     <nav
       aria-label="Portfolio navigation"
-      className={`hidden lg:block sticky top-0 h-svh w-[min(18rem,24vw)] ml-6 transition-opacity duration-300 ${
+      className={`hidden lg:block sticky top-32 h-[calc(100vh-8rem)] w-[min(18rem,24vw)] ml-6 z-[56] transition-opacity duration-300 ${
         isVisible ? "opacity-100" : "opacity-0 pointer-events-none"
       }`}
     >

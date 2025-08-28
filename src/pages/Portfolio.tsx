@@ -212,51 +212,100 @@ const Portfolio = () => {
           {getAllProjectsByCategory().map((categoryData, categoryIndex) => (
             <div key={categoryData.category}>
               {/* Category Section */}
-              <div id={`category-${categoryData.category}`} className="scroll-mt-20">
-                <h2 className="text-2xl font-bold text-foreground mb-8">{categoryData.label}</h2>
-                <div className="grid md:grid-cols-2 lg:grid-cols-2 gap-8 mb-16">
-                  {categoryData.projects.map((project) => (
-                    <Link 
-                      key={project.id}
-                      to={project.link}
-                      className="group block"
-                    >
-                      <Card className="overflow-hidden border-0 bg-transparent hover:scale-105 transition-transform duration-300">
-                        <div className="relative overflow-hidden rounded-2xl aspect-[4/3]">
-                          <img 
-                            src={project.image} 
-                            alt={project.title}
-                            className="w-full h-full object-cover"
-                          />
-                          <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
-                          
-                          {/* Content overlay */}
-                          <div className="absolute bottom-6 left-6 right-6">
-                            <div className="flex flex-wrap gap-2 mb-3">
-                              {project.tags.map((tag) => (
-                                <Badge key={tag} variant="secondary" className="text-xs bg-white/20 text-white border-white/30">
-                                  {tag}
-                                </Badge>
-                              ))}
+              <div id={`category-${categoryData.category}`} className="scroll-mt-32 mb-16">
+                {categoryData.projects.length >= 2 ? (
+                  // Horizontal scroll for 2+ cards
+                  <div className="overflow-x-auto pb-4">
+                    <div className="flex gap-8 w-max">
+                      {categoryData.projects.map((project) => (
+                        <Link 
+                          key={project.id}
+                          to={project.link}
+                          className="group block w-[400px] flex-shrink-0"
+                        >
+                          <Card className="overflow-hidden border-0 bg-transparent hover:scale-105 transition-transform duration-300">
+                            <div className="relative overflow-hidden rounded-2xl aspect-[4/3]">
+                              <img 
+                                src={project.image} 
+                                alt={project.title}
+                                className="w-full h-full object-cover"
+                              />
+                              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+                              
+                              {/* Content overlay */}
+                              <div className="absolute bottom-6 left-6 right-6">
+                                <div className="flex flex-wrap gap-2 mb-3">
+                                  {project.tags.map((tag) => (
+                                    <Badge key={tag} variant="secondary" className="text-xs bg-white/20 text-white border-white/30">
+                                      {tag}
+                                    </Badge>
+                                  ))}
+                                </div>
+                                
+                                <h3 className="text-xl font-bold text-white mb-2">
+                                  {project.title}
+                                </h3>
+                                <p className="text-sm text-white/80 leading-relaxed">
+                                  {project.tagline}
+                                </p>
+                              </div>
+                              
+                              {/* Arrow icon */}
+                              <div className="absolute top-4 right-4 w-8 h-8 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                <ArrowUpRight className="w-4 h-4 text-white" />
+                              </div>
+                            </div>
+                          </Card>
+                        </Link>
+                      ))}
+                    </div>
+                  </div>
+                ) : (
+                  // Single card layout
+                  <div className="w-[400px]">
+                    {categoryData.projects.map((project) => (
+                      <Link 
+                        key={project.id}
+                        to={project.link}
+                        className="group block"
+                      >
+                        <Card className="overflow-hidden border-0 bg-transparent hover:scale-105 transition-transform duration-300">
+                          <div className="relative overflow-hidden rounded-2xl aspect-[4/3]">
+                            <img 
+                              src={project.image} 
+                              alt={project.title}
+                              className="w-full h-full object-cover"
+                            />
+                            <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+                            
+                            {/* Content overlay */}
+                            <div className="absolute bottom-6 left-6 right-6">
+                              <div className="flex flex-wrap gap-2 mb-3">
+                                {project.tags.map((tag) => (
+                                  <Badge key={tag} variant="secondary" className="text-xs bg-white/20 text-white border-white/30">
+                                    {tag}
+                                  </Badge>
+                                ))}
+                              </div>
+                              
+                              <h3 className="text-xl font-bold text-white mb-2">
+                                {project.title}
+                              </h3>
+                              <p className="text-sm text-white/80 leading-relaxed">
+                                {project.tagline}
+                              </p>
                             </div>
                             
-                            <h3 className="text-xl font-bold text-white mb-2">
-                              {project.title}
-                            </h3>
-                            <p className="text-sm text-white/80 leading-relaxed">
-                              {project.tagline}
-                            </p>
+                            {/* Arrow icon */}
+                            <div className="absolute top-4 right-4 w-8 h-8 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                              <ArrowUpRight className="w-4 h-4 text-white" />
+                            </div>
                           </div>
-                          
-                          {/* Arrow icon */}
-                          <div className="absolute top-4 right-4 w-8 h-8 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                            <ArrowUpRight className="w-4 h-4 text-white" />
-                          </div>
-                        </div>
-                      </Card>
-                    </Link>
-                  ))}
-                </div>
+                        </Card>
+                      </Link>
+                    ))}
+                  </div>
+                )}
               </div>
               
               {/* Divider line between categories (except after last category) */}
