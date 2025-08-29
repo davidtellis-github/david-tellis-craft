@@ -2,74 +2,32 @@ import React, { useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 import { ArrowLeft, Play, ExternalLink, Github, Figma } from "lucide-react";
 import Header from "@/components/ui/Header";
+import { projectsData } from "@/data/projectData";
 
 const ProjectDetails: React.FC = () => {
   const { slug } = useParams();
 
-  // Sample project data - replace with real data
-  const project = {
-    title: "Wedding Verse",
-    subtitle: "A shared workspace for couples, planners, and vendors",
-    description: "Weddings are multi-stakeholder and decision-dense. Couples juggle boards, sheets, and chats; vendors get low-context leads. We built a guided workspace that compresses decisions into 'packages,' improving clarity and velocity under timeline.",
-    
-    role: {
-      title: "Lead Product Designer",
-      duration: "Q1–Q3 '24 (≈ 12 weeks)",
-      team: "PM • Eng • Data • Ops",
-      tools: ["Figma", "Principle", "React", "Supabase"]
-    },
+  // Get project data based on slug
+  const project = slug ? projectsData[slug] : null;
 
-    context: {
-      problem: "The wedding market is fragmented across inspiration, planning, and procurement. Couples feel overwhelmed, planners herd cats, vendors waste time qualifying.",
-      objective: "Prove marketplace liquidity fast and lift lead→book conversion in 12 weeks.",
-      audience: "Couples planning weddings, wedding planners, and service vendors"
-    },
-
-    features: [
-      {
-        title: "Smart Matching",
-        description: "AI-powered vendor recommendations based on style preferences and budget constraints.",
-        icon: "🎯"
-      },
-      {
-        title: "Multi-Role Dashboards", 
-        description: "Tailored interfaces for couples, planners, and vendors with role-specific workflows.",
-        icon: "📊"
-      },
-      {
-        title: "Decision Packages",
-        description: "Structured decision flows that compress complex choices into manageable steps.",
-        icon: "📦"
-      },
-      {
-        title: "Real-time Collaboration",
-        description: "Live updates and comments system for seamless stakeholder communication.",
-        icon: "💬"
-      }
-    ],
-
-    process: [
-      { step: "Research", description: "User interviews & market analysis", icon: "🔍" },
-      { step: "Wireframes", description: "Information architecture & user flows", icon: "📝" },
-      { step: "Prototypes", description: "Interactive mockups & testing", icon: "🎨" },
-      { step: "Testing", description: "Usability testing & iteration", icon: "🧪" },
-      { step: "Launch", description: "Final design & handoff", icon: "🚀" }
-    ],
-
-    outcomes: [
-      { metric: "Lead→book conversion", value: "12% → 18%" },
-      { metric: "Day-7 active couples", value: "45% → 62%" },
-      { metric: "Vendor response time", value: "48h → 18h" }
-    ],
-
-    reflection: "The biggest challenge was balancing the needs of three distinct user types without creating interface complexity. We solved this through role-based progressive disclosure and smart defaults. Key learning: when designing for multiple stakeholders, start with the shared workflow and layer on role-specific features.",
-
-    links: {
-      live: "https://example.com",
-      github: "https://github.com",
-      figma: "https://figma.com"
-    }
-  };
+  // Redirect to 404 if project not found
+  if (!project) {
+    return (
+      <div className="min-h-screen bg-background text-foreground flex items-center justify-center">
+        <div className="text-center">
+          <h1 className="text-4xl font-bold mb-4">Project Not Found</h1>
+          <p className="text-muted-foreground mb-8">The project you're looking for doesn't exist.</p>
+          <Link
+            to="/portfolio"
+            className="inline-flex items-center gap-2 bg-foreground text-background px-6 py-3 rounded-full hover:bg-foreground/90 transition-colors"
+          >
+            <ArrowLeft className="h-4 w-4" />
+            Back to Portfolio
+          </Link>
+        </div>
+      </div>
+    );
+  }
 
   // SEO setup
   useEffect(() => {
@@ -92,7 +50,7 @@ const ProjectDetails: React.FC = () => {
       {/* Navigation - Minimalistic */}
       <div className="absolute top-8 right-8 z-50">
         <Link
-          to="/"
+          to="/portfolio"
           className="inline-flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors text-sm"
         >
           <ArrowLeft className="h-4 w-4" />

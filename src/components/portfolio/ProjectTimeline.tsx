@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 interface Project {
   id: string;
@@ -86,6 +87,7 @@ const ProjectTimeline: React.FC<ProjectTimelineProps> = ({
   hoveredCategory
 }) => {
   const [hoveredProject, setHoveredProject] = useState<string | null>(null);
+  const navigate = useNavigate();
 
   const filteredProjects = activeCategory === "all" 
     ? projects 
@@ -101,6 +103,10 @@ const ProjectTimeline: React.FC<ProjectTimelineProps> = ({
     onProjectHover(projectId);
   };
 
+  const handleProjectClick = (projectId: string) => {
+    navigate(`/project/${projectId}`);
+  };
+
   return (
     <div className="w-full">
       <div className="space-y-8">
@@ -112,11 +118,12 @@ const ProjectTimeline: React.FC<ProjectTimelineProps> = ({
           return (
             <div 
               key={project.id}
-              className={`border-t border-border pt-8 first:border-t-0 first:pt-0 transition-all duration-500 ${
+              className={`border-t border-border pt-8 first:border-t-0 first:pt-0 transition-all duration-500 cursor-pointer ${
                 isHighlighted ? 'opacity-100' : 'opacity-50 hover:opacity-75'
               }`}
               onMouseEnter={() => handleProjectHover(project.id)}
               onMouseLeave={() => handleProjectHover(null)}
+              onClick={() => handleProjectClick(project.id)}
             >
               {/* Title Row - Full Width */}
               <div className="flex items-center justify-between w-full">
