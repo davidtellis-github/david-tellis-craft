@@ -26,6 +26,9 @@
 // export default Contact;
 import React from "react";
 import profile from "/src/assets/portrait.jpg";
+import ResumeModal from "./ResumeModal";
+import { Button } from "@/components/ui/button";
+import { FileText } from "lucide-react";
 const Contact: React.FC = () => (
   <section
     id="contact"
@@ -56,13 +59,23 @@ const Contact: React.FC = () => (
             david@tellis.design
           </a>
           <a
-            href="https://linkedin.com/in/davidtellis"
+            href="https://www.linkedin.com/in/david-tellis-121576262/"
             target="_blank"
             rel="noreferrer"
             className="underline underline-offset-4 hover:text-primary transition-colors"
           >
             LinkedIn
           </a>
+        </div>
+
+        {/* Resume CTA */}
+        <div className="pt-4">
+          <ResumeModal>
+            <Button variant="outline" className="flex items-center gap-2">
+              <FileText className="w-4 h-4" />
+              View Resume
+            </Button>
+          </ResumeModal>
         </div>
       </div>
 
