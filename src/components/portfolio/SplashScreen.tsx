@@ -2,16 +2,24 @@ import React from "react";
 
 const SplashScreen: React.FC = () => {
   const [fade, setFade] = React.useState(false);
-  const [show, setShow] = React.useState(true);
+  const [show, setShow] = React.useState(() => {
+    // Only show splash screen if it hasn't been shown this session
+    return !sessionStorage.getItem('splashShown');
+  });
 
   React.useEffect(() => {
+    if (!show) return;
+    
+    // Mark splash as shown for this session
+    sessionStorage.setItem('splashShown', 'true');
+    
     const fadeTimer = setTimeout(() => setFade(true), 2000); // show for 2s
     const hideTimer = setTimeout(() => setShow(false), 4000); // allow fade-out to complete
     return () => {
       clearTimeout(fadeTimer);
       clearTimeout(hideTimer);
     };
-  }, []);
+  }, [show]);
 
   if (!show) return null;
 
