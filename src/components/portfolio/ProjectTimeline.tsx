@@ -11,6 +11,7 @@ interface Project {
 interface ProjectTimelineProps {
   activeCategory: string;
   onProjectHover: (projectId: string | null) => void;
+  hoveredCategory?: string | null;
 }
 
 const projects: Project[] = [
@@ -81,13 +82,19 @@ const projects: Project[] = [
 
 const ProjectTimeline: React.FC<ProjectTimelineProps> = ({ 
   activeCategory, 
-  onProjectHover 
+  onProjectHover,
+  hoveredCategory
 }) => {
   const [hoveredProject, setHoveredProject] = useState<string | null>(null);
 
   const filteredProjects = activeCategory === "all" 
     ? projects 
     : projects.filter(project => project.category === activeCategory);
+
+  // Show all projects when hovering a category, otherwise filter by active category
+  const displayedProjects = hoveredCategory 
+    ? projects 
+    : filteredProjects;
 
   const handleProjectHover = (projectId: string | null) => {
     setHoveredProject(projectId);
@@ -97,13 +104,15 @@ const ProjectTimeline: React.FC<ProjectTimelineProps> = ({
   return (
     <div className="max-w-4xl mx-auto">
       <div className="space-y-0">
-        {filteredProjects.map((project, index) => (
+        {displayedProjects.map((project, index) => (
           <div
             key={project.id}
             className={`
               grid grid-cols-12 gap-8 py-4 border-b border-border/20
               transition-all duration-300 cursor-pointer
-              ${hoveredProject === project.id || activeCategory === project.category 
+              ${hoveredProject === project.id || 
+                (hoveredCategory && (hoveredCategory === "all" || project.category === hoveredCategory)) ||
+                activeCategory === project.category 
                 ? 'text-foreground bg-muted/10' 
                 : 'text-muted-foreground hover:text-foreground'
               }

@@ -15,12 +15,14 @@ interface TimelineNavProps {
   activeCategory: string;
   onCategoryChange: (category: string) => void;
   hoveredProject?: string | null;
+  onCategoryHover: (category: string | null) => void;
 }
 
 const TimelineNav: React.FC<TimelineNavProps> = ({ 
   activeCategory, 
   onCategoryChange,
-  hoveredProject 
+  hoveredProject,
+  onCategoryHover
 }) => {
   return (
     <nav className="fixed left-8 top-1/2 -translate-y-1/2 z-50">
@@ -29,6 +31,8 @@ const TimelineNav: React.FC<TimelineNavProps> = ({
           <li key={category.id}>
             <button
               onClick={() => onCategoryChange(category.id)}
+              onMouseEnter={() => onCategoryHover(category.id)}
+              onMouseLeave={() => onCategoryHover(null)}
               className={`
                 transition-all duration-300 cursor-pointer text-left
                 hover:text-foreground

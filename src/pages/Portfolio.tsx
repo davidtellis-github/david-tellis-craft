@@ -13,6 +13,7 @@ import w1 from "@/assets/work-1.jpg";
 const Portfolio = () => {
   const [activeCategory, setActiveCategory] = useState("all");
   const [hoveredProject, setHoveredProject] = useState<string | null>(null);
+  const [hoveredCategory, setHoveredCategory] = useState<string | null>(null);
 
   return (
     <div className="min-h-screen bg-background text-foreground">
@@ -34,6 +35,7 @@ const Portfolio = () => {
         activeCategory={activeCategory} 
         onCategoryChange={setActiveCategory}
         hoveredProject={hoveredProject}
+        onCategoryHover={setHoveredCategory}
       />
 
       {/* Main Content Container */}
@@ -69,6 +71,7 @@ const Portfolio = () => {
           <ProjectTimeline 
             activeCategory={activeCategory}
             onProjectHover={setHoveredProject}
+            hoveredCategory={hoveredCategory}
           />
         </div>
 
