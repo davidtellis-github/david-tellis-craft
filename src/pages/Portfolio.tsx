@@ -49,7 +49,7 @@ const Portfolio = () => {
         </div>
 
         {/* Featured Video */}
-        <div className="relative mb-16 w-full max-w-4xl">
+        <div className="relative mb-16 w-full">
           <div className="relative overflow-hidden rounded-2xl">
             <div className="relative aspect-video">
               <img 

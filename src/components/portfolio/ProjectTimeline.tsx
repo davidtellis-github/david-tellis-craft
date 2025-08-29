@@ -102,46 +102,53 @@ const ProjectTimeline: React.FC<ProjectTimelineProps> = ({
   };
 
   return (
-    <div className="max-w-4xl mx-auto">
-      <div className="space-y-0">
-        {displayedProjects.map((project, index) => (
-          <div
-            key={project.id}
-            className={`
-              grid grid-cols-12 gap-8 py-4 border-b border-border/20
-              transition-all duration-300 cursor-pointer
-              ${hoveredProject === project.id || 
-                (hoveredCategory && (hoveredCategory === "all" || project.category === hoveredCategory)) ||
-                activeCategory === project.category 
-                ? 'text-foreground bg-muted/10' 
-                : 'text-muted-foreground hover:text-foreground'
-              }
-            `}
-            onMouseEnter={() => handleProjectHover(project.id)}
-            onMouseLeave={() => handleProjectHover(null)}
-          >
-            {/* Year */}
-            <div className="col-span-2 text-left">
-              <span className="text-sm font-medium">
-                {project.year}
-              </span>
+    <div className="w-full">
+      <div className="space-y-8">
+        {displayedProjects.map((project, index) => {
+          const isHighlighted = hoveredProject === project.id || 
+            (hoveredCategory && (hoveredCategory === "all" || project.category === hoveredCategory)) ||
+            activeCategory === project.category;
+          
+          return (
+            <div 
+              key={project.id}
+              className={`border-t border-border pt-8 first:border-t-0 first:pt-0 transition-all duration-500 ${
+                isHighlighted ? 'opacity-100' : 'opacity-50 hover:opacity-75'
+              }`}
+              onMouseEnter={() => handleProjectHover(project.id)}
+              onMouseLeave={() => handleProjectHover(null)}
+            >
+              {/* Title Row - Full Width */}
+              <div className="flex items-center justify-between w-full">
+                <div className="flex items-center gap-8">
+                  {/* Number */}
+                  <div className="text-2xl font-bold text-muted-foreground">
+                    {String(index + 1).padStart(2, '0')}
+                  </div>
+                  
+                  {/* Title */}
+                  <h3 className="text-2xl lg:text-3xl font-bold uppercase tracking-tight">
+                    {project.title}
+                  </h3>
+                </div>
+                
+                {/* Services */}
+                <div className="text-right">
+                  <span className="text-muted-foreground">
+                    {project.services}
+                  </span>
+                </div>
+              </div>
+
+              {/* Year */}
+              <div className="mt-4 ml-16">
+                <span className="text-sm text-muted-foreground">
+                  {project.year}
+                </span>
+              </div>
             </div>
-            
-            {/* Project Title */}
-            <div className="col-span-6 text-left">
-              <h3 className="text-lg font-medium">
-                {project.title}
-              </h3>
-            </div>
-            
-            {/* Services */}
-            <div className="col-span-4 text-left">
-              <span className="text-sm">
-                {project.services}
-              </span>
-            </div>
-          </div>
-        ))}
+          );
+        })}
       </div>
     </div>
   );
