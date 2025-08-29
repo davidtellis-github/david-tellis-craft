@@ -25,28 +25,43 @@ const TimelineNav: React.FC<TimelineNavProps> = ({
   onCategoryHover
 }) => {
   return (
-    <nav className="fixed left-8 top-1/2 -translate-y-1/2 z-50">
-      <ul className="space-y-4 text-muted-foreground text-sm">
-        {categories.map((category) => (
-          <li key={category.id}>
-            <button
-              onClick={() => onCategoryChange(category.id)}
-              onMouseEnter={() => onCategoryHover(category.id)}
-              onMouseLeave={() => onCategoryHover(null)}
-              className={`
-                transition-all duration-300 cursor-pointer text-left
-                hover:text-foreground
-                ${activeCategory === category.id
-                  ? "text-foreground font-medium scale-110"
-                  : ""
-                }
-              `}
-            >
-              {category.label}
-            </button>
-          </li>
-        ))}
-      </ul>
+    <nav
+      aria-label="Portfolio navigation"
+      className="hidden lg:block sticky top-20 h-[calc(100vh-5rem)] w-[min(18rem,24vw)] ml-6 z-[56]"
+    >
+      <div className="relative h-full flex flex-col gap-[14vh]">
+        {/* Category Menu */}
+        <ul
+          className="
+            space-y-1 
+            text-muted-foreground
+            text-[clamp(12px,1.6vmin,16px)]
+            pt-10
+          "
+        >
+          {categories.map((category) => (
+            <li key={category.id}>
+              <button
+                onClick={() => onCategoryChange(category.id)}
+                onMouseEnter={() => onCategoryHover(category.id)}
+                onMouseLeave={() => onCategoryHover(null)}
+                className={`
+                  transition-colors 
+                  hover:text-foreground 
+                  cursor-pointer
+                  ${
+                    activeCategory === category.id
+                      ? "text-foreground font-normal"
+                      : ""
+                  }
+                `}
+              >
+                {category.label}
+              </button>
+            </li>
+          ))}
+        </ul>
+      </div>
     </nav>
   );
 };
