@@ -3,8 +3,6 @@ import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Play, ExternalLink, ArrowUpRight, ArrowLeft } from "lucide-react";
 import Header from "@/components/ui/Header";
-import AmbientSpotlight from "@/components/portfolio/AmbientSpotlight"
-
 import ProjectTimeline from "@/components/portfolio/ProjectTimeline";
 import TimelineNav from "@/components/portfolio/TimelineNav";
 
@@ -19,7 +17,6 @@ const Portfolio = () => {
 
   return (
     <div className="min-h-screen bg-background text-foreground">
-      <AmbientSpotlight/>
       {/* Header */}
       <Header />
 
@@ -46,6 +43,15 @@ const Portfolio = () => {
           <section className="flex flex-col flex-1 min-w-0 py-[20vh]">
             {/* My Work Title */}
             <div className="mb-8">
+               {/* Back Button */}
+      <div className="fixed top-6 right-6 z-50">
+        <Link 
+          to="/" 
+          className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-muted/80 backdrop-blur-sm hover:bg-muted transition-colors"
+        >
+          <ArrowLeft className="w-4 h-4" />
+        </Link>
+      </div>
               <h1 className="text-4xl md:text-5xl font-bold tracking-tight">
                 My work
               </h1>
