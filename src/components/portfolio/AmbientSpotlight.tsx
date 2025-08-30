@@ -30,7 +30,7 @@ const AmbientSpotlight: React.FC = () => {
     <div
       ref={ref}
       aria-hidden
-      className="pointer-events-none fixed inset-0 -z-10"
+      className="pointer-events-none fixed inset-0 z-[100]"
       style={{
         background:
           "radial-gradient(400px 400px at var(--spot-x, 50%) var(--spot-y, 20%), hsl(var(--foreground)/0.06), transparent 60%)",
