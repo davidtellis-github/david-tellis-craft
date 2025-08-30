@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Play, ExternalLink, ArrowUpRight, ArrowLeft } from "lucide-react";
 import Header from "@/components/ui/Header";
+import AmbientSpotlight from "@/components/portfolio/AmbientSpotlight"
+
 import ProjectTimeline from "@/components/portfolio/ProjectTimeline";
 import TimelineNav from "@/components/portfolio/TimelineNav";
 
@@ -17,6 +19,7 @@ const Portfolio = () => {
 
   return (
     <div className="min-h-screen bg-background text-foreground">
+      <AmbientSpotlight/>
       {/* Header */}
       <Header />
 

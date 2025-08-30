@@ -4,6 +4,8 @@ import { ArrowLeft, Play, ExternalLink, Github, Figma } from "lucide-react";
 import Header from "@/components/ui/Header";
 import ProjectNav from "@/components/portfolio/ProjectNav";
 import { projectsData } from "@/data/projectData";
+import AmbientSpotlight from "@/components/portfolio/AmbientSpotlight"
+
 
 const ProjectDetails: React.FC = () => {
   const { slug } = useParams();
@@ -14,7 +16,8 @@ const ProjectDetails: React.FC = () => {
   // Redirect to 404 if project not found
   if (!project) {
     return (
-      <div className="min-h-screen bg-background text-foreground flex items-center justify-center">
+      <AmbientSpotlight/>
+      <div className="min-h-screen bg-background text-foreground flex items-end justify-center">
         <div className="text-center">
           <h1 className="text-4xl font-bold mb-4">Project Not Found</h1>
           <p className="text-muted-foreground mb-8">The project you're looking for doesn't exist.</p>

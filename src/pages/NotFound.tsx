@@ -1,5 +1,7 @@
 import { useLocation } from "react-router-dom";
 import { useEffect } from "react";
+import AmbientSpotlight from "@/components/portfolio/AmbientSpotlight"
+
 
 const NotFound = () => {
   const location = useLocation();
@@ -12,6 +14,7 @@ const NotFound = () => {
   }, [location.pathname]);
 
   return (
+    <AmbientSpotlight/>
     <main className="min-h-screen flex items-center justify-center bg-background text-foreground">
       <div className="text-center">
         <h1 className="text-6xl font-bold mb-4">404</h1>
