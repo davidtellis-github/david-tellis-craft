@@ -49,7 +49,7 @@ const PortfolioNav: React.FC<PortfolioNavProps> = ({ activeCategory, onCategoryC
   return (
     <nav
       aria-label="Portfolio navigation"
-      className="hidden lg:block sticky top-0 h-svh w-[min(18rem,24vw)]"
+      className="hidden lg:block sticky top-0 h-[calc(100vh-5rem)] w-[min(18rem,24vw)]  z-[56]"
     >
       <div className="relative h-full flex flex-col gap-[14vh]">
         {/* Category Menu */}
