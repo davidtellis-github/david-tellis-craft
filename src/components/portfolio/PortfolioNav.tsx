@@ -49,28 +49,9 @@ const PortfolioNav: React.FC<PortfolioNavProps> = ({ activeCategory, onCategoryC
   return (
     <nav
       aria-label="Portfolio navigation"
-      className="hidden lg:block sticky top-20 h-[calc(100vh-5rem)] w-[min(18rem,24vw)] ml-6 z-[56]"
+      className="hidden lg:block sticky top-0 h-svh w-[min(18rem,24vw)]"
     >
       <div className="relative h-full flex flex-col gap-[14vh]">
-         {/* --- Animated Logo --- */}
-       <a
-  href="#intro"
-  aria-label="Home"
-  className="pt-10 leading-none select-none text-foreground 
-             text-[clamp(20px,4vmin,32px)]  font-normal flex group relative"
->
-  {/* Always-visible "D" */}
-    <span className="inline-block">D</span>
-  <span
-    className="
-      inline-block opacity-0
-      group-hover:animate-spreadOut
-      group-hover:opacity-100
-    "
-  >
-    avid Tellis
-  </span>
-</a>
         {/* Category Menu */}
         <ul
           className="
