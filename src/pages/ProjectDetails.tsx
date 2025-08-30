@@ -1,11 +1,15 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import { ArrowLeft, Play, ExternalLink, Github, Figma } from "lucide-react";
 import Header from "@/components/ui/Header";
+import TimelineNav from "@/components/portfolio/TimelineNav";
 import { projectsData } from "@/data/projectData";
 
 const ProjectDetails: React.FC = () => {
   const { slug } = useParams();
+  const [activeCategory, setActiveCategory] = useState("all");
+  const [hoveredProject, setHoveredProject] = useState<string | null>(null);
+  const [hoveredCategory, setHoveredCategory] = useState<string | null>(null);
 
   // Get project data based on slug
   const project = slug ? projectsData[slug] : null;
@@ -44,21 +48,30 @@ const ProjectDetails: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-background text-foreground">
-      {/* Fixed Header */}
+      {/* Header */}
       <Header />
 
-      {/* Navigation - Minimalistic */}
-      <div className="absolute top-8 right-8 z-50">
-        <Link
-          to="/portfolio"
-          className="inline-flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors text-sm"
+      {/* Back Button */}
+      <div className="fixed top-6 right-6 z-50">
+        <Link 
+          to="/portfolio" 
+          className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-muted/80 backdrop-blur-sm hover:bg-muted transition-colors"
         >
-          <ArrowLeft className="h-4 w-4" />
-          Back to Portfolio
+          <ArrowLeft className="w-4 h-4" />
         </Link>
       </div>
 
-      <main className="px-8 py-16 max-w-5xl mx-auto">
+      <main className="w-[98vw] mx-auto px-4 md:px-6">
+        {/* Main layout with TimelineNav + content */}
+        <div className="flex gap-[4vw] lg:gap-[6vw]">
+          <TimelineNav 
+            activeCategory={activeCategory} 
+            onCategoryChange={setActiveCategory}
+            hoveredProject={hoveredProject}
+            onCategoryHover={setHoveredCategory}
+          />
+          
+          <section className="flex flex-col flex-1 min-w-0 py-[20vh]">
         {/* Hero Section */}
         <section className="mb-32 pt-16">
           <div className="mb-16">
@@ -245,6 +258,8 @@ const ProjectDetails: React.FC = () => {
             </a>
           </div>
         </section>
+          </section>
+        </div>
       </main>
     </div>
   );
