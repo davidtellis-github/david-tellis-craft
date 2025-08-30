@@ -1,15 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 import { ArrowLeft, Play, ExternalLink, Github, Figma } from "lucide-react";
 import Header from "@/components/ui/Header";
-import TimelineNav from "@/components/portfolio/TimelineNav";
+import ProjectNav from "@/components/portfolio/ProjectNav";
 import { projectsData } from "@/data/projectData";
 
 const ProjectDetails: React.FC = () => {
   const { slug } = useParams();
-  const [activeCategory, setActiveCategory] = useState("all");
-  const [hoveredProject, setHoveredProject] = useState<string | null>(null);
-  const [hoveredCategory, setHoveredCategory] = useState<string | null>(null);
 
   // Get project data based on slug
   const project = slug ? projectsData[slug] : null;
@@ -62,18 +59,13 @@ const ProjectDetails: React.FC = () => {
       </div>
 
       <main className="w-[98vw] mx-auto px-4 md:px-6">
-        {/* Main layout with TimelineNav + content */}
-        <div className="flex gap-[4vw] lg:gap-[6vw]">
-          <TimelineNav 
-            activeCategory={activeCategory} 
-            onCategoryChange={setActiveCategory}
-            hoveredProject={hoveredProject}
-            onCategoryHover={setHoveredCategory}
-          />
+        {/* Main layout with ProjectNav + content */}
+        <div className="flex gap-8 lg:gap-12">
+          <ProjectNav />
           
-          <section className="flex flex-col flex-1 min-w-0 py-[20vh]">
+          <section className="flex flex-col flex-1 min-w-0 py-16">
         {/* Hero Section */}
-        <section className="mb-32 pt-16">
+        <section id="overview" className="py-20 pt-16">
           <div className="mb-16">
             <h1 className="text-6xl md:text-7xl lg:text-8xl font-bold tracking-tight leading-[0.9] mb-8">
               {project.title}
@@ -121,7 +113,7 @@ const ProjectDetails: React.FC = () => {
         </section>
 
         {/* Context Section */}
-        <section className="mb-32">
+        <section id="context" className="py-20">
           <h2 className="text-5xl font-bold mb-16">Context & Challenge</h2>
           <div className="grid md:grid-cols-2 gap-16">
             <div>
@@ -140,7 +132,7 @@ const ProjectDetails: React.FC = () => {
         </section>
 
         {/* Role & Impact */}
-        <section className="mb-32">
+        <section id="role" className="py-20">
           <h2 className="text-5xl font-bold mb-16">My Role & Impact</h2>
           <div className="grid md:grid-cols-2 gap-16">
             <div className="bg-muted/30 rounded-2xl h-80"></div>
@@ -168,7 +160,7 @@ const ProjectDetails: React.FC = () => {
         </section>
 
         {/* Features */}
-        <section className="mb-32">
+        <section id="features" className="py-20">
           <h2 className="text-5xl font-bold mb-16">Features & Complexity</h2>
           <div className="grid md:grid-cols-2 gap-8">
             {project.features.map((feature, index) => (
@@ -183,7 +175,7 @@ const ProjectDetails: React.FC = () => {
         </section>
 
         {/* Process */}
-        <section className="mb-32">
+        <section id="process" className="py-20">
           <h2 className="text-5xl font-bold mb-16">Process & Approach</h2>
           <div className="space-y-12">
             {project.process.map((phase, index) => (
@@ -201,7 +193,7 @@ const ProjectDetails: React.FC = () => {
         </section>
 
         {/* Video Walkthrough */}
-        <section className="mb-32">
+        <section id="walkthrough" className="py-20">
           <h2 className="text-5xl font-bold mb-16">Video Walkthrough</h2>
           <div className="relative aspect-video bg-muted/50 rounded-2xl overflow-hidden">
             <div className="absolute inset-0 bg-gradient-to-br from-background/20 to-background/5 flex items-center justify-center">
@@ -216,7 +208,7 @@ const ProjectDetails: React.FC = () => {
         </section>
 
         {/* Reflection */}
-        <section className="mb-32">
+        <section id="reflection" className="py-20">
           <h2 className="text-5xl font-bold mb-16">Reflection & Learnings</h2>
           <div className="max-w-3xl">
             <p className="text-xl text-muted-foreground leading-relaxed">
@@ -226,7 +218,7 @@ const ProjectDetails: React.FC = () => {
         </section>
 
         {/* CTA Section */}
-        <section className="text-center">
+        <section id="links" className="py-20 text-center">
           <h2 className="text-4xl font-bold mb-8">View the Project</h2>
           <div className="flex flex-wrap gap-6 justify-center">
             <a 
