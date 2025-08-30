@@ -45,7 +45,7 @@ const ProjectDetails: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-background text-foreground">
-    
+      
 
       {/* Back Button */}
       <div className="fixed top-6 right-6 z-50">

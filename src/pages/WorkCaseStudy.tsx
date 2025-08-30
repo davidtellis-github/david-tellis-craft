@@ -1,8 +1,6 @@
 import React, { useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 import { ArrowLeft } from "lucide-react";
-import AmbientSpotlight from "@/components/portfolio/AmbientSpotlight"
-
 
 function titleCaseFromSlug(slug?: string) {
   if (!slug) return "Wedding Verse";
@@ -184,8 +182,7 @@ const WorkCaseStudy: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-background text-foreground">
-      <AmbientSpotlight/>{/* Top Nav */}
-      <header className="sticky top-0 z-40 backdrop-blur supports-[backdrop-filter]:bg-background/70 bg-background/80 border-b border-border">
+      {/* Top Nav */}
         <div className="container mx-auto px-6 lg:px-10 py-3 flex items-center gap-4">
           <Link
             to="/"
@@ -205,7 +202,7 @@ const WorkCaseStudy: React.FC = () => {
         <section id="hero" className="pt-8 md:pt-12">
           <div className="grid md:grid-cols-12 gap-6 md:gap-8 items-start">
             <div className="md:col-span-7">
-               <h1 className="text-2xl md:text-4xl font-medium tracking-tight">
+               <h1 className="text-2xl md:text-4xl font-bold tracking-tight">
                 {data.title} — {data.subtitle}
               </h1>
               <p className="mt-3 text-muted-foreground max-w-prose">
