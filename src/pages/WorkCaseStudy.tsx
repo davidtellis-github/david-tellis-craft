@@ -205,7 +205,7 @@ const WorkCaseStudy: React.FC = () => {
         <section id="hero" className="pt-8 md:pt-12">
           <div className="grid md:grid-cols-12 gap-6 md:gap-8 items-start">
             <div className="md:col-span-7">
-               <h1 className="text-2xl md:text-4xl font-bold tracking-tight">
+               <h1 className="text-2xl md:text-4xl font-medium tracking-tight">
                 {data.title} — {data.subtitle}
               </h1>
               <p className="mt-3 text-muted-foreground max-w-prose">
