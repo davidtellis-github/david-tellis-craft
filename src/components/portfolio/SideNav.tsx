@@ -51,14 +51,34 @@ const SideNav: React.FC = () => {
   return (
     <nav
       aria-label="Section navigation"
-      className="hidden lg:block sticky top-16 h-[calc(100vh-4rem)] w-[min(18rem,24vw)] ml-6"
+      className="flex flex-col hidden lg:block sticky top-0 h-svh w-[min(18rem,24vw)]  "
     >
-      <div className="relative h-full flex flex-col justify-start">
+      <div className="relative h-full flex flex-col gap-[14vh]">
+        {/* --- Animated Logo --- */}
+       <a
+  href="#intro"
+  aria-label="Home"
+  className="pt-10 leading-none select-none text-foreground 
+             text-[clamp(20px,4vmin,32px)]  font-normal flex group relative"
+>
+  {/* Always-visible "D" */}
+    <span className="inline-block">D</span>
+  <span
+    className="
+      inline-block opacity-0
+      group-hover:animate-spreadOut
+      group-hover:opacity-100
+    "
+  >
+    avid Tellis
+  </span>
+</a>
+
         {/* --- Nav Menu --- */}
         <ul
           className="
         
-            space-y-1 
+            space-y-0 
             text-muted-foreground
             text-[clamp(12px,1.6vmin,16px)]
           "
