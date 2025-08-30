@@ -16,20 +16,22 @@ const ProjectDetails: React.FC = () => {
   // Redirect to 404 if project not found
   if (!project) {
     return (
-      <AmbientSpotlight/>
-      <div className="min-h-screen bg-background text-foreground flex items-end justify-center">
-        <div className="text-center">
-          <h1 className="text-4xl font-bold mb-4">Project Not Found</h1>
-          <p className="text-muted-foreground mb-8">The project you're looking for doesn't exist.</p>
-          <Link
-            to="/portfolio"
-            className="inline-flex items-center gap-2 bg-foreground text-background px-6 py-3 rounded-full hover:bg-foreground/90 transition-colors"
-          >
-            <ArrowLeft className="h-4 w-4" />
-            Back to Portfolio
-          </Link>
+      <>
+        <AmbientSpotlight/>
+        <div className="min-h-screen bg-background text-foreground flex items-end justify-center">
+          <div className="text-center">
+            <h1 className="text-4xl font-bold mb-4">Project Not Found</h1>
+            <p className="text-muted-foreground mb-8">The project you're looking for doesn't exist.</p>
+            <Link
+              to="/portfolio"
+              className="inline-flex items-center gap-2 bg-foreground text-background px-6 py-3 rounded-full hover:bg-foreground/90 transition-colors"
+            >
+              <ArrowLeft className="h-4 w-4" />
+              Back to Portfolio
+            </Link>
+          </div>
         </div>
-      </div>
+      </>
     );
   }
 
