@@ -56,9 +56,7 @@ const ProjectNav: React.FC = () => {
     <nav
       aria-label="Project navigation"
       className="hidden lg:block sticky top-20 h-[calc(100vh-5rem)] w-[min(18rem,24vw)] ml-6 z-[56]"
-    >
-      <div className="relative h-full flex flex-col gap-[14vh]">
-        {/* Back to Portfolio */}
+    > {/* Back to Portfolio */}
         <div className="pt-10">
           <Link
             to="/portfolio"
@@ -68,6 +66,8 @@ const ProjectNav: React.FC = () => {
             Back to Portfolio
           </Link>
         </div>
+      <div className="relative h-full flex flex-col gap-[14vh]">
+       
 
         {/* Section Menu */}
         <ul
