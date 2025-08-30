@@ -27,7 +27,7 @@ const TimelineNav: React.FC<TimelineNavProps> = ({
   return (
     <nav
       aria-label="Portfolio navigation"
-      className="hidden lg:block sticky top-20 h-[calc(100vh-5rem)] w-[min(18rem,24vw)] ml-6 z-[56]"
+      className="hidden lg:block sticky top-16 h-[calc(100vh-4rem)] w-[min(18rem,24vw)] ml-6 z-[56]"
     >
       <div className="relative h-full flex flex-col gap-[14vh]">
         {/* Category Menu */}
@@ -36,7 +36,6 @@ const TimelineNav: React.FC<TimelineNavProps> = ({
             space-y-1 
             text-muted-foreground
             text-[clamp(12px,1.6vmin,16px)]
-            pt-10
           "
         >
           {categories.map((category) => (

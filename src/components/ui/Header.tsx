@@ -2,11 +2,11 @@ import React from "react";
 
 const Header = () => {
   return (
-    <header className="fixed top-6 left-6 z-50">
+    <header className="fixed top-16 left-6 z-50">
       <a
   href="#intro"
   aria-label="Home"
-  className="pt-10 leading-none select-none text-foreground 
+  className="leading-none select-none text-foreground 
              text-[clamp(20px,4vmin,32px)]  font-normal flex group relative"
 >
   {/* Always-visible "D" */}

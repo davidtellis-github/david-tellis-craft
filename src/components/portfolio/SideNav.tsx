@@ -51,9 +51,9 @@ const SideNav: React.FC = () => {
   return (
     <nav
       aria-label="Section navigation"
-      className="hidden lg:block sticky top-0 h-svh w-[min(18rem,24vw)]  "
+      className="hidden lg:block sticky top-16 h-[calc(100vh-4rem)] w-[min(18rem,24vw)] ml-6"
     >
-      <div className="relative h-full flex flex-col justify-center">
+      <div className="relative h-full flex flex-col justify-start">
         {/* --- Nav Menu --- */}
         <ul
           className="
