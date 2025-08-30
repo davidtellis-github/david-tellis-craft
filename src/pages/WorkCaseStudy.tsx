@@ -182,20 +182,6 @@ const WorkCaseStudy: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-background text-foreground">
-      {/* Top Nav */}
-      <header>
-        <div className="container mx-auto px-6 lg:px-10 py-3 flex items-center gap-4">
-          <Link
-            to="/"
-            className="inline-flex items-center gap-2 rounded-lg px-3 py-1.5 border border-border hover:bg-muted text-sm"
-            aria-label="Back to work"
-          >
-            <ArrowLeft className="h-4 w-4" aria-hidden="true" />
-            Back
-          </Link>
-          <div className="font-semibold tracking-tight">Case Study · 0→1</div>
-        </div>
-      </header>
 
       {/* Page Body */}
       <main className="container mx-auto px-6 lg:px-10 pb-24">

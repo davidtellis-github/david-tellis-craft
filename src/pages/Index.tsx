@@ -6,7 +6,6 @@ import ValuesSection from "@/components/portfolio/ValuesSection";
 import BackgroundTimeline from "@/components/portfolio/BackgroundTimeline";
 import Testimonials from "@/components/portfolio/Testimonials";
 import Contact from "@/components/portfolio/Contact";
-import Header from "@/components/ui/Header";
 
 const Index = () => {
   return (

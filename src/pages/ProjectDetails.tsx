@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 import { ArrowLeft, Play, ExternalLink, Github, Figma } from "lucide-react";
-import Header from "@/components/ui/Header";
 import ProjectNav from "@/components/portfolio/ProjectNav";
 import { projectsData } from "@/data/projectData";
 
