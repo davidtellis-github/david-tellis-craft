@@ -55,24 +55,31 @@ const ProjectNav: React.FC = () => {
   return (
     <nav
       aria-label="Project navigation"
-      className="hidden lg:block sticky top-16 h-[calc(100vh-4rem)] w-[min(18rem,24vw)] ml-6 z-[56]"
+      className="hidden lg:block sticky top-20 h-[calc(100vh-5rem)] w-[min(18rem,24vw)] ml-6 z-[56]"
     >
-      <div className="relative h-full flex flex-col gap-[14vh]">
-        {/* Back to Portfolio */}
-        <div>
-          <Link
-            to="/portfolio"
-            className="inline-flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors text-[clamp(12px,1.6vmin,16px)]"
-          >
-            <ArrowLeft className="h-4 w-4" />
-            Back to Portfolio
-          </Link>
-        </div>
+      < <a
+  href="#intro"
+  aria-label="Home"
+  className="pt-10 leading-none select-none text-foreground 
+             text-[clamp(20px,4vmin,32px)]  font-normal flex group relative"
+>
+  {/* Always-visible "D" */}
+    <span className="inline-block">D</span>
+  <span
+    className="
+      inline-block opacity-0
+      group-hover:animate-spreadOut
+      group-hover:opacity-100
+    "
+  >
+    avid Tellis
+  </span>
+</a>
 
         {/* Section Menu */}
         <ul
           className="
-            space-y-1 
+            space-y-0
             text-muted-foreground
             text-[clamp(12px,1.6vmin,16px)]
           "
