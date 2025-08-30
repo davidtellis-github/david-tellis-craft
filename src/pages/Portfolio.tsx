@@ -17,7 +17,8 @@ const Portfolio = () => {
 
   return (
     <div className="min-h-screen bg-background text-foreground">
-     
+      {/* Header */}
+      <Header />
 
       {/* Back Button */}
       <div className="fixed top-6 right-6 z-50">
@@ -29,7 +30,7 @@ const Portfolio = () => {
         </Link>
       </div>
 
-      <main className="w-[98vw] mx-auto px-4 md:px-6">
+      <main className="w-[98vw] mx-auto ">
         {/* Main layout with TimelineNav + content */}
         <div className="flex gap-[4vw] lg:gap-[6vw]">
           <TimelineNav 
