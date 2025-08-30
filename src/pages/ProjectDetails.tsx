@@ -45,8 +45,7 @@ const ProjectDetails: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-background text-foreground">
-      {/* Header */}
-      <Header />
+     
 
       {/* Back Button */}
       <div className="fixed top-6 right-6 z-50">
@@ -58,7 +57,7 @@ const ProjectDetails: React.FC = () => {
         </Link>
       </div>
 
-      <main className="w-[98vw] mx-auto ">
+      <main className="w-[98vw] mx-auto px-4 md:px-6">
         {/* Main layout with ProjectNav + content */}
         <div className="flex gap-8 lg:gap-12">
           <ProjectNav />

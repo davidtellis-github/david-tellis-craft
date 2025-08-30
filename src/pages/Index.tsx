@@ -12,7 +12,7 @@ const Index = () => {
   return (
     <div className="min-h-screen bg-background text-foreground">
       <AmbientSpotlight />
-     
+      
       <main className="w-[98vw] mx-auto px-4 md:px-6">
         {/* Main layout with SideNav + sections */}
         <div className="flex gap-[4vw] lg:gap-[6vw]">
