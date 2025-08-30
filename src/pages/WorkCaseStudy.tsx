@@ -183,6 +183,7 @@ const WorkCaseStudy: React.FC = () => {
   return (
     <div className="min-h-screen bg-background text-foreground">
       {/* Top Nav */}
+      <header>
         <div className="container mx-auto px-6 lg:px-10 py-3 flex items-center gap-4">
           <Link
             to="/"
