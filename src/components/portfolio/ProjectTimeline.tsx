@@ -126,7 +126,7 @@ const ProjectTimeline: React.FC<ProjectTimelineProps> = ({
               onClick={() => handleProjectClick(project.id)}
             >
               {/* Title Row - Full Width */}
-              <div className="flex items-center justify-between w-full">
+              <div className="flex items-center justify-between w-full ">
                 <div className="flex items-center gap-8">
                   {/* Number */}
                   <div className="text-2xl font-bold text-muted-foreground">

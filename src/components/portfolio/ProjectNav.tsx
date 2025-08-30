@@ -72,7 +72,7 @@ const ProjectNav: React.FC = () => {
         {/* Section Menu */}
         <ul
           className="
-            space-y-1 
+            space-y-0
             text-muted-foreground
             text-[clamp(12px,1.6vmin,16px)]
           "
