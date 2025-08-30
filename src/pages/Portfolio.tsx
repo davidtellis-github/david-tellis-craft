@@ -43,22 +43,12 @@ const Portfolio = () => {
           <section className="flex flex-col flex-1 min-w-0 py-[20vh]">
             {/* My Work Title */}
             <div className="mb-8">
-              <h1 className="text-4xl md:text-5xl font-medium tracking-tight">
+              <h1 className="text-4xl md:text-5xl font-bold tracking-tight">
                 My work
               </h1>
             </div>
 
-           
-
-            {/* Project Timeline */}
-            <div className="w-full mb-20">
-              <ProjectTimeline 
-                activeCategory={activeCategory}
-                onProjectHover={setHoveredProject}
-                hoveredCategory={hoveredCategory}
-              />
-            </div>
-             {/* Featured Video */}
+            {/* Featured Video */}
             <div className="relative mb-16 w-full">
               <div className="relative overflow-hidden rounded-2xl">
                 <div className="relative aspect-video">
@@ -76,11 +66,20 @@ const Portfolio = () => {
               </div>
             </div>
 
+            {/* Project Timeline */}
+            <div className="w-full mb-20">
+              <ProjectTimeline 
+                activeCategory={activeCategory}
+                onProjectHover={setHoveredProject}
+                hoveredCategory={hoveredCategory}
+              />
+            </div>
+
             {/* Call to Action */}
             <section className="py-20">
               <div className="space-y-8">
                 <div className="space-y-4">
-                  <h2 className="text-4xl md:text-5xl font-medium tracking-tight">
+                  <h2 className="text-4xl md:text-5xl font-bold tracking-tight">
                     Like what you see?
                   </h2>
                   <p className="text-xl text-muted-foreground max-w-2xl">
