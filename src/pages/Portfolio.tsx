@@ -43,21 +43,22 @@ const Portfolio = () => {
           <section className="flex flex-col flex-1 min-w-0 py-[20vh]">
             {/* My Work Title */}
             <div className="mb-8">
-               {/* Back Button */}
-      <div className="fixed top-6 right-6 z-50">
-        <Link 
-          to="/" 
-          className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-muted/80 backdrop-blur-sm hover:bg-muted transition-colors"
-        >
-          <ArrowLeft className="w-4 h-4" />
-        </Link>
-      </div>
               <h1 className="text-4xl md:text-5xl font-bold tracking-tight">
                 My work
               </h1>
             </div>
 
-            {/* Featured Video */}
+           
+
+            {/* Project Timeline */}
+            <div className="w-full mb-20">
+              <ProjectTimeline 
+                activeCategory={activeCategory}
+                onProjectHover={setHoveredProject}
+                hoveredCategory={hoveredCategory}
+              />
+            </div>
+             {/* Featured Video */}
             <div className="relative mb-16 w-full">
               <div className="relative overflow-hidden rounded-2xl">
                 <div className="relative aspect-video">
@@ -73,15 +74,6 @@ const Portfolio = () => {
                   </div>
                 </div>
               </div>
-            </div>
-
-            {/* Project Timeline */}
-            <div className="w-full mb-20">
-              <ProjectTimeline 
-                activeCategory={activeCategory}
-                onProjectHover={setHoveredProject}
-                hoveredCategory={hoveredCategory}
-              />
             </div>
 
             {/* Call to Action */}
