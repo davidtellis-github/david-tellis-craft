@@ -1,46 +1,11 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
-import w1 from "@/assets/work-1.jpg";
-import w2 from "@/assets/work-2.jpg";
-import w3 from "@/assets/work-3.jpg";
-import w4 from "@/assets/work-4.jpg";
-import w5 from "@/assets/work-5.jpg";
-import w6 from "@/assets/work-6.jpg";
-import w7 from "@/assets/work-7.jpg";
-import w8 from "@/assets/work-8.jpg";
-import w9 from "@/assets/work-9.jpg";
-const projects = [{
-  title: "Wedding Verse",
-  img: w1,
-  slug: "wedding-verse",
-  video: "https://player.vimeo.com/video/123456789",
-  description: "A shared workspace for couples, planners, and vendors that turns inspiration into booked services.",
-  details: ["Guided workspace that compresses decisions into packages", "Multi-stakeholder collaboration platform", "Improved clarity and velocity under wedding timeline constraints"]
-}, {
-  title: "Futurcraft AI",
-  img: w2,
-  slug: "futurcraft-ai",
-  video: "https://player.vimeo.com/video/987654321",
-  description: "A brand-aligned AI content engine for creating consistent, multi-format content at scale.",
-  details: ["Brand DNA capture for AI-generated consistency", "Multi-format content creation and repurposing", "Reduced content turnaround by 70%"]
-}, {
-  title: "Turbocloud",
-  img: w3,
-  slug: "turbocloud",
-  video: "https://player.vimeo.com/video/456789123",
-  description: "FinOps platform for monitoring and optimizing cloud costs across AWS, Azure, and GCP.",
-  details: ["Unified cloud cost visibility and management", "CI/CD workflow integration with cost tracking", "Automated optimization recommendations"]
-}, {
-  title: "Outrange",
-  img: w4,
-  slug: "outrange",
-  video: "https://player.vimeo.com/video/789123456",
-  description: "Conceptual lifestyle app exploring community-driven adventure planning and discovery.",
-  details: ["Moodboard-driven experience discovery", "Collaborative group planning with polls", "Interactive map interface for adventure planning"]
-}];
+import { useProjects } from "@/hooks/useProjects";
+
 const WorkGrid: React.FC = () => {
   const [expandedProjects, setExpandedProjects] = useState<Set<number>>(new Set());
   const projectRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const { projects, loading, error } = useProjects();
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -66,73 +31,123 @@ const WorkGrid: React.FC = () => {
     });
 
     return () => observer.disconnect();
-  }, []);
+  }, [projects.length]); // Re-run when projects load
 
-  return <section id="work" className="min-h-screen flex flex-col justify-center py-20">
+  if (loading) {
+    return (
+      <section id="work" className="min-h-screen flex flex-col justify-center py-20">
+        <div className="container mx-auto lg:px-0 px-0">
+          <div className="space-y-8">
+            {[...Array(4)].map((_, index) => (
+              <div key={index} className="border-t border-border pt-8 first:border-t-0 first:pt-0">
+                <div className="flex items-center justify-between w-full">
+                  <div className="flex items-center gap-8">
+                    <div className="w-8 h-8 bg-muted rounded animate-pulse"></div>
+                    <div className="w-48 h-8 bg-muted rounded animate-pulse"></div>
+                  </div>
+                  <div className="w-8 h-8 bg-muted rounded animate-pulse"></div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+    );
+  }
+
+  if (error) {
+    return (
+      <section id="work" className="min-h-screen flex flex-col justify-center py-20">
+        <div className="container mx-auto lg:px-0 px-0">
+          <div className="text-center text-muted-foreground">
+            Error loading projects: {error}
+          </div>
+        </div>
+      </section>
+    );
+  }
+
+  // Take only the first 4 projects for the work grid
+  const displayProjects = projects.slice(0, 4);
+
+  return (
+    <section id="work" className="min-h-screen flex flex-col justify-center py-20">
       <div className="container mx-auto lg:px-0 px-0">
-        {/* Header */}
-        
-
         {/* Projects List */}
         <div className="space-y-8">
-          {projects.map((project, index) => {
+          {displayProjects.map((project, index) => {
             const isExpanded = expandedProjects.has(index);
+            const featuredAsset = project.assets.find(asset => asset.is_featured);
+            
             return (
-            <div 
-              key={project.title} 
-              ref={el => projectRefs.current[index] = el}
-              data-index={index}
-              className="border-t border-border pt-8 first:border-t-0 first:pt-0 transition-all duration-500"
-            >
-              {/* Title Row - Full Width */}
-              <div className="flex items-center justify-between w-full">
-                <div className="flex items-center gap-8">
-                  {/* Number */}
-                  <div className="text-2xl font-bold text-muted-foreground">
-                    {String(index + 1).padStart(2, '0')}
+              <div 
+                key={project.id} 
+                ref={el => projectRefs.current[index] = el}
+                data-index={index}
+                className="border-t border-border pt-8 first:border-t-0 first:pt-0 transition-all duration-500"
+              >
+                {/* Title Row - Full Width */}
+                <div className="flex items-center justify-between w-full">
+                  <div className="flex items-center gap-8">
+                    {/* Number */}
+                    <div className="text-2xl font-bold text-muted-foreground">
+                      {String(index + 1).padStart(2, '0')}
+                    </div>
+                    
+                    {/* Title */}
+                    <h3 className="text-2xl lg:text-3xl font-bold uppercase tracking-tight">
+                      {project.title}
+                    </h3>
                   </div>
                   
-                  {/* Title */}
-                  <h3 className="text-2xl lg:text-3xl font-bold uppercase tracking-tight">
-                    {project.title}
-                  </h3>
+                  {/* Arrow */}
+                  <Link to={`/project/${project.slug}`} className="group" aria-label={`View case study: ${project.title}`}>
+                    <div className="w-8 h-8 flex items-center justify-center text-primary group-hover:translate-x-1 transition-transform duration-300">
+                      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-6 h-6">
+                        <path d="M7 17L17 7M17 7H7M17 7V17" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                      </svg>
+                    </div>
+                  </Link>
                 </div>
-                
-                {/* Arrow */}
-                <Link to={`/project/${project.slug}`} className="group" aria-label={`View case study: ${project.title}`}>
-                  <div className="w-8 h-8 flex items-center justify-center text-primary group-hover:translate-x-1 transition-transform duration-300">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-6 h-6">
-                      <path d="M7 17L17 7M17 7H7M17 7V17" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                    </svg>
-                  </div>
-                </Link>
-              </div>
 
-              {/* Video and Content - Shown based on scroll */}
-              <div className={`overflow-hidden transition-all duration-700 mt-6 ${
-                isExpanded 
-                  ? 'opacity-100 max-h-[800px]' 
-                  : 'opacity-0 max-h-0'
-              }`}>
-                {/* Video Preview */}
-                <div className="aspect-video w-full mb-6">
-                  <iframe
-                    src={project.video}
-                    className="w-full h-full rounded-lg"
-                    frameBorder="0"
-                    allow="autoplay; fullscreen; picture-in-picture"
-                    allowFullScreen
-                  ></iframe>
-                </div>
-                
-                {/* Project Description Only */}
-                <div className="max-w-2xl">
-                  <p className="text-foreground text-lg leading-relaxed">
-                    {project.description}
-                  </p>
+                {/* Video and Content - Shown based on scroll */}
+                <div className={`overflow-hidden transition-all duration-700 mt-6 ${
+                  isExpanded 
+                    ? 'opacity-100 max-h-[800px]' 
+                    : 'opacity-0 max-h-0'
+                }`}>
+                  {/* Featured Asset or Placeholder */}
+                  <div className="aspect-video w-full mb-6">
+                    {featuredAsset && featuredAsset.asset_type === 'video' ? (
+                      <iframe
+                        src={featuredAsset.file_path}
+                        className="w-full h-full rounded-lg"
+                        frameBorder="0"
+                        allow="autoplay; fullscreen; picture-in-picture"
+                        allowFullScreen
+                        title={`${project.title} video preview`}
+                      ></iframe>
+                    ) : featuredAsset && featuredAsset.asset_type === 'image' ? (
+                      <img 
+                        src={featuredAsset.file_path} 
+                        alt={featuredAsset.alt_text || `${project.title} preview`}
+                        className="w-full h-full object-cover rounded-lg"
+                      />
+                    ) : (
+                      <div className="w-full h-full bg-muted rounded-lg flex items-center justify-center">
+                        <span className="text-muted-foreground">Preview coming soon</span>
+                      </div>
+                    )}
+                  </div>
+                  
+                  {/* Project Description */}
+                  <div className="max-w-2xl">
+                    <p className="text-foreground text-lg leading-relaxed">
+                      {project.description}
+                    </p>
+                  </div>
                 </div>
               </div>
-            </div>
             );
           })}
         </div>
@@ -161,6 +176,7 @@ const WorkGrid: React.FC = () => {
           </div>
         </div>
       </div>
-    </section>;
+    </section>
+  );
 };
 export default WorkGrid;

@@ -1,85 +1,12 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-
-interface Project {
-  id: string;
-  year: string;
-  title: string;
-  services: string;
-  category: string;
-}
+import { useProjects } from "@/hooks/useProjects";
 
 interface ProjectTimelineProps {
   activeCategory: string;
   onProjectHover: (projectId: string | null) => void;
   hoveredCategory?: string | null;
 }
-
-const projects: Project[] = [
-  {
-    id: "wedding-verse",
-    year: "2024",
-    title: "Wedding Verse",
-    services: "Strategy + Design + Engineering",
-    category: "b2c"
-  },
-  {
-    id: "futurcraft-ai",
-    year: "2025",
-    title: "Futurcraft AI",
-    services: "Strategy + Design + Engineering",
-    category: "ai"
-  },
-  {
-    id: "turbocloud",
-    year: "2025",
-    title: "Turbocloud",
-    services: "Strategy + Design + Engineering",
-    category: "finops"
-  },
-  {
-    id: "health-project",
-    year: "2024",
-    title: "HealthCare Platform",
-    services: "Strategy + Design",
-    category: "healthcare"
-  },
-  {
-    id: "project-alpha",
-    year: "2024",
-    title: "Project Alpha",
-    services: "Strategy + Design + Engineering",
-    category: "b2c"
-  },
-  {
-    id: "web-design-1",
-    year: "2024",
-    title: "Corporate Website",
-    services: "Strategy + Design",
-    category: "webdesigns"
-  },
-  {
-    id: "ui-exploration-1",
-    year: "2024",
-    title: "UI Exploration #1",
-    services: "Strategy + Design + Engineering",
-    category: "interactions"
-  },
-  {
-    id: "ui-exploration-2",
-    year: "2024",
-    title: "UI Exploration #2",
-    services: "Strategy + Design + Engineering",
-    category: "interactions"
-  },
-  {
-    id: "project-beta",
-    year: "2023",
-    title: "Project Beta",
-    services: "Strategy + Design + Engineering",
-    category: "b2b"
-  }
-];
 
 const ProjectTimeline: React.FC<ProjectTimelineProps> = ({ 
   activeCategory, 
@@ -88,10 +15,41 @@ const ProjectTimeline: React.FC<ProjectTimelineProps> = ({
 }) => {
   const [hoveredProject, setHoveredProject] = useState<string | null>(null);
   const navigate = useNavigate();
+  const { projects, loading, error } = useProjects();
+
+  if (loading) {
+    return (
+      <div className="w-full">
+        <div className="space-y-8">
+          {[...Array(6)].map((_, index) => (
+            <div key={index} className="border-t border-border pt-8 first:border-t-0 first:pt-0">
+              <div className="flex items-center justify-between w-full">
+                <div className="flex items-center gap-8">
+                  <div className="w-8 h-8 bg-muted rounded animate-pulse"></div>
+                  <div className="w-48 h-8 bg-muted rounded animate-pulse"></div>
+                </div>
+                <div className="w-32 h-6 bg-muted rounded animate-pulse"></div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="w-full">
+        <div className="text-center text-muted-foreground">
+          Error loading projects: {error}
+        </div>
+      </div>
+    );
+  }
 
   const filteredProjects = activeCategory === "all" 
     ? projects 
-    : projects.filter(project => project.category === activeCategory);
+    : projects.filter(project => project.category?.slug === activeCategory);
 
   // Show all projects when hovering a category, otherwise filter by active category
   const displayedProjects = hoveredCategory 
@@ -103,8 +61,8 @@ const ProjectTimeline: React.FC<ProjectTimelineProps> = ({
     onProjectHover(projectId);
   };
 
-  const handleProjectClick = (projectId: string) => {
-    navigate(`/project/${projectId}`);
+  const handleProjectClick = (projectSlug: string) => {
+    navigate(`/project/${projectSlug}`);
   };
 
   return (
@@ -112,8 +70,8 @@ const ProjectTimeline: React.FC<ProjectTimelineProps> = ({
       <div className="space-y-8">
         {displayedProjects.map((project, index) => {
           const isHighlighted = hoveredProject === project.id || 
-            (hoveredCategory && (hoveredCategory === "all" || project.category === hoveredCategory)) ||
-            activeCategory === project.category;
+            (hoveredCategory && (hoveredCategory === "all" || project.category?.slug === hoveredCategory)) ||
+            activeCategory === project.category?.slug;
           
           return (
             <div 
@@ -123,7 +81,7 @@ const ProjectTimeline: React.FC<ProjectTimelineProps> = ({
               }`}
               onMouseEnter={() => handleProjectHover(project.id)}
               onMouseLeave={() => handleProjectHover(null)}
-              onClick={() => handleProjectClick(project.id)}
+              onClick={() => handleProjectClick(project.slug)}
             >
               {/* Title Row - Full Width */}
               <div className="flex items-center justify-between w-full ">
