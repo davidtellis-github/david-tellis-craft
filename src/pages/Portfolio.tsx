@@ -74,7 +74,7 @@ const Portfolio = () => {
               <div className="relative overflow-hidden rounded-2xl">
                 <div className="relative aspect-video">
                   <video 
-                    src="https://gksxdznfdxrsjqkuzxmg.supabase.co/storage/v1/object/public/project-videos/skylark%202%20(1).mp4"
+                    src="https://gksxdznfdxrsjqkuzxmg.supabase.co/storage/v1/object/public/project-videos/keyboard%202.mp4"
                     className="w-full h-full object-cover rounded-2xl"
                     controls
                     poster={w1}
