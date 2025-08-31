@@ -7,7 +7,7 @@ import ProjectTimeline from "@/components/portfolio/ProjectTimeline";
 import TimelineNav from "@/components/portfolio/TimelineNav";
 
 // Import work images
-import w1 from "https://gksxdznfdxrsjqkuzxmg.supabase.co/storage/v1/object/public/project-videos/skylark%202%20(1).mp4";
+import w1 from "@/assets/work-1.jpg";
 
 
 const Portfolio = () => {
