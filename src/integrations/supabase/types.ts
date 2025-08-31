@@ -14,7 +14,283 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      categories: {
+        Row: {
+          created_at: string
+          description: string | null
+          id: string
+          name: string
+          slug: string
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          description?: string | null
+          id?: string
+          name: string
+          slug: string
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          description?: string | null
+          id?: string
+          name?: string
+          slug?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      project_assets: {
+        Row: {
+          alt_text: string | null
+          asset_type: string
+          caption: string | null
+          created_at: string
+          file_name: string
+          file_path: string
+          file_size: number | null
+          id: string
+          is_featured: boolean | null
+          mime_type: string | null
+          project_id: string
+          sort_order: number | null
+        }
+        Insert: {
+          alt_text?: string | null
+          asset_type: string
+          caption?: string | null
+          created_at?: string
+          file_name: string
+          file_path: string
+          file_size?: number | null
+          id?: string
+          is_featured?: boolean | null
+          mime_type?: string | null
+          project_id: string
+          sort_order?: number | null
+        }
+        Update: {
+          alt_text?: string | null
+          asset_type?: string
+          caption?: string | null
+          created_at?: string
+          file_name?: string
+          file_path?: string
+          file_size?: number | null
+          id?: string
+          is_featured?: boolean | null
+          mime_type?: string | null
+          project_id?: string
+          sort_order?: number | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "project_assets_project_id_fkey"
+            columns: ["project_id"]
+            isOneToOne: false
+            referencedRelation: "projects"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      project_features: {
+        Row: {
+          created_at: string
+          description: string | null
+          icon: string | null
+          id: string
+          project_id: string
+          sort_order: number | null
+          title: string
+        }
+        Insert: {
+          created_at?: string
+          description?: string | null
+          icon?: string | null
+          id?: string
+          project_id: string
+          sort_order?: number | null
+          title: string
+        }
+        Update: {
+          created_at?: string
+          description?: string | null
+          icon?: string | null
+          id?: string
+          project_id?: string
+          sort_order?: number | null
+          title?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "project_features_project_id_fkey"
+            columns: ["project_id"]
+            isOneToOne: false
+            referencedRelation: "projects"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      project_outcomes: {
+        Row: {
+          created_at: string
+          id: string
+          metric: string
+          project_id: string
+          sort_order: number | null
+          value: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          metric: string
+          project_id: string
+          sort_order?: number | null
+          value: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          metric?: string
+          project_id?: string
+          sort_order?: number | null
+          value?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "project_outcomes_project_id_fkey"
+            columns: ["project_id"]
+            isOneToOne: false
+            referencedRelation: "projects"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      project_process: {
+        Row: {
+          created_at: string
+          description: string | null
+          icon: string | null
+          id: string
+          project_id: string
+          sort_order: number | null
+          step: string
+        }
+        Insert: {
+          created_at?: string
+          description?: string | null
+          icon?: string | null
+          id?: string
+          project_id: string
+          sort_order?: number | null
+          step: string
+        }
+        Update: {
+          created_at?: string
+          description?: string | null
+          icon?: string | null
+          id?: string
+          project_id?: string
+          sort_order?: number | null
+          step?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "project_process_project_id_fkey"
+            columns: ["project_id"]
+            isOneToOne: false
+            referencedRelation: "projects"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      projects: {
+        Row: {
+          category_id: string | null
+          context_audience: string | null
+          context_objective: string | null
+          context_problem: string | null
+          created_at: string
+          description: string | null
+          figma_link: string | null
+          github_link: string | null
+          id: string
+          is_published: boolean | null
+          live_link: string | null
+          reflection: string | null
+          role_duration: string | null
+          role_team: string | null
+          role_title: string | null
+          role_tools: string[] | null
+          services: string | null
+          slug: string
+          sort_order: number | null
+          subtitle: string | null
+          title: string
+          updated_at: string
+          year: string | null
+        }
+        Insert: {
+          category_id?: string | null
+          context_audience?: string | null
+          context_objective?: string | null
+          context_problem?: string | null
+          created_at?: string
+          description?: string | null
+          figma_link?: string | null
+          github_link?: string | null
+          id?: string
+          is_published?: boolean | null
+          live_link?: string | null
+          reflection?: string | null
+          role_duration?: string | null
+          role_team?: string | null
+          role_title?: string | null
+          role_tools?: string[] | null
+          services?: string | null
+          slug: string
+          sort_order?: number | null
+          subtitle?: string | null
+          title: string
+          updated_at?: string
+          year?: string | null
+        }
+        Update: {
+          category_id?: string | null
+          context_audience?: string | null
+          context_objective?: string | null
+          context_problem?: string | null
+          created_at?: string
+          description?: string | null
+          figma_link?: string | null
+          github_link?: string | null
+          id?: string
+          is_published?: boolean | null
+          live_link?: string | null
+          reflection?: string | null
+          role_duration?: string | null
+          role_team?: string | null
+          role_title?: string | null
+          role_tools?: string[] | null
+          services?: string | null
+          slug?: string
+          sort_order?: number | null
+          subtitle?: string | null
+          title?: string
+          updated_at?: string
+          year?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "projects_category_id_fkey"
+            columns: ["category_id"]
+            isOneToOne: false
+            referencedRelation: "categories"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
     }
     Views: {
       [_ in never]: never
