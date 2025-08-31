@@ -73,16 +73,12 @@ const Portfolio = () => {
             <div className="relative mb-16 w-full">
               <div className="relative overflow-hidden rounded-2xl">
                 <div className="relative aspect-video">
-                  <img 
-                    src={w1} 
-                    alt="Featured Work"
+                  <video 
+                    src="https://gksxdznfdxrsjqkuzxmg.supabase.co/storage/v1/object/public/project-videos/skylark%202%20(1).mp4"
                     className="w-full h-full object-cover rounded-2xl"
+                    controls
+                    poster={w1}
                   />
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <div className="w-24 h-24 bg-primary/90 rounded-full flex items-center justify-center hover:scale-110 transition-transform cursor-pointer">
-                      <Play className="w-10 h-10 text-primary-foreground ml-1" />
-                    </div>
-                  </div>
                 </div>
               </div>
             </div>
