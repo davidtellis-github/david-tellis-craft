@@ -1,6 +1,35 @@
 import { supabase } from "@/integrations/supabase/client";
 
-// Asset mappings based on project data structure
+// Import all assets statically to avoid dynamic import issues
+import work1 from "@/assets/work-1.jpg";
+import work2 from "@/assets/work-2.jpg";  
+import work3 from "@/assets/work-3.jpg";
+import work4 from "@/assets/work-4.jpg";
+import work5 from "@/assets/work-5.jpg";
+import work6 from "@/assets/work-6.jpg";
+import work7 from "@/assets/work-7.jpg";
+import work8 from "@/assets/work-8.jpg";
+import work9 from "@/assets/work-9.jpg";
+import portrait from "@/assets/portrait.jpg";
+import portraitPng from "@/assets/portrait.png";
+import background from "@/assets/baground.png";
+
+// Asset mappings based on project data structure with static imports
+const assetMap: Record<string, string> = {
+  "work-1.jpg": work1,
+  "work-2.jpg": work2,
+  "work-3.jpg": work3,
+  "work-4.jpg": work4,
+  "work-5.jpg": work5,
+  "work-6.jpg": work6,
+  "work-7.jpg": work7,
+  "work-8.jpg": work8,
+  "work-9.jpg": work9,
+  "portrait.jpg": portrait,
+  "portrait.png": portraitPng,
+  "baground.png": background,
+};
+
 const projectAssets = {
   "wedding-verse": [
     { file: "work-1.jpg", type: "image", featured: true },
@@ -59,17 +88,15 @@ export const uploadProjectAssets = async (): Promise<AssetUploadResult> => {
 
       for (const asset of assets) {
         try {
-          // Import the asset dynamically (Vite will handle the path resolution)
-          let assetModule;
-          try {
-            assetModule = await import(`../assets/${asset.file}`);
-          } catch (importError) {
-            result.errors.push(`Failed to import ${asset.file}: Asset not found`);
+          // Get the asset URL from static imports
+          const assetUrl = assetMap[asset.file];
+          if (!assetUrl) {
+            result.errors.push(`Asset not found in asset map: ${asset.file}`);
             continue;
           }
 
           // Fetch the asset URL that Vite provides
-          const response = await fetch(assetModule.default);
+          const response = await fetch(assetUrl);
           
           if (!response.ok) {
             result.errors.push(`Failed to fetch ${asset.file}: ${response.statusText}`);
@@ -129,16 +156,18 @@ export const uploadProjectAssets = async (): Promise<AssetUploadResult> => {
 
     for (const asset of additionalAssets) {
       try {
-        const assetModule = await import(`../assets/${asset.file}`);
-        const response = await fetch(assetModule.default);
-        if (response.ok) {
-          const blob = await response.blob();
-          const { error } = await supabase.storage
-            .from(asset.bucket)
-            .upload(`misc/${asset.file}`, blob, { upsert: true });
+        const assetUrl = assetMap[asset.file];
+        if (assetUrl) {
+          const response = await fetch(assetUrl);
+          if (response.ok) {
+            const blob = await response.blob();
+            const { error } = await supabase.storage
+              .from(asset.bucket)
+              .upload(`misc/${asset.file}`, blob, { upsert: true });
 
-          if (!error) {
-            console.log(`✅ Uploaded additional asset: ${asset.file}`);
+            if (!error) {
+              console.log(`✅ Uploaded additional asset: ${asset.file}`);
+            }
           }
         }
       } catch (error) {
