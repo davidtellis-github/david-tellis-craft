@@ -1,5 +1,6 @@
 import { supabase } from "@/integrations/supabase/client";
 import { projectsData } from "@/data/projectData";
+import { uploadProjectAssets, createAssetRecords } from "./uploadAssets";
 
 interface CategoryMap {
   [key: string]: string; // category slug -> category id
@@ -147,8 +148,23 @@ export const migrateProjectData = async () => {
       }
     }
 
+    // Step 3: Upload and link assets
+    console.log("Uploading project assets...");
+    const assetResults = await uploadProjectAssets();
+    
+    if (assetResults.success) {
+      console.log("Creating asset database records...");
+      const assetRecordResults = await createAssetRecords(assetResults);
+      
+      if (!assetRecordResults.success) {
+        console.warn("⚠️ Asset upload succeeded but database records failed:", assetRecordResults.message);
+      }
+    } else {
+      console.warn("⚠️ Asset upload had issues:", assetResults.errors);
+    }
+
     console.log("Project data migration completed successfully!");
-    return { success: true, message: "Migration completed successfully" };
+    return { success: true, message: "Migration completed successfully with assets" };
 
   } catch (error) {
     console.error("Migration failed:", error);
