@@ -73,14 +73,11 @@ const Portfolio = () => {
             <div className="relative mb-16 w-full">
               <div className="relative overflow-hidden rounded-2xl">
                 <div className="relative aspect-video">
-                    <video 
-    src={w1} 
-    controls={false} 
-    autoPlay={false} 
-    loop 
-    muted 
-    className="w-full h-full object-cover rounded-2xl"
-  />
+                  <img 
+                    src={w1} 
+                    alt="Featured Work"
+                    className="w-full h-full object-cover rounded-2xl"
+                  />
                   <div className="absolute inset-0 flex items-center justify-center">
                     <div className="w-24 h-24 bg-primary/90 rounded-full flex items-center justify-center hover:scale-110 transition-transform cursor-pointer">
                       <Play className="w-10 h-10 text-primary-foreground ml-1" />
