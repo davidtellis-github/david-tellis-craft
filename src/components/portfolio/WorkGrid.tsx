@@ -69,7 +69,7 @@ const WorkGrid: React.FC = () => {
   }, []);
 
   return <section id="work" className="min-h-screen flex flex-col justify-center py-20">
-      <div className="container mx-auto lg:px-10 px-0">
+      <div className="container mx-auto lg:px-0 px-0">
         {/* Header */}
         
 

@@ -31,7 +31,7 @@ const Portfolio = () => {
 
       <main className="w-[98vw] mx-auto px-4 md:px-6">
         {/* Main layout with TimelineNav + content */}
-        <div className="flex gap-[4vw] lg:gap-[6vw]">
+        <div className="flex m-0 gap-[4vw] lg:gap-[6vw]">
           <TimelineNav 
             activeCategory={activeCategory} 
             onCategoryChange={setActiveCategory}
@@ -41,12 +41,34 @@ const Portfolio = () => {
           
           <section className="flex flex-col flex-1 min-w-0 py-[20vh]">
             {/* My Work Title */}
-            <div className="mb-8">
-              <h1 className="text-4xl md:text-5xl font-bold tracking-tight">
+            <div className="flex flex-col items-end mb-8 ">
+              <div className="text-left">
+              <h1 className="text-4xl md:text-5xl mb-8 font-medium tracking-tight">
                 My work
               </h1>
+               {/* Bottom Right: Paragraph */}
+    <div className="flex flex-col-2 justify-start items-start mb-0">
+      <p className="max-w-2xl text-sm sm:text-base md:text-lg lg:text-[clamp(16px,1.4vmin,18px)] leading-relaxed text-foreground text-left">
+        I make things that actually work — and work well. I’m allergic to “good
+        enough,” “we’ll fix it later,” and anything that smells like it was
+        designed for a presentation, not a human. I ask the awkward questions,
+        obsess over the small details, and refuse to let a sloppy handoff ruin a
+        solid design.
+      </p>
+      </div>
+    </div>
             </div>
 
+            
+
+            {/* Project Timeline */}
+            <div className="w-full mb-20">
+              <ProjectTimeline 
+                activeCategory={activeCategory}
+                onProjectHover={setHoveredProject}
+                hoveredCategory={hoveredCategory}
+              />
+            </div>
             {/* Featured Video */}
             <div className="relative mb-16 w-full">
               <div className="relative overflow-hidden rounded-2xl">
@@ -65,20 +87,11 @@ const Portfolio = () => {
               </div>
             </div>
 
-            {/* Project Timeline */}
-            <div className="w-full mb-20">
-              <ProjectTimeline 
-                activeCategory={activeCategory}
-                onProjectHover={setHoveredProject}
-                hoveredCategory={hoveredCategory}
-              />
-            </div>
-
             {/* Call to Action */}
             <section className="py-20">
               <div className="space-y-8">
                 <div className="space-y-4">
-                  <h2 className="text-4xl md:text-5xl font-bold tracking-tight">
+                  <h2 className="text-4xl md:text-5xl font-medium tracking-tight">
                     Like what you see?
                   </h2>
                   <p className="text-xl text-muted-foreground max-w-2xl">

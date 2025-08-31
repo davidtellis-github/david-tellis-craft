@@ -129,12 +129,12 @@ const ProjectTimeline: React.FC<ProjectTimelineProps> = ({
               <div className="flex items-center justify-between w-full ">
                 <div className="flex items-center gap-8">
                   {/* Number */}
-                  <div className="text-2xl font-bold text-muted-foreground">
+                  <div className="text-2xl font-medium text-muted-foreground">
                     {String(index + 1).padStart(2, '0')}
                   </div>
                   
                   {/* Title */}
-                  <h3 className="text-2xl lg:text-3xl font-bold uppercase tracking-tight">
+                  <h3 className="text-2xl lg:text-3xl font-medium uppercase tracking-tight">
                     {project.title}
                   </h3>
                 </div>

@@ -80,7 +80,7 @@ const Contact: React.FC = () => (
       </div>
 
       {/* Right column - Portrait */}
-      <aside className="aspect-square overflow-hidden max-w-sm lg:max-w-md justify-self-center">
+      <aside className="aspect-square overflow-hidden max-w-lg lg:max-w-xl  justify-self-center">
         <img
           src={profile} // 👉 replace with your actual image path
           alt="Portrait of David Tellis"

@@ -13,8 +13,8 @@ const ProjectDetails: React.FC = () => {
   // Redirect to 404 if project not found
   if (!project) {
     return (
-      <div className="min-h-screen bg-background text-foreground flex items-center justify-center">
-        <div className="text-center">
+      <div className="min-h-screen bg-background text-foreground flex items-end justify-center">
+        <div className="text-end">
           <h1 className="text-4xl font-bold mb-4">Project Not Found</h1>
           <p className="text-muted-foreground mb-8">The project you're looking for doesn't exist.</p>
           <Link
@@ -61,11 +61,11 @@ const ProjectDetails: React.FC = () => {
         <div className="flex gap-8 lg:gap-12">
           <ProjectNav />
           
-          <section className="flex flex-col flex-1 min-w-0 py-16">
+          <section className="flex flex-col flex-1 min-w-0 py-[20vh]">
         {/* Hero Section */}
         <section id="overview" className="py-20 pt-16">
           <div className="mb-16">
-            <h1 className="text-6xl md:text-7xl lg:text-8xl font-bold tracking-tight leading-[0.9] mb-8">
+            <h1 className="text-6xl md:text-7xl lg:text-8xl font-medium tracking-tight leading-[0.9] mb-8">
               {project.title}
             </h1>
             <p className="text-2xl text-muted-foreground mb-12">
@@ -115,12 +115,12 @@ const ProjectDetails: React.FC = () => {
           <h2 className="text-5xl font-bold mb-16">Context & Challenge</h2>
           <div className="grid md:grid-cols-2 gap-16">
             <div>
-              <h3 className="text-xl font-semibold mb-4 text-muted-foreground uppercase tracking-wider">Problem</h3>
+              <h3 className="text-xl font-medium mb-4 text-muted-foreground uppercase tracking-wider">Problem</h3>
               <p className="text-lg leading-relaxed mb-8">
                 {project.context.problem}
               </p>
               
-              <h3 className="text-xl font-semibold mb-4 text-muted-foreground uppercase tracking-wider">Objective</h3>
+              <h3 className="text-xl font-medium mb-4 text-muted-foreground uppercase tracking-wider">Objective</h3>
               <p className="text-lg leading-relaxed">
                 {project.context.objective}
               </p>
@@ -131,11 +131,11 @@ const ProjectDetails: React.FC = () => {
 
         {/* Role & Impact */}
         <section id="role" className="py-20">
-          <h2 className="text-5xl font-bold mb-16">My Role & Impact</h2>
+          <h2 className="text-5xl font-medium mb-16">My Role & Impact</h2>
           <div className="grid md:grid-cols-2 gap-16">
             <div className="bg-muted/30 rounded-2xl h-80"></div>
             <div>
-              <h3 className="text-xl font-semibold mb-6 text-muted-foreground uppercase tracking-wider">Key Responsibilities</h3>
+              <h3 className="text-xl font-medium mb-6 text-muted-foreground uppercase tracking-wider">Key Responsibilities</h3>
               <ul className="space-y-3 text-lg mb-12">
                 <li>Led end-to-end product design strategy</li>
                 <li>Conducted user research and stakeholder interviews</li>
@@ -144,7 +144,7 @@ const ProjectDetails: React.FC = () => {
                 <li>Collaborated closely with engineering team</li>
               </ul>
               
-              <h3 className="text-xl font-semibold mb-6 text-muted-foreground uppercase tracking-wider">Outcomes</h3>
+              <h3 className="text-xl font-medium mb-6 text-muted-foreground uppercase tracking-wider">Outcomes</h3>
               <div className="space-y-4">
                 {project.outcomes.map((outcome, index) => (
                   <div key={index} className="flex justify-between items-center py-2 border-b border-border/20">
@@ -159,7 +159,7 @@ const ProjectDetails: React.FC = () => {
 
         {/* Features */}
         <section id="features" className="py-20">
-          <h2 className="text-5xl font-bold mb-16">Features & Complexity</h2>
+          <h2 className="text-5xl font-medium mb-16">Features & Complexity</h2>
           <div className="grid md:grid-cols-2 gap-8">
             {project.features.map((feature, index) => (
               <div key={index} className="border-l-2 border-border/20 pl-8 py-6">
@@ -174,7 +174,7 @@ const ProjectDetails: React.FC = () => {
 
         {/* Process */}
         <section id="process" className="py-20">
-          <h2 className="text-5xl font-bold mb-16">Process & Approach</h2>
+          <h2 className="text-5xl font-medium mb-16">Process & Approach</h2>
           <div className="space-y-12">
             {project.process.map((phase, index) => (
               <div key={index} className="flex items-start gap-8">
