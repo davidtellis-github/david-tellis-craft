@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState, useCallback } from "react";
 import { Link } from "react-router-dom";
 import { useProjects } from "@/hooks/useProjects";
 
@@ -7,31 +7,84 @@ const WorkGrid: React.FC = () => {
   const projectRefs = useRef<(HTMLDivElement | null)[]>([]);
   const { projects, loading, error } = useProjects();
 
+  // Take only the first 4 projects for the work grid
+  const displayProjects = projects.slice(0, 4);
+
+  // Memoized intersection observer callback
+  const handleIntersection = useCallback((entries: IntersectionObserverEntry[]) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        const index = parseInt(entry.target.getAttribute('data-index') || '0');
+        console.log(`Project ${index} intersecting`); // Debug log
+        // Add a staggered delay for sequential opening
+        setTimeout(() => {
+          setExpandedProjects(prev => new Set(prev).add(index));
+        }, index * 200); // Reduced delay for faster response
+      }
+    });
+  }, []);
+
+  // Set up intersection observer after projects are loaded and DOM is ready
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            const index = parseInt(entry.target.getAttribute('data-index') || '0');
-            // Add a staggered delay for sequential opening
+    if (loading || projects.length === 0) return;
+
+    // Ensure refs array is properly sized
+    projectRefs.current = projectRefs.current.slice(0, displayProjects.length);
+
+    // Small delay to ensure DOM elements are fully rendered
+    const timer = setTimeout(() => {
+      const observer = new IntersectionObserver(handleIntersection, { 
+        threshold: 0.2, // Lower threshold for earlier triggering
+        rootMargin: '-50px 0px' // Less restrictive margin
+      });
+
+      // Observe all project elements that exist
+      projectRefs.current.forEach((ref, index) => {
+        if (ref) {
+          console.log(`Observing project ${index}`); // Debug log
+          observer.observe(ref);
+        }
+      });
+
+      // Cleanup function
+      return () => {
+        console.log('Cleaning up observer'); // Debug log
+        observer.disconnect();
+      };
+    }, 100);
+
+    return () => {
+      clearTimeout(timer);
+    };
+  }, [projects.length, loading, handleIntersection]);
+
+  // Fallback scroll listener for additional reliability
+  useEffect(() => {
+    if (loading || projects.length === 0) return;
+
+    const handleScroll = () => {
+      projectRefs.current.forEach((ref, index) => {
+        if (ref && !expandedProjects.has(index)) {
+          const rect = ref.getBoundingClientRect();
+          const isVisible = rect.top < window.innerHeight * 0.8 && rect.bottom > 0;
+          
+          if (isVisible) {
             setTimeout(() => {
               setExpandedProjects(prev => new Set(prev).add(index));
-            }, index * 300);
+            }, index * 200);
           }
-        });
-      },
-      { 
-        threshold: 0.3,
-        rootMargin: '-100px 0px'
-      }
-    );
+        }
+      });
+    };
 
-    projectRefs.current.forEach((ref) => {
-      if (ref) observer.observe(ref);
-    });
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    // Initial check in case elements are already in view
+    handleScroll();
 
-    return () => observer.disconnect();
-  }, [projects.length]); // Re-run when projects load
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, [projects.length, loading, expandedProjects]);
 
   if (loading) {
     return (
@@ -66,9 +119,6 @@ const WorkGrid: React.FC = () => {
       </section>
     );
   }
-
-  // Take only the first 4 projects for the work grid
-  const displayProjects = projects.slice(0, 4);
 
   return (
     <section id="work" className="min-h-screen flex flex-col justify-center py-20">
