@@ -7,7 +7,7 @@ const tabsData: { key: string; label: string; headline: React.ReactNode }[] = [
     label: "For anyone",
     headline: (
       <>
-        Hello there, I'm a designer/artist <br></br>
+        Hello there, <br></br> I'm a designer/artist.  <br></br>
          {/* <span className="underline underline-offset-8 decoration-[hsl(var(--foreground)/0.4)]">Designer/Artist</span>  */}
          I turn ideas into beautiful, functional things that actually work.
       </>
@@ -86,7 +86,7 @@ const Hero: React.FC = () => {
 
         {tabsData.map((t) => (
           <TabsContent key={t.key} value={t.key} className="focus:outline-none">
-<h1 className="text-5xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-medium tracking-loose leading-[0] text-foreground max-w-5xl">              {t.headline}
+<h1 className="text-5xl sm:text-3xl md:text-4xl lg:text-7xl xl:text-10xl font-medium tracking-loose leading-normal text-foreground max-w-80vw">              {t.headline}
             </h1>
           </TabsContent>
         ))}

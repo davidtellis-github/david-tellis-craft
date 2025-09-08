@@ -89,7 +89,7 @@ const WorkGrid: React.FC = () => {
   if (loading) {
     return (
       <section id="work" className="min-h-screen flex flex-col justify-center py-20">
-        <div className="container mx-auto lg:px-0 px-0">
+        <div className="container  lg:px-0 ">
           <div className="space-y-8">
             {[...Array(4)].map((_, index) => (
               <div key={index} className="border-t border-border pt-8 first:border-t-0 first:pt-0">
@@ -122,7 +122,7 @@ const WorkGrid: React.FC = () => {
 
   return (
     <section id="work" className="min-h-screen flex flex-col justify-center py-20">
-      <div className="container mx-auto lg:px-0 px-0">
+      <div className="">
         {/* Projects List */}
         <div className="space-y-8">
           {displayProjects.map((project, index) => {
@@ -134,18 +134,18 @@ const WorkGrid: React.FC = () => {
                 key={project.id} 
                 ref={el => projectRefs.current[index] = el}
                 data-index={index}
-                className="border-t border-border pt-8 first:border-t-0 first:pt-0 transition-all duration-500"
+                className="border-t border-border pt-10 first:border-t-0 first:pt-0 transition-all duration-500"
               >
                 {/* Title Row - Full Width */}
-                <div className="flex items-center justify-between w-full">
-                  <div className="flex items-center gap-8">
+                <div className="flex items-center justify-between w-full pb-10">
+                  <div className="flex items-center gap-8 ">
                     {/* Number */}
-                    <div className="text-2xl font-bold text-muted-foreground">
+                    <div className="text-2xl font-semibold text-muted-foreground ">
                       {String(index + 1).padStart(2, '0')}
                     </div>
                     
                     {/* Title */}
-                    <h3 className="text-2xl lg:text-3xl font-bold uppercase tracking-tight">
+                    <h3 className="text-2xl lg:text-4xl font-medium  tracking-loose">
                       {project.title}
                     </h3>
                   </div>
@@ -163,7 +163,7 @@ const WorkGrid: React.FC = () => {
                 {/* Video and Content - Shown based on scroll */}
                 <div className={`overflow-hidden transition-all duration-700 mt-6 ${
                   isExpanded 
-                    ? 'opacity-100 max-h-[800px]' 
+                    ? 'opacity-100 max-h-full' 
                     : 'opacity-0 max-h-0'
                 }`}>
                   {/* Featured Asset or Placeholder */}
@@ -192,7 +192,7 @@ const WorkGrid: React.FC = () => {
                   
                   {/* Project Description */}
                   <div className="max-w-2xl">
-                    <p className="text-foreground text-lg leading-relaxed">
+                    <p className="text-foreground text-lg leading-relaxed pb-20">
                       {project.description}
                     </p>
                   </div>
@@ -207,7 +207,7 @@ const WorkGrid: React.FC = () => {
           <div className="bg-foreground rounded-lg p-8 group hover:bg-foreground/90 transition-colors duration-300">
             <div className="flex items-center justify-between w-full">
               <div>
-                <h3 className="text-3xl lg:text-4xl font-bold uppercase tracking-tight mb-2 text-background">
+                <h3 className="text-3xl lg:text-4xl font-medium  tracking-relaxed mb-2 text-background">
                   View All Work
                 </h3>
                 <p className="text-background/70 text-lg">
