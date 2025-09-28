@@ -62,9 +62,41 @@ const TimelineNav: React.FC<TimelineNavProps> = ({
   return (
     <nav
       aria-label="Portfolio navigation"
-      className="hidden lg:block sticky top-0 h-[calc(100vh-5rem)] w-[min(18rem,24vw)] z-[56]"
+      className="block sticky top-0 h-auto lg:h-[calc(100vh-5rem)] w-full lg:w-[min(18rem,24vw)] z-[56]"
     >
-      <div className="relative h-full flex flex-col gap-[14vh]">
+      {/* Mobile horizontal scrollable navigation */}
+      <div className="lg:hidden w-full overflow-x-auto py-4 px-4 bg-background/80 backdrop-blur-sm border-b border-border">
+        <div className="flex gap-4 min-w-max">
+          <a
+            href="#intro"
+            aria-label="Home"
+            className="text-foreground text-lg font-normal whitespace-nowrap"
+          >
+            David Tellis
+          </a>
+          <div className="flex gap-4 text-sm">
+            {allCategories.map((category) => (
+              <button
+                key={category.slug}
+                onClick={() => onCategoryChange(category.slug)}
+                className={`
+                  whitespace-nowrap px-3 py-1 rounded-full transition-colors
+                  ${
+                    activeCategory === category.slug
+                      ? "bg-primary text-primary-foreground"
+                      : "text-muted-foreground hover:text-foreground hover:bg-muted"
+                  }
+                `}
+              >
+                {category.name}
+              </button>
+            ))}
+          </div>
+        </div>
+      </div>
+      
+      {/* Desktop navigation */}
+      <div className="hidden lg:block relative h-full flex flex-col gap-[14vh]">
         {/* Category Menu */}
         {/* --- Animated Logo --- */}
        <a

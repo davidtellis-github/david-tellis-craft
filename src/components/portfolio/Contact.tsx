@@ -15,22 +15,22 @@ const Contact: React.FC = () => {
         {/* Left column - Text content */}
         <div className="flex flex-col gap-6">
           {/* Main intro line */}
-          <p className="text-2xl leading-relaxed">
+          <p className="text-xl sm:text-2xl lg:text-3xl leading-relaxed">
             I'm{" "}
             <span className="text-foreground font-medium">David Tellis</span>
             <br /> Let's build something great.
           </p>
 
           {/* Short note */}
-          <p className="text-muted-foreground">
+          <p className="text-sm sm:text-base text-muted-foreground">
             Interested in product design roles with real user impact.
           </p>
 
           {/* Contact links */}
-          <div className="flex flex-col sm:flex-row sm:gap-8 gap-4 text-lg pt-2">
+          <div className="flex flex-col sm:flex-row sm:gap-8 gap-4 text-sm sm:text-base lg:text-lg pt-2">
             <a
               href="mailto:davidtellis12@gmail.com"
-              className="underline underline-offset-4 hover:text-primary transition-colors"
+              className="underline underline-offset-4 hover:text-primary transition-colors break-all sm:break-normal"
             >
               davidtellis12@gmail.com
             </a>
