@@ -44,6 +44,7 @@ export type Database = {
       project_assets: {
         Row: {
           alt_text: string | null
+          asset_tags: string[] | null
           asset_type: string
           caption: string | null
           created_at: string
@@ -58,6 +59,7 @@ export type Database = {
         }
         Insert: {
           alt_text?: string | null
+          asset_tags?: string[] | null
           asset_type: string
           caption?: string | null
           created_at?: string
@@ -72,6 +74,7 @@ export type Database = {
         }
         Update: {
           alt_text?: string | null
+          asset_tags?: string[] | null
           asset_type?: string
           caption?: string | null
           created_at?: string
@@ -211,6 +214,7 @@ export type Database = {
           context_audience: string | null
           context_objective: string | null
           context_problem: string | null
+          contribution_level: string | null
           created_at: string
           description: string | null
           figma_link: string | null
@@ -218,6 +222,7 @@ export type Database = {
           id: string
           is_published: boolean | null
           live_link: string | null
+          project_tags: string[] | null
           reflection: string | null
           role_duration: string | null
           role_team: string | null
@@ -236,6 +241,7 @@ export type Database = {
           context_audience?: string | null
           context_objective?: string | null
           context_problem?: string | null
+          contribution_level?: string | null
           created_at?: string
           description?: string | null
           figma_link?: string | null
@@ -243,6 +249,7 @@ export type Database = {
           id?: string
           is_published?: boolean | null
           live_link?: string | null
+          project_tags?: string[] | null
           reflection?: string | null
           role_duration?: string | null
           role_team?: string | null
@@ -261,6 +268,7 @@ export type Database = {
           context_audience?: string | null
           context_objective?: string | null
           context_problem?: string | null
+          contribution_level?: string | null
           created_at?: string
           description?: string | null
           figma_link?: string | null
@@ -268,6 +276,7 @@ export type Database = {
           id?: string
           is_published?: boolean | null
           live_link?: string | null
+          project_tags?: string[] | null
           reflection?: string | null
           role_duration?: string | null
           role_team?: string | null
@@ -290,6 +299,48 @@ export type Database = {
             referencedColumns: ["id"]
           },
         ]
+      }
+      ui_explorations: {
+        Row: {
+          contribution_level: string
+          created_at: string
+          description: string | null
+          id: string
+          image_url: string
+          is_featured: boolean | null
+          project_id: string
+          sort_order: number | null
+          tags: string[] | null
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          contribution_level?: string
+          created_at?: string
+          description?: string | null
+          id?: string
+          image_url: string
+          is_featured?: boolean | null
+          project_id: string
+          sort_order?: number | null
+          tags?: string[] | null
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          contribution_level?: string
+          created_at?: string
+          description?: string | null
+          id?: string
+          image_url?: string
+          is_featured?: boolean | null
+          project_id?: string
+          sort_order?: number | null
+          tags?: string[] | null
+          title?: string
+          updated_at?: string
+        }
+        Relationships: []
       }
     }
     Views: {

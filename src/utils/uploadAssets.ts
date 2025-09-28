@@ -40,34 +40,38 @@ const assetMap: Record<string, string> = {
 
 const projectAssets = {
   "wedding-verse": [
-    { file: "work-1.jpg", type: "image", featured: true },
-    { file: "work-2.jpg", type: "image", featured: false }
+    { file: "work-1.jpg", type: "image", featured: true, tags: ["Hero Design", "User Interface"] as string[] },
+    { file: "work-2.jpg", type: "image", featured: false, tags: ["Mobile UI", "Responsive Design"] as string[] }
   ],
   "futurcraft-ai": [
-    { file: "futurcraft-ai.png", type: "image", featured: true }
+    { file: "futurcraft-ai.png", type: "image", featured: true, tags: ["AI Interface", "Dashboard", "Lead Design"] as string[] },
+    { file: "work-3.jpg", type: "image", featured: false, tags: ["UI Exploration", "Concept Design"] as string[] }
   ],
   "turbocloud": [
-    { file: "tubocloud-dashboard.png", type: "image", featured: true }
+    { file: "tubocloud-dashboard.png", type: "image", featured: true, tags: ["Dashboard", "Cloud Platform", "Lead Design"] as string[] },
+    { file: "work-4.jpg", type: "image", featured: false, tags: ["Admin Interface", "Data Visualization"] as string[] }
   ],
   "health-project": [
-    { file: "medpass-healthcare.png", type: "image", featured: true }
+    { file: "medpass-healthcare.png", type: "image", featured: true, tags: ["Healthcare UI", "Mobile App", "UI Contribution"] as string[] },
+    { file: "work-5.jpg", type: "image", featured: false, tags: ["Patient Portal", "Medical Interface"] as string[] }
   ],
   "project-alpha": [
-    { file: "work-6.jpg", type: "image", featured: true }
+    { file: "work-6.jpg", type: "image", featured: true, tags: ["Enterprise UI", "Lead Design"] as string[] }
   ],
   "web-design-1": [
-    { file: "boston-financial.png", type: "image", featured: true }
+    { file: "boston-financial.png", type: "image", featured: true, tags: ["Corporate Website", "Financial Services", "Lead Design"] as string[] },
+    { file: "work-7.jpg", type: "image", featured: false, tags: ["Landing Page", "Corporate Design"] as string[] }
   ],
   "ui-exploration-1": [
-    { file: "work-8.jpg", type: "image", featured: true }
+    { file: "work-8.jpg", type: "image", featured: true, tags: ["UI Exploration", "Mobile Design", "Concept"] as string[] }
   ],
   "ui-exploration-2": [
-    { file: "work-9.jpg", type: "image", featured: true }
+    { file: "work-9.jpg", type: "image", featured: true, tags: ["UI Exploration", "Dashboard Concept", "Innovation"] as string[] }
   ],
   "project-beta": [
-    { file: "portrait.jpg", type: "image", featured: true }
+    { file: "portrait.jpg", type: "image", featured: true, tags: ["Profile Design", "Personal Branding"] as string[] }
   ]
-} as const;
+};
 
 interface AssetUploadResult {
   success: boolean;
@@ -77,6 +81,7 @@ interface AssetUploadResult {
     publicUrl: string;
     assetType: 'image' | 'video' | 'document';
     isFeatured: boolean;
+    tags: string[];
   }>;
   errors: string[];
 }
@@ -143,7 +148,8 @@ export const uploadProjectAssets = async (): Promise<AssetUploadResult> => {
             fileName: asset.file,
             publicUrl: urlData.publicUrl,
             assetType: asset.type as 'image' | 'video' | 'document',
-            isFeatured: asset.featured
+            isFeatured: asset.featured,
+            tags: asset.tags || []
           });
 
           console.log(`✅ Uploaded ${asset.file} for ${projectSlug}`);
@@ -233,7 +239,8 @@ export const createAssetRecords = async (uploadResults: AssetUploadResult) => {
           file_path: asset.publicUrl,
           alt_text: `${asset.projectSlug} project ${asset.assetType}`,
           is_featured: asset.isFeatured,
-          sort_order: asset.isFeatured ? 0 : 1
+          sort_order: asset.isFeatured ? 0 : 1,
+          asset_tags: asset.tags
         });
 
       if (assetError) {
