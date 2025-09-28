@@ -2,50 +2,9 @@ import React from "react";
 import profile from "/src/assets/portrait.jpg";
 import ResumeModal from "./ResumeModal";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { FileText, Send } from "lucide-react";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { z } from "zod";
-import { useToast } from "@/hooks/use-toast";
-
-const projectFormSchema = z.object({
-  email: z.string().email("Please enter a valid email address"),
-});
-
-type ProjectFormData = z.infer<typeof projectFormSchema>;
 
 const Contact: React.FC = () => {
-  const { toast } = useToast();
-  
-  const form = useForm<ProjectFormData>({
-    resolver: zodResolver(projectFormSchema),
-    defaultValues: {
-      email: "",
-    },
-  });
-
-  const onSubmit = (data: ProjectFormData) => {
-    const subject = encodeURIComponent("New Project Inquiry");
-    const body = encodeURIComponent(`Hi David,
-
-I'm interested in starting a new project with you.
-
-Contact me at: ${data.email}
-
-Best regards`);
-    
-    window.open(`mailto:david@tellis.design?subject=${subject}&body=${body}`, '_self');
-    
-    toast({
-      title: "Email client opened",
-      description: "Please send the email from your email client to get in touch.",
-    });
-    
-    form.reset();
-  };
-
   return (
     <section
       id="contact"
@@ -95,33 +54,16 @@ Best regards`);
             </ResumeModal>
           </div>
 
-          {/* Start Project Form */}
+          {/* Start Project Button */}
           <div className="pt-8 border-t border-border">
             <h3 className="text-lg font-medium mb-4">Start a Project</h3>
-            <Form {...form}>
-              <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
-                <FormField
-                  control={form.control}
-                  name="email"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Your Email</FormLabel>
-                      <FormControl>
-                        <Input 
-                          placeholder="Enter your email address" 
-                          {...field} 
-                        />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-                <Button type="submit" className="flex items-center gap-2">
-                  <Send className="w-4 h-4" />
-                  Start Project
-                </Button>
-              </form>
-            </Form>
+            <Button 
+              onClick={() => window.open('https://mail.google.com/mail/?view=cm&fs=1&to=david@tellis.design&su=New%20Project%20Inquiry', '_blank')}
+              className="flex items-center gap-2"
+            >
+              <Send className="w-4 h-4" />
+              Start Project
+            </Button>
           </div>
         </div>
 
