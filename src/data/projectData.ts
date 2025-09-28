@@ -386,7 +386,7 @@ export const projectsData: Record<string, ProjectData> = {
 
   "web-design-1": {
     id: "web-design-1",
-    title: "Corporate Website",
+    title: "Boston Financial",
     subtitle: "Enterprise brand presence and lead generation",
     description: "Complete corporate website redesign focusing on brand storytelling, lead generation optimization, and scalable content management for a growing enterprise technology company.",
     category: "webdesigns",

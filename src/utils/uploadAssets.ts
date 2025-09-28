@@ -13,6 +13,10 @@ import work9 from "@/assets/work-9.jpg";
 import portrait from "@/assets/portrait.jpg";
 import portraitPng from "@/assets/portrait.png";
 import background from "@/assets/baground.png";
+import tuboCloudImg from "@/assets/tubocloud-dashboard.png";
+import futurCraftImg from "@/assets/futurcraft-ai.png";
+import bostonFinancialImg from "@/assets/boston-financial.png";
+import medpassImg from "@/assets/medpass-healthcare.png";
 
 // Asset mappings based on project data structure with static imports
 const assetMap: Record<string, string> = {
@@ -28,6 +32,10 @@ const assetMap: Record<string, string> = {
   "portrait.jpg": portrait,
   "portrait.png": portraitPng,
   "baground.png": background,
+  "tubocloud-dashboard.png": tuboCloudImg,
+  "futurcraft-ai.png": futurCraftImg,
+  "boston-financial.png": bostonFinancialImg,
+  "medpass-healthcare.png": medpassImg,
 };
 
 const projectAssets = {
@@ -36,19 +44,19 @@ const projectAssets = {
     { file: "work-2.jpg", type: "image", featured: false }
   ],
   "futurcraft-ai": [
-    { file: "work-3.jpg", type: "image", featured: true }
+    { file: "futurcraft-ai.png", type: "image", featured: true }
   ],
   "turbocloud": [
-    { file: "work-4.jpg", type: "image", featured: true }
+    { file: "tubocloud-dashboard.png", type: "image", featured: true }
   ],
   "health-project": [
-    { file: "work-5.jpg", type: "image", featured: true }
+    { file: "medpass-healthcare.png", type: "image", featured: true }
   ],
   "project-alpha": [
     { file: "work-6.jpg", type: "image", featured: true }
   ],
   "web-design-1": [
-    { file: "work-7.jpg", type: "image", featured: true }
+    { file: "boston-financial.png", type: "image", featured: true }
   ],
   "ui-exploration-1": [
     { file: "work-8.jpg", type: "image", featured: true }

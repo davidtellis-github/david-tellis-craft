@@ -8,6 +8,10 @@ import TimelineNav from "@/components/portfolio/TimelineNav";
 
 // Import work images
 import w1 from "@/assets/work-1.jpg";
+import tuboCloudImg from "@/assets/tubocloud-dashboard.png";
+import futurCraftImg from "@/assets/futurcraft-ai.png";
+import bostonFinancialImg from "@/assets/boston-financial.png";
+import medpassImg from "@/assets/medpass-healthcare.png";
 
 
 const Portfolio = () => {
