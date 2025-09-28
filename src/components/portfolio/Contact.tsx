@@ -29,10 +29,10 @@ const Contact: React.FC = () => {
           {/* Contact links */}
           <div className="flex flex-col sm:flex-row sm:gap-8 gap-4 text-lg pt-2">
             <a
-              href="mailto:david@tellis.design"
+              href="mailto:davidtellis12@gmail.com"
               className="underline underline-offset-4 hover:text-primary transition-colors"
             >
-              david@tellis.design
+              davidtellis12@gmail.com
             </a>
             <a
               href="https://www.linkedin.com/in/david-tellis-121576262/"
@@ -58,7 +58,7 @@ const Contact: React.FC = () => {
           <div className="pt-8 border-t border-border">
             <h3 className="text-lg font-medium mb-4">Start a Project</h3>
             <Button 
-              onClick={() => window.open('https://mail.google.com/mail/?view=cm&fs=1&to=david@tellis.design&su=New%20Project%20Inquiry', '_blank')}
+              onClick={() => window.open('https://mail.google.com/mail/?view=cm&fs=1&to=davidtellis12@gmail.com&su=New%20Project%20Inquiry', '_blank')}
               className="flex items-center gap-2"
             >
               <Send className="w-4 h-4" />
