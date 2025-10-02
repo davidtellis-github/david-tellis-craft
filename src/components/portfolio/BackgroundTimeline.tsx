@@ -57,14 +57,14 @@ const roles = [
     title: "Product Designer",
     time: "2024-Now",
     location: "Bengaluru",
-    notes: "At Turbostart (Venture Capital), I worked on simplifying workflows, improving core features, and making the platform more user-friendly. Collaborating with stakeholders and developers pushed me to think beyond screens, sharpen my product mindset, and grow into a more confident designer who balances user needs with business goals.",
+    notes: "Designed multiple Product for various Startus and Clients",
   },
   {
     company: "Freelance",
     title: "UI Designer",
     time: "2024",
     location: "Remote",
-    notes: "I freelance as a UI designer—crafting clean, modern interfaces for brands and products. Freelancing has sharpened my visual design skills, adaptability, and client collaboration. Balancing both roles has helped me grow creatively while learning how to deliver designs that are not just aesthetic but practical and impactful.",
+    notes: "Helped clients launch their Idea from 0 to 1 ",
   },
    {
     company: "Marketing Agency",
@@ -78,27 +78,12 @@ const roles = [
 const BackgroundTimeline: React.FC = () => (
   <section
     id="background"
-    className="min-h-screen flex flex-col justify-center pt-[20vh]"
+    className="min-h-screen flex flex-col justify-start "
   >
-   <p className="max-w-lg text-sm sm:text-base md:text-lg lg:text-[clamp(16px,1.4vmin,18px)] leading-tight text-foreground text-left">
-      I make things that actually work — and work well. I’m allergic to “good
-      enough,” “we’ll fix it later,” and anything that smells like it was
-      designed for a presentation, not a human. I ask the awkward questions,
-      obsess over the smadesignll details, and refuse to let a sloppy handoff ruin a
-      solid design.
-      
-      I’ll take feedback, but don’t expect me to nod politely if it’s based on
-      “personal vibes” and not actual reasoning. I’ll push back, because the
-      goal isn’t to make me look good, it’s to make the product unbreakable,
-      intuitive, and worth using twice.
-      
-      Design for me isn’t just a job — it’s my way of leaving things better than
-      I found them. And yes, that sounds noble, but honestly, I just hate crappy
-      products.
-    </p>
+   
 
 
-    <ol className="space-y-24 pt-[10vh]">
+    <ol className="space-y-24 ">
       {roles.map((r) => (
         <li
           key={`${r.company}-${r.time}`}
@@ -108,7 +93,7 @@ const BackgroundTimeline: React.FC = () => (
           {/* Role Card */}
           <div className="space-y-4">
             {/* Company */}
-            <div className="text-3xl sm:text-1xl lg:text-2xl text-foreground text-base mb-2">
+            <div className="text-3xl sm:text-2xl lg:text-3xl text-foreground text-base mb-2">
               {r.company}
             </div>
 
@@ -122,7 +107,7 @@ const BackgroundTimeline: React.FC = () => (
           </div>
 
             {/* Notes */}
-            <p className="max-w-1lg text-1xl sm:text-1xl lg:text-[clamp(16px,1.6vmin,18px)] text-muted-foreground leading-tight  text-base">
+            <p  className="max-w-md text-md font-light leading-[1.4] tracking-loose text-foreground text-left text-muted-foreground">
               {r.notes}
             </p>
           </div>

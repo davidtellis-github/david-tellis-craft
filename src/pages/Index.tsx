@@ -13,9 +13,9 @@ const Index = () => {
     <div className="min-h-screen bg-background text-foreground">
       <AmbientSpotlight />
       
-      <main className="w-[98vw] mx-auto px-4 md:px-6">
+      <main className="w-full mx-2vh px-4 md:px-6">
         {/* Main layout with SideNav + sections */}
-        <div className="flex gap-[4vw] lg:gap-[6vw]">
+        <div className="flex gap-[4vw] lg:gap-[10%]">
           <SideNav />
           <section className="flex flex-col flex-1 min-w-0">
             <Hero />
@@ -29,7 +29,7 @@ const Index = () => {
       </main>
       
       {/* Temporary migration button - remove after migrating */}
-      <MigrationButton />
+      {/* <MigrationButton /> */}
     </div>
   );
 };

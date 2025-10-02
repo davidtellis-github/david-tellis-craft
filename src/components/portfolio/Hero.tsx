@@ -7,9 +7,11 @@ const tabsData: { key: string; label: string; headline: React.ReactNode }[] = [
     label: "For anyone",
     headline: (
       <>
-        Hello there, <br></br> I'm a designer/artist.  <br></br>
-         {/* <span className="underline underline-offset-8 decoration-[hsl(var(--foreground)/0.4)]">Designer/Artist</span>  */}
-         I turn ideas into beautiful, functional things that actually work.
+        Hello there, I’m a
+designer who cares
+about making
+beautiful things that
+help people.
       </>
     ),
   },
@@ -73,12 +75,31 @@ const Hero: React.FC = () => {
     //     <TabsList className="h-auto p-0 bg-transparent border-0 flex flex-wrap  gap-6 justify-start text-sm text-muted-foreground">
     <div id="intro" className="relative min-h-screen flex flex-col justify-start py-[20vh]">
       <Tabs value={active} onValueChange={setActive} className="w-full text-left  gap-0">
-        <TabsList className="h-auto p-0 bg-transparent border-0 flex flex-wrap overflow-x-auto gap-8 justify-start font-normal text-[clamp(8px,1.6vmin,10px)] tracking-loose leading-[0] text-base  text-muted-foreground ">
+        <TabsList  className="
+    h-auto
+    p-0
+    bg-transparent
+    border-0
+    flex
+    flex-nowrap         /* prevent wrapping */
+    overflow-x-auto     /* horizontal scroll */
+    gap-8
+    justify-start
+    
+    text-[clamp(8px,1.6vmin,10px)]
+    tracking-loose
+    leading-[0]
+    text-base
+    text-muted-foreground
+    scrollbar-hide      /* optional: hide scrollbar */
+  "
+> 
+        
           {tabsData.map((t) => (
             <TabsTrigger
               key={t.key}
               value={t.key}
-  className="px-0 py-2 bg-transparent text-base data-[state=active]:text-foreground data-[state=active]:font-normal text-[clamp(12px,1.6vmin,16px)] transition-colors"            >
+  className="px-0 py-0 bg-transparent text-base data-[state=active]:text-foreground data-[state=active]:font-normal text-[clamp(12px,1.6vmin,16px)] transition-colors"            >
               {t.label}
             </TabsTrigger>
           ))}
@@ -86,13 +107,50 @@ const Hero: React.FC = () => {
 
         {tabsData.map((t) => (
           <TabsContent key={t.key} value={t.key} className="focus:outline-none">
-<h1 className="text-5xl sm:text-3xl md:text-4xl lg:text-7xl xl:text-10xl font-medium tracking-loose leading-normal text-foreground max-w-80vw">              {t.headline}
-            </h1>
+<h1
+  className="
+    text-3xl           /* Default mobile size */
+    sm:text-6xl         /* Small screens */
+    md:text-6xl         /* Tablets */
+    lg:text-7xl         /* Large screens */
+    xl:text-7xl         /* Extra large screens */
+    2xl:text-8xl        /* Very large screens */
+
+    font-medium 
+    tracking-tight
+
+    leading-snug        /* Default line-height for mobile */
+    sm:leading-tight     /* Slightly tighter on small screens */
+    md:leading-[1.2]   /* Normal on medium and above */
+
+    text-foreground 
+    max-w-[90vw]
+  "
+>
+  {t.headline}
+</h1>
           </TabsContent>
         ))}
       </Tabs>
 
-      <p className="mt-6 text-lg text-muted-foreground">
+      <p className="
+    h-auto
+   
+    bg-transparent
+    
+    flex
+    flex-nowrap         /* prevent wrapping */
+    overflow-x-auto     /* horizontal scroll */
+    gap-8
+    justify-start
+    font-normal
+    text-[clamp(8px,1.6vmin,10px)]
+    tracking-loose
+    leading-[0]
+    text-base
+    text-muted-foreground
+   
+  ">
         Currently open to impactful, product-focused opportunities — especially {activeLabel.toLowerCase()}.
       </p>
     </div>

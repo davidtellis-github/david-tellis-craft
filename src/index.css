@@ -49,29 +49,29 @@ All colors are in HSL.
   }
 
   .dark {
-    --background: 0 0% 3.5%;       /* #090909 */
-    --foreground: 0 0% 90%;        /* #e5e5e5 */
+    --background: 0 0% 0%;       /* #090909 */
+    --foreground: 0 0% 100%;        /* #e5e5e5 */
 
     --card: 0 0% 7%;               /* #121212 */
-    --card-foreground: 0 0% 90%;   /* #e5e5e5 */
+    --card-foreground: 0 0% 100%;   /* #e5e5e5 */
 
     --popover: 0 0% 7%;            /* #121212 */
-    --popover-foreground: 0 0% 90%; /* #e5e5e5 */
+    --popover-foreground: 0 0% 100%; /* #e5e5e5 */
 
     --primary: 0 0% 95%;           /* #f2f2f2 */
     --primary-foreground: 0 0% 7%; /* #121212 */
 
     --secondary: 0 0% 15%;         /* #262626 */
-    --secondary-foreground: 0 0% 90%; /* #e5e5e5 */
+    --secondary-foreground: 0 0% 100%; /* #e5e5e5 */
 
     --muted: 0 0% 25%;             /* #696969 */
     --muted-foreground: 0 0% 50%;  /* #bfbfbf */
 
     --accent: 0 0% 20%;            /* #333333 */
-    --accent-foreground: 0 0% 95%; /* #f2f2f2 */
+    --accent-foreground: 0 0% 100%; /* #f2f2f2 */
 
     --destructive: 0 63% 45%;      /* #992f2f */
-    --destructive-foreground: 0 0% 98%; /* #fafafa */
+    --destructive-foreground: 0 0% 100%; /* #fafafa */
 
     --border: 0 0% 20%;            /* #333333 */
     --input: 0 0% 20%;             /* #333333 */
@@ -97,11 +97,12 @@ All colors are in HSL.
 
   html {
     scroll-behavior: smooth;
+    width:100%;
   }
 
   body {
     @apply bg-background text-foreground;
-    font-family: 'urbanist',ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', 'Apple Color Emoji', 'Segoe UI Emoji';
+    font-family: 'figtree',ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', 'Apple Color Emoji', 'Segoe UI Emoji';
   }
 }
 /* ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', 'Apple Color Emoji', 'Segoe UI Emoji */

@@ -45,12 +45,12 @@ const quotes = [
 
 const Testimonials: React.FC = () => (
   <section id="references" className="relative min-h-screen flex flex-col justify-start py-[20vh]">
-    <div className="grid md:grid-cols-2 gap-[8vh]">
+    <div className="grid md:grid-cols-2 gap-[10vh]">
       {quotes.map((q, i) => (
         <figure key={i} className="space-y-1">
-          <blockquote className="text-2xl text-foreground leading-tight">“{q.text}”</blockquote>
+          <blockquote className="text-3xl text-foreground leading-tight">“{q.text}”</blockquote>
           <figcaption className="text-sm text-muted-foreground">
-            <span className="underline underline-offset-4">{q.author}</span>
+            <span className="underline underline-offset-4 text-foreground">{q.author}</span>
             <span className="ml-2">{q.role}</span>
           </figcaption>
         </figure>

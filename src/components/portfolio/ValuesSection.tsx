@@ -22,19 +22,37 @@
 // export default ValuesSection;
 import React from "react";
 
-const words = ["Egoless.", "Adaptive.", "Curious.", "Craft-obsessed."];
+const words = ["Fun.","Curious.", "Adaptive.","Passionate." ];
 
 const ValuesSection: React.FC = () => (
+  
   <section
     id="values"
-    className="min-h-screen grid grid-cols-1 lg:grid-cols-2 grid-rows-2 lg:pt-[20vh] "
+    className=" grid grid-cols-1 grid-cols-2 grid-rows-3 lg:pt-[20vh] "
   >
     {/* Top Left: Big Values */}
-    <div className="flex flex-col justify-start items-start space-y-1 sm:space-y-2 md:space-y-4">
+    <div className="flex flex-col justify-start items-start h-full mb-6">
       {words.map((w) => (
         <div
           key={w}
-          className="text-5xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-medium tracking-loose leading-[0] text-foreground max-w-5xl"
+          className="
+          text-4xl           /* Default mobile size */
+          sm:text-4xl         /* Small screens */
+          md:text-6xl         /* Tablets */
+          lg:text-7xl         /* Large screens */
+          xl:text-7xl         /* Extra large screens */
+          2xl:text-8xl        /* Very large screens */
+      
+          font-medium 
+          tracking-tight
+      
+          leading-snug        /* Default line-height for mobile */
+          sm:leading-snug     /* Slightly tighter on small screens */
+          md:leading-tight   /* Normal on medium and above */
+      
+          text-foreground 
+          
+        "
         >
           {w}
         </div>
@@ -48,8 +66,8 @@ const ValuesSection: React.FC = () => (
     <div  />
 
     {/* Bottom Right: Paragraph */}
-    <div className="flex justify-start items-start mb-0">
-      <p className="max-w-lg text-sm sm:text-base md:text-lg lg:text-[clamp(16px,1.4vmin,18px)] leading-relaxed text-foreground text-left">
+    <div className="flex justify-start items-start ">
+      <p className="max-w-full text-md font-light leading-[1.4] tracking-loose text-foreground text-left">
         I make things that actually work — and work well. I’m allergic to “good
         enough,” “we’ll fix it later,” and anything that smells like it was
         designed for a presentation, not a human. I ask the awkward questions,
@@ -64,6 +82,12 @@ const ValuesSection: React.FC = () => (
         crappy products.
       </p>
     </div>
+    <div className="flex justify-start items-start ">
+      <p className="grid grid-cols-1 max-w-full text-md font-light leading-[1.4] tracking-loose text-foreground text-left">
+   I studied visual communication design, got my start in branding, marketing, and web design, then evolved to specialize in product design. Leveraging my visual design foundation and deep user empathy, I’ve established myself as a well rounded design leader who creates human-centered platforms with cohesive throughlines at every touchpoint: from vision and strategy, to brand awareness and marketing, to product development and delightful micro interactions. Throughout my 15 years of professional experience, I’ve worked freelance, in-house, at startups, and at established public companies, developing a wide range of multi-disciplinary skills in diverse contexts. My insatiable curiosity, high craft, and adaptability, enable me to generate impact in our ever-changing environment.
+      
+      
+    </p></div>
   </section>
 );
 
