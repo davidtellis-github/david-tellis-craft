@@ -17,7 +17,7 @@ const MobileHeader: React.FC = () => {
     { id: "work", label: "Work" },
     { id: "values", label: "Values" },
     { id: "background", label: "Background" },
-    { id: "testimonials", label: "Testimonials" },
+    { id: "testimonials", label: "References" },
     { id: "contact", label: "Contact" },
   ];
 
@@ -56,23 +56,15 @@ const MobileHeader: React.FC = () => {
   return (
     <header className="fixed top-0 left-0 right-0 z-50 lg:hidden bg-background/95 backdrop-blur-sm border-b border-border">
       <div className="flex items-center justify-between px-4 py-4">
-        {/* Animated Logo */}
+        {/* Logo - Static "D" */}
         <a
           href="#intro"
           onClick={(e) => handleClick(e, "intro")}
           aria-label="Home"
           className="leading-none select-none text-foreground 
-                     text-[clamp(20px,4vmin,32px)] font-normal flex group relative"
+                     text-[clamp(24px,5vmin,36px)] font-bold"
         >
-          <span
-            className="
-              inline-block opacity-0
-              group-hover:animate-spreadOut
-              group-hover:opacity-100
-            "
-          >
-            avid Tellis
-          </span>
+          D
         </a>
 
         {/* Hamburger Menu */}
@@ -88,26 +80,25 @@ const MobileHeader: React.FC = () => {
           
           <SheetContent 
             side="top" 
-            className="w-full border-b border-border"
+            className="w-full h-full bg-black border-none flex flex-col"
           >
             <SheetHeader className="sr-only">
               <SheetTitle>Navigation Menu</SheetTitle>
             </SheetHeader>
             
-            {/* Horizontal Navigation */}
-            <nav className="flex gap-2 overflow-x-auto pb-2 scrollbar-hide mt-6">
+            {/* Vertical Navigation */}
+            <nav className="flex flex-col gap-6 px-8 pt-20">
               {sections.map((section) => (
                 <a
                   key={section.id}
                   href={`#${section.id}`}
                   onClick={(e) => handleClick(e, section.id)}
                   className={`
-                    flex-shrink-0 px-4 py-2 rounded-full text-sm font-medium
-                    transition-all duration-200 whitespace-nowrap
+                    text-4xl font-normal transition-colors duration-200
                     ${
                       activeSection === section.id
-                        ? "bg-foreground text-background"
-                        : "bg-muted text-muted-foreground hover:bg-muted/70"
+                        ? "text-white"
+                        : "text-gray-500 hover:text-gray-400"
                     }
                   `}
                   aria-current={activeSection === section.id ? "page" : undefined}
@@ -116,6 +107,18 @@ const MobileHeader: React.FC = () => {
                 </a>
               ))}
             </nav>
+
+            {/* Green Badge with Initials */}
+            <div className="absolute bottom-8 right-8 flex items-center gap-3">
+              <div className="flex gap-1">
+                <div className="w-1 h-1 rounded-full bg-gray-500"></div>
+                <div className="w-1 h-1 rounded-full bg-gray-500"></div>
+                <div className="w-1 h-1 rounded-full bg-gray-500"></div>
+              </div>
+              <div className="w-12 h-12 rounded-full bg-green-500 flex items-center justify-center text-black font-semibold">
+                DT
+              </div>
+            </div>
           </SheetContent>
         </Sheet>
       </div>
