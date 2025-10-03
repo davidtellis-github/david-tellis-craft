@@ -8,26 +8,60 @@ const Contact: React.FC = () => {
   return (
     <section
       id="contact"
-      className="relative min-h-screen flex flex-col justify-start py-[20vh] lg:bg-background"
+      className="relative min-h-screen flex flex-col justify-start pt-[20vh] gap-auto lg:bg-background"
     >
       <div className="grid lg:grid-cols-2 gap-8 items-start">
         
         {/* Left column - Text content */}
-        <div className="flex flex-col gap-6">
+        <div className="flex flex-col gap-0">
           {/* Main intro line */}
-          <p className="text-xl sm:text-2xl lg:text-3xl leading-relaxed">
-            I'm{" "}
-            <span className="text-foreground font-medium">David Tellis</span>
-            <br /> Let's build something great.
+          <p className="text-xl sm:text-md  lg:text-lg text-muted-foreground leading-relaxed">
+           {" "}
+             Exploring new opportunities.
           </p>
 
           {/* Short note */}
-          <p className="text-sm sm:text-base text-muted-foreground">
-            Interested in product design roles with real user impact.
+          <p className="text-xl sm:text-2xl  lg:text-2xl sm:text-left ">
+            Currently working with startups
           </p>
 
           {/* Contact links */}
-          <div className="flex flex-col sm:flex-row sm:gap-8 gap-4 text-sm sm:text-base lg:text-lg pt-2">
+          
+          {/* Resume CTA */}
+          {/* Resume + Start Project CTAs */}
+<div className="pt-4 grid grid-cols-2 gap-4">
+  <ResumeModal>
+    <Button variant="outline" className="flex items-center gap-2 w-full">
+      <FileText className="w-4 h-4" />
+      View Resume
+    </Button>
+  </ResumeModal>
+
+  <Button 
+    onClick={() => window.open('https://mail.google.com/mail/?view=cm&fs=1&to=davidtellis12@gmail.com&su=New%20Project%20Inquiry', '_blank')}
+    className="flex items-center gap-2 w-full"
+  >
+    <Send className="w-4 h-4" />
+    Start Project
+  </Button>
+</div>
+
+          {/* Start Project Button */}
+          <div className="pt-8 ">
+            
+            
+          </div>
+        </div>
+
+        {/* Right column - Portrait */}
+        <aside className="aspect-square overflow-hidden max-w-lg lg:max-w-screen h-full justify-self-center">
+          <img
+            src={profile}
+            alt="Portrait of David Tellis"
+            className="w-full h-full object-cover"
+          />
+        </aside>
+      </div><div className="flex flex-col sm:flex-row sm:gap-8 gap-8 text-sm sm:text-sm lg:text-md pt-2">
             <a
               href="mailto:davidtellis12@gmail.com"
               className="underline underline-offset-4 hover:text-primary transition-colors break-all sm:break-normal"
@@ -44,38 +78,6 @@ const Contact: React.FC = () => {
             </a>
           </div>
 
-          {/* Resume CTA */}
-          <div className="pt-4">
-            <ResumeModal>
-              <Button variant="outline" className="flex items-center gap-2">
-                <FileText className="w-4 h-4" />
-                View Resume
-              </Button>
-            </ResumeModal>
-          </div>
-
-          {/* Start Project Button */}
-          <div className="pt-8 border-t border-border">
-            <h3 className="text-lg font-medium mb-4">Start a Project</h3>
-            <Button 
-              onClick={() => window.open('https://mail.google.com/mail/?view=cm&fs=1&to=davidtellis12@gmail.com&su=New%20Project%20Inquiry', '_blank')}
-              className="flex items-center gap-2"
-            >
-              <Send className="w-4 h-4" />
-              Start Project
-            </Button>
-          </div>
-        </div>
-
-        {/* Right column - Portrait */}
-        <aside className="aspect-square overflow-hidden max-w-lg lg:max-w-xl justify-self-center">
-          <img
-            src={profile}
-            alt="Portrait of David Tellis"
-            className="w-full h-full object-cover rounded-lg"
-          />
-        </aside>
-      </div>
     </section>
   );
 };
