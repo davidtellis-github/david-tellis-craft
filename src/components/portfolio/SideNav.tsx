@@ -51,7 +51,7 @@ const SideNav: React.FC = () => {
   return (
     <nav
       aria-label="Section navigation"
-      className="flex flex-col hidden lg:block sticky top-0 h-svh w-[min(18rem,24vw)]  "
+      className="hidden lg:flex lg:flex-col sticky top-0 h-svh w-[min(18rem,24vw)]"
     >
       <div className="relative h-full flex flex-col">
         {/* --- Animated Logo --- */}
