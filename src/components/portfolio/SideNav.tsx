@@ -53,13 +53,13 @@ const SideNav: React.FC = () => {
       aria-label="Section navigation"
       className="flex flex-col hidden lg:block sticky top-0 h-svh w-[min(18rem,24vw)]  "
     >
-      <div className="relative h-full flex flex-col gap-[14vh]">
+      <div className="relative h-full flex flex-col">
         {/* --- Animated Logo --- */}
        <a
   href="#intro"
   aria-label="Home"
-  className="pt-10 leading-none select-none text-foreground 
-             text-[clamp(20px,4vmin,32px)]  font-normal flex group relative"
+  className="sticky top-10 pt-10 leading-none select-none text-foreground 
+             text-[clamp(20px,4vmin,32px)]  font-normal flex group"
 >
   {/* Always-visible "D" */}
     <span className="inline-block">D</span>
@@ -77,7 +77,7 @@ const SideNav: React.FC = () => {
         {/* --- Nav Menu --- */}
         <ul
           className="
-        
+            sticky top-[35vh]
             space-y-0 
             text-muted-foreground
             text-[clamp(12px,1.6vmin,16px)]
