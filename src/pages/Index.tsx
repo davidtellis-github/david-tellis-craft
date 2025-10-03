@@ -1,5 +1,6 @@
 import AmbientSpotlight from "@/components/portfolio/AmbientSpotlight";
 import SideNav from "@/components/portfolio/SideNav";
+import MobileHeader from "@/components/portfolio/MobileHeader";
 import Hero from "@/components/portfolio/Hero";
 import WorkGrid from "@/components/portfolio/WorkGrid";
 import ValuesSection from "@/components/portfolio/ValuesSection";
@@ -12,8 +13,9 @@ const Index = () => {
   return (
     <div className="min-h-screen bg-background text-foreground">
       <AmbientSpotlight />
+      <MobileHeader />
       
-      <main className="w-full mx-2vh px-4 md:px-6">
+      <main className="w-full mx-2vh px-4 md:px-6 pt-16 lg:pt-0">
         {/* Main layout with SideNav + sections */}
         <div className="flex gap-[4vw] lg:gap-[10%]">
           <SideNav />
