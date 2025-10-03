@@ -109,16 +109,7 @@ const MobileHeader: React.FC = () => {
             </nav>
 
             {/* Green Badge with Initials */}
-            <div className="absolute bottom-8 right-8 flex items-center gap-3">
-              <div className="flex gap-1">
-                <div className="w-1 h-1 rounded-full bg-gray-500"></div>
-                <div className="w-1 h-1 rounded-full bg-gray-500"></div>
-                <div className="w-1 h-1 rounded-full bg-gray-500"></div>
-              </div>
-              <div className="w-12 h-12 rounded-full bg-green-500 flex items-center justify-center text-black font-semibold">
-                DT
-              </div>
-            </div>
+           
           </SheetContent>
         </Sheet>
       </div>
