@@ -54,7 +54,7 @@ const MobileHeader: React.FC = () => {
   };
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 lg:hidden bg-background/95 backdrop-blur-sm border-b border-border">
+    <header className="fixed top-0 left-0 right-0 z-50 lg:hidden  backdrop-blur-sm border-b border-border">
       <div className="flex items-center justify-between px-4 py-4">
         {/* Logo - Static "D" */}
         <a
