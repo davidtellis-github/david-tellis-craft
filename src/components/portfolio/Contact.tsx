@@ -27,7 +27,7 @@ const Contact: React.FC = () => {
           </p>
 
           {/* Contact links */}
-          <div className="flex flex-col sm:flex-row sm:gap-8 gap-4 text-sm sm:text-base lg:text-lg pt-2">
+          <div className="flex flex-col sm:flex-row sm:gap-8 gap-4 text-sm sm:text-base lg:text-lg pt-2 flex-wrap">
             <a
               href="mailto:davidtellis12@gmail.com"
               className="underline underline-offset-4 hover:text-primary transition-colors break-all sm:break-normal"
@@ -44,19 +44,15 @@ const Contact: React.FC = () => {
             </a>
           </div>
 
-          {/* Resume CTA */}
-          <div className="pt-4">
+          {/* Action Buttons */}
+          <div className="pt-4 flex flex-col sm:flex-row gap-4">
             <ResumeModal>
               <Button variant="outline" className="flex items-center gap-2">
                 <FileText className="w-4 h-4" />
                 View Resume
               </Button>
             </ResumeModal>
-          </div>
-
-          {/* Start Project Button */}
-          <div className="pt-8 border-t border-border">
-            <h3 className="text-lg font-medium mb-4">Start a Project</h3>
+            
             <Button 
               onClick={() => window.open('https://mail.google.com/mail/?view=cm&fs=1&to=davidtellis12@gmail.com&su=New%20Project%20Inquiry', '_blank')}
               className="flex items-center gap-2"
@@ -68,7 +64,7 @@ const Contact: React.FC = () => {
         </div>
 
         {/* Right column - Portrait */}
-        <aside className="aspect-square overflow-hidden max-w-lg lg:max-w-xl justify-self-center">
+        <aside className="order-first lg:order-last w-full max-w-sm sm:max-w-md lg:max-w-xl mx-auto lg:mx-0 aspect-square overflow-hidden">
           <img
             src={profile}
             alt="Portrait of David Tellis"

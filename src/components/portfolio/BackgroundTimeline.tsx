@@ -78,27 +78,24 @@ const roles = [
 const BackgroundTimeline: React.FC = () => (
   <section
     id="background"
-    className="min-h-screen flex flex-col justify-start "
+    className="min-h-screen flex flex-col justify-start py-12 sm:py-16 lg:py-[20vh]"
   >
-   
-
-
-    <ol className="space-y-24 ">
+    <ol className="space-y-12 sm:space-y-16 lg:space-y-24">
       {roles.map((r) => (
         <li
           key={`${r.company}-${r.time}`}
-          className="flex flex-col md:grid grid-cols-[80vh_1fr] gap-[10vh] items-start  "
+          className="flex flex-col lg:grid lg:grid-cols-[1fr_1fr] gap-8 lg:gap-[10vh] items-start"
         >
           
           {/* Role Card */}
           <div className="space-y-4">
             {/* Company */}
-            <div className="text-3xl sm:text-2xl lg:text-3xl text-foreground text-base mb-2">
+            <div className="text-xl sm:text-2xl lg:text-3xl text-foreground mb-2">
               {r.company}
             </div>
 
             {/* Title */}
-            <h3 className="text-5xl sm:text-6xl lg:text-7xl font-medium leading-tight text-foreground mb-3">
+            <h3 className="text-3xl sm:text-4xl lg:text-7xl font-medium leading-tight text-foreground mb-3">
               {r.title}
             </h3>
              {/* Time + Location */}

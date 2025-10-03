@@ -73,7 +73,7 @@ const Hero: React.FC = () => {
     //   />
     //   <Tabs value={active} onValueChange={setActive} className="w-full text-left ">
     //     <TabsList className="h-auto p-0 bg-transparent border-0 flex flex-wrap  gap-6 justify-start text-sm text-muted-foreground">
-    <div id="intro" className="relative min-h-screen flex flex-col justify-start py-[20vh]">
+    <div id="intro" className="relative min-h-screen flex flex-col justify-start py-[15vh] sm:py-[20vh]">
       <Tabs value={active} onValueChange={setActive} className="w-full text-left  gap-0">
         <TabsList  className="
     h-auto
@@ -125,6 +125,7 @@ const Hero: React.FC = () => {
 
     text-foreground 
     max-w-[90vw]
+    break-words
   "
 >
   {t.headline}
