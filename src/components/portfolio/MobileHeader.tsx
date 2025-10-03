@@ -62,7 +62,7 @@ const MobileHeader: React.FC = () => {
           onClick={(e) => handleClick(e, "intro")}
           aria-label="Home"
           className="leading-none select-none text-foreground 
-                     text-[clamp(24px,5vmin,36px)] font-bold"
+                     text-[clamp(24px,5vmin,36px)] font-normal"
         >
           D
         </a>
