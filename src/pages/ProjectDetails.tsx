@@ -1,8 +1,9 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
-import { ArrowLeft, Play, ExternalLink, Github, Figma } from "lucide-react";
+import { ArrowLeft, Play, ExternalLink, Github, Figma, Smartphone } from "lucide-react";
 import ProjectNav from "@/components/portfolio/ProjectNav";
 import { projectsData } from "@/data/projectData";
+import { ProjectUIShowcase } from "@/components/portfolio/ProjectUIShowcase";
 
 const ProjectDetails: React.FC = () => {
   const { slug } = useParams();
@@ -64,7 +65,7 @@ const ProjectDetails: React.FC = () => {
           <section className="flex flex-col flex-1 min-w-0 py-[20vh]">
         {/* Hero Section */}
         <section id="overview" className="py-20 pt-16">
-          <div className="mb-16">
+            <div className="mb-16">
             <h1 className="text-6xl md:text-7xl lg:text-8xl font-medium tracking-tight leading-[0.9] mb-8">
               {project.title}
             </h1>
@@ -96,6 +97,13 @@ const ProjectDetails: React.FC = () => {
                   <p className="text-sm uppercase tracking-wider text-muted-foreground mb-2">Tools</p>
                   <p className="text-lg">{project.role.tools.join(" • ")}</p>
                 </div>
+                {project.id === "wedding-verse" && (
+                  <div className="pt-4 border-t border-border/20">
+                    <p className="text-sm text-muted-foreground">
+                      🚀 <strong>Update:</strong> Mobile app launched on Play Store (2025).
+                    </p>
+                  </div>
+                )}
               </div>
             </div>
           </div>
@@ -112,7 +120,7 @@ const ProjectDetails: React.FC = () => {
 
         {/* Context Section */}
         <section id="context" className="py-20">
-          <h2 className="text-5xl font-bold mb-16">Context & Challenge</h2>
+          <h2 className="text-5xl font-medium mb-16">Context & Challenge</h2>
           <div className="grid md:grid-cols-2 gap-16">
             <div>
               <h3 className="text-xl font-medium mb-4 text-muted-foreground uppercase tracking-wider">Problem</h3>
@@ -139,7 +147,7 @@ const ProjectDetails: React.FC = () => {
               <ul className="space-y-3 text-lg mb-12">
                 <li>Led end-to-end product design strategy</li>
                 <li>Conducted user research and stakeholder interviews</li>
-                <li>Designed multi-role dashboard experiences</li>
+                <li>Designed multi-role interaction experiences</li>
                 <li>Created and maintained design system</li>
                 <li>Collaborated closely with engineering team</li>
               </ul>
@@ -190,9 +198,18 @@ const ProjectDetails: React.FC = () => {
           </div>
         </section>
 
+        {/* Gallery Section */}
+        <section id="gallery" className="py-20">
+          <ProjectUIShowcase 
+            projectSlug={project.id}
+            projectTitle={project.title}
+            contributionLevel="full"
+          />
+        </section>
+
         {/* Video Walkthrough */}
         <section id="walkthrough" className="py-20">
-          <h2 className="text-5xl font-bold mb-16">Video Walkthrough</h2>
+          <h2 className="text-5xl font-medium mb-16">Video Walkthrough</h2>
           <div className="relative aspect-video bg-muted/50 rounded-2xl overflow-hidden">
             <div className="absolute inset-0 bg-gradient-to-br from-background/20 to-background/5 flex items-center justify-center">
               <div className="text-center">
@@ -207,7 +224,7 @@ const ProjectDetails: React.FC = () => {
 
         {/* Reflection */}
         <section id="reflection" className="py-20">
-          <h2 className="text-5xl font-bold mb-16">Reflection & Learnings</h2>
+          <h2 className="text-5xl font-medium mb-16">Reflection & Learnings</h2>
           <div className="max-w-3xl">
             <p className="text-xl text-muted-foreground leading-relaxed">
               {project.reflection}
@@ -217,35 +234,52 @@ const ProjectDetails: React.FC = () => {
 
         {/* CTA Section */}
         <section id="links" className="py-20 text-center">
-          <h2 className="text-4xl font-bold mb-8">View the Project</h2>
+          <h2 className="text-4xl font-medium mb-8">View the Project</h2>
           <div className="flex flex-wrap gap-6 justify-center">
-            <a 
-              href={project.links.live} 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 bg-foreground text-background px-8 py-4 rounded-full hover:bg-foreground/90 transition-colors text-lg font-medium"
-            >
-              <ExternalLink className="h-5 w-5" />
-              Live Project
-            </a>
-            <a 
-              href={project.links.figma} 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 border border-border px-8 py-4 rounded-full hover:bg-muted/50 transition-colors text-lg font-medium"
-            >
-              <Figma className="h-5 w-5" />
-              Figma
-            </a>
-            <a 
-              href={project.links.github} 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 border border-border px-8 py-4 rounded-full hover:bg-muted/50 transition-colors text-lg font-medium"
-            >
-              <Github className="h-5 w-5" />
-              GitHub
-            </a>
+            {project.links.live && (
+              <a 
+                href={project.links.live} 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 bg-foreground text-background px-8 py-4 rounded-full hover:bg-foreground/90 transition-colors text-lg font-medium"
+              >
+                <ExternalLink className="h-5 w-5" />
+                Live Project
+              </a>
+            )}
+            {project.links.figma && (
+              <a 
+                href={project.links.figma} 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 border border-border px-8 py-4 rounded-full hover:bg-muted/50 transition-colors text-lg font-medium"
+              >
+                <Figma className="h-5 w-5" />
+                Figma
+              </a>
+            )}
+            {project.links.github && (
+              <a 
+                href={project.links.github} 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 border border-border px-8 py-4 rounded-full hover:bg-muted/50 transition-colors text-lg font-medium"
+              >
+                <Github className="h-5 w-5" />
+                GitHub
+              </a>
+            )}
+            {project.links.playstore && (
+              <a 
+                href={project.links.playstore} 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 border border-border px-8 py-4 rounded-full hover:bg-muted/50 transition-colors text-lg font-medium"
+              >
+                <Smartphone className="h-5 w-5" />
+                Download App
+              </a>
+            )}
           </div>
         </section>
           </section>

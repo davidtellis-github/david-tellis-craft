@@ -43,6 +43,7 @@ export interface ProjectData {
     live?: string;
     github?: string;
     figma?: string;
+    playstore?: string;
   };
 }
 
@@ -51,29 +52,34 @@ export const projectsData: Record<string, ProjectData> = {
     id: "wedding-verse",
     title: "Wedding Verse",
     subtitle: "A shared workspace for couples, planners, and vendors",
-    description: "Weddings are multi-stakeholder and decision-dense. Couples juggle boards, sheets, and chats; vendors get low-context leads. We built a guided workspace that compresses decisions into 'packages,' improving clarity and velocity under timeline.",
+    description: "Weddings are multi-stakeholder and decision-dense. Couples juggle budgets, vendors, and timelines, often spread across disconnected tools. We built a guided workspace that compresses decisions into packages—improving clarity and velocity under time limits.",
     category: "b2c",
     year: "2024",
     services: "Strategy + Design + Engineering",
     
     role: {
       title: "Lead Product Designer",
-      duration: "Q1–Q3 '24 (≈ 12 weeks)",
+      duration: "Q4 2023 – Q2 2024 (≈ 12 weeks for MVP)",
       team: "PM • Eng • Data • Ops",
-      tools: ["Figma", "Principle", "React", "Supabase"]
+      tools: ["Figma", "Principle", "Rive", "Supabase"]
     },
 
     context: {
-      problem: "The wedding market is fragmented across inspiration, planning, and procurement. Couples feel overwhelmed, planners herd cats, vendors waste time qualifying.",
-      objective: "Prove marketplace liquidity fast and lift lead→book conversion in 12 weeks.",
+      problem: "The wedding market is fragmented across inspirations, planning, and procurement. Couples feel overwhelmed, planners have siloed tools, and vendors waste time on quoting.",
+      objective: "Prove marketplace liquidity fast and lift lead-to-book conversion in 12 weeks.",
       audience: "Couples planning weddings, wedding planners, and service vendors"
     },
 
     features: [
       {
         title: "Smart Matching",
-        description: "AI-powered vendor recommendations based on style preferences and budget constraints.",
+        description: "AI-powered vendor recommendations based on style preferences and budget.",
         icon: "🎯"
+      },
+      {
+        title: "Decision Packages",
+        description: "Structured decision flows that compress complex vendor choices into manageable steps.",
+        icon: "📦"
       },
       {
         title: "Multi-Role Dashboards", 
@@ -81,37 +87,48 @@ export const projectsData: Record<string, ProjectData> = {
         icon: "📊"
       },
       {
-        title: "Decision Packages",
-        description: "Structured decision flows that compress complex choices into manageable steps.",
-        icon: "📦"
+        title: "Real-Time Collaboration",
+        description: "Live updates and comments system for seamless communication.",
+        icon: "💬"
       },
       {
-        title: "Real-time Collaboration",
-        description: "Live updates and comments system for seamless stakeholder communication.",
-        icon: "💬"
+        title: "Wedding Assistant",
+        description: "A guided assistant to help with budgets, checklists, vendor curation, and mood boards.",
+        icon: "🤖"
+      },
+      {
+        title: "Mood Boards",
+        description: "Collect inspirations from vendor galleries or import from Pinterest/Instagram to guide choices.",
+        icon: "🎨"
+      },
+      {
+        title: "Mobile App",
+        description: "Launched on Play Store in 2025, extending planning and collaboration into on-the-go workflows.",
+        icon: "📱"
       }
     ],
 
     process: [
       { step: "Research", description: "User interviews & market analysis", icon: "🔍" },
-      { step: "Wireframes", description: "Information architecture & user flows", icon: "📝" },
+      { step: "Wireframes", description: "Information architecture & flows", icon: "📝" },
       { step: "Prototypes", description: "Interactive mockups & testing", icon: "🎨" },
       { step: "Testing", description: "Usability testing & iteration", icon: "🧪" },
-      { step: "Launch", description: "Final design & handoff", icon: "🚀" }
+      { step: "Launch", description: "MVP release & dev handoff", icon: "🚀" }
     ],
 
     outcomes: [
-      { metric: "Lead→book conversion", value: "12% → 18%" },
-      { metric: "Day-7 active couples", value: "45% → 62%" },
+      { metric: "Lead→book conversion", value: "12% → 19%" },
+      { metric: "Day-7 active couples", value: "45% → 63%" },
       { metric: "Vendor response time", value: "48h → 18h" }
     ],
 
-    reflection: "The biggest challenge was balancing the needs of three distinct user types without creating interface complexity. We solved this through role-based progressive disclosure and smart defaults.",
+    reflection: "The biggest challenge was balancing the needs of three distinct user types without creating interface complexity. We solved this through role-based progressive disclosure and smart defaults. Launching the mobile app confirmed the importance of accessibility—many users relied on planning on-the-go, especially couples and vendors.",
 
     links: {
       live: "https://weddingverse.com",
       github: "https://github.com/weddingverse",
-      figma: "https://figma.com/weddingverse"
+      figma: "https://figma.com/weddingverse",
+      playstore: "https://play.google.com/store/apps/details?id=com.ken42.weddingverse&pli=1"
     }
   },
 
