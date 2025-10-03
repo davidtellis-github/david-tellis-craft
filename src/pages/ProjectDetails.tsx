@@ -1,15 +1,42 @@
 import React, { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
-import { ArrowLeft, Play, ExternalLink, Github, Figma, Smartphone } from "lucide-react";
+import { ArrowLeft, Play, ExternalLink, Github, Figma, Smartphone, Images, ChevronDown, ChevronUp } from "lucide-react";
 import ProjectNav from "@/components/portfolio/ProjectNav";
 import { projectsData } from "@/data/projectData";
-import { ProjectUIShowcase } from "@/components/portfolio/ProjectUIShowcase";
+import { useProjectAssets } from "@/hooks/useProjectAssets";
+import { UIGallery } from "@/components/portfolio/UIGallery";
+import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
 
 const ProjectDetails: React.FC = () => {
   const { slug } = useParams();
+  const [isGalleryOpen, setIsGalleryOpen] = useState(false);
 
   // Get project data based on slug
   const project = slug ? projectsData[slug] : null;
+  
+  // Get project assets for gallery
+  const { assets, explorations, isLoading } = useProjectAssets(slug || "");
+  
+  const allUIAssets = [
+    ...assets.map(asset => ({
+      id: asset.id,
+      title: asset.alt_text || `${project?.title || 'Project'} UI`,
+      description: asset.caption,
+      image_url: asset.file_path,
+      tags: asset.asset_tags,
+      contribution_level: 'full',
+      is_featured: asset.is_featured
+    })),
+    ...explorations.map(exploration => ({
+      id: exploration.id,
+      title: exploration.title,
+      description: exploration.description,
+      image_url: exploration.image_url,
+      tags: exploration.tags,
+      contribution_level: exploration.contribution_level,
+      is_featured: exploration.is_featured
+    }))
+  ];
 
   // Redirect to 404 if project not found
   if (!project) {
@@ -200,11 +227,38 @@ const ProjectDetails: React.FC = () => {
 
         {/* Gallery Section */}
         <section id="gallery" className="py-20">
-          <ProjectUIShowcase 
-            projectSlug={project.id}
-            projectTitle={project.title}
-            contributionLevel="full"
-          />
+          <Collapsible open={isGalleryOpen} onOpenChange={setIsGalleryOpen}>
+            <CollapsibleTrigger className="w-full group">
+              <div className="flex items-center justify-between py-6 hover:opacity-70 transition-opacity">
+                <div className="flex items-center gap-4">
+                  <Images className="h-6 w-6" />
+                  <h2 className="text-5xl font-medium">UI Gallery</h2>
+                  <span className="text-2xl text-muted-foreground">
+                    ({allUIAssets.length})
+                  </span>
+                </div>
+                {isGalleryOpen ? (
+                  <ChevronUp className="h-6 w-6 transition-transform" />
+                ) : (
+                  <ChevronDown className="h-6 w-6 transition-transform" />
+                )}
+              </div>
+            </CollapsibleTrigger>
+            
+            <CollapsibleContent className="mt-8">
+              {!isLoading && allUIAssets.length > 0 && (
+                <UIGallery 
+                  assets={allUIAssets} 
+                  projectTitle={project.title}
+                />
+              )}
+              {!isLoading && allUIAssets.length === 0 && (
+                <p className="text-muted-foreground text-center py-12">
+                  No UI assets available for this project yet.
+                </p>
+              )}
+            </CollapsibleContent>
+          </Collapsible>
         </section>
 
         {/* Video Walkthrough */}

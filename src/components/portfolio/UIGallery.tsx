@@ -36,92 +36,25 @@ export const UIGallery: React.FC<UIGalleryProps> = ({
 
   return (
     <div className={`ui-gallery ${className}`}>
-      {/* Filter Buttons */}
-      <div className="flex flex-wrap gap-2 mb-6">
-        <Button
-          variant={filter === 'all' ? 'default' : 'outline'}
-          size="sm"
-          onClick={() => setFilter('all')}
-        >
-          All Work ({assets.length})
-        </Button>
-        {contributionLevels.map(level => (
-          <Button
-            key={level}
-            variant={filter === level ? 'default' : 'outline'}
-            size="sm"
-            onClick={() => setFilter(level)}
-          >
-            {level} ({assets.filter(a => a.contribution_level === level).length})
-          </Button>
-        ))}
-      </div>
-
-      {/* Gallery Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      {/* Gallery Grid - Pinterest style masonry */}
+      <div className="columns-1 md:columns-2 lg:columns-3 gap-4 space-y-4">
         {filteredAssets.map((asset, index) => (
           <div
             key={asset.id}
-            className="group relative overflow-hidden rounded-lg border bg-card hover:shadow-lg transition-all duration-300"
+            className="group relative overflow-hidden rounded-lg break-inside-avoid mb-4 cursor-pointer"
+            onClick={() => setSelectedImage(asset.image_url)}
           >
             {/* Image */}
-            <div className="aspect-video relative overflow-hidden">
+            <div className="relative overflow-hidden">
               <img
                 src={asset.image_url}
                 alt={asset.title || `${projectTitle} UI ${index + 1}`}
-                className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                className="w-full h-auto object-cover transition-transform duration-300 group-hover:scale-105"
               />
               
               {/* Overlay */}
-              <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                <Button
-                  size="sm"
-                  variant="secondary"
-                  onClick={() => setSelectedImage(asset.image_url)}
-                  className="gap-2"
-                >
-                  <Eye className="h-4 w-4" />
-                  View Details
-                </Button>
-              </div>
-
-              {/* Featured Badge */}
-              {asset.is_featured && (
-                <Badge className="absolute top-2 left-2 bg-primary text-primary-foreground">
-                  Featured
-                </Badge>
-              )}
-            </div>
-
-            {/* Content */}
-            <div className="p-4">
-              <div className="flex items-start justify-between mb-2">
-                <h4 className="font-semibold text-sm">
-                  {asset.title || `UI Design ${index + 1}`}
-                </h4>
-                <Badge variant="outline" className="text-xs">
-                  {asset.contribution_level}
-                </Badge>
-              </div>
-              
-              {asset.description && (
-                <p className="text-sm text-muted-foreground mb-3 line-clamp-2">
-                  {asset.description}
-                </p>
-              )}
-
-              {/* Tags */}
-              <div className="flex flex-wrap gap-1">
-                {asset.tags.slice(0, 3).map(tag => (
-                  <Badge key={tag} variant="secondary" className="text-xs">
-                    {tag}
-                  </Badge>
-                ))}
-                {asset.tags.length > 3 && (
-                  <Badge variant="secondary" className="text-xs">
-                    +{asset.tags.length - 3}
-                  </Badge>
-                )}
+              <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                <Eye className="h-8 w-8 text-white" />
               </div>
             </div>
           </div>
