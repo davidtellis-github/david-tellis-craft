@@ -26,24 +26,6 @@ const Contact: React.FC = () => {
             Interested in product design roles with real user impact.
           </p>
 
-          {/* Contact links */}
-          <div className="flex flex-col sm:flex-row sm:gap-8 gap-4 text-sm sm:text-base lg:text-lg pt-2 flex-wrap">
-            <a
-              href="mailto:davidtellis12@gmail.com"
-              className="underline underline-offset-4 hover:text-primary transition-colors break-all sm:break-normal"
-            >
-              davidtellis12@gmail.com
-            </a>
-            <a
-              href="https://www.linkedin.com/in/david-tellis-121576262/"
-              target="_blank"
-              rel="noreferrer"
-              className="underline underline-offset-4 hover:text-primary transition-colors"
-            >
-              LinkedIn
-            </a>
-          </div>
-
           {/* Action Buttons */}
           <div className="pt-4 flex flex-col sm:flex-row gap-4">
             <ResumeModal>
@@ -60,6 +42,24 @@ const Contact: React.FC = () => {
               <Send className="w-4 h-4" />
               Start Project
             </Button>
+          </div>
+
+          {/* Contact links */}
+          <div className="flex flex-row gap-6 sm:gap-8 text-sm sm:text-base lg:text-lg pt-6 flex-wrap">
+            <a
+              href="mailto:davidtellis12@gmail.com"
+              className="underline underline-offset-4 hover:text-primary transition-colors"
+            >
+              davidtellis12@gmail.com
+            </a>
+            <a
+              href="https://www.linkedin.com/in/david-tellis-121576262/"
+              target="_blank"
+              rel="noreferrer"
+              className="underline underline-offset-4 hover:text-primary transition-colors"
+            >
+              LinkedIn
+            </a>
           </div>
         </div>
 
