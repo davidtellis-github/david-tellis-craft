@@ -2,7 +2,7 @@ import React from "react";
 
 const quotes = [
   {
-    text: "Truly one of the best design collaborators I've worked with—thoughtful, fast, and detail-oriented.",
+    text: "Truly one of the best design collaborators I’ve worked with—thoughtful, fast, and detail-oriented.",
     author: "A. Chen",
     role: "Director of Product Design",
   },
@@ -44,11 +44,11 @@ const quotes = [
 ];
 
 const Testimonials: React.FC = () => (
-  <section id="references" className="relative min-h-screen flex flex-col justify-start py-12 sm:py-16 lg:py-[20vh]">
-    <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-10 lg:gap-[10vh]">
+  <section id="references" className="relative min-h-screen flex flex-col justify-start py-[20vh]">
+    <div className="grid md:grid-cols-2 gap-[10vh]">
       {quotes.map((q, i) => (
         <figure key={i} className="space-y-1">
-          <blockquote className="text-xl sm:text-2xl lg:text-3xl text-foreground leading-tight">"{q.text}"</blockquote>
+          <blockquote className="text-3xl text-foreground leading-tight">“{q.text}”</blockquote>
           <figcaption className="text-sm text-muted-foreground">
             <span className="underline underline-offset-4 text-foreground">{q.author}</span>
             <span className="ml-2">{q.role}</span>

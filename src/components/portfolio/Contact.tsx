@@ -26,29 +26,11 @@ const Contact: React.FC = () => {
             Interested in product design roles with real user impact.
           </p>
 
-          {/* Action Buttons */}
-          <div className="pt-4 flex flex-col sm:flex-row gap-4">
-            <ResumeModal>
-              <Button variant="outline" className="flex items-center gap-2">
-                <FileText className="w-4 h-4" />
-                View Resume
-              </Button>
-            </ResumeModal>
-            
-            <Button 
-              onClick={() => window.open('https://mail.google.com/mail/?view=cm&fs=1&to=davidtellis12@gmail.com&su=New%20Project%20Inquiry', '_blank')}
-              className="flex items-center gap-2"
-            >
-              <Send className="w-4 h-4" />
-              Start Project
-            </Button>
-          </div>
-
           {/* Contact links */}
-          <div className="flex flex-row gap-6 sm:gap-8 text-sm sm:text-base lg:text-lg pt-6 flex-wrap">
+          <div className="flex flex-col sm:flex-row sm:gap-8 gap-4 text-sm sm:text-base lg:text-lg pt-2">
             <a
               href="mailto:davidtellis12@gmail.com"
-              className="underline underline-offset-4 hover:text-primary transition-colors"
+              className="underline underline-offset-4 hover:text-primary transition-colors break-all sm:break-normal"
             >
               davidtellis12@gmail.com
             </a>
@@ -61,10 +43,32 @@ const Contact: React.FC = () => {
               LinkedIn
             </a>
           </div>
+
+          {/* Resume CTA */}
+          <div className="pt-4">
+            <ResumeModal>
+              <Button variant="outline" className="flex items-center gap-2">
+                <FileText className="w-4 h-4" />
+                View Resume
+              </Button>
+            </ResumeModal>
+          </div>
+
+          {/* Start Project Button */}
+          <div className="pt-8 border-t border-border">
+            <h3 className="text-lg font-medium mb-4">Start a Project</h3>
+            <Button 
+              onClick={() => window.open('https://mail.google.com/mail/?view=cm&fs=1&to=davidtellis12@gmail.com&su=New%20Project%20Inquiry', '_blank')}
+              className="flex items-center gap-2"
+            >
+              <Send className="w-4 h-4" />
+              Start Project
+            </Button>
+          </div>
         </div>
 
         {/* Right column - Portrait */}
-        <aside className="order-first lg:order-last w-full max-w-sm sm:max-w-md lg:max-w-xl mx-auto lg:mx-0 aspect-square overflow-hidden">
+        <aside className="aspect-square overflow-hidden max-w-lg lg:max-w-xl justify-self-center">
           <img
             src={profile}
             alt="Portrait of David Tellis"

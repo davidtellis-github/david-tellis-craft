@@ -137,15 +137,15 @@ const WorkGrid: React.FC = () => {
                 className="border-t border-border pt-10 first:border-t-0 first:pt-0 transition-all duration-500"
               >
                 {/* Title Row - Full Width */}
-                <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between w-full pb-10 gap-4">
-                  <div className="flex items-center gap-4 sm:gap-8">
+                <div className="flex items-center justify-between w-full pb-10">
+                  <div className="flex items-center gap-8 ">
                     {/* Number */}
-                    <div className="text-xl sm:text-2xl font-semibold text-muted-foreground">
+                    <div className="text-2xl font-semibold text-muted-foreground ">
                       {String(index + 1).padStart(2, '0')}
                     </div>
                     
                     {/* Title */}
-                    <h3 className="text-xl sm:text-2xl lg:text-4xl font-medium tracking-loose">
+                    <h3 className="text-2xl lg:text-4xl font-medium  tracking-loose">
                       {project.title}
                     </h3>
                   </div>

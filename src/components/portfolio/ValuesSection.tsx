@@ -28,10 +28,10 @@ const ValuesSection: React.FC = () => (
   
   <section
     id="values"
-    className="grid grid-cols-1 lg:grid-cols-2 lg:grid-rows-3 gap-8 lg:gap-0 py-12 sm:py-16 lg:py-[20vh]"
+    className=" grid grid-cols-1 grid-cols-2 grid-rows-3 lg:pt-[20vh] "
   >
     {/* Top Left: Big Values */}
-    <div className="flex flex-col justify-start items-start h-full lg:col-start-1 lg:row-start-1">
+    <div className="flex flex-col justify-start items-start h-full mb-6">
       {words.map((w) => (
         <div
           key={w}
@@ -59,14 +59,14 @@ const ValuesSection: React.FC = () => (
       ))}
     </div>
 
-    {/* Top Right = empty (keeps spacing diagonal on desktop) */}
-    <div className="hidden lg:block" />
+    {/* Top Right = empty (keeps spacing diagonal) */}
+    <div />
 
-    {/* Bottom Left = empty (keeps spacing diagonal on desktop) */}
-    <div className="hidden lg:block" />
+    {/* Bottom Left = empty (keeps spacing diagonal) */}
+    <div  />
 
     {/* Bottom Right: Paragraph */}
-    <div className="flex justify-start items-start lg:col-start-2 lg:row-start-3">
+    <div className="flex justify-start items-start ">
       <p className="max-w-full text-md font-light leading-[1.4] tracking-loose text-foreground text-left">
         I make things that actually work — and work well. I’m allergic to “good
         enough,” “we’ll fix it later,” and anything that smells like it was
@@ -82,8 +82,8 @@ const ValuesSection: React.FC = () => (
         crappy products.
       </p>
     </div>
-    <div className="flex justify-start items-start lg:col-start-1 lg:row-start-4">
-      <p className="max-w-full text-md font-light leading-[1.4] tracking-loose text-foreground text-left">
+    <div className="flex justify-start items-start ">
+      <p className="grid grid-cols-1 max-w-full text-md font-light leading-[1.4] tracking-loose text-foreground text-left">
    I studied visual communication design, got my start in branding, marketing, and web design, then evolved to specialize in product design. Leveraging my visual design foundation and deep user empathy, I’ve established myself as a well rounded design leader who creates human-centered platforms with cohesive throughlines at every touchpoint: from vision and strategy, to brand awareness and marketing, to product development and delightful micro interactions. Throughout my 15 years of professional experience, I’ve worked freelance, in-house, at startups, and at established public companies, developing a wide range of multi-disciplinary skills in diverse contexts. My insatiable curiosity, high craft, and adaptability, enable me to generate impact in our ever-changing environment.
       
       

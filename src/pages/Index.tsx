@@ -15,9 +15,9 @@ const Index = () => {
       <AmbientSpotlight />
       <MobileHeader />
       
-      <main className="w-full overflow-x-hidden px-4 sm:px-6 lg:px-8 pt-16 lg:pt-0 max-w-[1600px] mx-auto">
+      <main className="w-full mx-2vh px-4 md:px-6 pt-16 lg:pt-0">
         {/* Main layout with SideNav + sections */}
-        <div className="flex gap-0 lg:gap-[10%]">
+        <div className="flex gap-[4vw] lg:gap-[10%]">
           <SideNav />
           <section className="flex flex-col flex-1 min-w-0">
             <Hero />

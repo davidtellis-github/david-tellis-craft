@@ -98,7 +98,7 @@ const BackgroundTimeline: React.FC = () => (
             </div>
 
             {/* Title */}
-            <h3 className="text-full sm:text-6xl lg:text-7xl font-medium leading-tight text-foreground mb-3">
+            <h3 className="text-5xl sm:text-6xl lg:text-7xl font-medium leading-tight text-foreground mb-3">
               {r.title}
             </h3>
              {/* Time + Location */}
