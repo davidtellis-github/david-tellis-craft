@@ -161,7 +161,7 @@ const WorkGrid: React.FC = () => {
                 </div>
 
                 {/* Video and Content - Shown based on scroll */}
-                <div className={`overflow-hidden transition-all duration-700 mt-6 ${
+                <div className={`overflow-hidden autoplay-true transition-all duration-700 mt-6 ${
                   isExpanded 
                     ? 'opacity-100 max-h-full' 
                     : 'opacity-0 max-h-0'
@@ -192,7 +192,7 @@ const WorkGrid: React.FC = () => {
                   
                   {/* Project Description */}
                   <div className="max-w-2xl">
-                    <p className="text-foreground text-lg leading-relaxed pb-20">
+                    <p className="max-w-full text-md font-light leading-[1.4] tracking-loose text-foreground text-left">
                       {project.description}
                     </p>
                   </div>
@@ -204,27 +204,28 @@ const WorkGrid: React.FC = () => {
         
         {/* View All Work CTA */}
         <div className="border-t border-border pt-12 mt-12">
+        <Link to="/portfolio" className="group" aria-label="View all work">
           <div className="bg-foreground rounded-lg p-8 group hover:bg-foreground/90 transition-colors duration-300">
             <div className="flex items-center justify-between w-full">
               <div>
                 <h3 className="text-3xl lg:text-4xl font-medium  tracking-relaxed mb-2 text-background">
                   View All Work
                 </h3>
-                <p className="text-background/70 text-lg">
-                  Explore my complete portfolio
-                </p>
+               
               </div>
               
-              <Link to="/portfolio" className="group" aria-label="View all work">
+              
                 <div className="w-12 h-12 flex items-center justify-center text-background group-hover:translate-x-2 group-hover:scale-110 transition-all duration-300 bg-background/10 rounded-full">
                   <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-6 h-6">
                     <path d="M7 17L17 7M17 7H7M17 7V17" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                   </svg>
                 </div>
-              </Link>
+              
             </div>
           </div>
+          </Link>
         </div>
+        
       </div>
     </section>
   );

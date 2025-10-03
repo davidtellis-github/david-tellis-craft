@@ -45,13 +45,13 @@ const Portfolio = () => {
           
           <section className="flex flex-col flex-1 min-w-0 py-[20vh]">
             {/* My Work Title */}
-            <div className="flex flex-col items-end mb-8 ">
+            {/* <div className="flex flex-col items-end mb-8 ">
               <div className="text-left">
               <h1 className="text-4xl md:text-5xl mb-8 font-medium tracking-tight">
                 My work
-              </h1>
+              </h1> */}
                {/* Bottom Right: Paragraph */}
-    <div className="flex flex-col-2 justify-start items-start mb-0">
+    {/* <div className="flex flex-col-2 justify-start items-start mb-0">
       <p className="max-w-2xl text-sm sm:text-base md:text-lg lg:text-[clamp(16px,1.4vmin,18px)] leading-relaxed text-foreground text-left">
         I make things that actually work — and work well. I’m allergic to “good
         enough,” “we’ll fix it later,” and anything that smells like it was
@@ -61,7 +61,7 @@ const Portfolio = () => {
       </p>
       </div>
     </div>
-            </div>
+            </div> */}
 
             
 
