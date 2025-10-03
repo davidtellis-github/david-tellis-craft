@@ -64,7 +64,7 @@ const TimelineNav: React.FC<TimelineNavProps> = ({
       aria-label="Portfolio navigation"
       className="hidden lg:flex lg:flex-col sticky top-0 h-svh w-[min(18rem,24vw)]"
     >
-      <div className="relative h-full flex flex-col">
+      <div className="relative h-full flex flex-col gap-[14vh]">
         {/* --- Animated Logo --- */}
        <a
   href="#intro"
