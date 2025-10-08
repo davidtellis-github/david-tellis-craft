@@ -62,7 +62,7 @@ const projectAssets = {
   "project-alpha": [
     { file: "work-6.jpg", type: "image", featured: true, tags: ["Enterprise UI", "Lead Design"] as string[] }
   ],
-  "web-design-1": [
+  "boston-financial": [
     { file: "boston-financial-1.png", type: "image", featured: true, tags: ["Compliance Dashboard", "Login Interface", "Lead Design"] as string[] },
     { file: "boston-financial-2.png", type: "image", featured: true, tags: ["Client Management", "Dashboard Design", "Financial UI"] as string[] },
     { file: "boston-financial.png", type: "image", featured: false, tags: ["Corporate Website", "Financial Services"] as string[] }

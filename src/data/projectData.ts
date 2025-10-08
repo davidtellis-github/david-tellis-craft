@@ -401,8 +401,8 @@ export const projectsData: Record<string, ProjectData> = {
     }
   },
 
-  "web-design-1": {
-    id: "web-design-1",
+  "boston-financial": {
+    id: "boston-financial",
     title: "Boston Financial",
     subtitle: "AI-driven compliance management & task workflow optimization",
     description: "UX strategy and design solution for improving compliance management and enabling better task assignment workflows through an AI-driven approach. Focused on reducing manual inefficiencies and automating regulatory compliance processes.",
