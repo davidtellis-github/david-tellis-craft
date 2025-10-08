@@ -8,11 +8,27 @@ import { UIGallery } from "@/components/portfolio/UIGallery";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
 import bostonMockup1 from "@/assets/boston-financial-mockup-1.png";
 import bostonMockup2 from "@/assets/boston-financial-mockup-2.png";
+import futurcraftMockup1 from "@/assets/futurcraft-mockup-1.jpg";
+import futurcraftMockup2 from "@/assets/futurcraft-mockup-2.jpg";
+import futurcraftMockup3 from "@/assets/futurcraft-mockup-3.jpg";
+import futurcraftMockup4 from "@/assets/futurcraft-mockup-4.jpg";
+import futurcraftMockup5 from "@/assets/futurcraft-mockup-5.jpg";
+import futurcraftMockup6 from "@/assets/futurcraft-mockup-6.jpg";
+import futurcraftMockup7 from "@/assets/futurcraft-mockup-7.jpg";
+import futurcraftMockup8 from "@/assets/futurcraft-mockup-8.jpg";
 
 // Map of mockup images
 const mockupImageMap: Record<string, string> = {
   "/src/assets/boston-financial-mockup-1.png": bostonMockup1,
   "/src/assets/boston-financial-mockup-2.png": bostonMockup2,
+  "/src/assets/futurcraft-mockup-1.jpg": futurcraftMockup1,
+  "/src/assets/futurcraft-mockup-2.jpg": futurcraftMockup2,
+  "/src/assets/futurcraft-mockup-3.jpg": futurcraftMockup3,
+  "/src/assets/futurcraft-mockup-4.jpg": futurcraftMockup4,
+  "/src/assets/futurcraft-mockup-5.jpg": futurcraftMockup5,
+  "/src/assets/futurcraft-mockup-6.jpg": futurcraftMockup6,
+  "/src/assets/futurcraft-mockup-7.jpg": futurcraftMockup7,
+  "/src/assets/futurcraft-mockup-8.jpg": futurcraftMockup8,
 };
 
 const ProjectDetails: React.FC = () => {

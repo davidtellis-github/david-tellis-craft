@@ -143,6 +143,17 @@ export const projectsData: Record<string, ProjectData> = {
     year: "2025",
     services: "Strategy + Design + Engineering",
     
+    mockupImages: [
+      "/src/assets/futurcraft-mockup-1.jpg",
+      "/src/assets/futurcraft-mockup-2.jpg",
+      "/src/assets/futurcraft-mockup-3.jpg",
+      "/src/assets/futurcraft-mockup-4.jpg",
+      "/src/assets/futurcraft-mockup-5.jpg",
+      "/src/assets/futurcraft-mockup-6.jpg",
+      "/src/assets/futurcraft-mockup-7.jpg",
+      "/src/assets/futurcraft-mockup-8.jpg"
+    ],
+    
     role: {
       title: "Senior Product Designer",
       duration: "Q4 '24 – Q2 '25 (≈ 16 weeks)",
