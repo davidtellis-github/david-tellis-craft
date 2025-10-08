@@ -6,6 +6,14 @@ import { projectsData } from "@/data/projectData";
 import { useProjectAssets } from "@/hooks/useProjectAssets";
 import { UIGallery } from "@/components/portfolio/UIGallery";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
+import bostonMockup1 from "@/assets/boston-financial-mockup-1.png";
+import bostonMockup2 from "@/assets/boston-financial-mockup-2.png";
+
+// Map of mockup images
+const mockupImageMap: Record<string, string> = {
+  "/src/assets/boston-financial-mockup-1.png": bostonMockup1,
+  "/src/assets/boston-financial-mockup-2.png": bostonMockup2,
+};
 
 const ProjectDetails: React.FC = () => {
   const { slug } = useParams();
@@ -135,14 +143,24 @@ const ProjectDetails: React.FC = () => {
             </div>
           </div>
 
-          {/* Video Section */}
-          <div className="relative aspect-video bg-muted/50 rounded-2xl overflow-hidden group cursor-pointer">
-            <div className="absolute inset-0 bg-gradient-to-br from-background/20 to-background/5 flex items-center justify-center">
-              <div className="bg-background/90 rounded-full p-8 group-hover:scale-110 transition-transform">
-                <Play className="h-12 w-12 text-foreground ml-1" />
+          {/* Hero Image or Video Section */}
+          {project.mockupImages && project.mockupImages.length > 0 ? (
+            <div className="relative rounded-2xl overflow-hidden">
+              <img 
+                src={mockupImageMap[project.mockupImages[0]] || project.mockupImages[0]} 
+                alt={`${project.title} interface mockup`}
+                className="w-full h-auto object-cover"
+              />
+            </div>
+          ) : (
+            <div className="relative aspect-video bg-muted/50 rounded-2xl overflow-hidden group cursor-pointer">
+              <div className="absolute inset-0 bg-gradient-to-br from-background/20 to-background/5 flex items-center justify-center">
+                <div className="bg-background/90 rounded-full p-8 group-hover:scale-110 transition-transform">
+                  <Play className="h-12 w-12 text-foreground ml-1" />
+                </div>
               </div>
             </div>
-          </div>
+          )}
         </section>
 
         {/* Context Section */}
@@ -160,7 +178,17 @@ const ProjectDetails: React.FC = () => {
                 {project.context.objective}
               </p>
             </div>
-            <div className="bg-muted/30 rounded-2xl h-80"></div>
+            {project.mockupImages && project.mockupImages[1] ? (
+              <div className="rounded-2xl overflow-hidden">
+                <img 
+                  src={mockupImageMap[project.mockupImages[1]] || project.mockupImages[1]} 
+                  alt={`${project.title} context mockup`}
+                  className="w-full h-full object-cover"
+                />
+              </div>
+            ) : (
+              <div className="bg-muted/30 rounded-2xl h-80"></div>
+            )}
           </div>
         </section>
 
@@ -168,7 +196,17 @@ const ProjectDetails: React.FC = () => {
         <section id="role" className="py-20">
           <h2 className="text-5xl font-medium mb-16">My Role & Impact</h2>
           <div className="grid md:grid-cols-2 gap-16">
-            <div className="bg-muted/30 rounded-2xl h-80"></div>
+            {project.mockupImages && project.mockupImages[0] ? (
+              <div className="rounded-2xl overflow-hidden">
+                <img 
+                  src={mockupImageMap[project.mockupImages[0]] || project.mockupImages[0]} 
+                  alt={`${project.title} role mockup`}
+                  className="w-full h-full object-cover"
+                />
+              </div>
+            ) : (
+              <div className="bg-muted/30 rounded-2xl h-80"></div>
+            )}
             <div>
               <h3 className="text-xl font-medium mb-6 text-muted-foreground uppercase tracking-wider">Key Responsibilities</h3>
               <ul className="space-y-3 text-lg mb-12">

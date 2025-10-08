@@ -45,6 +45,8 @@ export interface ProjectData {
     figma?: string;
     playstore?: string;
   };
+
+  mockupImages?: string[];
 }
 
 export const projectsData: Record<string, ProjectData> = {
@@ -409,6 +411,11 @@ export const projectsData: Record<string, ProjectData> = {
     category: "webdesigns",
     year: "2024",
     services: "UX Strategy + Design",
+    
+    mockupImages: [
+      "/src/assets/boston-financial-mockup-2.png",
+      "/src/assets/boston-financial-mockup-1.png"
+    ],
     
     role: {
       title: "UX Strategist & Designer",
