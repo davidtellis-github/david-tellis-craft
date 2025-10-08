@@ -48,6 +48,17 @@ const ProjectDetails: React.FC = () => {
   const { assets, explorations, isLoading } = useProjectAssets(slug || "");
   
   const allUIAssets = [
+    // Add mockup images from projectData
+    ...(project?.mockupImages || []).map((imagePath, index) => ({
+      id: `mockup-${index}`,
+      title: `${project?.title || 'Project'} - UI ${index + 1}`,
+      description: undefined,
+      image_url: mockupImageMap[imagePath] || imagePath,
+      tags: [],
+      contribution_level: 'full',
+      is_featured: index === 0
+    })),
+    // Add database assets
     ...assets.map(asset => ({
       id: asset.id,
       title: asset.alt_text || `${project?.title || 'Project'} UI`,
@@ -57,6 +68,7 @@ const ProjectDetails: React.FC = () => {
       contribution_level: 'full',
       is_featured: asset.is_featured
     })),
+    // Add UI explorations
     ...explorations.map(exploration => ({
       id: exploration.id,
       title: exploration.title,
