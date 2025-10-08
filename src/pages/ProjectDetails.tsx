@@ -177,6 +177,25 @@ const ProjectDetails: React.FC = () => {
             <p className="text-2xl text-muted-foreground mb-12">
               {project.subtitle}
             </p>
+
+            {/* Hero Image or Video Section */}
+            {project.mockupImages && project.mockupImages.length > 0 ? (
+              <div className="relative rounded-2xl overflow-hidden mb-16">
+                <img 
+                  src={mockupImageMap[project.mockupImages[0]] || project.mockupImages[0]} 
+                  alt={`${project.title} interface mockup`}
+                  className="w-full h-auto object-cover"
+                />
+              </div>
+            ) : (
+              <div className="relative aspect-video bg-muted/50 rounded-2xl overflow-hidden group cursor-pointer mb-16">
+                <div className="absolute inset-0 bg-gradient-to-br from-background/20 to-background/5 flex items-center justify-center">
+                  <div className="bg-background/90 rounded-full p-8 group-hover:scale-110 transition-transform">
+                    <Play className="h-12 w-12 text-foreground ml-1" />
+                  </div>
+                </div>
+              </div>
+            )}
             
             <div className="grid md:grid-cols-2 gap-16 mb-16">
               <div>
@@ -212,25 +231,6 @@ const ProjectDetails: React.FC = () => {
               </div>
             </div>
           </div>
-
-          {/* Hero Image or Video Section */}
-          {project.mockupImages && project.mockupImages.length > 0 ? (
-            <div className="relative rounded-2xl overflow-hidden">
-              <img 
-                src={mockupImageMap[project.mockupImages[0]] || project.mockupImages[0]} 
-                alt={`${project.title} interface mockup`}
-                className="w-full h-auto object-cover"
-              />
-            </div>
-          ) : (
-            <div className="relative aspect-video bg-muted/50 rounded-2xl overflow-hidden group cursor-pointer">
-              <div className="absolute inset-0 bg-gradient-to-br from-background/20 to-background/5 flex items-center justify-center">
-                <div className="bg-background/90 rounded-full p-8 group-hover:scale-110 transition-transform">
-                  <Play className="h-12 w-12 text-foreground ml-1" />
-                </div>
-              </div>
-            </div>
-          )}
         </section>
 
         {/* Gallery Section */}
