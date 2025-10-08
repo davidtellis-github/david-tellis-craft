@@ -19,6 +19,10 @@ import futurcraftMockup8 from "@/assets/futurcraft-mockup-8.jpg";
 import futurcraftMockup9 from "@/assets/futurcraft-mockup-9.jpg";
 import futurcraftMockup10 from "@/assets/futurcraft-mockup-10.jpg";
 import futurcraftMockup11 from "@/assets/futurcraft-mockup-11.jpg";
+import turbocloudMockup1 from "@/assets/turbocloud-mockup-1.jpg";
+import turbocloudMockup2 from "@/assets/turbocloud-mockup-2.jpg";
+import turbocloudMockup3 from "@/assets/turbocloud-mockup-3.jpg";
+import turbocloudMockup4 from "@/assets/turbocloud-mockup-4.jpg";
 
 // Map of mockup images
 const mockupImageMap: Record<string, string> = {
@@ -35,6 +39,10 @@ const mockupImageMap: Record<string, string> = {
   "/src/assets/futurcraft-mockup-9.jpg": futurcraftMockup9,
   "/src/assets/futurcraft-mockup-10.jpg": futurcraftMockup10,
   "/src/assets/futurcraft-mockup-11.jpg": futurcraftMockup11,
+  "turbocloud-mockup-1.jpg": turbocloudMockup1,
+  "turbocloud-mockup-2.jpg": turbocloudMockup2,
+  "turbocloud-mockup-3.jpg": turbocloudMockup3,
+  "turbocloud-mockup-4.jpg": turbocloudMockup4,
 };
 
 const ProjectDetails: React.FC = () => {

@@ -281,7 +281,14 @@ export const projectsData: Record<string, ProjectData> = {
       live: "https://turbocloud.io",
       github: "https://github.com/turbocloud",
       figma: "https://figma.com/turbocloud"
-    }
+    },
+
+    mockupImages: [
+      "turbocloud-mockup-1.jpg",
+      "turbocloud-mockup-2.jpg",
+      "turbocloud-mockup-3.jpg",
+      "turbocloud-mockup-4.jpg"
+    ]
   },
 
   "health-project": {
