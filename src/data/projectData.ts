@@ -293,7 +293,7 @@ export const projectsData: Record<string, ProjectData> = {
 
   "health-project": {
     id: "health-project",
-    title: "HealthCare Platform",
+    title: "Medpass",
     subtitle: "Patient-centered digital health ecosystem",
     description: "Comprehensive healthcare platform connecting patients, providers, and care coordinators through seamless digital experiences, improving care accessibility and health outcomes.",
     category: "healthcare",
