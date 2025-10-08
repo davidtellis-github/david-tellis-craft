@@ -233,6 +233,42 @@ const ProjectDetails: React.FC = () => {
           )}
         </section>
 
+        {/* Gallery Section */}
+        <section id="gallery" className="py-20">
+          <Collapsible open={isGalleryOpen} onOpenChange={setIsGalleryOpen}>
+            <CollapsibleTrigger className="w-full group">
+              <div className="flex items-center justify-between py-6 hover:opacity-70 transition-opacity">
+                <div className="flex items-center gap-4">
+                  <Images className="h-6 w-6" />
+                  <h2 className="text-5xl font-medium">Gallery</h2>
+                  <span className="text-2xl text-muted-foreground">
+                    ({allUIAssets.length})
+                  </span>
+                </div>
+                {isGalleryOpen ? (
+                  <ChevronUp className="h-6 w-6 transition-transform" />
+                ) : (
+                  <ChevronDown className="h-6 w-6 transition-transform" />
+                )}
+              </div>
+            </CollapsibleTrigger>
+            
+            <CollapsibleContent className="mt-8">
+              {!isLoading && allUIAssets.length > 0 && (
+                <UIGallery 
+                  assets={allUIAssets} 
+                  projectTitle={project.title}
+                />
+              )}
+              {!isLoading && allUIAssets.length === 0 && (
+                <p className="text-muted-foreground text-center py-12">
+                  No UI assets available for this project yet.
+                </p>
+              )}
+            </CollapsibleContent>
+          </Collapsible>
+        </section>
+
         {/* Context Section */}
         <section id="context" className="py-20">
           <h2 className="text-5xl font-medium mb-16">Context & Challenge</h2>
@@ -331,42 +367,6 @@ const ProjectDetails: React.FC = () => {
               </div>
             ))}
           </div>
-        </section>
-
-        {/* Gallery Section */}
-        <section id="gallery" className="py-20">
-          <Collapsible open={isGalleryOpen} onOpenChange={setIsGalleryOpen}>
-            <CollapsibleTrigger className="w-full group">
-              <div className="flex items-center justify-between py-6 hover:opacity-70 transition-opacity">
-                <div className="flex items-center gap-4">
-                  <Images className="h-6 w-6" />
-                  <h2 className="text-5xl font-medium">UI Gallery</h2>
-                  <span className="text-2xl text-muted-foreground">
-                    ({allUIAssets.length})
-                  </span>
-                </div>
-                {isGalleryOpen ? (
-                  <ChevronUp className="h-6 w-6 transition-transform" />
-                ) : (
-                  <ChevronDown className="h-6 w-6 transition-transform" />
-                )}
-              </div>
-            </CollapsibleTrigger>
-            
-            <CollapsibleContent className="mt-8">
-              {!isLoading && allUIAssets.length > 0 && (
-                <UIGallery 
-                  assets={allUIAssets} 
-                  projectTitle={project.title}
-                />
-              )}
-              {!isLoading && allUIAssets.length === 0 && (
-                <p className="text-muted-foreground text-center py-12">
-                  No UI assets available for this project yet.
-                </p>
-              )}
-            </CollapsibleContent>
-          </Collapsible>
         </section>
 
         {/* Video Walkthrough */}
