@@ -404,67 +404,71 @@ export const projectsData: Record<string, ProjectData> = {
   "web-design-1": {
     id: "web-design-1",
     title: "Boston Financial",
-    subtitle: "Enterprise brand presence and lead generation",
-    description: "Complete corporate website redesign focusing on brand storytelling, lead generation optimization, and scalable content management for a growing enterprise technology company.",
+    subtitle: "AI-driven compliance management & task workflow optimization",
+    description: "UX strategy and design solution for improving compliance management and enabling better task assignment workflows through an AI-driven approach. Focused on reducing manual inefficiencies and automating regulatory compliance processes.",
     category: "webdesigns",
     year: "2024",
-    services: "Strategy + Design",
+    services: "UX Strategy + Design",
     
     role: {
-      title: "Web Designer",
-      duration: "Q2–Q3 '24 (≈ 10 weeks)",
-      team: "Marketing • Content • Frontend Developer",
-      tools: ["Figma", "Webflow", "After Effects", "Google Analytics"]
+      title: "UX Strategist & Designer",
+      duration: "Q2–Q3 '24 (≈ 12 weeks)",
+      team: "Product Manager • Stakeholders • Compliance Officers",
+      tools: ["Figma", "Miro", "Adobe XD", "Principle"]
     },
 
     context: {
-      problem: "Outdated website with poor conversion rates (1.2%) and inconsistent brand messaging. Complex enterprise sales process needed better lead qualification.",
-      objective: "Create a compelling brand presence that effectively communicates value proposition and generates qualified leads.",
-      audience: "Enterprise decision makers, IT professionals, and potential partners"
+      problem: "Manual compliance management workflows created bottlenecks and complexity. Compliance officers, auditors, and managers faced delays in task allocation and high risk of human error in regulatory checks.",
+      objective: "Design an AI-driven system to predict risk areas, automate task assignments, and improve compliance accuracy while reducing manual inefficiencies.",
+      audience: "Compliance officers, auditors, managers, and financial professionals"
     },
 
     features: [
       {
-        title: "Interactive Brand Story",
-        description: "Animated storytelling that communicates company mission and competitive advantages.",
-        icon: "📖"
+        title: "AI Risk Prediction",
+        description: "Machine learning model to predict compliance breach risk areas and automate regulatory checks.",
+        icon: "🤖"
       },
       {
-        title: "Lead Qualification System",
-        description: "Smart forms and progressive profiling to capture high-quality lead information.",
+        title: "Automated Task Suggestions",
+        description: "AI-driven recommendations for task assignments based on workload, priority, and dependencies.",
         icon: "🎯"
       },
       {
-        title: "Resource Library",
-        description: "Gated content hub with case studies, whitepapers, and implementation guides.",
-        icon: "📚"
+        title: "Multiple Task Assignment",
+        description: "Batch assignment capabilities with priority tagging and dependency mapping for large-scale workflows.",
+        icon: "📋"
       },
       {
-        title: "Performance Optimization",
-        description: "Fast loading times and SEO optimization for improved search visibility.",
-        icon: "⚡"
+        title: "Compliance Dashboard",
+        description: "Centralized view of compliance status, risk alerts, and team workload with real-time updates.",
+        icon: "📊"
+      },
+      {
+        title: "AI Recommendations Panel",
+        description: "Intelligent panel suggesting optimal task allocation and flagging potential compliance gaps.",
+        icon: "💡"
       }
     ],
 
     process: [
-      { step: "Discovery", description: "Brand audit & competitive analysis", icon: "🔍" },
-      { step: "Strategy", description: "Content strategy & conversion funnel design", icon: "📊" },
-      { step: "Design", description: "Visual design & interaction prototyping", icon: "🎨" },
-      { step: "Content", description: "Copywriting & multimedia asset creation", icon: "✍️" },
-      { step: "Launch", description: "Development handoff & performance monitoring", icon: "🚀" }
+      { step: "UX Research", description: "Analyzed workflows, identified bottlenecks, studied user personas", icon: "🔍" },
+      { step: "Problem Mapping", description: "Mapped pain points in manual processes and delayed task allocation", icon: "🗺️" },
+      { step: "AI Strategy", description: "Proposed AI model for risk prediction and automated suggestions", icon: "🤖" },
+      { step: "Wireframes", description: "Created low-fidelity wireframes for dashboard, task screens, and AI panel", icon: "📐" },
+      { step: "Presentation", description: "Delivered UX strategy presentation with mockups and business impact analysis", icon: "🎤" }
     ],
 
     outcomes: [
-      { metric: "Conversion rate", value: "1.2% → 3.8%" },
-      { metric: "Qualified leads", value: "180% increase" },
-      { metric: "Page load time", value: "5.2s → 1.8s" }
+      { metric: "Time saved", value: "40% reduction in manual tasks" },
+      { metric: "Compliance accuracy", value: "95% improvement" },
+      { metric: "Task allocation speed", value: "3x faster" }
     ],
 
-    reflection: "B2B websites need to balance trust-building with lead generation. The key insight was creating value before asking for information, which significantly improved conversion quality.",
+    reflection: "Working closely with compliance stakeholders revealed the importance of aligning design with regulatory terminology and nuances. The AI-driven approach not only reduced errors but also empowered managers to make data-backed decisions, transforming a reactive process into a proactive one.",
 
     links: {
-      live: "https://corporate-website.com",
-      figma: "https://figma.com/corporate-website"
+      figma: "https://figma.com/boston-financial-compliance"
     }
   },
 
