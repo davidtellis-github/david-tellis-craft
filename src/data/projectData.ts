@@ -730,10 +730,10 @@ export const projectsData: Record<string, ProjectData> = {
     description: "A web portal built for startups and their ecosystem — a digital space that connects founders, investors, mentors, and solution providers to help ideas grow and scale. The platform acts as a launchpad for India's new-generation entrepreneurs, combining funding access, mentorship, and business solutions in one place.",
     category: "b2b",
     year: "2025",
-    services: "Strategy + Design + Brand Identity",
+    services: "Strategy + Design + Stakeholder Management",
     
     role: {
-      title: "Product Designer (UI/UX + Visual Direction)",
+      title: "Product Designer & Project Lead",
       duration: "2025",
       team: "Presented by Zee • Curated by Turbostart",
       tools: ["Figma"]
