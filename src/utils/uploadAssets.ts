@@ -16,6 +16,8 @@ import background from "@/assets/baground.png";
 import tuboCloudImg from "@/assets/tubocloud-dashboard.png";
 import futurCraftImg from "@/assets/futurcraft-ai.png";
 import bostonFinancialImg from "@/assets/boston-financial.png";
+import bostonFinancial1 from "@/assets/boston-financial-1.png";
+import bostonFinancial2 from "@/assets/boston-financial-2.png";
 import medpassImg from "@/assets/medpass-healthcare.png";
 
 // Asset mappings based on project data structure with static imports
@@ -35,6 +37,8 @@ const assetMap: Record<string, string> = {
   "tubocloud-dashboard.png": tuboCloudImg,
   "futurcraft-ai.png": futurCraftImg,
   "boston-financial.png": bostonFinancialImg,
+  "boston-financial-1.png": bostonFinancial1,
+  "boston-financial-2.png": bostonFinancial2,
   "medpass-healthcare.png": medpassImg,
 };
 
@@ -59,8 +63,9 @@ const projectAssets = {
     { file: "work-6.jpg", type: "image", featured: true, tags: ["Enterprise UI", "Lead Design"] as string[] }
   ],
   "web-design-1": [
-    { file: "boston-financial.png", type: "image", featured: true, tags: ["Corporate Website", "Financial Services", "Lead Design"] as string[] },
-    { file: "work-7.jpg", type: "image", featured: false, tags: ["Landing Page", "Corporate Design"] as string[] }
+    { file: "boston-financial-1.png", type: "image", featured: true, tags: ["Compliance Dashboard", "Login Interface", "Lead Design"] as string[] },
+    { file: "boston-financial-2.png", type: "image", featured: true, tags: ["Client Management", "Dashboard Design", "Financial UI"] as string[] },
+    { file: "boston-financial.png", type: "image", featured: false, tags: ["Corporate Website", "Financial Services"] as string[] }
   ],
   "ui-exploration-1": [
     { file: "work-8.jpg", type: "image", featured: true, tags: ["UI Exploration", "Mobile Design", "Concept"] as string[] }
