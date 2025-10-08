@@ -144,6 +144,9 @@ export const projectsData: Record<string, ProjectData> = {
     services: "Strategy + Design + Engineering",
     
     mockupImages: [
+      "/src/assets/futurcraft-mockup-9.jpg",
+      "/src/assets/futurcraft-mockup-10.jpg",
+      "/src/assets/futurcraft-mockup-11.jpg",
       "/src/assets/futurcraft-mockup-1.jpg",
       "/src/assets/futurcraft-mockup-2.jpg",
       "/src/assets/futurcraft-mockup-3.jpg",
