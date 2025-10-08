@@ -59,6 +59,18 @@ export const projectsData: Record<string, ProjectData> = {
     year: "2024",
     services: "Strategy + Design + Engineering",
     
+    mockupImages: [
+      "weddingverse-mockup-1.jpg",
+      "weddingverse-mockup-2.jpg",
+      "weddingverse-mockup-3.jpg",
+      "weddingverse-mockup-4.jpg",
+      "weddingverse-mockup-5.jpg",
+      "weddingverse-mockup-6.jpg",
+      "weddingverse-mockup-7.jpg",
+      "weddingverse-mockup-8.jpg",
+      "weddingverse-mockup-9.jpg"
+    ],
+    
     role: {
       title: "Lead Product Designer",
       duration: "Q4 2023 – Q2 2024 (≈ 12 weeks for MVP)",

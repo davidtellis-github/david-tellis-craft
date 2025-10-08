@@ -28,6 +28,15 @@ import medpassMockup2 from "@/assets/medpass-mockup-2.jpg";
 import medpassMockup3 from "@/assets/medpass-mockup-3.jpg";
 import medpassMockup4 from "@/assets/medpass-mockup-4.jpg";
 import medpassMockup5 from "@/assets/medpass-mockup-5.jpg";
+import weddingverseMockup1 from "@/assets/weddingverse-mockup-1.jpg";
+import weddingverseMockup2 from "@/assets/weddingverse-mockup-2.jpg";
+import weddingverseMockup3 from "@/assets/weddingverse-mockup-3.jpg";
+import weddingverseMockup4 from "@/assets/weddingverse-mockup-4.jpg";
+import weddingverseMockup5 from "@/assets/weddingverse-mockup-5.jpg";
+import weddingverseMockup6 from "@/assets/weddingverse-mockup-6.jpg";
+import weddingverseMockup7 from "@/assets/weddingverse-mockup-7.jpg";
+import weddingverseMockup8 from "@/assets/weddingverse-mockup-8.jpg";
+import weddingverseMockup9 from "@/assets/weddingverse-mockup-9.jpg";
 
 // Map of mockup images
 const mockupImageMap: Record<string, string> = {
@@ -53,6 +62,15 @@ const mockupImageMap: Record<string, string> = {
   "medpass-mockup-3.jpg": medpassMockup3,
   "medpass-mockup-4.jpg": medpassMockup4,
   "medpass-mockup-5.jpg": medpassMockup5,
+  "weddingverse-mockup-1.jpg": weddingverseMockup1,
+  "weddingverse-mockup-2.jpg": weddingverseMockup2,
+  "weddingverse-mockup-3.jpg": weddingverseMockup3,
+  "weddingverse-mockup-4.jpg": weddingverseMockup4,
+  "weddingverse-mockup-5.jpg": weddingverseMockup5,
+  "weddingverse-mockup-6.jpg": weddingverseMockup6,
+  "weddingverse-mockup-7.jpg": weddingverseMockup7,
+  "weddingverse-mockup-8.jpg": weddingverseMockup8,
+  "weddingverse-mockup-9.jpg": weddingverseMockup9,
 };
 
 const ProjectDetails: React.FC = () => {
