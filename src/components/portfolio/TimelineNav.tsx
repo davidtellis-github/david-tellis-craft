@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { useCategories } from "@/hooks/useProjects";
 
 interface TimelineNavProps {
@@ -29,8 +30,8 @@ const TimelineNav: React.FC<TimelineNavProps> = ({
         className="hidden lg:block sticky top-0 h-[calc(100vh-5rem)] w-[min(18rem,24vw)] z-[56]"
       >
         <div className="relative h-full flex flex-col gap-[14vh]">
-          <a
-            href="#intro"
+          <Link
+            to="/"
             aria-label="Home"
             className="pt-10 leading-none select-none text-foreground 
                        text-[clamp(20px,4vmin,32px)]  font-normal flex group relative"
@@ -45,7 +46,7 @@ const TimelineNav: React.FC<TimelineNavProps> = ({
             >
               avid Tellis
             </span>
-          </a>
+          </Link>
           
           <ul className="space-y-0 text-muted-foreground text-[clamp(12px,1.6vmin,16px)]">
             {[...Array(6)].map((_, index) => (
@@ -66,8 +67,8 @@ const TimelineNav: React.FC<TimelineNavProps> = ({
     >
       <div className="relative h-full flex flex-col gap-[14vh]">
         {/* --- Animated Logo --- */}
-       <a
-  href="#intro"
+       <Link
+  to="/"
   aria-label="Home"
   className="sticky top-10 pt-10 leading-none select-none text-foreground 
              text-[clamp(20px,4vmin,32px)]  font-normal flex group relative"
@@ -83,7 +84,7 @@ const TimelineNav: React.FC<TimelineNavProps> = ({
   >
     avid Tellis
   </span>
-</a>
+</Link>
         <ul
           className="
             sticky top-[35vh]

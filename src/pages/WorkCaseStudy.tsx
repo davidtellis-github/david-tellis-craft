@@ -184,7 +184,7 @@ const WorkCaseStudy: React.FC = () => {
     <div className="min-h-screen bg-background text-foreground">
 
       {/* Page Body */}
-      <main className="container mx-auto px-6 lg:px-10 pb-24">
+      <main className="w-[98vw] mx-auto px-4 md:px-6 pb-24">
         {/* HERO */}
         <section id="hero" className="pt-8 md:pt-12">
           <div className="grid md:grid-cols-12 gap-6 md:gap-8 items-start">

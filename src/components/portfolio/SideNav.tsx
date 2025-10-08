@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 const sections = [
   { id: "intro", label: "Intro" },
@@ -55,8 +56,8 @@ const SideNav: React.FC = () => {
     >
       <div className="relative h-full flex flex-col gap-[14vh]">
         {/* --- Animated Logo --- */}
-       <a
-  href="#intro"
+       <Link
+  to="/"
   aria-label="Home"
   className="pt-10 leading-none select-none text-foreground 
              text-[clamp(20px,4vmin,32px)]  font-normal flex group relative"
@@ -72,7 +73,7 @@ const SideNav: React.FC = () => {
   >
     avid Tellis
   </span>
-</a>
+</Link>
 
         {/* --- Nav Menu --- */}
         <ul
