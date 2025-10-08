@@ -721,5 +721,92 @@ export const projectsData: Record<string, ProjectData> = {
       live: "https://project-beta.enterprise",
       github: "https://github.com/project-beta"
     }
+  },
+
+  "ideabaaz": {
+    id: "ideabaaz",
+    title: "Ideabaaz",
+    subtitle: "Get visible. Get funded. Get growing.",
+    description: "A web portal built for startups and their ecosystem — a digital space that connects founders, investors, mentors, and solution providers to help ideas grow and scale. The platform acts as a launchpad for India's new-generation entrepreneurs, combining funding access, mentorship, and business solutions in one place.",
+    category: "b2b",
+    year: "2025",
+    services: "Strategy + Design + Brand Identity",
+    
+    role: {
+      title: "Product Designer (UI/UX + Visual Direction)",
+      duration: "2025",
+      team: "Presented by Zee • Curated by Turbostart",
+      tools: ["Figma"]
+    },
+
+    context: {
+      problem: "India's startup ecosystem is buzzing — but fragmented. Early-stage founders struggle to find visibility, guidance, and funding opportunities. On the other side, investors and mentors lack a centralized, reliable space to discover and support new ventures.",
+      objective: "Design a landing experience that introduces the ecosystem and inspires action, while building trust and credibility through visual tone, partner branding, and content flow.",
+      audience: "Founders, investors, mentors, and solution providers in India's startup ecosystem"
+    },
+
+    features: [
+      {
+        title: "For Founders",
+        description: "Get visible to investors, access funding opportunities, and showcase your startup to the right audience.",
+        icon: "🚀"
+      },
+      {
+        title: "For Investors",
+        description: "Discover vetted startups, connect with high-potential founders, and expand your investment portfolio.",
+        icon: "💼"
+      },
+      {
+        title: "For Mentors",
+        description: "Guide the next generation of entrepreneurs, share your expertise, and contribute to the ecosystem.",
+        icon: "🎓"
+      },
+      {
+        title: "For Solution Providers",
+        description: "Connect with startups in need of your services, from legal to marketing to technology solutions.",
+        icon: "🔧"
+      }
+    ],
+
+    process: [
+      { 
+        step: "Hero Section", 
+        description: "Bold messaging with 'Get visible. Get funded. Get growing.' and startup registration CTA to build anticipation.", 
+        icon: "🎯" 
+      },
+      { 
+        step: "Partner Logos", 
+        description: "Built social proof instantly with known brands like House of Cheer, Wizcraft, Zee, Dangal, and YourStory.", 
+        icon: "🤝" 
+      },
+      { 
+        step: "Ecosystem Breakdown", 
+        description: "Introduced 4 key groups with light, friendly tone and quick CTAs for each user type.", 
+        icon: "🧩" 
+      },
+      { 
+        step: "Get Started Section", 
+        description: "Motivational messaging encouraging each user type to begin their journey on Ideabaaz.", 
+        icon: "✨" 
+      },
+      { 
+        step: "FAQs & Footer", 
+        description: "Added transparency, trust signals, and clear ownership credits.", 
+        icon: "📋" 
+      }
+    ],
+
+    outcomes: [
+      { metric: "Brand foundation", value: "Established solid identity" },
+      { metric: "Landing page design", value: "High-conversion ready" },
+      { metric: "Content structure", value: "Adaptable for future features" },
+      { metric: "Brand positioning", value: "Credible accelerator backed by Zee" }
+    ],
+
+    reflection: "Ideabaaz was about creating more than just a platform — it was about building a web portal where ideas, mentorship, funding, and solutions meet seamlessly. Simplifying complex ecosystems into digestible, inspiring storytelling improves engagement. Strong brand voice alignment early on helps in setting the tone for future UX. Even pre-launch pages can act as powerful brand assets when designed with intention. Every idea deserves the right stage.",
+
+    links: {
+      figma: "https://figma.com/ideabaaz"
+    }
   }
 };
