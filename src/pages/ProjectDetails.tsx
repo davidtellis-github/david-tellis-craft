@@ -23,6 +23,11 @@ import turbocloudMockup1 from "@/assets/turbocloud-mockup-1.jpg";
 import turbocloudMockup2 from "@/assets/turbocloud-mockup-2.jpg";
 import turbocloudMockup3 from "@/assets/turbocloud-mockup-3.jpg";
 import turbocloudMockup4 from "@/assets/turbocloud-mockup-4.jpg";
+import medpassMockup1 from "@/assets/medpass-mockup-1.jpg";
+import medpassMockup2 from "@/assets/medpass-mockup-2.jpg";
+import medpassMockup3 from "@/assets/medpass-mockup-3.jpg";
+import medpassMockup4 from "@/assets/medpass-mockup-4.jpg";
+import medpassMockup5 from "@/assets/medpass-mockup-5.jpg";
 
 // Map of mockup images
 const mockupImageMap: Record<string, string> = {
@@ -43,6 +48,11 @@ const mockupImageMap: Record<string, string> = {
   "turbocloud-mockup-2.jpg": turbocloudMockup2,
   "turbocloud-mockup-3.jpg": turbocloudMockup3,
   "turbocloud-mockup-4.jpg": turbocloudMockup4,
+  "medpass-mockup-1.jpg": medpassMockup1,
+  "medpass-mockup-2.jpg": medpassMockup2,
+  "medpass-mockup-3.jpg": medpassMockup3,
+  "medpass-mockup-4.jpg": medpassMockup4,
+  "medpass-mockup-5.jpg": medpassMockup5,
 };
 
 const ProjectDetails: React.FC = () => {

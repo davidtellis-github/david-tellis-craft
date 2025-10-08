@@ -300,6 +300,14 @@ export const projectsData: Record<string, ProjectData> = {
     year: "2024",
     services: "Strategy + Design",
     
+    mockupImages: [
+      "medpass-mockup-1.jpg",
+      "medpass-mockup-2.jpg",
+      "medpass-mockup-3.jpg",
+      "medpass-mockup-4.jpg",
+      "medpass-mockup-5.jpg"
+    ],
+    
     role: {
       title: "Senior UX Designer",
       duration: "Q2–Q4 '24 (≈ 14 weeks)",
