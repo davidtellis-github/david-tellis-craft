@@ -77,19 +77,6 @@ const Portfolio = () => {
                 hoveredCategory={hoveredCategory}
               />
             </div>
-            {/* Featured Video */}
-            <div className="relative mb-16 w-full">
-              <div className="relative overflow-hidden rounded-2xl">
-                <div className="relative aspect-video">
-                  <video 
-                    src="https://gksxdznfdxrsjqkuzxmg.supabase.co/storage/v1/object/public/project-videos/keyboard%202.mp4"
-                    className="w-full h-full object-cover rounded-2xl"
-                    controls
-                    poster={w1}
-                  />
-                </div>
-              </div>
-            </div>
 
             {/* UI Gallery - Full Width Section */}
             {!isLoading && assets.length > 0 && (
@@ -115,6 +102,20 @@ const Portfolio = () => {
                 </div>
               </section>
             )}
+
+            {/* Featured Video */}
+            <div className="relative mb-16 w-full">
+              <div className="relative overflow-hidden rounded-2xl">
+                <div className="relative aspect-video">
+                  <video 
+                    src="https://gksxdznfdxrsjqkuzxmg.supabase.co/storage/v1/object/public/project-videos/keyboard%202.mp4"
+                    className="w-full h-full object-cover rounded-2xl"
+                    controls
+                    poster={w1}
+                  />
+                </div>
+              </div>
+            </div>
 
             {/* Call to Action */}
             <section className="py-20">
