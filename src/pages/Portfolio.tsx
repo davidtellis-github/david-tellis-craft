@@ -7,6 +7,7 @@ import ProjectTimeline from "@/components/portfolio/ProjectTimeline";
 import TimelineNav from "@/components/portfolio/TimelineNav";
 import { UIGallery } from "@/components/portfolio/UIGallery";
 import { useAllProjectAssets } from "@/hooks/useAllProjectAssets";
+import { UploadUIAssetsButton } from "@/components/dev/UploadUIAssetsButton";
 
 // Import work images
 import w1 from "@/assets/work-1.jpg";
@@ -93,13 +94,16 @@ const Portfolio = () => {
             {/* UI Gallery */}
             {!isLoading && assets.length > 0 && (
               <section className="mb-20">
-                <div className="mb-8">
-                  <h2 className="text-3xl md:text-4xl font-medium tracking-tight mb-4">
-                    UI Showcase
-                  </h2>
-                  <p className="text-lg text-muted-foreground max-w-2xl">
-                    A collection of interface designs and explorations from all projects
-                  </p>
+                <div className="mb-8 flex items-start justify-between">
+                  <div>
+                    <h2 className="text-3xl md:text-4xl font-medium tracking-tight mb-4">
+                      UI Showcase
+                    </h2>
+                    <p className="text-lg text-muted-foreground max-w-2xl">
+                      A collection of interface designs and explorations from all projects
+                    </p>
+                  </div>
+                  <UploadUIAssetsButton />
                 </div>
                 <UIGallery 
                   assets={assets} 
