@@ -5,6 +5,8 @@ import { Play, ExternalLink, ArrowUpRight, ArrowLeft } from "lucide-react";
 import Header from "@/components/ui/Header";
 import ProjectTimeline from "@/components/portfolio/ProjectTimeline";
 import TimelineNav from "@/components/portfolio/TimelineNav";
+import { UIGallery } from "@/components/portfolio/UIGallery";
+import { useAllProjectAssets } from "@/hooks/useAllProjectAssets";
 
 // Import work images
 import w1 from "@/assets/work-1.jpg";
@@ -18,6 +20,7 @@ const Portfolio = () => {
   const [activeCategory, setActiveCategory] = useState("all");
   const [hoveredProject, setHoveredProject] = useState<string | null>(null);
   const [hoveredCategory, setHoveredCategory] = useState<string | null>(null);
+  const { assets, isLoading } = useAllProjectAssets();
 
   return (
     <div className="min-h-screen bg-background text-foreground">
@@ -86,6 +89,24 @@ const Portfolio = () => {
                 </div>
               </div>
             </div>
+
+            {/* UI Gallery */}
+            {!isLoading && assets.length > 0 && (
+              <section className="mb-20">
+                <div className="mb-8">
+                  <h2 className="text-3xl md:text-4xl font-medium tracking-tight mb-4">
+                    UI Showcase
+                  </h2>
+                  <p className="text-lg text-muted-foreground max-w-2xl">
+                    A collection of interface designs and explorations from all projects
+                  </p>
+                </div>
+                <UIGallery 
+                  assets={assets} 
+                  projectTitle="All Projects" 
+                />
+              </section>
+            )}
 
             {/* Call to Action */}
             <section className="py-20">
