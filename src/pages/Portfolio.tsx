@@ -8,6 +8,7 @@ import TimelineNav from "@/components/portfolio/TimelineNav";
 import { UIGallery } from "@/components/portfolio/UIGallery";
 import { useAllProjectAssets } from "@/hooks/useAllProjectAssets";
 import { UploadUIAssetsButton } from "@/components/dev/UploadUIAssetsButton";
+import { UploadNewGalleryButton } from "@/components/dev/UploadNewGalleryButton";
 
 // Import work images
 import w1 from "@/assets/work-1.jpg";
@@ -90,7 +91,10 @@ const Portfolio = () => {
                       A collection of interface designs and explorations from all projects
                     </p>
                   </div>
-                  <UploadUIAssetsButton />
+                  <div className="flex gap-2">
+                    <UploadUIAssetsButton />
+                    <UploadNewGalleryButton />
+                  </div>
                 </div>
                 
                 {/* Break out of container for full-width gallery */}
