@@ -36,29 +36,40 @@ export const UIGallery: React.FC<UIGalleryProps> = ({
 
   return (
     <div className={`ui-gallery ${className}`}>
-      {/* Gallery Grid - Pinterest style masonry */}
-      <div className="columns-1 md:columns-2 lg:columns-3 gap-4 space-y-4">
-        {filteredAssets.map((asset, index) => (
-          <div
-            key={asset.id}
-            className="group relative overflow-hidden rounded-lg break-inside-avoid mb-4 cursor-pointer"
-            onClick={() => setSelectedImage(asset.image_url)}
-          >
-            {/* Image */}
-            <div className="relative overflow-hidden">
-              <img
-                src={asset.image_url}
-                alt={asset.title || `${projectTitle} UI ${index + 1}`}
-                className="w-full h-auto object-cover transition-transform duration-300 group-hover:scale-105"
-              />
-              
-              {/* Overlay */}
-              <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                <Eye className="h-8 w-8 text-white" />
+      {/* Gallery Grid - Bento style full-width grid */}
+      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-1 md:gap-2">
+        {filteredAssets.map((asset, index) => {
+          // Create varied sizing patterns for visual interest
+          const isLarge = index % 7 === 0;
+          const isTall = index % 5 === 0;
+          const isWide = index % 11 === 0;
+          
+          return (
+            <div
+              key={asset.id}
+              className={`group relative overflow-hidden rounded-sm cursor-pointer
+                ${isLarge ? 'col-span-2 row-span-2' : ''}
+                ${isTall && !isLarge ? 'row-span-2' : ''}
+                ${isWide && !isLarge ? 'col-span-2' : ''}
+              `}
+              onClick={() => setSelectedImage(asset.image_url)}
+            >
+              {/* Image */}
+              <div className="relative overflow-hidden h-full">
+                <img
+                  src={asset.image_url}
+                  alt={asset.title || `${projectTitle} UI ${index + 1}`}
+                  className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                />
+                
+                {/* Overlay */}
+                <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                  <Eye className="h-6 w-6 md:h-8 md:w-8 text-white" />
+                </div>
               </div>
             </div>
-          </div>
-        ))}
+          );
+        })}
       </div>
 
       {/* Lightbox Modal */}

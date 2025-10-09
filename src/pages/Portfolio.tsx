@@ -91,7 +91,7 @@ const Portfolio = () => {
               </div>
             </div>
 
-            {/* UI Gallery */}
+            {/* UI Gallery - Full Width Section */}
             {!isLoading && assets.length > 0 && (
               <section className="mb-20">
                 <div className="mb-8 flex items-start justify-between">
@@ -105,10 +105,14 @@ const Portfolio = () => {
                   </div>
                   <UploadUIAssetsButton />
                 </div>
-                <UIGallery 
-                  assets={assets} 
-                  projectTitle="All Projects" 
-                />
+                
+                {/* Break out of container for full-width gallery */}
+                <div className="relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] w-screen px-0">
+                  <UIGallery 
+                    assets={assets} 
+                    projectTitle="All Projects" 
+                  />
+                </div>
               </section>
             )}
 
