@@ -63,14 +63,14 @@ const TimelineNav: React.FC<TimelineNavProps> = ({
   return (
     <nav
       aria-label="Portfolio navigation"
-      className="hidden lg:flex lg:flex-col sticky top-0 h-svh w-[min(18rem,24vw)]"
+      className="flex flex-col hidden lg:block sticky top-0 h-svh w-[min(18rem,24vw)]"
     >
       <div className="relative h-full flex flex-col gap-[14vh]">
         {/* --- Animated Logo --- */}
        <Link
   to="/"
   aria-label="Home"
-  className="sticky top-10 pt-10 leading-none select-none text-foreground 
+  className="pt-10 leading-none select-none text-foreground 
              text-[clamp(20px,4vmin,32px)]  font-normal flex group relative"
 >
   {/* Always-visible "D" */}
@@ -87,7 +87,7 @@ const TimelineNav: React.FC<TimelineNavProps> = ({
 </Link>
         <ul
           className="
-            sticky top-[35vh]
+            sticky z-99
             space-y-0
             text-muted-foreground
             text-[clamp(12px,1.6vmin,16px)]

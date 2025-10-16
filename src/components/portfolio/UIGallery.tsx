@@ -37,7 +37,7 @@ export const UIGallery: React.FC<UIGalleryProps> = ({
   return (
     <div className={`ui-gallery ${className}`}>
       {/* Gallery Grid - Bento style full-width grid */}
-      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-1 md:gap-2">
+      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 gap-0.4 md:gap-2 ">
         {filteredAssets.map((asset, index) => {
           // Create varied sizing patterns for visual interest
           const isLarge = index % 7 === 0;

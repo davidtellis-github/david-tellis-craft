@@ -2,44 +2,29 @@ import React from "react";
 
 const quotes = [
   {
-    text: "Truly one of the best design collaborators I’ve worked with—thoughtful, fast, and detail-oriented.",
-    author: "A. Chen",
-    role: "Director of Product Design",
+    text: "Creative, clear, and collaborative! David makes every project smoother, smarter, and genuinely more fun.",
+    author: "Karthik.R",
+    role: "Sr. Graphic Designern",
   },
   {
-    text: "Has a rare blend of systems thinking and craft. Elevates teams and outcomes.",
-    author: "S. Fields",
-    role: "Senior UX Program Manager",
+    text: "⁠Trust David with a vision, and he’ll return with something better than you imagined. Every single time",
+    author: "Jaffrina Joseph",
+    role: "Associate Product Manager",
   },
   {
-    text: "Brings clarity to ambiguous problems and ships with quality.",
-    author: "D. Ong",
+    text: "David was one of the first people who mentored me in this field. He really taught me that 'Less is more', Overall super chill but hardworking person to have in your team! ",
+    author: "Jahnavi",
     role: "Product Designer",
   },
   {
-    text: "Incredibly thoughtful and pragmatic—great partner to engineers and PMs.",
-    author: "K. Lowden",
-    role: "Staff Product Designer",
+    text: "David is highly meticulous and takes ownership of his projects, He explores different methods to express ideas both artistically and functionally, keeping project goals in mind. David doesn't 'work'; he does what he loves. ",
+    author: "Amisha Jha",
+    role: "Content Writer",
   },
   {
-    text: "Incredibly thoughtful and pragmatic—great partner to engineers and PMs.",
-    author: "K. Lowden",
-    role: "Staff Product Designer",
-  },
-  {
-    text: "Incredibly thoughtful and pragmatic—great partner to engineers and PMs.",
-    author: "K. Lowden",
-    role: "Staff Product Designer",
-  },
-  {
-    text: "Incredibly thoughtful and pragmatic—great partner to engineers and PMs.",
-    author: "K. Lowden",
-    role: "Staff Product Designer",
-  },
-  {
-    text: "Incredibly thoughtful and pragmatic—great partner to engineers and PMs.",
-    author: "K. Lowden",
-    role: "Staff Product Designer",
+    text: "Your approach towards problem-solving and reasoning out solutions while going with bold design choices has fascinated me a few times. It's been great working with you because you listen with intention, you understand and ask questions, and then you execute well.. ",
+    author: "Chris",
+    role: "UX designer",
   },
 ];
 

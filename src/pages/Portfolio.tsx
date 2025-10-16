@@ -111,37 +111,8 @@ const Portfolio = () => {
                 hoveredCategory={hoveredCategory}
               />
             </div>
-
-            {/* UI Gallery - Full Width Section */}
-            {!isLoading && assets.length > 0 && (
-              <section className="mb-20">
-                <div className="mb-8 flex items-start justify-between">
-                  <div>
-                    <h2 className="text-3xl md:text-4xl font-medium tracking-tight mb-4">
-                      UI Showcase
-                    </h2>
-                    <p className="text-lg text-muted-foreground max-w-2xl">
-                      A collection of interface designs and explorations from all projects
-                    </p>
-                  </div>
-                  <div className="flex gap-2">
-                    <UploadUIAssetsButton />
-                    <UploadNewGalleryButton />
-                  </div>
-                </div>
-                
-                {/* Break out of container for full-width gallery */}
-                <div className="relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] w-screen px-0">
-                  <UIGallery 
-                    assets={assets} 
-                    projectTitle="All Projects" 
-                  />
-                </div>
-              </section>
-            )}
-
-            {/* Featured Video */}
-            <div className="relative mb-16 w-full">
+             {/* Featured Video
+             <div className="relative min-h-screen flex flex-col justify-start py-[20vh]">
               <div className="relative overflow-hidden rounded-2xl">
                 <div className="relative aspect-video">
                   <video 
@@ -152,9 +123,27 @@ const Portfolio = () => {
                   />
                 </div>
               </div>
-            </div>
+            </div> */}
 
-            {/* Call to Action */}
+            {/* UI Gallery - Full Width Section */}
+            {!isLoading && assets.length > 0 && (
+              <section className="mb-20">
+             
+                
+                {/* Break out of container for full-width gallery */}
+                <div className="absolute inset-x-0 w-screen h-screen overflow-hidden h-screen
+                ">
+                  <UIGallery 
+                    assets={assets} 
+                    projectTitle="All Projects" 
+                  />
+                </div>
+              </section>
+            )}
+
+           
+
+            {/* Call to Action
             <section className="py-20">
               <div className="space-y-8">
                 <div className="space-y-4">
@@ -178,7 +167,7 @@ const Portfolio = () => {
                   </Button>
                 </div>
               </div>
-            </section>
+            </section> */}
           </section>
         </div>
       </main>

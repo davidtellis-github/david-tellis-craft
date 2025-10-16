@@ -88,7 +88,10 @@ const Hero: React.FC = () => {
     
     text-[clamp(8px,1.6vmin,10px)]
     tracking-loose
+     text-muted-foreground
+            text-[clamp(12px,1.6vmin,16px)]
     leading-[0]
+    font-light
     text-base
     text-muted-foreground
     scrollbar-hide      /* optional: hide scrollbar */
@@ -99,7 +102,7 @@ const Hero: React.FC = () => {
             <TabsTrigger
               key={t.key}
               value={t.key}
-  className="px-0 py-0 bg-transparent text-base data-[state=active]:text-foreground data-[state=active]:font-normal text-[clamp(12px,1.6vmin,16px)] transition-colors"            >
+  className="px-0 py-0 bg-transparent  data-[state=active]:text-foreground data-[state=active] text-[clamp(12px,1.6vmin,16px)] text-light transition-colors"            >
               {t.label}
             </TabsTrigger>
           ))}
