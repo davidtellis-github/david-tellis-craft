@@ -6,15 +6,11 @@ const quotes = [
     author: "Karthik.R",
     role: "Sr. Graphic Designern",
   },
+
   {
     text: "⁠Trust David with a vision, and he’ll return with something better than you imagined. Every single time",
     author: "Jaffrina Joseph",
     role: "Associate Product Manager",
-  },
-  {
-    text: "David was one of the first people who mentored me in this field. He really taught me that 'Less is more', Overall super chill but hardworking person to have in your team! ",
-    author: "Jahnavi",
-    role: "Product Designer",
   },
   {
     text: "David is highly meticulous and takes ownership of his projects, He explores different methods to express ideas both artistically and functionally, keeping project goals in mind. David doesn't 'work'; he does what he loves. ",
@@ -22,10 +18,17 @@ const quotes = [
     role: "Content Writer",
   },
   {
+    text: "David was one of the first people who mentored me in this field. He really taught me that 'Less is more', Overall super chill but hardworking person to have in your team! ",
+    author: "Jahnavi",
+    role: "Product Designer",
+  }, 
+   {
     text: "Your approach towards problem-solving and reasoning out solutions while going with bold design choices has fascinated me a few times. It's been great working with you because you listen with intention, you understand and ask questions, and then you execute well.. ",
     author: "Chris",
     role: "UX designer",
   },
+  
+  
 ];
 
 const Testimonials: React.FC = () => (

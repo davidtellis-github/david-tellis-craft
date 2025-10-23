@@ -7,11 +7,7 @@ const tabsData: { key: string; label: string; headline: React.ReactNode }[] = [
     label: "For anyone",
     headline: (
       <>
-        Hello there, I’m a
-designer who cares
-about making
-beautiful things that
-help people.
+        Hey there, I am designer who help startups and businesses build their products
       </>
     ),
   },
@@ -20,7 +16,7 @@ help people.
     label: "Recruiters",
     headline: (
       <>
-        2+ years designing fintech, <br></br>AI tools, marketplaces, and health apps. From landing pages to design systems—everything converts, scales, and ships.. I move fast, learn faster. You’ll want to pay me more.
+        2+ years of designing products, landing pages, and design systems for 10+ startups/clients.
       </>
     ),
   },
@@ -29,7 +25,7 @@ help people.
     label: "Design Directors",
     headline: (
       <>
-        Systems thinker with a high bar for quality; I build <span className="underline underline-offset-8 decoration-[hsl(var(--foreground)/0.4)]">scalable design systems</span> and partner deeply across functions.
+       I adore system thinking. I think beyond the goals and briefs to make it scalable. I respect both product goals and creative standards, and say "big no" to patch works.
       </>
     ),
   },
@@ -38,7 +34,7 @@ help people.
     label: "Product Designers",
     headline: (
       <>
-       Clean files, tighter systems, and zero drama. I juggle projects, stay curious, and talk dev. I know the rules, when to break them, and how to make it look good.
+      I juggle projects, stay curious, and talk dev. I know when to break rules and how to make it look good. Learing on my documentation skills - currently;
       </>
     ),
   },
@@ -46,9 +42,8 @@ help people.
     key: "pms",
     label: "Product Managers",
     headline: (
-      <>
- I won’t just tick boxes. I’ll fill the gaps, clean the chaos, and ship stuff that works in real life;<br></br> Ask nicely, and I’ll deliver ahead of schedule. 
-        we’ll learn and ship together.      </>
+      <>I get what needs to be built, why it matters, and how it’ll impact users and numbers. I connect dots between vision, design, and dev.
+       </>
     ),
   },
   {
@@ -56,7 +51,7 @@ help people.
     label: "Engineers",
     headline: (
       <>
-I’ve studied code and lived with designers—so I get both worlds. <br></br> I design with logic, label things right, and ask smart questions early.  </>
+I’ve studied computers and practicing design, so I get both worlds; I'll ask right questions and love to sit next to a dev while designing </>
     ),
   },
 ];
