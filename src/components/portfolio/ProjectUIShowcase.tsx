@@ -21,7 +21,7 @@ export const ProjectUIShowcase: React.FC<ProjectUIShowcaseProps> = ({
   contributionLevel,
   className = ""
 }) => {
-  const { assets, explorations, isLoading, error, featuredAssets, galleryAssets } = useProjectAssets(projectSlug);
+  const { assets, isLoading, error, featuredAssets, galleryAssets } = useProjectAssets(projectSlug);
   const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
 
   if (isLoading) {
@@ -47,26 +47,16 @@ export const ProjectUIShowcase: React.FC<ProjectUIShowcaseProps> = ({
     );
   }
 
-  const allUIAssets = [
-    ...assets.map(asset => ({
-      id: asset.id,
-      title: asset.alt_text || `${projectTitle} UI`,
-      description: asset.caption,
-      image_url: asset.file_path,
-      tags: asset.asset_tags,
-      contribution_level: contributionLevel || 'Lead Designer',
-      is_featured: asset.is_featured
-    })),
-    ...explorations.map(exploration => ({
-      id: exploration.id,
-      title: exploration.title,
-      description: exploration.description,
-      image_url: exploration.image_url,
-      tags: exploration.tags,
-      contribution_level: exploration.contribution_level,
-      is_featured: exploration.is_featured
-    }))
-  ];
+  const allUIAssets = assets.map(asset => ({
+    id: asset.id,
+    file_path: asset.file_path,
+    alt_text: asset.alt_text,
+    caption: asset.caption,
+    asset_tags: asset.asset_tags,
+    contribution_level: asset.contribution_level || contributionLevel || 'Lead Designer',
+    is_featured: asset.is_featured,
+    show_in_gallery: asset.show_in_gallery
+  }));
 
   if (allUIAssets.length === 0) {
     return null;

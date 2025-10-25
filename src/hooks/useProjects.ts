@@ -26,6 +26,7 @@ export interface Project {
   github_link: string | null;
   figma_link: string | null;
   is_published: boolean;
+  is_featured_on_home: boolean;
   sort_order: number;
   created_at: string;
   updated_at: string;
