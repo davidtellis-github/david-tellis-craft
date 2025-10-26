@@ -7,7 +7,11 @@ import ProjectTimeline from "@/components/portfolio/ProjectTimeline";
 import TimelineNav from "@/components/portfolio/TimelineNav";
 import { UIGallery } from "@/components/portfolio/UIGallery";
 import { useAllProjectAssets } from "@/hooks/useAllProjectAssets";
+import { UploadUIAssetsButton } from "@/components/dev/UploadUIAssetsButton";
+import { UploadNewGalleryButton } from "@/components/dev/UploadNewGalleryButton";
+import { uploadNewGalleryAssets } from "@/utils/uploadNewGalleryAssets";
 import { useEffect, useRef } from "react";
+import { toast } from "sonner";
 
 // Import work images
 import w1 from "@/assets/work-1.jpg";
@@ -21,7 +25,37 @@ const Portfolio = () => {
   const [activeCategory, setActiveCategory] = useState("all");
   const [hoveredProject, setHoveredProject] = useState<string | null>(null);
   const [hoveredCategory, setHoveredCategory] = useState<string | null>(null);
-  const { assets, isLoading } = useAllProjectAssets({ showInGalleryOnly: true });
+  const { assets, isLoading } = useAllProjectAssets();
+  const uploadTriggered = useRef(false);
+
+  useEffect(() => {
+    const autoUpload = async () => {
+      if (uploadTriggered.current) return;
+      uploadTriggered.current = true;
+      
+      const hasUploaded = localStorage.getItem('gallery_assets_uploaded');
+      if (hasUploaded) return;
+      
+      toast.info("Uploading new gallery assets...");
+      try {
+        const results = await uploadNewGalleryAssets();
+        const successCount = results.filter(r => r.success).length;
+        
+        if (successCount === results.length) {
+          toast.success(`Successfully uploaded all ${successCount} gallery images!`);
+          localStorage.setItem('gallery_assets_uploaded', 'true');
+          setTimeout(() => window.location.reload(), 1500);
+        } else {
+          toast.warning(`Uploaded ${successCount}/${results.length} assets.`);
+        }
+      } catch (error) {
+        console.error("Upload error:", error);
+        toast.error("Failed to upload assets.");
+      }
+    };
+    
+    autoUpload();
+  }, []);
 
   return (
     <div className="min-h-screen bg-background text-foreground">
@@ -101,8 +135,7 @@ const Portfolio = () => {
                 ">
                   <UIGallery 
                     assets={assets} 
-                    projectTitle="All Projects"
-                    showFilters={true}
+                    projectTitle="All Projects" 
                   />
                 </div>
               </section>

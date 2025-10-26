@@ -5,68 +5,37 @@ import { Eye, ExternalLink } from 'lucide-react';
 
 interface UIAsset {
   id: string;
-  file_path: string;
-  alt_text?: string;
-  caption?: string;
-  asset_tags?: string[];
-  contribution_level?: string;
-  is_featured?: boolean;
-  show_in_gallery?: boolean;
+  title: string;
+  description?: string;
+  image_url: string;
+  tags: string[];
+  contribution_level: string;
+  is_featured: boolean;
 }
 
 interface UIGalleryProps {
   assets: UIAsset[];
   projectTitle: string;
   className?: string;
-  showFilters?: boolean;
 }
 
 export const UIGallery: React.FC<UIGalleryProps> = ({ 
   assets, 
   projectTitle, 
-  className = "",
-  showFilters = false
+  className = "" 
 }) => {
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
   const [filter, setFilter] = useState<string>('all');
 
   const filteredAssets = assets.filter(asset => {
     if (filter === 'all') return true;
-    return asset.contribution_level?.toLowerCase().includes(filter.toLowerCase());
+    return asset.contribution_level.toLowerCase().includes(filter.toLowerCase());
   });
 
-  const contributionLevels = [...new Set(assets.map(asset => asset.contribution_level).filter(Boolean))];
+  const contributionLevels = [...new Set(assets.map(asset => asset.contribution_level))];
 
   return (
     <div className={`ui-gallery ${className}`}>
-      {showFilters && contributionLevels.length > 0 && (
-        <div className="flex gap-2 mb-6">
-          <button
-            onClick={() => setFilter('all')}
-            className={`px-4 py-2 rounded-lg transition-colors ${
-              filter === 'all'
-                ? 'bg-primary text-primary-foreground'
-                : 'bg-secondary text-secondary-foreground hover:bg-secondary/80'
-            }`}
-          >
-            All
-          </button>
-          {contributionLevels.map((level) => (
-            <button
-              key={level}
-              onClick={() => setFilter(level as string)}
-              className={`px-4 py-2 rounded-lg transition-colors ${
-                filter === level
-                  ? 'bg-primary text-primary-foreground'
-                  : 'bg-secondary text-secondary-foreground hover:bg-secondary/80'
-              }`}
-            >
-              {level}
-            </button>
-          ))}
-        </div>
-      )}
-      
       {/* Gallery Grid - Bento style full-width grid */}
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 gap-0.4 md:gap-2 ">
         {filteredAssets.map((asset, index) => {
@@ -83,13 +52,13 @@ export const UIGallery: React.FC<UIGalleryProps> = ({
                 ${isTall && !isLarge ? 'row-span-2' : ''}
                 ${isWide && !isLarge ? 'col-span-2' : ''}
               `}
-              onClick={() => setSelectedImage(asset.file_path)}
+              onClick={() => setSelectedImage(asset.image_url)}
             >
               {/* Image */}
               <div className="relative overflow-hidden h-full">
                 <img
-                  src={asset.file_path}
-                  alt={asset.alt_text || `${projectTitle} UI ${index + 1}`}
+                  src={asset.image_url}
+                  alt={asset.title || `${projectTitle} UI ${index + 1}`}
                   className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
                 />
                 

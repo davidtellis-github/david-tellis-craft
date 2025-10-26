@@ -7,8 +7,8 @@ const WorkGrid: React.FC = () => {
   const projectRefs = useRef<(HTMLDivElement | null)[]>([]);
   const { projects, loading, error } = useProjects();
 
-  // Filter by featured projects for the work grid
-  const displayProjects = projects.filter(p => p.is_featured_on_home);
+  // Take only the first 4 projects for the work grid
+  const displayProjects = projects.slice(0, 4);
 
   // Memoized intersection observer callback
   const handleIntersection = useCallback((entries: IntersectionObserverEntry[]) => {

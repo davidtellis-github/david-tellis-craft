@@ -8,6 +8,7 @@ import ValuesSection from "@/components/portfolio/ValuesSection";
 import BackgroundTimeline from "@/components/portfolio/BackgroundTimeline";
 import Testimonials from "@/components/portfolio/Testimonials";
 import Contact from "@/components/portfolio/Contact";
+import MigrationButton from "@/components/dev/MigrationButton";
 
 const Index = () => {
   const [showContent, setShowContent] = useState(false);
@@ -57,6 +58,9 @@ const Index = () => {
           </section>
         </div>
       </main>
+      
+      {/* Temporary migration button - remove after migrating */}
+      {/* <MigrationButton /> */}
     </div>
   );
 };

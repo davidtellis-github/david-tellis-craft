@@ -81,29 +81,38 @@ const ProjectDetails: React.FC = () => {
   const project = slug ? projectsData[slug] : null;
   
   // Get project assets for gallery
-  const { assets, isLoading } = useProjectAssets(slug || "");
+  const { assets, explorations, isLoading } = useProjectAssets(slug || "");
   
   const allUIAssets = [
     // Add mockup images from projectData
     ...(project?.mockupImages || []).map((imagePath, index) => ({
       id: `mockup-${index}`,
-      file_path: mockupImageMap[imagePath] || imagePath,
-      alt_text: `${project?.title || 'Project'} - UI ${index + 1}`,
-      caption: undefined,
-      asset_tags: [],
+      title: `${project?.title || 'Project'} - UI ${index + 1}`,
+      description: undefined,
+      image_url: mockupImageMap[imagePath] || imagePath,
+      tags: [],
       contribution_level: 'full',
       is_featured: index === 0
     })),
-    // Add database assets (now unified - includes all UI assets)
+    // Add database assets
     ...assets.map(asset => ({
       id: asset.id,
-      file_path: asset.file_path,
-      alt_text: asset.alt_text || `${project?.title || 'Project'} UI`,
-      caption: asset.caption,
-      asset_tags: asset.asset_tags,
-      contribution_level: asset.contribution_level || 'full',
-      is_featured: asset.is_featured,
-      show_in_gallery: asset.show_in_gallery
+      title: asset.alt_text || `${project?.title || 'Project'} UI`,
+      description: asset.caption,
+      image_url: asset.file_path,
+      tags: asset.asset_tags,
+      contribution_level: 'full',
+      is_featured: asset.is_featured
+    })),
+    // Add UI explorations
+    ...explorations.map(exploration => ({
+      id: exploration.id,
+      title: exploration.title,
+      description: exploration.description,
+      image_url: exploration.image_url,
+      tags: exploration.tags,
+      contribution_level: exploration.contribution_level,
+      is_featured: exploration.is_featured
     }))
   ];
 
