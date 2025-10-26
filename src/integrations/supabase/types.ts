@@ -50,6 +50,7 @@ export type Database = {
           asset_tags: string[] | null
           asset_type: string
           caption: string | null
+          contribution_level: string | null
           created_at: string
           file_name: string
           file_path: string
@@ -58,6 +59,7 @@ export type Database = {
           is_featured: boolean | null
           mime_type: string | null
           project_id: string
+          show_in_gallery: boolean | null
           sort_order: number | null
         }
         Insert: {
@@ -65,6 +67,7 @@ export type Database = {
           asset_tags?: string[] | null
           asset_type: string
           caption?: string | null
+          contribution_level?: string | null
           created_at?: string
           file_name: string
           file_path: string
@@ -73,6 +76,7 @@ export type Database = {
           is_featured?: boolean | null
           mime_type?: string | null
           project_id: string
+          show_in_gallery?: boolean | null
           sort_order?: number | null
         }
         Update: {
@@ -80,6 +84,7 @@ export type Database = {
           asset_tags?: string[] | null
           asset_type?: string
           caption?: string | null
+          contribution_level?: string | null
           created_at?: string
           file_name?: string
           file_path?: string
@@ -88,6 +93,7 @@ export type Database = {
           is_featured?: boolean | null
           mime_type?: string | null
           project_id?: string
+          show_in_gallery?: boolean | null
           sort_order?: number | null
         }
         Relationships: [
@@ -223,6 +229,7 @@ export type Database = {
           figma_link: string | null
           github_link: string | null
           id: string
+          is_featured_on_home: boolean | null
           is_published: boolean | null
           live_link: string | null
           project_tags: string[] | null
@@ -250,6 +257,7 @@ export type Database = {
           figma_link?: string | null
           github_link?: string | null
           id?: string
+          is_featured_on_home?: boolean | null
           is_published?: boolean | null
           live_link?: string | null
           project_tags?: string[] | null
@@ -277,6 +285,7 @@ export type Database = {
           figma_link?: string | null
           github_link?: string | null
           id?: string
+          is_featured_on_home?: boolean | null
           is_published?: boolean | null
           live_link?: string | null
           project_tags?: string[] | null
@@ -302,48 +311,6 @@ export type Database = {
             referencedColumns: ["id"]
           },
         ]
-      }
-      ui_explorations: {
-        Row: {
-          contribution_level: string
-          created_at: string
-          description: string | null
-          id: string
-          image_url: string
-          is_featured: boolean | null
-          project_id: string
-          sort_order: number | null
-          tags: string[] | null
-          title: string
-          updated_at: string
-        }
-        Insert: {
-          contribution_level?: string
-          created_at?: string
-          description?: string | null
-          id?: string
-          image_url: string
-          is_featured?: boolean | null
-          project_id: string
-          sort_order?: number | null
-          tags?: string[] | null
-          title: string
-          updated_at?: string
-        }
-        Update: {
-          contribution_level?: string
-          created_at?: string
-          description?: string | null
-          id?: string
-          image_url?: string
-          is_featured?: boolean | null
-          project_id?: string
-          sort_order?: number | null
-          tags?: string[] | null
-          title?: string
-          updated_at?: string
-        }
-        Relationships: []
       }
     }
     Views: {
