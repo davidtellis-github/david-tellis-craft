@@ -59,17 +59,25 @@ export const useProjectAssets = (projectSlug: string) => {
 
         if (assetsError) throw assetsError;
 
-        // Fetch UI explorations
-        const { data: explorationsData, error: explorationsError } = await supabase
-          .from('ui_explorations')
-          .select('*')
-          .eq('project_id', project.id)
-          .order('sort_order', { ascending: true });
-
-        if (explorationsError) throw explorationsError;
-
         setAssets(assetsData || []);
-        setExplorations(explorationsData || []);
+        
+        // Transform gallery assets to explorations format
+        const galleryAssets = (assetsData || [])
+          .filter(asset => asset.show_in_gallery)
+          .map(asset => ({
+            id: asset.id,
+            project_id: asset.project_id,
+            title: asset.alt_text || asset.file_name,
+            description: asset.caption,
+            image_url: asset.file_path,
+            contribution_level: asset.contribution_level || 'Full',
+            tags: asset.asset_tags || [],
+            sort_order: asset.sort_order || 0,
+            is_featured: asset.is_featured || false,
+            created_at: asset.created_at
+          }));
+        
+        setExplorations(galleryAssets);
 
       } catch (err) {
         console.error('Error fetching project assets:', err);

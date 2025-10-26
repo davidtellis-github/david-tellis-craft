@@ -146,16 +146,19 @@ export const uploadNewGalleryAssets = async () => {
         continue;
       }
 
-      // Insert into ui_explorations table
+      // Insert into project_assets table
       const { error: insertError } = await supabase
-        .from('ui_explorations')
+        .from('project_assets')
         .insert({
           project_id: projectData.id,
-          title: asset.title,
-          image_url: publicUrl,
-          tags: asset.tags,
+          asset_type: 'image',
+          file_name: asset.fileName,
+          file_path: publicUrl,
+          alt_text: asset.title,
+          asset_tags: asset.tags,
           contribution_level: asset.contributionLevel,
           is_featured: false,
+          show_in_gallery: true,
           sort_order: 0
         });
 

@@ -8,13 +8,13 @@ interface ResumeModalProps {
 }
 
 const ResumeModal: React.FC<ResumeModalProps> = ({ children }) => {
-  const resumeImage = "/lovable-uploads/51cba955-c59e-4315-b16f-3c235692a530.png";
+  const resumePdf = "/lovable-uploads/David_Tellis_Resume.pdf";
   
   const handleDownload = () => {
     // Create a download link for the resume
     const link = document.createElement('a');
-    link.href = resumeImage;
-    link.download = 'David_Tellis_Resume.png';
+    link.href = resumePdf;
+    link.download = 'David_Tellis_Resume.pdf';
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
@@ -40,7 +40,7 @@ const ResumeModal: React.FC<ResumeModalProps> = ({ children }) => {
                 Download
               </Button>
               <Button 
-                onClick={() => window.open(resumeImage, '_blank')}
+                onClick={() => window.open(resumePdf, '_blank')}
                 variant="outline" 
                 size="sm"
                 className="flex items-center gap-2"
@@ -52,10 +52,10 @@ const ResumeModal: React.FC<ResumeModalProps> = ({ children }) => {
           </div>
           
           <div className="border rounded-lg overflow-hidden bg-white">
-            <img
-              src={resumeImage}
-              alt="David Tellis Resume"
-              className="w-full h-auto max-h-[70vh] object-contain"
+            <iframe
+              src={resumePdf}
+              title="David Tellis Resume"
+              className="w-full h-[70vh]"
             />
           </div>
         </div>
