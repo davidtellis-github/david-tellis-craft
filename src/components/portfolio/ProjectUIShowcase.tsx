@@ -21,7 +21,7 @@ export const ProjectUIShowcase: React.FC<ProjectUIShowcaseProps> = ({
   contributionLevel,
   className = ""
 }) => {
-  const { assets, isLoading, error, featuredAssets, galleryAssets } = useProjectAssets(projectSlug);
+  const { assets, isLoading, error } = useProjectAssets(projectSlug);
   const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
 
   if (isLoading) {

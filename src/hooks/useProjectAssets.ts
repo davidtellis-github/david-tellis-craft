@@ -17,6 +17,13 @@ interface ProjectAsset {
   created_at: string;
 }
 
+/**
+ * Hook to fetch project assets from database
+ * Categorizes assets by type following the flowchart structure:
+ * - Portfolio Images (asset_type='portfolio-image')
+ * - Gallery Assets (asset_type='gallery-image')
+ * - Videos (asset_type='video')
+ */
 export const useProjectAssets = (projectSlug: string) => {
   const [assets, setAssets] = useState<ProjectAsset[]>([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -28,7 +35,7 @@ export const useProjectAssets = (projectSlug: string) => {
         setIsLoading(true);
         setError(null);
 
-        // First get the project ID from slug
+        // Get project ID from slug
         const { data: project, error: projectError } = await supabase
           .from('projects')
           .select('id')
@@ -38,7 +45,7 @@ export const useProjectAssets = (projectSlug: string) => {
         if (projectError) throw projectError;
         if (!project) throw new Error('Project not found');
 
-        // Fetch all project assets (now unified)
+        // Fetch all project assets
         const { data: assetsData, error: assetsError } = await supabase
           .from('project_assets')
           .select('*')
@@ -62,12 +69,26 @@ export const useProjectAssets = (projectSlug: string) => {
     }
   }, [projectSlug]);
 
+  // Categorize assets following flowchart structure
+  const portfolioImages = assets.filter(asset => 
+    asset.asset_type === 'portfolio-image' || asset.is_featured
+  );
+  
+  const galleryAssets = assets.filter(asset => 
+    asset.asset_type === 'gallery-image' && asset.show_in_gallery
+  );
+  
+  const videos = assets.filter(asset => 
+    asset.asset_type === 'video'
+  );
+
   return {
     assets,
     isLoading,
     error,
-    featuredAssets: assets.filter(asset => asset.is_featured),
-    galleryAssets: assets.filter(asset => !asset.is_featured),
+    portfolioImages,
+    galleryAssets,
+    videos,
     allVisuals: assets.sort((a, b) => a.sort_order - b.sort_order)
   };
 };
