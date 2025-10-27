@@ -78,7 +78,7 @@ const roles = [
 const BackgroundTimeline: React.FC = () => (
   <section
     id="background"
-    className="min-h-screen flex flex-col justify-start "
+    className="min-h-screen flex flex-col justify-start pt-[20vh] "
   >
    
 

@@ -7,7 +7,7 @@ const tabsData: { key: string; label: string; headline: React.ReactNode }[] = [
     label: "For anyone",
     headline: (
       <>
-        Hey there, I am designer who help startups and businesses build their products
+        Hey there, I am David<br/>  I design digital experiences<br/>  that work beautifully and make sense to people.
       </>
     ),
   },
@@ -42,7 +42,7 @@ const tabsData: { key: string; label: string; headline: React.ReactNode }[] = [
     key: "pms",
     label: "Product Managers",
     headline: (
-      <>I get what needs to be built, why it matters, and how it’ll impact users and numbers. I connect dots between vision, design, and dev.
+      <>I get what needs to be built,  why it matters, and how it’ll impact users and numbers. I connect dots between vision, design, and dev.
        </>
     ),
   },
@@ -107,11 +107,11 @@ const Hero: React.FC = () => {
           <TabsContent key={t.key} value={t.key} className="focus:outline-none">
 <h1
   className="
-    text-3xl           /* Default mobile size */
+    text-6xl           /* Default mobile size */
     sm:text-6xl         /* Small screens */
-    md:text-6xl         /* Tablets */
+    md:text-7xl         /* Tablets */
     lg:text-7xl         /* Large screens */
-    xl:text-7xl         /* Extra large screens */
+    xl:text-8xl         /* Extra large screens */
     2xl:text-8xl        /* Very large screens */
 
     font-medium 
