@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { supabase } from "@/integrations/supabase/client";
+import { projectsData } from "@/data/projectData";
 
 export interface Project {
   id: string;
@@ -78,6 +78,19 @@ export interface Category {
   description: string | null;
 }
 
+// Helper function to get category display name
+const getCategoryName = (slug: string): string => {
+  const categoryMap: Record<string, string> = {
+    'b2c': 'B2C',
+    'ai': 'AI',
+    'finops': 'FinOps',
+    'healthcare': 'Healthcare',
+    'webdesigns': 'Web Designs',
+    'ui-exploration': 'UI Exploration'
+  };
+  return categoryMap[slug] || slug;
+};
+
 export const useProjects = () => {
   const [projects, setProjects] = useState<Project[]>([]);
   const [categories, setCategories] = useState<Category[]>([]);
@@ -88,44 +101,82 @@ export const useProjects = () => {
     try {
       setLoading(true);
       
-      // Fetch projects with related data
-      const { data: projectsData, error: projectsError } = await supabase
-        .from('projects')
-        .select(`
-          *,
-          category:categories(*),
-          features:project_features(*),
-          process:project_process(*),
-          outcomes:project_outcomes(*),
-          assets:project_assets(*)
-        `)
-        .eq('is_published', true)
-        .order('sort_order', { ascending: true });
+      // Transform static project data to match our interface
+      const transformedProjects = Object.values(projectsData).map((project, index) => ({
+        id: project.id,
+        slug: project.id,
+        title: project.title,
+        subtitle: project.subtitle,
+        description: project.description,
+        category: {
+          id: project.category,
+          name: getCategoryName(project.category),
+          slug: project.category
+        },
+        year: project.year,
+        services: project.services,
+        role_title: project.role.title,
+        role_duration: project.role.duration,
+        role_team: project.role.team,
+        role_tools: project.role.tools,
+        context_problem: project.context.problem,
+        context_objective: project.context.objective,
+        context_audience: project.context.audience,
+        reflection: project.reflection,
+        live_link: project.links.live || null,
+        github_link: project.links.github || null,
+        figma_link: project.links.figma || null,
+        is_published: true,
+        sort_order: index,
+        created_at: new Date().toISOString(),
+        updated_at: new Date().toISOString(),
+        features: project.features.map((f, i) => ({
+          id: `${project.id}-feature-${i}`,
+          title: f.title,
+          description: f.description,
+          icon: f.icon,
+          sort_order: i
+        })),
+        process: project.process.map((p, i) => ({
+          id: `${project.id}-process-${i}`,
+          step: p.step,
+          description: p.description,
+          icon: p.icon,
+          sort_order: i
+        })),
+        outcomes: project.outcomes.map((o, i) => ({
+          id: `${project.id}-outcome-${i}`,
+          metric: o.metric,
+          value: o.value,
+          sort_order: i
+        })),
+        assets: (project.mockupImages || []).map((imgPath, i) => ({
+          id: `${project.id}-asset-${i}`,
+          asset_type: 'image' as const,
+          file_name: imgPath,
+          file_path: imgPath.startsWith('/') ? imgPath : `/src/assets/${imgPath}`,
+          file_size: null,
+          mime_type: 'image/jpeg',
+          alt_text: `${project.title} mockup ${i + 1}`,
+          caption: null,
+          is_featured: i === 0,
+          sort_order: i
+        }))
+      }));
 
-      if (projectsError) throw projectsError;
-
-      // Sort related data by sort_order and cast types
-      const sortedProjects = projectsData?.map(project => ({
-        ...project,
-        features: project.features?.sort((a, b) => (a.sort_order || 0) - (b.sort_order || 0)) || [],
-        process: project.process?.sort((a, b) => (a.sort_order || 0) - (b.sort_order || 0)) || [],
-        outcomes: project.outcomes?.sort((a, b) => (a.sort_order || 0) - (b.sort_order || 0)) || [],
-        assets: project.assets?.map(asset => ({
-          ...asset,
-          asset_type: asset.asset_type as 'image' | 'video' | 'document'
-        })).sort((a, b) => (a.sort_order || 0) - (b.sort_order || 0)) || []
-      })) || [];
-
-      setProjects(sortedProjects);
+      setProjects(transformedProjects);
       
-      // Fetch categories
-      const { data: categoriesData, error: categoriesError } = await supabase
-        .from('categories')
-        .select('*')
-        .order('name');
+      // Extract unique categories
+      const uniqueCategories = Array.from(
+        new Set(Object.values(projectsData).map(p => p.category))
+      ).map(slug => ({
+        id: slug,
+        name: getCategoryName(slug),
+        slug,
+        description: null
+      }));
 
-      if (categoriesError) throw categoriesError;
-      setCategories(categoriesData || []);
+      setCategories(uniqueCategories);
 
     } catch (err) {
       setError(err instanceof Error ? err.message : 'An error occurred');
@@ -161,35 +212,75 @@ export const useProject = (slug: string) => {
       try {
         setLoading(true);
         
-        const { data, error } = await supabase
-          .from('projects')
-          .select(`
-            *,
-            category:categories(*),
-            features:project_features(*),
-            process:project_process(*),
-            outcomes:project_outcomes(*),
-            assets:project_assets(*)
-          `)
-          .eq('slug', slug)
-          .eq('is_published', true)
-          .single();
+        const projectData = projectsData[slug];
+        
+        if (!projectData) {
+          throw new Error('Project not found');
+        }
 
-        if (error) throw error;
-
-        // Sort related data by sort_order and cast types
-        const sortedProject = {
-          ...data,
-          features: data.features?.sort((a, b) => (a.sort_order || 0) - (b.sort_order || 0)) || [],
-          process: data.process?.sort((a, b) => (a.sort_order || 0) - (b.sort_order || 0)) || [],
-          outcomes: data.outcomes?.sort((a, b) => (a.sort_order || 0) - (b.sort_order || 0)) || [],
-          assets: data.assets?.map(asset => ({
-            ...asset,
-            asset_type: asset.asset_type as 'image' | 'video' | 'document'
-          })).sort((a, b) => (a.sort_order || 0) - (b.sort_order || 0)) || []
+        const transformedProject: Project = {
+          id: projectData.id,
+          slug: projectData.id,
+          title: projectData.title,
+          subtitle: projectData.subtitle,
+          description: projectData.description,
+          category: {
+            id: projectData.category,
+            name: getCategoryName(projectData.category),
+            slug: projectData.category
+          },
+          year: projectData.year,
+          services: projectData.services,
+          role_title: projectData.role.title,
+          role_duration: projectData.role.duration,
+          role_team: projectData.role.team,
+          role_tools: projectData.role.tools,
+          context_problem: projectData.context.problem,
+          context_objective: projectData.context.objective,
+          context_audience: projectData.context.audience,
+          reflection: projectData.reflection,
+          live_link: projectData.links.live || null,
+          github_link: projectData.links.github || null,
+          figma_link: projectData.links.figma || null,
+          is_published: true,
+          sort_order: 0,
+          created_at: new Date().toISOString(),
+          updated_at: new Date().toISOString(),
+          features: projectData.features.map((f, i) => ({
+            id: `${projectData.id}-feature-${i}`,
+            title: f.title,
+            description: f.description,
+            icon: f.icon,
+            sort_order: i
+          })),
+          process: projectData.process.map((p, i) => ({
+            id: `${projectData.id}-process-${i}`,
+            step: p.step,
+            description: p.description,
+            icon: p.icon,
+            sort_order: i
+          })),
+          outcomes: projectData.outcomes.map((o, i) => ({
+            id: `${projectData.id}-outcome-${i}`,
+            metric: o.metric,
+            value: o.value,
+            sort_order: i
+          })),
+          assets: (projectData.mockupImages || []).map((imgPath, i) => ({
+            id: `${projectData.id}-asset-${i}`,
+            asset_type: 'image' as const,
+            file_name: imgPath,
+            file_path: imgPath.startsWith('/') ? imgPath : `/src/assets/${imgPath}`,
+            file_size: null,
+            mime_type: 'image/jpeg',
+            alt_text: `${projectData.title} mockup ${i + 1}`,
+            caption: null,
+            is_featured: i === 0,
+            sort_order: i
+          }))
         };
 
-        setProject(sortedProject);
+        setProject(transformedProject);
       } catch (err) {
         setError(err instanceof Error ? err.message : 'Project not found');
       } finally {
@@ -213,13 +304,16 @@ export const useCategories = () => {
   useEffect(() => {
     const fetchCategories = async () => {
       try {
-        const { data, error } = await supabase
-          .from('categories')
-          .select('*')
-          .order('name');
+        const uniqueCategories = Array.from(
+          new Set(Object.values(projectsData).map(p => p.category))
+        ).map(slug => ({
+          id: slug,
+          name: getCategoryName(slug),
+          slug,
+          description: null
+        }));
 
-        if (error) throw error;
-        setCategories(data || []);
+        setCategories(uniqueCategories);
       } catch (err) {
         setError(err instanceof Error ? err.message : 'An error occurred');
       } finally {

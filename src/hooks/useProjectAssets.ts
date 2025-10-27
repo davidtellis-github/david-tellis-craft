@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { supabase } from '@/integrations/supabase/client';
+import { projectsData } from '@/data/projectData';
 
 interface ProjectAsset {
   id: string;
@@ -40,48 +40,33 @@ export const useProjectAssets = (projectSlug: string) => {
         setIsLoading(true);
         setError(null);
 
-        // First get the project ID from slug
-        const { data: project, error: projectError } = await supabase
-          .from('projects')
-          .select('id')
-          .eq('slug', projectSlug)
-          .single();
-
-        if (projectError) throw projectError;
-        if (!project) throw new Error('Project not found');
-
-        // Fetch project assets
-        const { data: assetsData, error: assetsError } = await supabase
-          .from('project_assets')
-          .select('*')
-          .eq('project_id', project.id)
-          .order('sort_order', { ascending: true });
-
-        if (assetsError) throw assetsError;
-
-        setAssets(assetsData || []);
+        const project = projectsData[projectSlug];
         
-        // Transform gallery assets to explorations format
-        const galleryAssets = (assetsData || [])
-          .filter(asset => asset.show_in_gallery)
-          .map(asset => ({
-            id: asset.id,
-            project_id: asset.project_id,
-            title: asset.alt_text || asset.file_name,
-            description: asset.caption,
-            image_url: asset.file_path,
-            contribution_level: asset.contribution_level || 'Full',
-            tags: asset.asset_tags || [],
-            sort_order: asset.sort_order || 0,
-            is_featured: asset.is_featured || false,
-            created_at: asset.created_at
-          }));
-        
-        setExplorations(galleryAssets);
+        if (!project) {
+          throw new Error('Project not found');
+        }
+
+        // Transform mockup images to assets format
+        const mockupAssets: ProjectAsset[] = (project.mockupImages || []).map((imgPath, index) => ({
+          id: `${project.id}-asset-${index}`,
+          project_id: project.id,
+          asset_type: 'image',
+          file_name: imgPath,
+          file_path: imgPath.startsWith('/') ? imgPath : `/src/assets/${imgPath}`,
+          alt_text: `${project.title} mockup ${index + 1}`,
+          caption: undefined,
+          is_featured: index === 0,
+          asset_tags: [],
+          sort_order: index,
+          created_at: new Date().toISOString()
+        }));
+
+        setAssets(mockupAssets);
+        setExplorations([]);
 
       } catch (err) {
-        console.error('Error fetching project assets:', err);
-        setError(err instanceof Error ? err.message : 'Failed to fetch assets');
+        console.error('Error loading project assets:', err);
+        setError(err instanceof Error ? err.message : 'Failed to load assets');
       } finally {
         setIsLoading(false);
       }
