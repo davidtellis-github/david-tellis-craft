@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { projectsData } from '@/data/projectData';
+import { getImageUrl } from '@/data/imageAssets';
 
 interface ProjectAsset {
   id: string;
@@ -52,7 +53,7 @@ export const useProjectAssets = (projectSlug: string) => {
           project_id: project.id,
           asset_type: 'image',
           file_name: imgPath,
-          file_path: imgPath.startsWith('/') ? imgPath : `/src/assets/${imgPath}`,
+          file_path: getImageUrl(imgPath),
           alt_text: `${project.title} mockup ${index + 1}`,
           caption: undefined,
           is_featured: index === 0,

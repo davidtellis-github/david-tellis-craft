@@ -156,17 +156,17 @@ export const projectsData: Record<string, ProjectData> = {
     services: "Strategy + Design + Engineering",
     
     mockupImages: [
-      "/src/assets/futurcraft-mockup-9.jpg",
-      "/src/assets/futurcraft-mockup-10.jpg",
-      "/src/assets/futurcraft-mockup-11.jpg",
-      "/src/assets/futurcraft-mockup-1.jpg",
-      "/src/assets/futurcraft-mockup-2.jpg",
-      "/src/assets/futurcraft-mockup-3.jpg",
-      "/src/assets/futurcraft-mockup-4.jpg",
-      "/src/assets/futurcraft-mockup-5.jpg",
-      "/src/assets/futurcraft-mockup-6.jpg",
-      "/src/assets/futurcraft-mockup-7.jpg",
-      "/src/assets/futurcraft-mockup-8.jpg"
+      "futurcraft-mockup-9.jpg",
+      "futurcraft-mockup-10.jpg",
+      "futurcraft-mockup-11.jpg",
+      "futurcraft-mockup-1.jpg",
+      "futurcraft-mockup-2.jpg",
+      "futurcraft-mockup-3.jpg",
+      "futurcraft-mockup-4.jpg",
+      "futurcraft-mockup-5.jpg",
+      "futurcraft-mockup-6.jpg",
+      "futurcraft-mockup-7.jpg",
+      "futurcraft-mockup-8.jpg"
     ],
     
     role: {
@@ -454,8 +454,8 @@ export const projectsData: Record<string, ProjectData> = {
     services: "UX Strategy + Design",
     
     mockupImages: [
-      "/src/assets/boston-financial-mockup-2.png",
-      "/src/assets/boston-financial-mockup-1.png"
+      "boston-financial-mockup-2.png",
+      "boston-financial-mockup-1.png"
     ],
     
     role: {
@@ -731,6 +731,11 @@ export const projectsData: Record<string, ProjectData> = {
     category: "b2b",
     year: "2025",
     services: "Strategy + Design + Stakeholder Management",
+    
+    mockupImages: [
+      "ideabaaz-mockup-1.jpg",
+      "ideabaaz-mockup-2.jpg"
+    ],
     
     role: {
       title: "Product Designer & Project Lead",

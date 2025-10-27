@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { projectsData } from '@/data/projectData';
+import { getImageUrl } from '@/data/imageAssets';
 
 interface UIAsset {
   id: string;
@@ -35,7 +36,7 @@ export const useAllProjectAssets = () => {
               project_id: project.id,
               title: `${project.title} - Design ${index + 1}`,
               description: project.subtitle,
-              image_url: imgPath.startsWith('/') ? imgPath : `/src/assets/${imgPath}`,
+              image_url: getImageUrl(imgPath),
               tags: [project.category],
               contribution_level: 'Full',
               is_featured: index === 0,
