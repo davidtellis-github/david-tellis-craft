@@ -79,16 +79,16 @@ const Portfolio = () => {
               </div>
             </div> */}
 
-            {/* Gallery Image - Full Height Section */}
-            <section className="mb-20">
+            {/* Gallery Image - Full Screen Width */}
+            <div className="relative w-screen left-1/2 right-1/2 -mx-[50vw] mb-20">
               <div className="w-full h-screen">
                 <img 
                   src={portfolioGallery} 
                   alt="Portfolio Gallery" 
-                  className="w-full h-full object-cover rounded-lg"
+                  className="w-full h-full object-cover"
                 />
               </div>
-            </section>
+            </div>
 
            
 
