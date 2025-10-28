@@ -3,15 +3,13 @@ import { Link } from "react-router-dom";
 import { ArrowLeft } from "lucide-react";
 import ProjectTimeline from "@/components/portfolio/ProjectTimeline";
 import TimelineNav from "@/components/portfolio/TimelineNav";
-import { UIGallery } from "@/components/portfolio/UIGallery";
-import { useAllProjectAssets } from "@/hooks/useAllProjectAssets";
+import portfolioGallery from "@/assets/portfolio-gallery.png";
 
 
 const Portfolio = () => {
   const [activeCategory, setActiveCategory] = useState("all");
   const [hoveredProject, setHoveredProject] = useState<string | null>(null);
   const [hoveredCategory, setHoveredCategory] = useState<string | null>(null);
-  const { assets, isLoading } = useAllProjectAssets();
 
   return (
     <div className="min-h-screen bg-background text-foreground">
@@ -81,21 +79,16 @@ const Portfolio = () => {
               </div>
             </div> */}
 
-            {/* UI Gallery - Full Width Section */}
-            {!isLoading && assets.length > 0 && (
-              <section className="mb-20">
-             
-                
-                {/* Break out of container for full-width gallery */}
-                <div className="absolute inset-x-0 w-screen h-screen overflow-hidden h-screen
-                ">
-                  <UIGallery 
-                    assets={assets} 
-                    projectTitle="All Projects" 
-                  />
-                </div>
-              </section>
-            )}
+            {/* Gallery Image - Full Height Section */}
+            <section className="mb-20">
+              <div className="w-full h-screen">
+                <img 
+                  src={portfolioGallery} 
+                  alt="Portfolio Gallery" 
+                  className="w-full h-full object-cover rounded-lg"
+                />
+              </div>
+            </section>
 
            
 
