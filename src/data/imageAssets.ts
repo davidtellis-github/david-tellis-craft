@@ -38,6 +38,8 @@ import bostonFinancial2 from '@/assets/boston-financial-mockup-2.png';
 import ideabaaz1 from '@/assets/ideabaaz-mockup-1.jpg';
 import ideabaaz2 from '@/assets/ideabaaz-mockup-2.jpg';
 
+import weddingverseFeatured from '@/assets/weddingverse-featured.png';
+
 // Map filenames to imported image URLs
 export const imageAssets: Record<string, string> = {
   'weddingverse-mockup-1.jpg': weddingverse1,
@@ -78,6 +80,8 @@ export const imageAssets: Record<string, string> = {
   
   'ideabaaz-mockup-1.jpg': ideabaaz1,
   'ideabaaz-mockup-2.jpg': ideabaaz2,
+  
+  'weddingverse-featured.png': weddingverseFeatured,
 };
 
 // Helper function to resolve image paths

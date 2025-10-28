@@ -60,6 +60,7 @@ export const projectsData: Record<string, ProjectData> = {
     services: "Strategy + Design + Engineering",
     
     mockupImages: [
+      "weddingverse-featured.png",
       "weddingverse-mockup-1.jpg",
       "weddingverse-mockup-2.jpg",
       "weddingverse-mockup-3.jpg",
