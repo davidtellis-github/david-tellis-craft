@@ -107,7 +107,7 @@ const Hero: React.FC = () => {
           <TabsContent key={t.key} value={t.key} className="focus:outline-none">
 <h1
   className="
-    text-6xl           /* Default mobile size */
+    text-4xl           /* Default mobile size */
     sm:text-6xl         /* Small screens */
     md:text-7xl         /* Tablets */
     lg:text-7xl         /* Large screens */
