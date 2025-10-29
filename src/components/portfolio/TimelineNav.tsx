@@ -1,6 +1,5 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { useCategories } from "@/hooks/useProjects";
 
 interface TimelineNavProps {
   activeCategory: string;
@@ -15,50 +14,14 @@ const TimelineNav: React.FC<TimelineNavProps> = ({
   hoveredProject,
   onCategoryHover
 }) => {
-  const { categories, loading } = useCategories();
-
-  // Build categories list with "All" option
+  // Define fixed categories
   const allCategories = [
-    { id: "all", name: "All", slug: "all" },
-    ...categories
+    { id: 'all', name: 'All', slug: 'all' },
+    { id: 'live', name: 'Live', slug: 'live' },
+    { id: 'ui-designs', name: 'UI Designs', slug: 'ui-designs' },
+    { id: 'concepts', name: 'Concepts', slug: 'concepts' }
   ];
 
-  if (loading) {
-    return (
-      <nav
-        aria-label="Portfolio navigation"
-        className="hidden lg:block sticky top-0 h-[calc(100vh-5rem)] w-[min(18rem,24vw)] z-[56]"
-      >
-        <div className="relative h-full flex flex-col gap-[14vh]">
-          <Link
-            to="/"
-            aria-label="Home"
-            className="pt-10 leading-none select-none text-foreground 
-                       text-[clamp(20px,4vmin,32px)]  font-normal flex group relative"
-          >
-            <span className="inline-block">D</span>
-            <span
-              className="
-                inline-block opacity-0
-                group-hover:animate-spreadOut
-                group-hover:opacity-100
-              "
-            >
-              avid Tellis
-            </span>
-          </Link>
-          
-          <ul className="space-y-0 text-muted-foreground text-[clamp(12px,1.6vmin,16px)]">
-            {[...Array(6)].map((_, index) => (
-              <li key={index}>
-                <div className="w-20 h-4 bg-muted rounded animate-pulse mb-2"></div>
-              </li>
-            ))}
-          </ul>
-        </div>
-      </nav>
-    );
-  }
 
   return (
     <nav

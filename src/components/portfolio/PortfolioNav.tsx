@@ -1,13 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 
 const categories = [
-  { id: "b2c", label: "B2C" },
-  { id: "ai", label: "AI" },
-  { id: "healthcare", label: "Healthcare" },
-  { id: "finops", label: "Finops" },
-  { id: "webdesigns", label: "Web designs" },
-  { id: "interactions", label: "Interactions" },
-  { id: "b2b", label: "B2B" },
+  { id: "all", label: "All" },
+  { id: "live", label: "Live" },
+  { id: "ui-designs", label: "UI Designs" },
+  { id: "concepts", label: "Concepts" }
 ];
 
 interface PortfolioNavProps {
