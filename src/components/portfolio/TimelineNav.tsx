@@ -22,6 +22,18 @@ const TimelineNav: React.FC<TimelineNavProps> = ({
     { id: 'ui-designs', name: 'UI Designs', slug: 'ui-designs' }
   ];
 
+  const handleClick = (category: string) => {
+    onCategoryChange(category);
+    
+    // Scroll to UI Designs gallery if that category is clicked
+    if (category === 'ui-designs') {
+      const gallerySection = document.getElementById('ui-designs-gallery');
+      if (gallerySection) {
+        gallerySection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }
+  };
+
 
   return (
     <nav
@@ -59,7 +71,7 @@ const TimelineNav: React.FC<TimelineNavProps> = ({
           {allCategories.map((category) => (
             <li key={category.slug}>
               <button
-                onClick={() => onCategoryChange(category.slug)}
+                onClick={() => handleClick(category.slug)}
                 onMouseEnter={() => onCategoryHover(category.slug)}
                 onMouseLeave={() => onCategoryHover(null)}
                 className={`

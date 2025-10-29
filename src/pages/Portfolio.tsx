@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { ArrowLeft } from "lucide-react";
 import ProjectTimeline from "@/components/portfolio/ProjectTimeline";
 import TimelineNav from "@/components/portfolio/TimelineNav";
+import UIMasonryGallery from "@/components/portfolio/UIMasonryGallery";
 import portfolioGallery from "@/assets/portfolio-gallery.png";
 
 
@@ -79,16 +80,8 @@ const Portfolio = () => {
               </div>
             </div> */}
 
-            {/* Gallery Image - Full Screen Width */}
-            <div className="relative w-screen left-1/2 right-1/2 -mx-[50vw] mb-20">
-              <div className="w-full h-screen">
-                <img 
-                  src={portfolioGallery} 
-                  alt="Portfolio Gallery" 
-                  className="w-full h-full object-cover"
-                />
-              </div>
-            </div>
+            {/* UI Designs Masonry Gallery */}
+            <UIMasonryGallery />
 
            
 
