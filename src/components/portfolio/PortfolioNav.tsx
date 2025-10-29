@@ -2,9 +2,9 @@ import React, { useEffect } from "react";
 
 const categories = [
   { id: "all", label: "All" },
-  { id: "live", label: "Live" },
-  { id: "ui-designs", label: "UI Designs" },
-  { id: "concepts", label: "Concepts" }
+  { id: "product", label: "Product" },
+  { id: "concepts", label: "Concepts" },
+  { id: "ui-designs", label: "UI Designs" }
 ];
 
 interface PortfolioNavProps {

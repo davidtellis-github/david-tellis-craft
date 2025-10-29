@@ -38,6 +38,10 @@ import bostonFinancial2 from '@/assets/boston-financial-mockup-2.png';
 import ideabaaz1 from '@/assets/ideabaaz-mockup-1.jpg';
 import ideabaaz2 from '@/assets/ideabaaz-mockup-2.jpg';
 
+import verasap1 from '@/assets/verasap-mockup-1.png';
+import verasap2 from '@/assets/verasap-mockup-2.png';
+import verasap3 from '@/assets/verasap-mockup-3.png';
+
 import weddingverseFeatured from '@/assets/weddingverse-featured.png';
 
 // Map filenames to imported image URLs
@@ -80,6 +84,10 @@ export const imageAssets: Record<string, string> = {
   
   'ideabaaz-mockup-1.jpg': ideabaaz1,
   'ideabaaz-mockup-2.jpg': ideabaaz2,
+  
+  'verasap-mockup-1.png': verasap1,
+  'verasap-mockup-2.png': verasap2,
+  'verasap-mockup-3.png': verasap3,
   
   'weddingverse-featured.png': weddingverseFeatured,
 };

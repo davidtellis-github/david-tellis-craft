@@ -17,9 +17,9 @@ const TimelineNav: React.FC<TimelineNavProps> = ({
   // Define fixed categories
   const allCategories = [
     { id: 'all', name: 'All', slug: 'all' },
-    { id: 'live', name: 'Live', slug: 'live' },
-    { id: 'ui-designs', name: 'UI Designs', slug: 'ui-designs' },
-    { id: 'concepts', name: 'Concepts', slug: 'concepts' }
+    { id: 'product', name: 'Product', slug: 'product' },
+    { id: 'concepts', name: 'Concepts', slug: 'concepts' },
+    { id: 'ui-designs', name: 'UI Designs', slug: 'ui-designs' }
   ];
 
 
