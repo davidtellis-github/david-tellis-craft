@@ -109,10 +109,10 @@ const ProjectDetails: React.FC = () => {
         {/* Hero Section */}
         <section id="overview" className="py-20 pt-16">
             <div className="mb-16">
-            <h1 className="text-6xl md:text-7xl lg:text-8xl font-medium tracking-tight leading-[0.9] mb-8">
+            <h1 className="text-5xl md:text-6xl lg:text-7xl font-light tracking-tight leading-[1.1] mb-6">
               {project.title}
             </h1>
-            <p className="text-2xl text-muted-foreground mb-12">
+            <p className="text-xl md:text-2xl text-muted-foreground font-light leading-relaxed mb-12">
               {project.subtitle}
             </p>
 
@@ -137,27 +137,27 @@ const ProjectDetails: React.FC = () => {
             
             <div className="grid md:grid-cols-2 gap-16 mb-16">
               <div>
-                <p className="text-lg text-muted-foreground leading-relaxed">
+                <p className="text-base md:text-lg text-muted-foreground leading-[1.8] font-light">
                   {project.description}
                 </p>
               </div>
               
               <div className="space-y-6">
                 <div>
-                  <p className="text-sm uppercase tracking-wider text-muted-foreground mb-2">Role</p>
-                  <p className="text-lg">{project.role.title}</p>
+                  <p className="text-xs uppercase tracking-[0.15em] text-muted-foreground mb-2 font-medium">Role</p>
+                  <p className="text-base font-light">{project.role.title}</p>
                 </div>
                 <div>
-                  <p className="text-sm uppercase tracking-wider text-muted-foreground mb-2">Duration</p>
-                  <p className="text-lg">{project.role.duration}</p>
+                  <p className="text-xs uppercase tracking-[0.15em] text-muted-foreground mb-2 font-medium">Duration</p>
+                  <p className="text-base font-light">{project.role.duration}</p>
                 </div>
                 <div>
-                  <p className="text-sm uppercase tracking-wider text-muted-foreground mb-2">Team</p>
-                  <p className="text-lg">{project.role.team}</p>
+                  <p className="text-xs uppercase tracking-[0.15em] text-muted-foreground mb-2 font-medium">Team</p>
+                  <p className="text-base font-light">{project.role.team}</p>
                 </div>
                 <div>
-                  <p className="text-sm uppercase tracking-wider text-muted-foreground mb-2">Tools</p>
-                  <p className="text-lg">{project.role.tools.join(" • ")}</p>
+                  <p className="text-xs uppercase tracking-[0.15em] text-muted-foreground mb-2 font-medium">Tools</p>
+                  <p className="text-base font-light">{project.role.tools.join(" • ")}</p>
                 </div>
                 {project.id === "wedding-verse" && (
                   <div className="pt-4 border-t border-border/20">
@@ -176,10 +176,10 @@ const ProjectDetails: React.FC = () => {
           <Collapsible open={isGalleryOpen} onOpenChange={setIsGalleryOpen}>
             <CollapsibleTrigger className="w-full group">
               <div className="flex items-center justify-between py-6 hover:opacity-70 transition-opacity">
-                <div className="flex items-center gap-4">
+                  <div className="flex items-center gap-4">
                   <Images className="h-6 w-6" />
-                  <h2 className="text-5xl font-medium">Gallery</h2>
-                  <span className="text-2xl text-muted-foreground">
+                  <h2 className="text-4xl md:text-5xl font-light">Gallery</h2>
+                  <span className="text-xl md:text-2xl text-muted-foreground font-light">
                     ({allUIAssets.length})
                   </span>
                 </div>
@@ -209,16 +209,16 @@ const ProjectDetails: React.FC = () => {
 
         {/* Context Section */}
         <section id="context" className="py-20">
-          <h2 className="text-5xl font-medium mb-16">Context & Challenge</h2>
+          <h2 className="text-4xl md:text-5xl font-light mb-16">Context & Challenge</h2>
           <div className="grid md:grid-cols-2 gap-16">
             <div>
-              <h3 className="text-xl font-medium mb-4 text-muted-foreground uppercase tracking-wider">Problem</h3>
-              <p className="text-lg leading-relaxed mb-8">
+              <h3 className="text-sm font-medium mb-4 text-muted-foreground uppercase tracking-[0.15em]">Problem</h3>
+              <p className="text-base md:text-lg leading-[1.8] font-light mb-8">
                 {project.context.problem}
               </p>
               
-              <h3 className="text-xl font-medium mb-4 text-muted-foreground uppercase tracking-wider">Objective</h3>
-              <p className="text-lg leading-relaxed">
+              <h3 className="text-sm font-medium mb-4 text-muted-foreground uppercase tracking-[0.15em]">Objective</h3>
+              <p className="text-base md:text-lg leading-[1.8] font-light">
                 {project.context.objective}
               </p>
             </div>
@@ -238,22 +238,12 @@ const ProjectDetails: React.FC = () => {
 
         {/* Role & Impact */}
         <section id="role" className="py-20">
-          <h2 className="text-5xl font-medium mb-16">My Role & Impact</h2>
+          <h2 className="text-4xl md:text-5xl font-light mb-16">My Role & Impact</h2>
           <div className="grid md:grid-cols-2 gap-16">
-            {project.mockupImages && project.mockupImages[0] ? (
-              <div className="rounded-2xl overflow-hidden">
-                <img 
-                  src={mockupImageMap[project.mockupImages[0]] || project.mockupImages[0]} 
-                  alt={`${project.title} role mockup`}
-                  className="w-full h-full object-cover"
-                />
-              </div>
-            ) : (
-              <div className="bg-muted/30 rounded-2xl h-80"></div>
-            )}
+...
             <div>
-              <h3 className="text-xl font-medium mb-6 text-muted-foreground uppercase tracking-wider">Key Responsibilities</h3>
-              <ul className="space-y-3 text-lg mb-12">
+              <h3 className="text-sm font-medium mb-6 text-muted-foreground uppercase tracking-[0.15em]">Key Responsibilities</h3>
+              <ul className="space-y-3 text-base md:text-lg font-light leading-relaxed mb-12">
                 <li>Led end-to-end product design strategy</li>
                 <li>Conducted user research and stakeholder interviews</li>
                 <li>Designed multi-role interaction experiences</li>
@@ -261,12 +251,12 @@ const ProjectDetails: React.FC = () => {
                 <li>Collaborated closely with engineering team</li>
               </ul>
               
-              <h3 className="text-xl font-medium mb-6 text-muted-foreground uppercase tracking-wider">Outcomes</h3>
+              <h3 className="text-sm font-medium mb-6 text-muted-foreground uppercase tracking-[0.15em]">Outcomes</h3>
               <div className="space-y-4">
                 {project.outcomes.map((outcome, index) => (
                   <div key={index} className="flex justify-between items-center py-2 border-b border-border/20">
-                    <span className="text-lg">{outcome.metric}</span>
-                    <span className="text-lg font-mono">{outcome.value}</span>
+                    <span className="text-base md:text-lg font-light">{outcome.metric}</span>
+                    <span className="text-base md:text-lg font-mono font-normal">{outcome.value}</span>
                   </div>
                 ))}
               </div>
@@ -276,12 +266,12 @@ const ProjectDetails: React.FC = () => {
 
         {/* Features */}
         <section id="features" className="py-20">
-          <h2 className="text-5xl font-medium mb-16">Features & Complexity</h2>
+          <h2 className="text-4xl md:text-5xl font-light mb-16">Features & Complexity</h2>
           <div className="grid md:grid-cols-2 gap-8">
             {project.features.map((feature, index) => (
               <div key={index} className="border-l-2 border-border/20 pl-8 py-6">
-                <h3 className="text-2xl font-semibold mb-4">{feature.title}</h3>
-                <p className="text-lg text-muted-foreground leading-relaxed">
+                <h3 className="text-xl md:text-2xl font-normal mb-4">{feature.title}</h3>
+                <p className="text-base md:text-lg text-muted-foreground leading-[1.8] font-light">
                   {feature.description}
                 </p>
               </div>
@@ -291,16 +281,16 @@ const ProjectDetails: React.FC = () => {
 
         {/* Process */}
         <section id="process" className="py-20">
-          <h2 className="text-5xl font-medium mb-16">Process & Approach</h2>
+          <h2 className="text-4xl md:text-5xl font-light mb-16">Process & Approach</h2>
           <div className="space-y-12">
             {project.process.map((phase, index) => (
               <div key={index} className="flex items-start gap-8">
-                <div className="text-4xl font-mono text-muted-foreground">
+                <div className="text-3xl md:text-4xl font-light text-muted-foreground">
                   {String(index + 1).padStart(2, '0')}
                 </div>
                 <div>
-                  <h3 className="text-2xl font-semibold mb-2">{phase.step}</h3>
-                  <p className="text-lg text-muted-foreground">{phase.description}</p>
+                  <h3 className="text-xl md:text-2xl font-normal mb-2">{phase.step}</h3>
+                  <p className="text-base md:text-lg text-muted-foreground font-light leading-[1.8]">{phase.description}</p>
                 </div>
               </div>
             ))}
@@ -309,7 +299,7 @@ const ProjectDetails: React.FC = () => {
 
         {/* Video Walkthrough */}
         <section id="walkthrough" className="py-20">
-          <h2 className="text-5xl font-medium mb-16">Video Walkthrough</h2>
+          <h2 className="text-4xl md:text-5xl font-light mb-16">Video Walkthrough</h2>
           <div className="relative aspect-video bg-muted/50 rounded-2xl overflow-hidden">
             <div className="absolute inset-0 bg-gradient-to-br from-background/20 to-background/5 flex items-center justify-center">
               <div className="text-center">
@@ -324,9 +314,9 @@ const ProjectDetails: React.FC = () => {
 
         {/* Reflection */}
         <section id="reflection" className="py-20">
-          <h2 className="text-5xl font-medium mb-16">Reflection & Learnings</h2>
+          <h2 className="text-4xl md:text-5xl font-light mb-16">Reflection & Learnings</h2>
           <div className="max-w-3xl">
-            <p className="text-xl text-muted-foreground leading-relaxed">
+            <p className="text-lg md:text-xl text-muted-foreground leading-[1.8] font-light">
               {project.reflection}
             </p>
           </div>
@@ -334,47 +324,47 @@ const ProjectDetails: React.FC = () => {
 
         {/* CTA Section */}
         <section id="links" className="py-20 text-center">
-          <h2 className="text-4xl font-medium mb-8">View the Project</h2>
+          <h2 className="text-3xl md:text-4xl font-light mb-8">View the Project</h2>
           <div className="flex flex-wrap gap-6 justify-center">
             {project.links.live && (
-              <a 
+                <a 
                 href={project.links.live} 
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 bg-foreground text-background px-8 py-4 rounded-full hover:bg-foreground/90 transition-colors text-lg font-medium"
+                className="inline-flex items-center gap-2 bg-foreground text-background px-8 py-4 rounded-full hover:bg-foreground/90 transition-colors text-base font-normal"
               >
                 <ExternalLink className="h-5 w-5" />
                 Live Project
               </a>
             )}
             {project.links.figma && (
-              <a 
+                <a 
                 href={project.links.figma} 
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 border border-border px-8 py-4 rounded-full hover:bg-muted/50 transition-colors text-lg font-medium"
+                className="inline-flex items-center gap-2 border border-border px-8 py-4 rounded-full hover:bg-muted/50 transition-colors text-base font-normal"
               >
                 <Figma className="h-5 w-5" />
                 Figma
               </a>
             )}
             {project.links.github && (
-              <a 
+                <a 
                 href={project.links.github} 
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 border border-border px-8 py-4 rounded-full hover:bg-muted/50 transition-colors text-lg font-medium"
+                className="inline-flex items-center gap-2 border border-border px-8 py-4 rounded-full hover:bg-muted/50 transition-colors text-base font-normal"
               >
                 <Github className="h-5 w-5" />
                 GitHub
               </a>
             )}
             {project.links.playstore && (
-              <a 
+                <a 
                 href={project.links.playstore} 
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 border border-border px-8 py-4 rounded-full hover:bg-muted/50 transition-colors text-lg font-medium"
+                className="inline-flex items-center gap-2 border border-border px-8 py-4 rounded-full hover:bg-muted/50 transition-colors text-base font-normal"
               >
                 <Smartphone className="h-5 w-5" />
                 Download App
