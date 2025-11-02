@@ -6,83 +6,10 @@ import { projectsData } from "@/data/projectData";
 import { useProjectAssets } from "@/hooks/useProjectAssets";
 import { UIGallery } from "@/components/portfolio/UIGallery";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
-import bostonMockup1 from "@/assets/boston-financial-mockup-1.png";
-import bostonMockup2 from "@/assets/boston-financial-mockup-2.png";
-import futurcraftMockup1 from "@/assets/futurcraft-mockup-1.jpg";
-import futurcraftMockup2 from "@/assets/futurcraft-mockup-2.jpg";
-import futurcraftMockup3 from "@/assets/futurcraft-mockup-3.jpg";
-import futurcraftMockup4 from "@/assets/futurcraft-mockup-4.jpg";
-import futurcraftMockup5 from "@/assets/futurcraft-mockup-5.jpg";
-import futurcraftMockup6 from "@/assets/futurcraft-mockup-6.jpg";
-import futurcraftMockup7 from "@/assets/futurcraft-mockup-7.jpg";
-import futurcraftMockup8 from "@/assets/futurcraft-mockup-8.jpg";
-import futurcraftMockup9 from "@/assets/futurcraft-mockup-9.jpg";
-import futurcraftMockup10 from "@/assets/futurcraft-mockup-10.jpg";
-import futurcraftMockup11 from "@/assets/futurcraft-mockup-11.jpg";
-import turbocloudMockup1 from "@/assets/turbocloud-mockup-1.jpg";
-import turbocloudMockup2 from "@/assets/turbocloud-mockup-2.jpg";
-import turbocloudMockup3 from "@/assets/turbocloud-mockup-3.jpg";
-import turbocloudMockup4 from "@/assets/turbocloud-mockup-4.jpg";
-import medpassMockup1 from "@/assets/medpass-mockup-1.jpg";
-import medpassMockup2 from "@/assets/medpass-mockup-2.jpg";
-import medpassMockup3 from "@/assets/medpass-mockup-3.jpg";
-import medpassMockup4 from "@/assets/medpass-mockup-4.jpg";
-import medpassMockup5 from "@/assets/medpass-mockup-5.jpg";
-import weddingverseMockup1 from "@/assets/weddingverse-mockup-1.jpg";
-import weddingverseMockup2 from "@/assets/weddingverse-mockup-2.jpg";
-import weddingverseMockup3 from "@/assets/weddingverse-mockup-3.jpg";
-import weddingverseMockup4 from "@/assets/weddingverse-mockup-4.jpg";
-import weddingverseMockup5 from "@/assets/weddingverse-mockup-5.jpg";
-import weddingverseMockup6 from "@/assets/weddingverse-mockup-6.jpg";
-import weddingverseMockup7 from "@/assets/weddingverse-mockup-7.jpg";
-import weddingverseMockup8 from "@/assets/weddingverse-mockup-8.jpg";
-import weddingverseMockup9 from "@/assets/weddingverse-mockup-9.jpg";
+// Mockup images removed - ready for re-upload
 
-// Map of mockup images
-const mockupImageMap: Record<string, string> = {
-  "/src/assets/boston-financial-mockup-1.png": bostonMockup1,
-  "/src/assets/boston-financial-mockup-2.png": bostonMockup2,
-  "/src/assets/futurcraft-mockup-1.jpg": futurcraftMockup1,
-  "/src/assets/futurcraft-mockup-2.jpg": futurcraftMockup2,
-  "/src/assets/futurcraft-mockup-3.jpg": futurcraftMockup3,
-  "/src/assets/futurcraft-mockup-4.jpg": futurcraftMockup4,
-  "/src/assets/futurcraft-mockup-5.jpg": futurcraftMockup5,
-  "/src/assets/futurcraft-mockup-6.jpg": futurcraftMockup6,
-  "/src/assets/futurcraft-mockup-7.jpg": futurcraftMockup7,
-  "/src/assets/futurcraft-mockup-8.jpg": futurcraftMockup8,
-  "/src/assets/futurcraft-mockup-9.jpg": futurcraftMockup9,
-  "/src/assets/futurcraft-mockup-10.jpg": futurcraftMockup10,
-  "/src/assets/futurcraft-mockup-11.jpg": futurcraftMockup11,
-  "futurcraft-mockup-1.jpg": futurcraftMockup1,
-  "futurcraft-mockup-2.jpg": futurcraftMockup2,
-  "futurcraft-mockup-3.jpg": futurcraftMockup3,
-  "futurcraft-mockup-4.jpg": futurcraftMockup4,
-  "futurcraft-mockup-5.jpg": futurcraftMockup5,
-  "futurcraft-mockup-6.jpg": futurcraftMockup6,
-  "futurcraft-mockup-7.jpg": futurcraftMockup7,
-  "futurcraft-mockup-8.jpg": futurcraftMockup8,
-  "futurcraft-mockup-9.jpg": futurcraftMockup9,
-  "futurcraft-mockup-10.jpg": futurcraftMockup10,
-  "futurcraft-mockup-11.jpg": futurcraftMockup11,
-  "turbocloud-mockup-1.jpg": turbocloudMockup1,
-  "turbocloud-mockup-2.jpg": turbocloudMockup2,
-  "turbocloud-mockup-3.jpg": turbocloudMockup3,
-  "turbocloud-mockup-4.jpg": turbocloudMockup4,
-  "medpass-mockup-1.jpg": medpassMockup1,
-  "medpass-mockup-2.jpg": medpassMockup2,
-  "medpass-mockup-3.jpg": medpassMockup3,
-  "medpass-mockup-4.jpg": medpassMockup4,
-  "medpass-mockup-5.jpg": medpassMockup5,
-  "weddingverse-mockup-1.jpg": weddingverseMockup1,
-  "weddingverse-mockup-2.jpg": weddingverseMockup2,
-  "weddingverse-mockup-3.jpg": weddingverseMockup3,
-  "weddingverse-mockup-4.jpg": weddingverseMockup4,
-  "weddingverse-mockup-5.jpg": weddingverseMockup5,
-  "weddingverse-mockup-6.jpg": weddingverseMockup6,
-  "weddingverse-mockup-7.jpg": weddingverseMockup7,
-  "weddingverse-mockup-8.jpg": weddingverseMockup8,
-  "weddingverse-mockup-9.jpg": weddingverseMockup9,
-};
+// Map of mockup images - ready for re-upload
+const mockupImageMap: Record<string, string> = {};
 
 const ProjectDetails: React.FC = () => {
   const { slug } = useParams();

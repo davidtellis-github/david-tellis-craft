@@ -59,18 +59,7 @@ export const projectsData: Record<string, ProjectData> = {
     year: "2024",
     services: "Strategy + Design + Engineering",
     
-    mockupImages: [
-      "weddingverse-featured.png",
-      "weddingverse-mockup-1.jpg",
-      "weddingverse-mockup-2.jpg",
-      "weddingverse-mockup-3.jpg",
-      "weddingverse-mockup-4.jpg",
-      "weddingverse-mockup-5.jpg",
-      "weddingverse-mockup-6.jpg",
-      "weddingverse-mockup-7.jpg",
-      "weddingverse-mockup-8.jpg",
-      "weddingverse-mockup-9.jpg"
-    ],
+    mockupImages: [],
     
     role: {
       title: "Lead Product Designer",
@@ -156,19 +145,7 @@ export const projectsData: Record<string, ProjectData> = {
     year: "2025",
     services: "Strategy + Design + Engineering",
     
-    mockupImages: [
-      "futurcraft-mockup-9.jpg",
-      "futurcraft-mockup-10.jpg",
-      "futurcraft-mockup-11.jpg",
-      "futurcraft-mockup-1.jpg",
-      "futurcraft-mockup-2.jpg",
-      "futurcraft-mockup-3.jpg",
-      "futurcraft-mockup-4.jpg",
-      "futurcraft-mockup-5.jpg",
-      "futurcraft-mockup-6.jpg",
-      "futurcraft-mockup-7.jpg",
-      "futurcraft-mockup-8.jpg"
-    ],
+    mockupImages: [],
     
     role: {
       title: "Senior Product Designer",
@@ -296,12 +273,7 @@ export const projectsData: Record<string, ProjectData> = {
       figma: "https://figma.com/turbocloud"
     },
 
-    mockupImages: [
-      "turbocloud-mockup-1.jpg",
-      "turbocloud-mockup-2.jpg",
-      "turbocloud-mockup-3.jpg",
-      "turbocloud-mockup-4.jpg"
-    ]
+    mockupImages: []
   },
 
   "health-project": {
@@ -313,13 +285,7 @@ export const projectsData: Record<string, ProjectData> = {
     year: "2024",
     services: "Strategy + Design",
     
-    mockupImages: [
-      "medpass-mockup-1.jpg",
-      "medpass-mockup-2.jpg",
-      "medpass-mockup-3.jpg",
-      "medpass-mockup-4.jpg",
-      "medpass-mockup-5.jpg"
-    ],
+    mockupImages: [],
     
     role: {
       title: "Senior UX Designer",
@@ -387,10 +353,7 @@ export const projectsData: Record<string, ProjectData> = {
     year: "2024",
     services: "UX Strategy + Design",
     
-    mockupImages: [
-      "boston-financial-mockup-2.png",
-      "boston-financial-mockup-1.png"
-    ],
+    mockupImages: [],
     
     role: {
       title: "UX Strategist & Designer",
@@ -463,10 +426,7 @@ export const projectsData: Record<string, ProjectData> = {
     year: "2025",
     services: "Strategy + Design + Stakeholder Management",
     
-    mockupImages: [
-      "ideabaaz-mockup-1.jpg",
-      "ideabaaz-mockup-2.jpg"
-    ],
+    mockupImages: [],
     
     role: {
       title: "Product Designer & Project Lead",
@@ -555,12 +515,7 @@ export const projectsData: Record<string, ProjectData> = {
     year: "2024",
     services: "UX Strategy + Design",
     
-    mockupImages: [
-      "fitness-mockup-1.png",
-      "fitness-mockup-2.png",
-      "fitness-mockup-3.png",
-      "fitness-mockup-4.png"
-    ],
+    mockupImages: [],
     
     role: {
       title: "Product Designer",
@@ -633,11 +588,7 @@ export const projectsData: Record<string, ProjectData> = {
     year: "2025",
     services: "Design",
     
-    mockupImages: [
-      "verasap-mockup-1.png",
-      "verasap-mockup-2.png",
-      "verasap-mockup-3.png"
-    ],
+    mockupImages: [],
     
     role: {
       title: "Product Designer",
