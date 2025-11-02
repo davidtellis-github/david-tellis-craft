@@ -27,7 +27,14 @@ export const UIGallery: React.FC<UIGalleryProps> = ({
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
   const [filter, setFilter] = useState<string>('all');
 
-  const filteredAssets = assets.filter(asset => {
+  // Only show assets with valid image URLs
+  const validAssets = assets.filter(asset => 
+    asset.image_url && 
+    typeof asset.image_url === 'string' && 
+    asset.image_url.trim() !== ''
+  );
+
+  const filteredAssets = validAssets.filter(asset => {
     if (filter === 'all') return true;
     return asset.contribution_level.toLowerCase().includes(filter.toLowerCase());
   });
