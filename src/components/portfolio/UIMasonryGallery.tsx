@@ -47,7 +47,7 @@ const UIMasonryGallery = () => {
               className="break-inside-avoid cursor-pointer group"
               onClick={() => setSelectedImage(image)}
             >
-              <div className="relative overflow-hidden rounded-lg bg-muted/50">
+              <div className="relative overflow-hidden bg-muted/50">
                 <img
                   src={image.src}
                   alt={image.alt}
