@@ -40,7 +40,7 @@ const UIMasonryGallery = () => {
   return (
     <>
       <section id="ui-designs-gallery" className="w-full py-20">
-        <div className="columns-1 sm:columns-2 lg:columns-3 xl:columns-4 gap-4 space-y-4">
+        <div className="columns-1 sm:columns-2 lg:columns-3 xl:columns-4 gap-1 space-y-1">
           {uiImages.map((image) => (
             <div
               key={image.id}
