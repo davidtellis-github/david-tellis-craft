@@ -1,9 +1,6 @@
-// Wedding Verse
-import weddingverseHero from '@/assets/weddingverse-hero.png';
-
 // Image asset mapping - ready for new uploads
 export const imageAssets: Record<string, string> = {
-  'weddingverse-hero.png': weddingverseHero,
+  // Project mockup images will be added here when re-uploaded
 };
 
 // Helper function to resolve image paths

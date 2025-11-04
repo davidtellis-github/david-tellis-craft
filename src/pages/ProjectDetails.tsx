@@ -8,13 +8,8 @@ import { UIGallery } from "@/components/portfolio/UIGallery";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
 // Mockup images removed - ready for re-upload
 
-// Import mockup images
-import weddingverseHero from '@/assets/weddingverse-hero.png';
-
-// Map of mockup images
-const mockupImageMap: Record<string, string> = {
-  'weddingverse-hero.png': weddingverseHero,
-};
+// Map of mockup images - ready for re-upload
+const mockupImageMap: Record<string, string> = {};
 
 const ProjectDetails: React.FC = () => {
   const { slug } = useParams();
