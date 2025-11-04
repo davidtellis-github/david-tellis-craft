@@ -59,7 +59,7 @@ export const projectsData: Record<string, ProjectData> = {
     year: "2024",
     services: "Strategy + Design + Engineering",
     
-    mockupImages: [],
+    mockupImages: ['weddingverse-hero.png'],
     
     role: {
       title: "Lead Product Designer",
