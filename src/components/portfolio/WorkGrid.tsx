@@ -136,60 +136,60 @@ const WorkGrid: React.FC = () => {
                 data-index={index}
                 className="border-t border-border pt-10 first:border-t-0 first:pt-0 transition-all duration-500"
               >
-                {/* Title Row - Full Width */}
-                <div className="flex items-center justify-between w-full pb-10">
-                  <div className="flex items-center gap-8 ">
-                    {/* Number */}
-                    <div className="text-2xl font-semibold text-muted-foreground ">
-                      {String(index + 1).padStart(2, '0')}
+                <Link to={`/project/${project.slug}`} className="block group cursor-pointer" aria-label={`View case study: ${project.title}`}>
+                  {/* Title Row - Full Width */}
+                  <div className="flex items-center justify-between w-full pb-10">
+                    <div className="flex items-center gap-8 ">
+                      {/* Number */}
+                      <div className="text-2xl font-semibold text-muted-foreground ">
+                        {String(index + 1).padStart(2, '0')}
+                      </div>
+                      
+                      {/* Title */}
+                      <h3 className="text-2xl lg:text-4xl font-medium  tracking-loose">
+                        {project.title}
+                      </h3>
                     </div>
                     
-                    {/* Title */}
-                    <h3 className="text-2xl lg:text-4xl font-medium  tracking-loose">
-                      {project.title}
-                    </h3>
-                  </div>
-                  
-                  {/* Arrow */}
-                  <Link to={`/project/${project.slug}`} className="group" aria-label={`View case study: ${project.title}`}>
+                    {/* Arrow */}
                     <div className="w-10 h-10 flex items-center justify-center bg-foreground text-background rounded-full group-hover:scale-110 transition-all duration-300">
                       <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-5 h-5">
                         <path d="M7 17L17 7M17 7H7M17 7V17" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                       </svg>
                     </div>
-                  </Link>
-                </div>
-
-                {/* Video and Content - Shown based on scroll */}
-                <div className={`overflow-hidden autoplay-true transition-all duration-700 mt-6 ${
-                  isExpanded 
-                    ? 'opacity-100 max-h-full' 
-                    : 'opacity-0 max-h-0'
-                }`}>
-                  {/* Featured Asset or Placeholder */}
-                  <div className="aspect-video w-full mb-6">
-                    {featuredAsset && featuredAsset.asset_type === 'video' ? (
-                      <iframe
-                        src={featuredAsset.file_path}
-                        className="w-full h-full rounded-lg"
-                        frameBorder="0"
-                        allow="autoplay; fullscreen; picture-in-picture"
-                        allowFullScreen
-                        title={`${project.title} video preview`}
-                      ></iframe>
-                    ) : featuredAsset && featuredAsset.asset_type === 'image' ? (
-                      <img 
-                        src={featuredAsset.file_path} 
-                        alt={featuredAsset.alt_text || `${project.title} preview`}
-                        className="w-full h-full object-cover rounded-lg"
-                      />
-                    ) : (
-                      <div className="w-full h-full bg-muted rounded-lg flex items-center justify-center">
-                        <span className="text-muted-foreground">Preview coming soon</span>
-                      </div>
-                    )}
                   </div>
-                </div>
+
+                  {/* Video and Content - Shown based on scroll */}
+                  <div className={`overflow-hidden autoplay-true transition-all duration-700 mt-6 ${
+                    isExpanded 
+                      ? 'opacity-100 max-h-full' 
+                      : 'opacity-0 max-h-0'
+                  }`}>
+                    {/* Featured Asset or Placeholder */}
+                    <div className="aspect-video w-full mb-6">
+                      {featuredAsset && featuredAsset.asset_type === 'video' ? (
+                        <iframe
+                          src={featuredAsset.file_path}
+                          className="w-full h-full rounded-lg pointer-events-none"
+                          frameBorder="0"
+                          allow="autoplay; fullscreen; picture-in-picture"
+                          allowFullScreen
+                          title={`${project.title} video preview`}
+                        ></iframe>
+                      ) : featuredAsset && featuredAsset.asset_type === 'image' ? (
+                        <img 
+                          src={featuredAsset.file_path} 
+                          alt={featuredAsset.alt_text || `${project.title} preview`}
+                          className="w-full h-full object-cover rounded-lg"
+                        />
+                      ) : (
+                        <div className="w-full h-full bg-muted rounded-lg flex items-center justify-center">
+                          <span className="text-muted-foreground">Preview coming soon</span>
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                </Link>
               </div>
             );
           })}
