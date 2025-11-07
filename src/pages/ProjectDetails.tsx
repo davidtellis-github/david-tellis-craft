@@ -193,6 +193,7 @@ const ProjectDetails: React.FC = () => {
 
         {/* Context Section */}
         <section id="context" className="py-12 border-b border-border/10">
+          <h2 className="text-2xl font-light mb-8">Context & Challenge</h2>
           <div className="grid md:grid-cols-2 gap-12">
             <div>
               <h3 className="text-sm font-medium mb-3 text-muted-foreground uppercase tracking-[0.15em]">Problem</h3>
@@ -221,6 +222,7 @@ const ProjectDetails: React.FC = () => {
 
         {/* Role & Impact */}
         <section id="role" className="py-12 border-b border-border/10">
+          <h2 className="text-2xl font-light mb-8">Role & Impact</h2>
           <div className="grid md:grid-cols-2 gap-12">
             {project.mockupImages && project.mockupImages[2] ? (
               <div className="rounded-2xl overflow-hidden h-full">
@@ -258,6 +260,7 @@ const ProjectDetails: React.FC = () => {
 
         {/* Features */}
         <section id="features" className="py-12 border-b border-border/10">
+          <h2 className="text-2xl font-light mb-8">Features & Complexity</h2>
           <div className="grid md:grid-cols-2 gap-6">
             {project.features.map((feature, index) => (
               <div key={index} className="border-l-2 border-border/20 pl-6 py-4">
@@ -272,6 +275,7 @@ const ProjectDetails: React.FC = () => {
 
         {/* Process */}
         <section id="process" className="py-12 border-b border-border/10">
+          <h2 className="text-2xl font-light mb-8">Process & Approach</h2>
           <div className="space-y-8">
             {project.process.map((phase, index) => (
               <div key={index} className="flex items-start gap-6">
@@ -290,6 +294,7 @@ const ProjectDetails: React.FC = () => {
         {/* Design System Section */}
         {project.designSystem && (
           <section id="design-system" className="py-12 border-b border-border/10">
+            <h2 className="text-2xl font-light mb-8">Design System</h2>
             <div className="mb-8">
               <h3 className="text-sm font-medium mb-4 text-muted-foreground uppercase tracking-[0.15em]">System Goals</h3>
               <ul className="space-y-2 text-sm font-light leading-relaxed">
@@ -341,6 +346,7 @@ const ProjectDetails: React.FC = () => {
         {/* Iterations & UX Decisions Section */}
         {project.iterations && (
           <section id="iterations" className="py-12 border-b border-border/10">
+            <h2 className="text-2xl font-light mb-8">Iterations & UX Decisions</h2>
             {project.iterations.intro && (
               <p className="text-sm text-muted-foreground leading-[1.8] font-light mb-8">
                 {project.iterations.intro}
@@ -392,6 +398,7 @@ const ProjectDetails: React.FC = () => {
 
         {/* Video Walkthrough */}
         <section id="walkthrough" className="py-12 border-b border-border/10">
+          <h2 className="text-2xl font-light mb-8">Video Walkthrough</h2>
           <div className="relative aspect-video bg-muted/50 rounded-xl overflow-hidden">
             <div className="absolute inset-0 bg-gradient-to-br from-background/20 to-background/5 flex items-center justify-center">
               <div className="text-center">
@@ -406,6 +413,7 @@ const ProjectDetails: React.FC = () => {
 
         {/* Reflection */}
         <section id="reflection" className="py-12 border-b border-border/10">
+          <h2 className="text-2xl font-light mb-8">Reflection & Learnings</h2>
           <div className="max-w-3xl">
             <p className="text-base text-muted-foreground leading-[1.8] font-light">
               {project.reflection}
@@ -415,6 +423,7 @@ const ProjectDetails: React.FC = () => {
 
         {/* Gallery Section */}
         <section id="gallery" className="py-12 border-b border-border/10">
+          <h2 className="text-2xl font-light mb-8">UI Gallery</h2>
           {!isLoading && allUIAssets.length > 0 && (
             <UIGallery 
               assets={allUIAssets} 
@@ -430,6 +439,7 @@ const ProjectDetails: React.FC = () => {
 
         {/* CTA Section */}
         <section id="links" className="py-16 text-center">
+          <h2 className="text-2xl font-light mb-8">View the Project</h2>
           <div className="flex flex-wrap gap-4 justify-center">
             {project.links.live && (
                 <a 
