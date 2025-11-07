@@ -361,14 +361,16 @@ const ProjectDetails: React.FC = () => {
               </div>
             )}
 
-            <div className="space-y-6">
+            <div className="columns-1 sm:columns-2 lg:columns-3 gap-4 space-y-4">
               {project.iterations.images.map((imagePath, index) => (
-                <div key={index} className="rounded-xl overflow-hidden bg-muted/20">
-                  <img 
-                    src={mockupImageMap[imagePath] || imagePath}
-                    alt={`Design Iterations ${index + 1}`}
-                    className="w-full h-auto object-cover"
-                  />
+                <div key={index} className="break-inside-avoid cursor-pointer group">
+                  <div className="rounded-xl overflow-hidden bg-muted/20">
+                    <img 
+                      src={mockupImageMap[imagePath] || imagePath}
+                      alt={`Design Iterations ${index + 1}`}
+                      className="w-full h-auto object-cover transition-transform duration-300 group-hover:scale-105"
+                    />
+                  </div>
                 </div>
               ))}
             </div>
