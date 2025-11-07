@@ -201,7 +201,9 @@ export const projectsData: Record<string, ProjectData> = {
       images: [
         "wedding-verse-design-system-1.png",
         "wedding-verse-design-system-2.png",
-        "wedding-verse-design-system-3.png"
+        "wedding-verse-design-system-3.png",
+        "wedding-verse-design-system-4.png",
+        "wedding-verse-design-system-5.png"
       ]
     },
 
