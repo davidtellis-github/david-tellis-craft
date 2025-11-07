@@ -189,13 +189,6 @@ const WorkGrid: React.FC = () => {
                       </div>
                     )}
                   </div>
-                  
-                  {/* Project Description */}
-                  <div className="max-w-2xl">
-                    <p className="max-w-full text-md font-light leading-[1.4] tracking-loose text-foreground text-left">
-                      {project.description}
-                    </p>
-                  </div>
                 </div>
               </div>
             );
