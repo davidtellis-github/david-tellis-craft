@@ -4,12 +4,26 @@ import ideabaazFeatured from '@/assets/ideabaaz-featured.png';
 import futurcraftFeatured from '@/assets/futurcraft-featured.png';
 import turbocloudFeatured from '@/assets/turbocloud-featured.png';
 
+// Wedding Verse Design System & Iterations
+import designSystem1 from '@/assets/wedding-verse-design-system-1.png';
+import designSystem2 from '@/assets/wedding-verse-design-system-2.png';
+import designSystem3 from '@/assets/wedding-verse-design-system-3.png';
+import iterations1 from '@/assets/wedding-verse-iterations-1.png';
+import iterations2 from '@/assets/wedding-verse-iterations-2.png';
+import iterations3 from '@/assets/wedding-verse-iterations-3.png';
+
 // Image asset mapping
 export const imageAssets: Record<string, string> = {
   'weddingverse-featured.png': weddingverseFeatured,
   'ideabaaz-featured.png': ideabaazFeatured,
   'futurcraft-featured.png': futurcraftFeatured,
   'turbocloud-featured.png': turbocloudFeatured,
+  'wedding-verse-design-system-1.png': designSystem1,
+  'wedding-verse-design-system-2.png': designSystem2,
+  'wedding-verse-design-system-3.png': designSystem3,
+  'wedding-verse-iterations-1.png': iterations1,
+  'wedding-verse-iterations-2.png': iterations2,
+  'wedding-verse-iterations-3.png': iterations3,
 };
 
 // Helper function to resolve image paths

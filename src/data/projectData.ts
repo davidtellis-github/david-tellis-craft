@@ -39,6 +39,27 @@ export interface ProjectData {
 
   reflection: string;
 
+  designSystem?: {
+    goals: string[];
+    coreElements: Array<{
+      title: string;
+      description: string;
+    }>;
+    note?: string;
+    images: string[];
+  };
+
+  iterations?: {
+    intro: string;
+    decisions: Array<{
+      challenge: string;
+      iteration: string;
+      finalDecision: string;
+    }>;
+    note?: string;
+    images: string[];
+  };
+
   links: {
     live?: string;
     github?: string;
@@ -147,6 +168,79 @@ export const projectsData: Record<string, ProjectData> = {
     ],
 
     reflection: "Designing Wedding Verse taught me how to build empathy across contrasting users — the emotional couple, the structured planner, and the busy vendor. The key was balancing emotional storytelling with design precision. Key learnings: Systems thinking is crucial when multiple roles share one workspace. AI can amplify creativity — if designed to feel human. Luxury aesthetics don't need to sacrifice accessibility. Next steps: Refining multi-user collaboration (couple + planner), expanding Neyara's conversational scope, and integrating visionboard-based recommendations.",
+
+    designSystem: {
+      goals: [
+        "Create a unified language that works across Couple, Planner, and Vendor roles",
+        "Ensure scalable color theming and component reuse",
+        "Reduce design debt and developer handoff friction"
+      ],
+      coreElements: [
+        {
+          title: "Typography",
+          description: "Hierarchical type scale with distinct weights for information density"
+        },
+        {
+          title: "Color Tokens",
+          description: "Dynamic theme logic for light/dark modes and role-based color accents"
+        },
+        {
+          title: "Components",
+          description: "100+ reusable components with interactive states and auto-layout logic"
+        },
+        {
+          title: "Patterns",
+          description: "Dashboard templates, onboarding flows, and vendor card systems"
+        },
+        {
+          title: "Icons & Microinteractions",
+          description: "Lightweight icon set + consistent motion system for states and feedback"
+        }
+      ],
+      note: "This system became the foundation for all current and upcoming features — powering dashboards, Neyara AI, and future mobile expansion.",
+      images: [
+        "wedding-verse-design-system-1.png",
+        "wedding-verse-design-system-2.png",
+        "wedding-verse-design-system-3.png"
+      ]
+    },
+
+    iterations: {
+      intro: "The Wedding Verse interface went through multiple cycles of exploration — over 2,000 Figma frames across 12 user journeys. Each iteration was data-driven, tested, and refined for clarity and emotional resonance.",
+      decisions: [
+        {
+          challenge: "Role Switching Confusion",
+          iteration: "Tested multiple navigation patterns (toggle, segmented control, breadcrumb)",
+          finalDecision: "Adopted hybrid top bar with quick switch + contextual breadcrumbs"
+        },
+        {
+          challenge: "Overloaded Vendor Cards",
+          iteration: "Explored compact, expandable, and layered versions",
+          finalDecision: "Finalized progressive disclosure layout to balance depth and clarity"
+        },
+        {
+          challenge: "Onboarding Fatigue",
+          iteration: "Compared form-based vs conversational flow",
+          finalDecision: "Implemented chat-style onboarding powered by Neyara prompts"
+        },
+        {
+          challenge: "Moodboard Collaboration",
+          iteration: "Tested gallery grid vs drag-and-drop canvas",
+          finalDecision: "Opted for freeform grid to mirror creative workflow of planners"
+        },
+        {
+          challenge: "Mobile Responsiveness",
+          iteration: "Iterated grid logic across 4 breakpoints",
+          finalDecision: "Used adaptive components with fluid column resizing"
+        }
+      ],
+      note: "Every iteration was a step toward simplicity — making a complex, multi-role system feel effortless and personal.",
+      images: [
+        "wedding-verse-iterations-1.png",
+        "wedding-verse-iterations-2.png",
+        "wedding-verse-iterations-3.png"
+      ]
+    },
 
     links: {
       live: "https://weddingverse.com",

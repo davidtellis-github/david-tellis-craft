@@ -11,6 +11,12 @@ import weddingverseFeatured from '@/assets/weddingverse-featured.png';
 import ideabaazFeatured from '@/assets/ideabaaz-featured.png';
 import futurcraftFeatured from '@/assets/futurcraft-featured.png';
 import turbocloudFeatured from '@/assets/turbocloud-featured.png';
+import designSystem1 from '@/assets/wedding-verse-design-system-1.png';
+import designSystem2 from '@/assets/wedding-verse-design-system-2.png';
+import designSystem3 from '@/assets/wedding-verse-design-system-3.png';
+import iterations1 from '@/assets/wedding-verse-iterations-1.png';
+import iterations2 from '@/assets/wedding-verse-iterations-2.png';
+import iterations3 from '@/assets/wedding-verse-iterations-3.png';
 
 // Map of mockup images
 const mockupImageMap: Record<string, string> = {
@@ -18,6 +24,12 @@ const mockupImageMap: Record<string, string> = {
   'ideabaaz-featured.png': ideabaazFeatured,
   'futurcraft-featured.png': futurcraftFeatured,
   'turbocloud-featured.png': turbocloudFeatured,
+  'wedding-verse-design-system-1.png': designSystem1,
+  'wedding-verse-design-system-2.png': designSystem2,
+  'wedding-verse-design-system-3.png': designSystem3,
+  'wedding-verse-iterations-1.png': iterations1,
+  'wedding-verse-iterations-2.png': iterations2,
+  'wedding-verse-iterations-3.png': iterations3,
 };
 
 const ProjectDetails: React.FC = () => {
@@ -306,6 +318,113 @@ const ProjectDetails: React.FC = () => {
             ))}
           </div>
         </section>
+
+        {/* Design System Section */}
+        {project.designSystem && (
+          <section id="design-system" className="py-20">
+            <h2 className="text-4xl md:text-5xl font-light mb-16">Design System</h2>
+            
+            <div className="mb-12">
+              <h3 className="text-sm font-medium mb-6 text-muted-foreground uppercase tracking-[0.15em]">System Goals</h3>
+              <ul className="space-y-3 text-base md:text-lg font-light leading-relaxed">
+                {project.designSystem.goals.map((goal, index) => (
+                  <li key={index} className="flex items-start gap-3">
+                    <span className="text-muted-foreground mt-1">•</span>
+                    <span>{goal}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            <div className="mb-12">
+              <h3 className="text-sm font-medium mb-6 text-muted-foreground uppercase tracking-[0.15em]">Core Elements</h3>
+              <div className="grid md:grid-cols-2 gap-8">
+                {project.designSystem.coreElements.map((element, index) => (
+                  <div key={index} className="border-l-2 border-border/20 pl-8 py-4">
+                    <h4 className="text-lg md:text-xl font-normal mb-2">{element.title}</h4>
+                    <p className="text-base text-muted-foreground leading-[1.8] font-light">
+                      {element.description}
+                    </p>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {project.designSystem.note && (
+              <div className="bg-muted/30 rounded-lg p-6 mb-12">
+                <p className="text-base md:text-lg text-muted-foreground leading-[1.8] font-light italic">
+                  {project.designSystem.note}
+                </p>
+              </div>
+            )}
+
+            <div className="grid md:grid-cols-3 gap-6">
+              {project.designSystem.images.map((imagePath, index) => (
+                <div key={index} className="rounded-xl overflow-hidden bg-muted/20">
+                  <img 
+                    src={mockupImageMap[imagePath] || imagePath}
+                    alt={`Design System ${index + 1}`}
+                    className="w-full h-auto object-cover"
+                  />
+                </div>
+              ))}
+            </div>
+          </section>
+        )}
+
+        {/* Iterations & UX Decisions Section */}
+        {project.iterations && (
+          <section id="iterations" className="py-20">
+            <h2 className="text-4xl md:text-5xl font-light mb-16">Iterations & UX Decisions</h2>
+            
+            {project.iterations.intro && (
+              <p className="text-base md:text-lg text-muted-foreground leading-[1.8] font-light mb-12">
+                {project.iterations.intro}
+              </p>
+            )}
+
+            <div className="mb-12">
+              <div className="space-y-8">
+                {project.iterations.decisions.map((decision, index) => (
+                  <div key={index} className="grid md:grid-cols-3 gap-6 pb-8 border-b border-border/20 last:border-0">
+                    <div>
+                      <h4 className="text-sm font-medium mb-2 text-muted-foreground uppercase tracking-[0.15em]">Challenge</h4>
+                      <p className="text-base font-light">{decision.challenge}</p>
+                    </div>
+                    <div>
+                      <h4 className="text-sm font-medium mb-2 text-muted-foreground uppercase tracking-[0.15em]">Iteration</h4>
+                      <p className="text-base font-light">{decision.iteration}</p>
+                    </div>
+                    <div>
+                      <h4 className="text-sm font-medium mb-2 text-muted-foreground uppercase tracking-[0.15em]">Final Decision</h4>
+                      <p className="text-base font-light">{decision.finalDecision}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {project.iterations.note && (
+              <div className="bg-muted/30 rounded-lg p-6 mb-12">
+                <p className="text-base md:text-lg text-muted-foreground leading-[1.8] font-light italic">
+                  {project.iterations.note}
+                </p>
+              </div>
+            )}
+
+            <div className="grid md:grid-cols-3 gap-6">
+              {project.iterations.images.map((imagePath, index) => (
+                <div key={index} className="rounded-xl overflow-hidden bg-muted/20">
+                  <img 
+                    src={mockupImageMap[imagePath] || imagePath}
+                    alt={`Iterations ${index + 1}`}
+                    className="w-full h-auto object-cover"
+                  />
+                </div>
+              ))}
+            </div>
+          </section>
+        )}
 
         {/* Video Walkthrough */}
         <section id="walkthrough" className="py-20">

@@ -8,6 +8,8 @@ const sections = [
   { id: "role", label: "Role" },
   { id: "features", label: "Features" },
   { id: "process", label: "Process" },
+  { id: "design-system", label: "Design System" },
+  { id: "iterations", label: "Iterations" },
   { id: "walkthrough", label: "Walkthrough" },
   { id: "reflection", label: "Reflection" },
   { id: "links", label: "Links" },
