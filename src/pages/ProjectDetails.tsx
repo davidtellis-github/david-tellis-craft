@@ -210,14 +210,7 @@ const ProjectDetails: React.FC = () => {
         <section id="gallery" className="py-12 border-b border-border/10">
           <Collapsible open={openSections.gallery} onOpenChange={() => toggleSection('gallery')}>
             <CollapsibleTrigger className="w-full group">
-              <div className="flex items-center justify-between py-4 hover:opacity-70 transition-opacity">
-                  <div className="flex items-center gap-3">
-                  <Images className="h-5 w-5 text-muted-foreground" />
-                  <h2 className="text-2xl md:text-3xl font-light">Gallery</h2>
-                  <span className="text-lg text-muted-foreground font-light">
-                    ({allUIAssets.length})
-                  </span>
-                </div>
+              <div className="flex items-center justify-end py-4 hover:opacity-70 transition-opacity">
                 {openSections.gallery ? (
                   <ChevronUp className="h-5 w-5 transition-transform" />
                 ) : (
@@ -246,8 +239,7 @@ const ProjectDetails: React.FC = () => {
         <section id="context" className="py-12 border-b border-border/10">
           <Collapsible open={openSections.context} onOpenChange={() => toggleSection('context')}>
             <CollapsibleTrigger className="w-full group">
-              <div className="flex items-center justify-between py-4 hover:opacity-70 transition-opacity">
-                <h2 className="text-2xl md:text-3xl font-light">Context & Challenge</h2>
+              <div className="flex items-center justify-end py-4 hover:opacity-70 transition-opacity">
                 {openSections.context ? (
                   <ChevronUp className="h-5 w-5 transition-transform" />
                 ) : (
@@ -289,8 +281,7 @@ const ProjectDetails: React.FC = () => {
         <section id="role" className="py-12 border-b border-border/10">
           <Collapsible open={openSections.role} onOpenChange={() => toggleSection('role')}>
             <CollapsibleTrigger className="w-full group">
-              <div className="flex items-center justify-between py-4 hover:opacity-70 transition-opacity">
-                <h2 className="text-2xl md:text-3xl font-light">My Role & Impact</h2>
+              <div className="flex items-center justify-end py-4 hover:opacity-70 transition-opacity">
                 {openSections.role ? (
                   <ChevronUp className="h-5 w-5 transition-transform" />
                 ) : (
@@ -341,8 +332,7 @@ const ProjectDetails: React.FC = () => {
         <section id="features" className="py-12 border-b border-border/10">
           <Collapsible open={openSections.features} onOpenChange={() => toggleSection('features')}>
             <CollapsibleTrigger className="w-full group">
-              <div className="flex items-center justify-between py-4 hover:opacity-70 transition-opacity">
-                <h2 className="text-2xl md:text-3xl font-light">Features & Complexity</h2>
+              <div className="flex items-center justify-end py-4 hover:opacity-70 transition-opacity">
                 {openSections.features ? (
                   <ChevronUp className="h-5 w-5 transition-transform" />
                 ) : (
@@ -370,8 +360,7 @@ const ProjectDetails: React.FC = () => {
         <section id="process" className="py-12 border-b border-border/10">
           <Collapsible open={openSections.process} onOpenChange={() => toggleSection('process')}>
             <CollapsibleTrigger className="w-full group">
-              <div className="flex items-center justify-between py-4 hover:opacity-70 transition-opacity">
-                <h2 className="text-2xl md:text-3xl font-light">Process & Approach</h2>
+              <div className="flex items-center justify-end py-4 hover:opacity-70 transition-opacity">
                 {openSections.process ? (
                   <ChevronUp className="h-5 w-5 transition-transform" />
                 ) : (
@@ -403,8 +392,7 @@ const ProjectDetails: React.FC = () => {
           <section id="design-system" className="py-12 border-b border-border/10">
             <Collapsible open={openSections.designSystem} onOpenChange={() => toggleSection('designSystem')}>
               <CollapsibleTrigger className="w-full group">
-                <div className="flex items-center justify-between py-4 hover:opacity-70 transition-opacity">
-                  <h2 className="text-2xl md:text-3xl font-light">Design System</h2>
+                <div className="flex items-center justify-end py-4 hover:opacity-70 transition-opacity">
                   {openSections.designSystem ? (
                     <ChevronUp className="h-5 w-5 transition-transform" />
                   ) : (
@@ -469,8 +457,7 @@ const ProjectDetails: React.FC = () => {
           <section id="iterations" className="py-12 border-b border-border/10">
             <Collapsible open={openSections.iterations} onOpenChange={() => toggleSection('iterations')}>
               <CollapsibleTrigger className="w-full group">
-                <div className="flex items-center justify-between py-4 hover:opacity-70 transition-opacity">
-                  <h2 className="text-2xl md:text-3xl font-light">Iterations & UX Decisions</h2>
+                <div className="flex items-center justify-end py-4 hover:opacity-70 transition-opacity">
                   {openSections.iterations ? (
                     <ChevronUp className="h-5 w-5 transition-transform" />
                   ) : (
@@ -533,7 +520,6 @@ const ProjectDetails: React.FC = () => {
 
         {/* Video Walkthrough */}
         <section id="walkthrough" className="py-12 border-b border-border/10">
-          <h2 className="text-2xl md:text-3xl font-light mb-6">Video Walkthrough</h2>
           <div className="relative aspect-video bg-muted/50 rounded-xl overflow-hidden">
             <div className="absolute inset-0 bg-gradient-to-br from-background/20 to-background/5 flex items-center justify-center">
               <div className="text-center">
@@ -550,8 +536,7 @@ const ProjectDetails: React.FC = () => {
         <section id="reflection" className="py-12 border-b border-border/10">
           <Collapsible open={openSections.reflection} onOpenChange={() => toggleSection('reflection')}>
             <CollapsibleTrigger className="w-full group">
-              <div className="flex items-center justify-between py-4 hover:opacity-70 transition-opacity">
-                <h2 className="text-2xl md:text-3xl font-light">Reflection & Learnings</h2>
+              <div className="flex items-center justify-end py-4 hover:opacity-70 transition-opacity">
                 {openSections.reflection ? (
                   <ChevronUp className="h-5 w-5 transition-transform" />
                 ) : (
@@ -572,7 +557,6 @@ const ProjectDetails: React.FC = () => {
 
         {/* CTA Section */}
         <section id="links" className="py-16 text-center">
-          <h2 className="text-2xl md:text-3xl font-light mb-6">View the Project</h2>
           <div className="flex flex-wrap gap-4 justify-center">
             {project.links.live && (
                 <a 
