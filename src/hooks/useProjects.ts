@@ -102,68 +102,85 @@ export const useProjects = () => {
     try {
       setLoading(true);
       
-      // Transform static project data to match our interface
-      const transformedProjects = Object.values(projectsData).map((project, index) => ({
-        id: project.id,
-        slug: project.id,
-        title: project.title,
-        subtitle: project.subtitle,
-        description: project.description,
-        category: {
-          id: project.category,
-          name: getCategoryName(project.category),
-          slug: project.category
-        },
-        year: project.year,
-        services: project.services,
-        role_title: project.role.title,
-        role_duration: project.role.duration,
-        role_team: project.role.team,
-        role_tools: project.role.tools,
-        context_problem: project.context.problem,
-        context_objective: project.context.objective,
-        context_audience: project.context.audience,
-        reflection: project.reflection,
-        live_link: project.links.live || null,
-        github_link: project.links.github || null,
-        figma_link: project.links.figma || null,
-        is_published: true,
-        sort_order: index,
-        created_at: new Date().toISOString(),
-        updated_at: new Date().toISOString(),
-        features: project.features.map((f, i) => ({
-          id: `${project.id}-feature-${i}`,
-          title: f.title,
-          description: f.description,
-          icon: f.icon,
-          sort_order: i
-        })),
-        process: project.process.map((p, i) => ({
-          id: `${project.id}-process-${i}`,
-          step: p.step,
-          description: p.description,
-          icon: p.icon,
-          sort_order: i
-        })),
-        outcomes: project.outcomes.map((o, i) => ({
-          id: `${project.id}-outcome-${i}`,
-          metric: o.metric,
-          value: o.value,
-          sort_order: i
-        })),
-        assets: (project.mockupImages || []).map((imgPath, i) => ({
-          id: `${project.id}-asset-${i}`,
-          asset_type: 'image' as const,
-          file_name: imgPath,
-          file_path: getImageUrl(imgPath),
-          file_size: null,
-          mime_type: 'image/jpeg',
-          alt_text: `${project.title} mockup ${i + 1}`,
-          caption: null,
-          is_featured: i === 0,
-          sort_order: i
-        }))
-      }));
+      // Define custom project order - Ideabaaz as 2nd
+      const projectOrder = [
+        'wedding-verse',
+        'ideabaaz',
+        'futurcraft-ai',
+        'turbocloud',
+        'health-project',
+        'boston-financial',
+        'fitness-app',
+        'verasap'
+      ];
+      
+      // Transform static project data in custom order
+      const transformedProjects = projectOrder
+        .filter(id => projectsData[id])
+        .map((id, index) => {
+          const project = projectsData[id];
+          return {
+          id: project.id,
+          slug: project.id,
+          title: project.title,
+          subtitle: project.subtitle,
+          description: project.description,
+          category: {
+            id: project.category,
+            name: getCategoryName(project.category),
+            slug: project.category
+          },
+          year: project.year,
+          services: project.services,
+          role_title: project.role.title,
+          role_duration: project.role.duration,
+          role_team: project.role.team,
+          role_tools: project.role.tools,
+          context_problem: project.context.problem,
+          context_objective: project.context.objective,
+          context_audience: project.context.audience,
+          reflection: project.reflection,
+          live_link: project.links.live || null,
+          github_link: project.links.github || null,
+          figma_link: project.links.figma || null,
+          is_published: true,
+          sort_order: index,
+          created_at: new Date().toISOString(),
+          updated_at: new Date().toISOString(),
+          features: project.features.map((f, i) => ({
+            id: `${project.id}-feature-${i}`,
+            title: f.title,
+            description: f.description,
+            icon: f.icon,
+            sort_order: i
+          })),
+          process: project.process.map((p, i) => ({
+            id: `${project.id}-process-${i}`,
+            step: p.step,
+            description: p.description,
+            icon: p.icon,
+            sort_order: i
+          })),
+          outcomes: project.outcomes.map((o, i) => ({
+            id: `${project.id}-outcome-${i}`,
+            metric: o.metric,
+            value: o.value,
+            sort_order: i
+          })),
+          assets: (project.mockupImages || []).map((imgPath, i) => ({
+            id: `${project.id}-asset-${i}`,
+            asset_type: 'image' as const,
+            file_name: imgPath,
+            file_path: getImageUrl(imgPath),
+            file_size: null,
+            mime_type: 'image/jpeg',
+            alt_text: `${project.title} mockup ${i + 1}`,
+            caption: null,
+            is_featured: i === 0,
+            sort_order: i
+          }))
+        };
+      });
 
       setProjects(transformedProjects);
       

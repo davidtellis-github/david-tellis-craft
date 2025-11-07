@@ -59,7 +59,7 @@ export const projectsData: Record<string, ProjectData> = {
     year: "2024",
     services: "Strategy + Design + Engineering",
     
-    mockupImages: ['weddingverse-hero.png'],
+    mockupImages: ['weddingverse-featured.png'],
     
     role: {
       title: "Lead Product Designer",
@@ -145,7 +145,7 @@ export const projectsData: Record<string, ProjectData> = {
     year: "2025",
     services: "Strategy + Design + Engineering",
     
-    mockupImages: [],
+    mockupImages: ['futurcraft-featured.png'],
     
     role: {
       title: "Senior Product Designer",
@@ -273,7 +273,7 @@ export const projectsData: Record<string, ProjectData> = {
       figma: "https://figma.com/turbocloud"
     },
 
-    mockupImages: []
+    mockupImages: ['turbocloud-featured.png']
   },
 
   "health-project": {
@@ -426,7 +426,7 @@ export const projectsData: Record<string, ProjectData> = {
     year: "2025",
     services: "Strategy + Design + Stakeholder Management",
     
-    mockupImages: [],
+    mockupImages: ['ideabaaz-featured.png'],
     
     role: {
       title: "Product Designer & Project Lead",

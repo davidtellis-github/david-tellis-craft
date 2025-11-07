@@ -1,9 +1,15 @@
-// Wedding Verse
-import weddingverseHero from '@/assets/weddingverse-hero.png';
+// Featured project images
+import weddingverseFeatured from '@/assets/weddingverse-featured.png';
+import ideabaazFeatured from '@/assets/ideabaaz-featured.png';
+import futurcraftFeatured from '@/assets/futurcraft-featured.png';
+import turbocloudFeatured from '@/assets/turbocloud-featured.png';
 
-// Image asset mapping - ready for new uploads
+// Image asset mapping
 export const imageAssets: Record<string, string> = {
-  'weddingverse-hero.png': weddingverseHero,
+  'weddingverse-featured.png': weddingverseFeatured,
+  'ideabaaz-featured.png': ideabaazFeatured,
+  'futurcraft-featured.png': futurcraftFeatured,
+  'turbocloud-featured.png': turbocloudFeatured,
 };
 
 // Helper function to resolve image paths

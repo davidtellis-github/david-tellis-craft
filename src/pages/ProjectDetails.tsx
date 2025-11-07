@@ -7,11 +7,17 @@ import { useProjectAssets } from "@/hooks/useProjectAssets";
 import { UIGallery } from "@/components/portfolio/UIGallery";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
 // Import mockup images
-import weddingverseHero from '@/assets/weddingverse-hero.png';
+import weddingverseFeatured from '@/assets/weddingverse-featured.png';
+import ideabaazFeatured from '@/assets/ideabaaz-featured.png';
+import futurcraftFeatured from '@/assets/futurcraft-featured.png';
+import turbocloudFeatured from '@/assets/turbocloud-featured.png';
 
 // Map of mockup images
 const mockupImageMap: Record<string, string> = {
-  'weddingverse-hero.png': weddingverseHero,
+  'weddingverse-featured.png': weddingverseFeatured,
+  'ideabaaz-featured.png': ideabaazFeatured,
+  'futurcraft-featured.png': futurcraftFeatured,
+  'turbocloud-featured.png': turbocloudFeatured,
 };
 
 const ProjectDetails: React.FC = () => {
