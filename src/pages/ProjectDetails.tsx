@@ -1,11 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useParams, Link, useNavigate } from "react-router-dom";
-import { ArrowLeft, Play, ExternalLink, Github, Figma, Smartphone, Images, ChevronDown, ChevronUp } from "lucide-react";
+import { ArrowLeft, Play, ExternalLink, Github, Figma, Smartphone } from "lucide-react";
 import ProjectNav from "@/components/portfolio/ProjectNav";
 import { projectsData } from "@/data/projectData";
 import { useProjectAssets } from "@/hooks/useProjectAssets";
 import { UIGallery } from "@/components/portfolio/UIGallery";
-import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
 // Import mockup images
 import weddingverseFeatured from '@/assets/weddingverse-featured.png';
 import ideabaazFeatured from '@/assets/ideabaaz-featured.png';
@@ -35,20 +34,6 @@ const mockupImageMap: Record<string, string> = {
 const ProjectDetails: React.FC = () => {
   const { slug } = useParams();
   const navigate = useNavigate();
-  const [openSections, setOpenSections] = useState({
-    gallery: false,
-    context: false,
-    role: false,
-    features: false,
-    process: false,
-    designSystem: false,
-    iterations: false,
-    reflection: false
-  });
-
-  const toggleSection = (section: keyof typeof openSections) => {
-    setOpenSections(prev => ({ ...prev, [section]: !prev[section] }));
-  };
 
   // Get project data based on slug
   const project = slug ? projectsData[slug] : null;
@@ -208,313 +193,215 @@ const ProjectDetails: React.FC = () => {
 
         {/* Gallery Section */}
         <section id="gallery" className="py-12 border-b border-border/10">
-          <Collapsible open={openSections.gallery} onOpenChange={() => toggleSection('gallery')}>
-            <CollapsibleTrigger className="w-full group">
-              <div className="flex items-center justify-end py-4 hover:opacity-70 transition-opacity">
-                {openSections.gallery ? (
-                  <ChevronUp className="h-5 w-5 transition-transform" />
-                ) : (
-                  <ChevronDown className="h-5 w-5 transition-transform" />
-                )}
-              </div>
-            </CollapsibleTrigger>
-            
-            <CollapsibleContent className="mt-6">
-              {!isLoading && allUIAssets.length > 0 && (
-                <UIGallery 
-                  assets={allUIAssets} 
-                  projectTitle={project.title}
-                />
-              )}
-              {!isLoading && allUIAssets.length === 0 && (
-                <p className="text-muted-foreground text-center py-12">
-                  No UI assets available for this project yet.
-                </p>
-              )}
-            </CollapsibleContent>
-          </Collapsible>
+          {!isLoading && allUIAssets.length > 0 && (
+            <UIGallery 
+              assets={allUIAssets} 
+              projectTitle={project.title}
+            />
+          )}
+          {!isLoading && allUIAssets.length === 0 && (
+            <p className="text-muted-foreground text-center py-12">
+              No UI assets available for this project yet.
+            </p>
+          )}
         </section>
 
         {/* Context Section */}
         <section id="context" className="py-12 border-b border-border/10">
-          <Collapsible open={openSections.context} onOpenChange={() => toggleSection('context')}>
-            <CollapsibleTrigger className="w-full group">
-              <div className="flex items-center justify-end py-4 hover:opacity-70 transition-opacity">
-                {openSections.context ? (
-                  <ChevronUp className="h-5 w-5 transition-transform" />
-                ) : (
-                  <ChevronDown className="h-5 w-5 transition-transform" />
-                )}
+          <div className="grid md:grid-cols-2 gap-12">
+            <div>
+              <h3 className="text-sm font-medium mb-3 text-muted-foreground uppercase tracking-[0.15em]">Problem</h3>
+              <p className="text-base leading-[1.8] font-light mb-6">
+                {project.context.problem}
+              </p>
+              
+              <h3 className="text-sm font-medium mb-3 text-muted-foreground uppercase tracking-[0.15em]">Objective</h3>
+              <p className="text-base leading-[1.8] font-light">
+                {project.context.objective}
+              </p>
+            </div>
+            {project.mockupImages && project.mockupImages[1] ? (
+              <div className="rounded-2xl overflow-hidden">
+                <img 
+                  src={mockupImageMap[project.mockupImages[1]] || project.mockupImages[1]} 
+                  alt={`${project.title} context mockup`}
+                  className="w-full h-full object-cover"
+                />
               </div>
-            </CollapsibleTrigger>
-            
-            <CollapsibleContent className="mt-6">
-              <div className="grid md:grid-cols-2 gap-12">
-                <div>
-                  <h3 className="text-sm font-medium mb-3 text-muted-foreground uppercase tracking-[0.15em]">Problem</h3>
-                  <p className="text-base leading-[1.8] font-light mb-6">
-                    {project.context.problem}
-                  </p>
-                  
-                  <h3 className="text-sm font-medium mb-3 text-muted-foreground uppercase tracking-[0.15em]">Objective</h3>
-                  <p className="text-base leading-[1.8] font-light">
-                    {project.context.objective}
-                  </p>
-                </div>
-                {project.mockupImages && project.mockupImages[1] ? (
-                  <div className="rounded-2xl overflow-hidden">
-                    <img 
-                      src={mockupImageMap[project.mockupImages[1]] || project.mockupImages[1]} 
-                      alt={`${project.title} context mockup`}
-                      className="w-full h-full object-cover"
-                    />
-                  </div>
-                ) : (
-                  <div className="bg-muted/30 rounded-2xl h-80"></div>
-                )}
-              </div>
-            </CollapsibleContent>
-          </Collapsible>
+            ) : (
+              <div className="bg-muted/30 rounded-2xl h-80"></div>
+            )}
+          </div>
         </section>
 
         {/* Role & Impact */}
         <section id="role" className="py-12 border-b border-border/10">
-          <Collapsible open={openSections.role} onOpenChange={() => toggleSection('role')}>
-            <CollapsibleTrigger className="w-full group">
-              <div className="flex items-center justify-end py-4 hover:opacity-70 transition-opacity">
-                {openSections.role ? (
-                  <ChevronUp className="h-5 w-5 transition-transform" />
-                ) : (
-                  <ChevronDown className="h-5 w-5 transition-transform" />
-                )}
+          <div className="grid md:grid-cols-2 gap-12">
+            {project.mockupImages && project.mockupImages[2] ? (
+              <div className="rounded-2xl overflow-hidden h-full">
+                <img 
+                  src={mockupImageMap[project.mockupImages[2]] || project.mockupImages[2]} 
+                  alt={`${project.title} role mockup`}
+                  className="w-full h-full object-cover"
+                />
               </div>
-            </CollapsibleTrigger>
-            
-            <CollapsibleContent className="mt-6">
-              <div className="grid md:grid-cols-2 gap-12">
-                {project.mockupImages && project.mockupImages[2] ? (
-                  <div className="rounded-2xl overflow-hidden h-full">
-                    <img 
-                      src={mockupImageMap[project.mockupImages[2]] || project.mockupImages[2]} 
-                      alt={`${project.title} role mockup`}
-                      className="w-full h-full object-cover"
-                    />
+            ) : (
+              <div className="bg-muted/30 rounded-2xl h-80"></div>
+            )}
+            <div>
+              <h3 className="text-sm font-medium mb-4 text-muted-foreground uppercase tracking-[0.15em]">Key Responsibilities</h3>
+              <ul className="space-y-2 text-base font-light leading-relaxed mb-8">
+                <li>Led end-to-end product design strategy</li>
+                <li>Conducted user research and stakeholder interviews</li>
+                <li>Designed multi-role interaction experiences</li>
+                <li>Created and maintained design system</li>
+                <li>Collaborated closely with engineering team</li>
+              </ul>
+              
+              <h3 className="text-sm font-medium mb-4 text-muted-foreground uppercase tracking-[0.15em]">Outcomes</h3>
+              <div className="space-y-3">
+                {project.outcomes.map((outcome, index) => (
+                  <div key={index} className="flex justify-between items-center py-2 border-b border-border/20">
+                    <span className="text-sm font-light">{outcome.metric}</span>
+                    <span className="text-sm font-mono font-normal">{outcome.value}</span>
                   </div>
-                ) : (
-                  <div className="bg-muted/30 rounded-2xl h-80"></div>
-                )}
-                <div>
-                  <h3 className="text-sm font-medium mb-4 text-muted-foreground uppercase tracking-[0.15em]">Key Responsibilities</h3>
-                  <ul className="space-y-2 text-base font-light leading-relaxed mb-8">
-                    <li>Led end-to-end product design strategy</li>
-                    <li>Conducted user research and stakeholder interviews</li>
-                    <li>Designed multi-role interaction experiences</li>
-                    <li>Created and maintained design system</li>
-                    <li>Collaborated closely with engineering team</li>
-                  </ul>
-                  
-                  <h3 className="text-sm font-medium mb-4 text-muted-foreground uppercase tracking-[0.15em]">Outcomes</h3>
-                  <div className="space-y-3">
-                    {project.outcomes.map((outcome, index) => (
-                      <div key={index} className="flex justify-between items-center py-2 border-b border-border/20">
-                        <span className="text-sm font-light">{outcome.metric}</span>
-                        <span className="text-sm font-mono font-normal">{outcome.value}</span>
-                      </div>
-                    ))}
-                  </div>
-                </div>
+                ))}
               </div>
-            </CollapsibleContent>
-          </Collapsible>
+            </div>
+          </div>
         </section>
 
         {/* Features */}
         <section id="features" className="py-12 border-b border-border/10">
-          <Collapsible open={openSections.features} onOpenChange={() => toggleSection('features')}>
-            <CollapsibleTrigger className="w-full group">
-              <div className="flex items-center justify-end py-4 hover:opacity-70 transition-opacity">
-                {openSections.features ? (
-                  <ChevronUp className="h-5 w-5 transition-transform" />
-                ) : (
-                  <ChevronDown className="h-5 w-5 transition-transform" />
-                )}
+          <div className="grid md:grid-cols-2 gap-6">
+            {project.features.map((feature, index) => (
+              <div key={index} className="border-l-2 border-border/20 pl-6 py-4">
+                <h3 className="text-lg font-normal mb-2">{feature.title}</h3>
+                <p className="text-sm text-muted-foreground leading-[1.8] font-light">
+                  {feature.description}
+                </p>
               </div>
-            </CollapsibleTrigger>
-            
-            <CollapsibleContent className="mt-6">
-              <div className="grid md:grid-cols-2 gap-6">
-                {project.features.map((feature, index) => (
-                  <div key={index} className="border-l-2 border-border/20 pl-6 py-4">
-                    <h3 className="text-lg font-normal mb-2">{feature.title}</h3>
-                    <p className="text-sm text-muted-foreground leading-[1.8] font-light">
-                      {feature.description}
-                    </p>
-                  </div>
-                ))}
-              </div>
-            </CollapsibleContent>
-          </Collapsible>
+            ))}
+          </div>
         </section>
 
         {/* Process */}
         <section id="process" className="py-12 border-b border-border/10">
-          <Collapsible open={openSections.process} onOpenChange={() => toggleSection('process')}>
-            <CollapsibleTrigger className="w-full group">
-              <div className="flex items-center justify-end py-4 hover:opacity-70 transition-opacity">
-                {openSections.process ? (
-                  <ChevronUp className="h-5 w-5 transition-transform" />
-                ) : (
-                  <ChevronDown className="h-5 w-5 transition-transform" />
-                )}
+          <div className="space-y-8">
+            {project.process.map((phase, index) => (
+              <div key={index} className="flex items-start gap-6">
+                <div className="text-2xl font-light text-muted-foreground min-w-[3rem]">
+                  {String(index + 1).padStart(2, '0')}
+                </div>
+                <div>
+                  <h3 className="text-lg font-normal mb-1">{phase.step}</h3>
+                  <p className="text-sm text-muted-foreground font-light leading-[1.8]">{phase.description}</p>
+                </div>
               </div>
-            </CollapsibleTrigger>
-            
-            <CollapsibleContent className="mt-6">
-              <div className="space-y-8">
-                {project.process.map((phase, index) => (
-                  <div key={index} className="flex items-start gap-6">
-                    <div className="text-2xl font-light text-muted-foreground min-w-[3rem]">
-                      {String(index + 1).padStart(2, '0')}
-                    </div>
-                    <div>
-                      <h3 className="text-lg font-normal mb-1">{phase.step}</h3>
-                      <p className="text-sm text-muted-foreground font-light leading-[1.8]">{phase.description}</p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </CollapsibleContent>
-          </Collapsible>
+            ))}
+          </div>
         </section>
 
         {/* Design System Section */}
         {project.designSystem && (
           <section id="design-system" className="py-12 border-b border-border/10">
-            <Collapsible open={openSections.designSystem} onOpenChange={() => toggleSection('designSystem')}>
-              <CollapsibleTrigger className="w-full group">
-                <div className="flex items-center justify-end py-4 hover:opacity-70 transition-opacity">
-                  {openSections.designSystem ? (
-                    <ChevronUp className="h-5 w-5 transition-transform" />
-                  ) : (
-                    <ChevronDown className="h-5 w-5 transition-transform" />
-                  )}
-                </div>
-              </CollapsibleTrigger>
-              
-              <CollapsibleContent className="mt-6">
-                <div className="mb-8">
-                  <h3 className="text-sm font-medium mb-4 text-muted-foreground uppercase tracking-[0.15em]">System Goals</h3>
-                  <ul className="space-y-2 text-sm font-light leading-relaxed">
-                    {project.designSystem.goals.map((goal, index) => (
-                      <li key={index} className="flex items-start gap-2">
-                        <span className="text-muted-foreground mt-1">•</span>
-                        <span>{goal}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
+            <div className="mb-8">
+              <h3 className="text-sm font-medium mb-4 text-muted-foreground uppercase tracking-[0.15em]">System Goals</h3>
+              <ul className="space-y-2 text-sm font-light leading-relaxed">
+                {project.designSystem.goals.map((goal, index) => (
+                  <li key={index} className="flex items-start gap-2">
+                    <span className="text-muted-foreground mt-1">•</span>
+                    <span>{goal}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
 
-                <div className="mb-8">
-                  <h3 className="text-sm font-medium mb-4 text-muted-foreground uppercase tracking-[0.15em]">Core Elements</h3>
-                  <div className="grid md:grid-cols-2 gap-6">
-                    {project.designSystem.coreElements.map((element, index) => (
-                      <div key={index} className="border-l-2 border-border/20 pl-6 py-3">
-                        <h4 className="text-base font-normal mb-1">{element.title}</h4>
-                        <p className="text-sm text-muted-foreground leading-[1.8] font-light">
-                          {element.description}
-                        </p>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-
-                {project.designSystem.note && (
-                  <div className="bg-muted/30 rounded-lg p-4 mb-8">
-                    <p className="text-sm text-muted-foreground leading-[1.8] font-light italic">
-                      {project.designSystem.note}
+            <div className="mb-8">
+              <h3 className="text-sm font-medium mb-4 text-muted-foreground uppercase tracking-[0.15em]">Core Elements</h3>
+              <div className="grid md:grid-cols-2 gap-6">
+                {project.designSystem.coreElements.map((element, index) => (
+                  <div key={index} className="border-l-2 border-border/20 pl-6 py-3">
+                    <h4 className="text-base font-normal mb-1">{element.title}</h4>
+                    <p className="text-sm text-muted-foreground leading-[1.8] font-light">
+                      {element.description}
                     </p>
                   </div>
-                )}
+                ))}
+              </div>
+            </div>
 
-                <div className="grid md:grid-cols-3 gap-4">
-                  {project.designSystem.images.map((imagePath, index) => (
-                    <div key={index} className="rounded-xl overflow-hidden bg-muted/20">
-                      <img 
-                        src={mockupImageMap[imagePath] || imagePath}
-                        alt={`Design System ${index + 1}`}
-                        className="w-full h-auto object-cover"
-                      />
-                    </div>
-                  ))}
+            {project.designSystem.note && (
+              <div className="bg-muted/30 rounded-lg p-4 mb-8">
+                <p className="text-sm text-muted-foreground leading-[1.8] font-light italic">
+                  {project.designSystem.note}
+                </p>
+              </div>
+            )}
+
+            <div className="grid md:grid-cols-3 gap-4">
+              {project.designSystem.images.map((imagePath, index) => (
+                <div key={index} className="rounded-xl overflow-hidden bg-muted/20">
+                  <img 
+                    src={mockupImageMap[imagePath] || imagePath}
+                    alt={`Design System ${index + 1}`}
+                    className="w-full h-auto object-cover"
+                  />
                 </div>
-              </CollapsibleContent>
-            </Collapsible>
+              ))}
+            </div>
           </section>
         )}
 
         {/* Iterations & UX Decisions Section */}
         {project.iterations && (
           <section id="iterations" className="py-12 border-b border-border/10">
-            <Collapsible open={openSections.iterations} onOpenChange={() => toggleSection('iterations')}>
-              <CollapsibleTrigger className="w-full group">
-                <div className="flex items-center justify-end py-4 hover:opacity-70 transition-opacity">
-                  {openSections.iterations ? (
-                    <ChevronUp className="h-5 w-5 transition-transform" />
-                  ) : (
-                    <ChevronDown className="h-5 w-5 transition-transform" />
-                  )}
-                </div>
-              </CollapsibleTrigger>
-              
-              <CollapsibleContent className="mt-6">
-                {project.iterations.intro && (
-                  <p className="text-sm text-muted-foreground leading-[1.8] font-light mb-8">
-                    {project.iterations.intro}
-                  </p>
-                )}
+            {project.iterations.intro && (
+              <p className="text-sm text-muted-foreground leading-[1.8] font-light mb-8">
+                {project.iterations.intro}
+              </p>
+            )}
 
-                <div className="mb-8">
-                  <div className="space-y-6">
-                    {project.iterations.decisions.map((decision, index) => (
-                      <div key={index} className="grid md:grid-cols-3 gap-4 pb-6 border-b border-border/20 last:border-0">
-                        <div>
-                          <h4 className="text-xs font-medium mb-1 text-muted-foreground uppercase tracking-[0.15em]">Challenge</h4>
-                          <p className="text-sm font-light">{decision.challenge}</p>
-                        </div>
-                        <div>
-                          <h4 className="text-xs font-medium mb-1 text-muted-foreground uppercase tracking-[0.15em]">Iteration</h4>
-                          <p className="text-sm font-light">{decision.iteration}</p>
-                        </div>
-                        <div>
-                          <h4 className="text-xs font-medium mb-1 text-muted-foreground uppercase tracking-[0.15em]">Final Decision</h4>
-                          <p className="text-sm font-light">{decision.finalDecision}</p>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-
-                {project.iterations.note && (
-                  <div className="bg-muted/30 rounded-lg p-4 mb-8">
-                    <p className="text-sm text-muted-foreground leading-[1.8] font-light italic">
-                      {project.iterations.note}
-                    </p>
-                  </div>
-                )}
-
-                <div className="grid md:grid-cols-3 gap-4">
-                  {project.iterations.images.map((imagePath, index) => (
-                    <div key={index} className="rounded-xl overflow-hidden bg-muted/20">
-                      <img 
-                        src={mockupImageMap[imagePath] || imagePath}
-                        alt={`Iterations ${index + 1}`}
-                        className="w-full h-auto object-cover"
-                      />
+            <div className="mb-8">
+              <div className="space-y-6">
+                {project.iterations.decisions.map((decision, index) => (
+                  <div key={index} className="grid md:grid-cols-3 gap-4 pb-6 border-b border-border/20 last:border-0">
+                    <div>
+                      <h4 className="text-xs font-medium mb-1 text-muted-foreground uppercase tracking-[0.15em]">Challenge</h4>
+                      <p className="text-sm font-light">{decision.challenge}</p>
                     </div>
-                  ))}
+                    <div>
+                      <h4 className="text-xs font-medium mb-1 text-muted-foreground uppercase tracking-[0.15em]">Iteration</h4>
+                      <p className="text-sm font-light">{decision.iteration}</p>
+                    </div>
+                    <div>
+                      <h4 className="text-xs font-medium mb-1 text-muted-foreground uppercase tracking-[0.15em]">Final Decision</h4>
+                      <p className="text-sm font-light">{decision.finalDecision}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {project.iterations.note && (
+              <div className="bg-muted/30 rounded-lg p-4 mb-8">
+                <p className="text-sm text-muted-foreground leading-[1.8] font-light italic">
+                  {project.iterations.note}
+                </p>
+              </div>
+            )}
+
+            <div className="grid md:grid-cols-3 gap-4">
+              {project.iterations.images.map((imagePath, index) => (
+                <div key={index} className="rounded-xl overflow-hidden bg-muted/20">
+                  <img 
+                    src={mockupImageMap[imagePath] || imagePath}
+                    alt={`Iterations ${index + 1}`}
+                    className="w-full h-auto object-cover"
+                  />
                 </div>
-              </CollapsibleContent>
-            </Collapsible>
+              ))}
+            </div>
           </section>
         )}
 
@@ -534,25 +421,11 @@ const ProjectDetails: React.FC = () => {
 
         {/* Reflection */}
         <section id="reflection" className="py-12 border-b border-border/10">
-          <Collapsible open={openSections.reflection} onOpenChange={() => toggleSection('reflection')}>
-            <CollapsibleTrigger className="w-full group">
-              <div className="flex items-center justify-end py-4 hover:opacity-70 transition-opacity">
-                {openSections.reflection ? (
-                  <ChevronUp className="h-5 w-5 transition-transform" />
-                ) : (
-                  <ChevronDown className="h-5 w-5 transition-transform" />
-                )}
-              </div>
-            </CollapsibleTrigger>
-            
-            <CollapsibleContent className="mt-6">
-              <div className="max-w-3xl">
-                <p className="text-base text-muted-foreground leading-[1.8] font-light">
-                  {project.reflection}
-                </p>
-              </div>
-            </CollapsibleContent>
-          </Collapsible>
+          <div className="max-w-3xl">
+            <p className="text-base text-muted-foreground leading-[1.8] font-light">
+              {project.reflection}
+            </p>
+          </div>
         </section>
 
         {/* CTA Section */}
