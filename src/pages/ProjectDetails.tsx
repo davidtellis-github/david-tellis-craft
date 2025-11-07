@@ -191,21 +191,6 @@ const ProjectDetails: React.FC = () => {
           </div>
         </section>
 
-        {/* Gallery Section */}
-        <section id="gallery" className="py-12 border-b border-border/10">
-          {!isLoading && allUIAssets.length > 0 && (
-            <UIGallery 
-              assets={allUIAssets} 
-              projectTitle={project.title}
-            />
-          )}
-          {!isLoading && allUIAssets.length === 0 && (
-            <p className="text-muted-foreground text-center py-12">
-              No UI assets available for this project yet.
-            </p>
-          )}
-        </section>
-
         {/* Context Section */}
         <section id="context" className="py-12 border-b border-border/10">
           <div className="grid md:grid-cols-2 gap-12">
@@ -426,6 +411,21 @@ const ProjectDetails: React.FC = () => {
               {project.reflection}
             </p>
           </div>
+        </section>
+
+        {/* Gallery Section */}
+        <section id="gallery" className="py-12 border-b border-border/10">
+          {!isLoading && allUIAssets.length > 0 && (
+            <UIGallery 
+              assets={allUIAssets} 
+              projectTitle={project.title}
+            />
+          )}
+          {!isLoading && allUIAssets.length === 0 && (
+            <p className="text-muted-foreground text-center py-12">
+              No UI assets available for this project yet.
+            </p>
+          )}
         </section>
 
         {/* CTA Section */}
