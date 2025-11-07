@@ -13,6 +13,8 @@ import designSystem3 from '@/assets/wedding-verse-design-system-3.png';
 import wvIterations1 from '@/assets/wedding-verse-iterations-1.png';
 import wvIterations2 from '@/assets/wedding-verse-iterations-2.png';
 import wvIterations3 from '@/assets/wedding-verse-iterations-3.png';
+import wvIterations4 from '@/assets/wedding-verse-iterations-4.png';
+import wvIterations5 from '@/assets/wedding-verse-iterations-5.png';
 
 // Image asset mapping
 export const imageAssets: Record<string, string> = {
@@ -26,6 +28,8 @@ export const imageAssets: Record<string, string> = {
   'wedding-verse-iterations-1.png': wvIterations1,
   'wedding-verse-iterations-2.png': wvIterations2,
   'wedding-verse-iterations-3.png': wvIterations3,
+  'wedding-verse-iterations-4.png': wvIterations4,
+  'wedding-verse-iterations-5.png': wvIterations5,
 };
 
 // Helper function to resolve image paths

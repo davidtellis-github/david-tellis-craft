@@ -238,7 +238,9 @@ export const projectsData: Record<string, ProjectData> = {
       images: [
         "wedding-verse-iterations-1.png",
         "wedding-verse-iterations-2.png",
-        "wedding-verse-iterations-3.png"
+        "wedding-verse-iterations-3.png",
+        "wedding-verse-iterations-4.png",
+        "wedding-verse-iterations-5.png"
       ]
     },
 
