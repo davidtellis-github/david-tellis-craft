@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useParams, Link } from "react-router-dom";
+import { useParams, Link, useNavigate } from "react-router-dom";
 import { ArrowLeft, Play, ExternalLink, Github, Figma, Smartphone, Images, ChevronDown, ChevronUp } from "lucide-react";
 import ProjectNav from "@/components/portfolio/ProjectNav";
 import { projectsData } from "@/data/projectData";
@@ -22,6 +22,7 @@ const mockupImageMap: Record<string, string> = {
 
 const ProjectDetails: React.FC = () => {
   const { slug } = useParams();
+  const navigate = useNavigate();
   const [isGalleryOpen, setIsGalleryOpen] = useState(false);
 
   // Get project data based on slug
@@ -101,12 +102,12 @@ const ProjectDetails: React.FC = () => {
 
       {/* Back Button */}
       <div className="fixed top-6 right-6 z-50">
-        <Link 
-          to="/portfolio" 
+        <button 
+          onClick={() => navigate(-1)}
           className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-muted/80 backdrop-blur-sm hover:bg-muted transition-colors"
         >
           <ArrowLeft className="w-4 h-4" />
-        </Link>
+        </button>
       </div>
 
       <main className="w-[98vw] mx-auto px-4 md:px-6">
