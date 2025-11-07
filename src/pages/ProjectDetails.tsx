@@ -353,27 +353,6 @@ const ProjectDetails: React.FC = () => {
               </p>
             )}
 
-            <div className="mb-8">
-              <div className="space-y-6">
-                {project.iterations.decisions.map((decision, index) => (
-                  <div key={index} className="grid md:grid-cols-3 gap-4 pb-6 border-b border-border/20 last:border-0">
-                    <div>
-                      <h4 className="text-xs font-medium mb-1 text-muted-foreground uppercase tracking-[0.15em]">Challenge</h4>
-                      <p className="text-sm font-light">{decision.challenge}</p>
-                    </div>
-                    <div>
-                      <h4 className="text-xs font-medium mb-1 text-muted-foreground uppercase tracking-[0.15em]">Iteration</h4>
-                      <p className="text-sm font-light">{decision.iteration}</p>
-                    </div>
-                    <div>
-                      <h4 className="text-xs font-medium mb-1 text-muted-foreground uppercase tracking-[0.15em]">Final Decision</h4>
-                      <p className="text-sm font-light">{decision.finalDecision}</p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-
             {project.iterations.note && (
               <div className="bg-muted/30 rounded-lg p-4 mb-8">
                 <p className="text-sm text-muted-foreground leading-[1.8] font-light italic">
@@ -382,12 +361,12 @@ const ProjectDetails: React.FC = () => {
               </div>
             )}
 
-            <div className="grid md:grid-cols-3 gap-4">
+            <div className="space-y-6">
               {project.iterations.images.map((imagePath, index) => (
                 <div key={index} className="rounded-xl overflow-hidden bg-muted/20">
                   <img 
                     src={mockupImageMap[imagePath] || imagePath}
-                    alt={`Iterations ${index + 1}`}
+                    alt={`Design Iterations ${index + 1}`}
                     className="w-full h-auto object-cover"
                   />
                 </div>
