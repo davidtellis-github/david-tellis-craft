@@ -164,9 +164,9 @@ const ProjectDetails: React.FC = () => {
         captions={lightboxCaptions}
       />
 
-      <main className="w-full max-w-[1600px] mx-auto px-6 md:px-12 lg:px-20">
+      <main className="w-[98vw] mx-auto px-4 md:px-6 pt-16 lg:pt-0">
         {/* Main layout with ProjectNav + content */}
-        <div className="flex gap-16 lg:gap-24">
+        <div className="flex gap-[4vw] lg:gap-[10%]">
           <ProjectNav />
           
           <section className="flex flex-col flex-1 min-w-0 py-[20vh]">
