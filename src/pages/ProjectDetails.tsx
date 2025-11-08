@@ -417,7 +417,22 @@ const ProjectDetails: React.FC = () => {
         {/* Process */}
         <section id="process" className="py-12 border-b border-border/10">
           <h2 className="text-2xl font-light mb-8">Process & Approach</h2>
-          <ProcessTimeline steps={project.process} />
+          <div className="grid md:grid-cols-2 gap-8">
+            {project.process.map((process, index) => (
+              <div 
+                key={index} 
+                className="border-l-2 border-border/20 pl-6 py-3 hover:border-foreground/40 transition-colors"
+              >
+                <div className="flex items-center gap-3 mb-2">
+                  <span className="text-2xl">{process.icon}</span>
+                  <h3 className="text-base font-normal">{process.step}</h3>
+                </div>
+                <p className="text-sm text-muted-foreground leading-[1.8] font-light">
+                  {process.description}
+                </p>
+              </div>
+            ))}
+          </div>
         </section>
         
         {/* Gallery Section - Moved Earlier */}
