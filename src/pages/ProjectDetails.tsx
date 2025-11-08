@@ -183,10 +183,10 @@ const ProjectDetails: React.FC = () => {
               </span>
             </div>
             
-            <h1 className="text-6xl md:text-7xl lg:text-8xl font-extralight tracking-tight leading-[1.05] mb-12 animate-fade-in">
+            <h1 className="text-4xl sm:text-6xl md:text-7xl lg:text-7xl xl:text-8xl 2xl:text-8xl font-medium tracking-tight leading-snug sm:leading-tight md:leading-[1.2] mb-12 animate-fade-in">
               {project.title}
             </h1>
-            <p className="text-2xl md:text-3xl text-muted-foreground font-extralight leading-[1.6] mb-20 animate-fade-in max-w-4xl" style={{ animationDelay: '100ms' }}>
+            <p className="text-lg sm:text-xl md:text-2xl text-muted-foreground font-light leading-relaxed mb-20 animate-fade-in max-w-4xl" style={{ animationDelay: '100ms' }}>
               {project.subtitle}
             </p>
 
@@ -254,7 +254,7 @@ const ProjectDetails: React.FC = () => {
             <div className="inline-flex items-center gap-3 mb-8 text-muted-foreground">
               <span className="text-xs uppercase tracking-[0.2em] font-light">Key Challenge</span>
             </div>
-            <p className="text-3xl md:text-4xl lg:text-5xl font-extralight leading-[1.4] text-foreground">
+            <p className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-light leading-snug sm:leading-tight md:leading-[1.4] text-foreground">
               {project.context.problem.split('.')[0]}.
             </p>
           </div>
@@ -262,7 +262,7 @@ const ProjectDetails: React.FC = () => {
 
         {/* Context Section */}
         <section id="context" className="py-32">
-          <h2 className="text-4xl font-extralight mb-16 tracking-tight">Context & Challenge</h2>
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-medium tracking-tight mb-16">Context & Challenge</h2>
           <div className="grid lg:grid-cols-2 gap-20 items-center">
             <div className="space-y-16">
               <div>
@@ -303,8 +303,8 @@ const ProjectDetails: React.FC = () => {
             {/* Left Column - Role Info */}
             <div className="space-y-16">
               <div>
-                <h2 className="text-4xl font-extralight mb-3 tracking-tight">Role & Impact</h2>
-                <p className="text-muted-foreground text-lg font-light leading-relaxed">
+                <h2 className="text-3xl sm:text-4xl md:text-5xl font-medium tracking-tight mb-3">Role & Impact</h2>
+                <p className="text-muted-foreground text-base sm:text-lg font-light leading-relaxed">
                   Leading design strategy and execution
                 </p>
               </div>
@@ -312,7 +312,7 @@ const ProjectDetails: React.FC = () => {
               {/* Role Card */}
               <div className="border border-border/30 rounded-2xl p-8 bg-muted/10 backdrop-blur-sm">
                 <div className="flex items-start justify-between mb-8">
-                  <h3 className="text-2xl font-light tracking-tight">
+                  <h3 className="text-xl sm:text-2xl font-medium tracking-tight">
                     {project.role.title}
                   </h3>
                 </div>
