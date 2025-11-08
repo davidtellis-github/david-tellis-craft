@@ -138,7 +138,7 @@ const ProjectDetails: React.FC = () => {
 
             {/* Hero Image or Video Section */}
             {project.videoUrl ? (
-              <div className="relative aspect-video rounded-2xl overflow-hidden mb-16">
+              <div className="relative aspect-video rounded-lg overflow-hidden mb-16">
                 <iframe
                   src={project.videoUrl}
                   className="absolute inset-0 w-full h-full"

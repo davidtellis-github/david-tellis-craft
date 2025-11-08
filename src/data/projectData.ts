@@ -207,7 +207,7 @@ export const projectsData: Record<string, ProjectData> = {
       ]
     },
 
-    videoUrl: "https://player.vimeo.com/video/1134826452?badge=0&autopause=0&autoplay=1&muted=1",
+    videoUrl: "https://player.vimeo.com/video/1134826452?badge=0&autopause=0&autoplay=1&muted=1&loop=1&controls=0&title=0&byline=0&portrait=0",
 
     iterations: {
       intro: "The Wedding Verse interface went through multiple cycles of exploration — over 2,000 Figma frames across 12 user journeys. Each iteration was data-driven, tested, and refined for clarity and emotional resonance.",
