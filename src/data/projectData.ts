@@ -540,86 +540,91 @@ export const projectsData: Record<string, ProjectData> = {
   "ideabaaz": {
     id: "ideabaaz",
     title: "Ideabaaz",
-    subtitle: "Get visible. Get funded. Get growing.",
-    description: "A web portal built for startups and their ecosystem — a digital space that connects founders, investors, mentors, and solution providers to help ideas grow and scale. The platform acts as a launchpad for India's new-generation entrepreneurs, combining funding access, mentorship, and business solutions in one place.",
+    subtitle: "A startup ecosystem born from a live TV show — connecting founders, investors, mentors, and corporates.",
+    description: "A digital ecosystem that turns Ideabaaz from a televised pitch show into a living platform where startups, investors, mentors, corporates, and franchise seekers can discover, connect, and grow together.",
     category: "concepts",
-    year: "2025",
+    year: "2024",
     services: "Strategy + Design + Stakeholder Management",
     
     mockupImages: ['ideabaaz-featured.png', 'ideabaaz-laptop-mockup.png'],
     
     role: {
-      title: "Product Designer & Project Lead",
-      duration: "2025",
+      title: "Lead Product Designer & Early Project Manager",
+      duration: "Q1 2024 – Ongoing (Platform in development)",
       team: "Presented by Zee • Curated by Turbostart",
-      tools: ["Figma"]
+      tools: ["Figma", "FigJam"]
     },
 
     context: {
-      problem: "India's startup ecosystem is buzzing — but fragmented. Early-stage founders struggle to find visibility, guidance, and funding opportunities. On the other side, investors and mentors lack a centralized, reliable space to discover and support new ventures.",
-      objective: "Design a landing experience that introduces the ecosystem and inspires action, while building trust and credibility through visual tone, partner branding, and content flow.",
-      audience: "Founders, investors, mentors, and solution providers in India's startup ecosystem"
+      problem: "India's startup landscape is full of ambition but disconnected — founders pitch everywhere, yet rarely reach the right investors or mentors. Ideabaaz began as a national TV show on Zee TV, bringing startup stories to millions, but lacked a structured platform to convert exposure into opportunity.",
+      objective: "Turn Ideabaaz from a televised pitch show into a living, digital ecosystem where startups, investors, mentors, corporates, and franchise seekers can discover, connect, and grow together.",
+      audience: "Founders, investors, mentors, corporates, and franchise seekers in India's startup ecosystem"
     },
 
     features: [
       {
-        title: "For Founders",
-        description: "Get visible to investors, access funding opportunities, and showcase your startup to the right audience.",
+        title: "Live-Show Integration",
+        description: "Showcasing featured startups and investors from the Zee TV series with real-time engagement opportunities.",
+        icon: "📺"
+      },
+      {
+        title: "Founder Profiles",
+        description: "Public startup pages that allow discovery, following, and direct investor interest.",
         icon: "🚀"
       },
       {
-        title: "For Investors",
-        description: "Discover vetted startups, connect with high-potential founders, and expand your investment portfolio.",
+        title: "Investor Discovery",
+        description: "Structured filters and recommendation logic for domain-based matchmaking.",
         icon: "💼"
       },
       {
-        title: "For Mentors",
-        description: "Guide the next generation of entrepreneurs, share your expertise, and contribute to the ecosystem.",
+        title: "Training & Mentorship Hub",
+        description: "Mentor programs and growth tracks for early-stage founders.",
         icon: "🎓"
       },
       {
-        title: "For Solution Providers",
-        description: "Connect with startups in need of your services, from legal to marketing to technology solutions.",
-        icon: "🔧"
+        title: "Corporate & Franchise Network",
+        description: "Designed framework for corporates and franchise seekers to collaborate within the ecosystem.",
+        icon: "🤝"
       }
     ],
 
     process: [
       { 
-        step: "Hero Section", 
-        description: "Bold messaging with 'Get visible. Get funded. Get growing.' and startup registration CTA to build anticipation.", 
-        icon: "🎯" 
+        step: "Research", 
+        description: "Mapped user journeys for founders, investors, and media audiences.", 
+        icon: "🔍" 
       },
       { 
-        step: "Partner Logos", 
-        description: "Built social proof instantly with known brands like House of Cheer, Wizcraft, Zee, Dangal, and YourStory.", 
+        step: "Ideation & Wireframes", 
+        description: "Created interactive flows and early UX structure using FigJam and Figma.", 
+        icon: "📐" 
+      },
+      { 
+        step: "Visual Design", 
+        description: "Built an adaptable UI system reflecting the Ideabaaz brand and TV identity.", 
+        icon: "🎨" 
+      },
+      { 
+        step: "Collaboration", 
+        description: "Worked closely with founders, producers, and stakeholders to align roadmap and expectations.", 
         icon: "🤝" 
       },
       { 
-        step: "Ecosystem Breakdown", 
-        description: "Introduced 4 key groups with light, friendly tone and quick CTAs for each user type.", 
-        icon: "🧩" 
-      },
-      { 
-        step: "Get Started Section", 
-        description: "Motivational messaging encouraging each user type to begin their journey on Ideabaaz.", 
-        icon: "✨" 
-      },
-      { 
-        step: "FAQs & Footer", 
-        description: "Added transparency, trust signals, and clear ownership credits.", 
+        step: "Management", 
+        description: "Coordinated across design, marketing, and development for early release milestones.", 
         icon: "📋" 
       }
     ],
 
     outcomes: [
-      { metric: "Brand foundation", value: "Established solid identity" },
-      { metric: "Landing page design", value: "High-conversion ready" },
-      { metric: "Content structure", value: "Adaptable for future features" },
-      { metric: "Brand positioning", value: "Credible accelerator backed by Zee" }
+      { metric: "Product direction", value: "Unified across teams" },
+      { metric: "Early validation", value: "Prototypes validated positioning" },
+      { metric: "Ecosystem foundation", value: "Set for 2025 web launch" },
+      { metric: "Stakeholder alignment", value: "Synced tech, marketing, media" }
     ],
 
-    reflection: "Ideabaaz was about creating more than just a platform — it was about building a web portal where ideas, mentorship, funding, and solutions meet seamlessly. Simplifying complex ecosystems into digestible, inspiring storytelling improves engagement. Strong brand voice alignment early on helps in setting the tone for future UX. Even pre-launch pages can act as powerful brand assets when designed with intention. Every idea deserves the right stage.",
+    reflection: "Building a digital product that originated from a TV format taught me how to merge storytelling with systems design. Managing creative, tech, and marketing stakeholders early helped me bridge gaps between idea and execution — a skill that defined Ideabaaz's product direction.",
 
     links: {
       figma: "https://figma.com/ideabaaz"
