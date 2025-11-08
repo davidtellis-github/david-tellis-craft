@@ -546,7 +546,7 @@ export const projectsData: Record<string, ProjectData> = {
     year: "2025",
     services: "Strategy + Design + Stakeholder Management",
     
-    mockupImages: ['ideabaaz-featured.png'],
+    mockupImages: ['ideabaaz-featured.png', 'ideabaaz-laptop-mockup.png'],
     
     role: {
       title: "Product Designer & Project Lead",

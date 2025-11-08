@@ -9,6 +9,7 @@ import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 // Import mockup images
 import weddingverseFeatured from '@/assets/weddingverse-featured.png';
 import ideabaazFeatured from '@/assets/ideabaaz-featured.png';
+import ideabaazLaptopMockup from '@/assets/ideabaaz-laptop-mockup.png';
 import futurcraftFeatured from '@/assets/futurcraft-featured.png';
 import turbocloudFeatured from '@/assets/turbocloud-featured.png';
 import designSystem1 from '@/assets/wedding-verse-design-system-1.png';
@@ -24,6 +25,7 @@ import weddingverseRole from '@/assets/wedding-verse-role.jpg';
 const mockupImageMap: Record<string, string> = {
   'weddingverse-featured.png': weddingverseFeatured,
   'ideabaaz-featured.png': ideabaazFeatured,
+  'ideabaaz-laptop-mockup.png': ideabaazLaptopMockup,
   'futurcraft-featured.png': futurcraftFeatured,
   'turbocloud-featured.png': turbocloudFeatured,
   'wedding-verse-design-system-1.png': designSystem1,
