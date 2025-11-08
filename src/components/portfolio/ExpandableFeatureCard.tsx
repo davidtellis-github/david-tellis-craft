@@ -18,20 +18,20 @@ export const ExpandableFeatureCard: React.FC<ExpandableFeatureCardProps> = ({
   const hasLongDescription = description.length > 120;
 
   return (
-    <div className="group relative border border-border rounded-lg p-6 hover:border-foreground/20 hover:shadow-md transition-all duration-300 bg-card">
+    <div className="group relative border border-border/30 rounded-xl p-8 hover:border-foreground/40 hover:shadow-lg transition-all duration-500 bg-card/50">
       {isComingSoon && (
-        <span className="absolute top-4 right-4 text-xs px-2 py-1 rounded-full bg-muted text-muted-foreground">
+        <span className="absolute top-6 right-6 text-xs px-3 py-2 rounded-full bg-muted/50 text-muted-foreground tracking-wider">
           Coming Soon
         </span>
       )}
       
       <div className="flex items-start gap-4">
         <div className="flex-1 min-w-0">
-          <h3 className="text-lg font-medium mb-2 group-hover:text-foreground transition-colors">
+          <h3 className="text-xl font-light mb-4 group-hover:text-foreground transition-colors">
             {title}
           </h3>
           
-          <p className={`text-muted-foreground leading-relaxed ${
+          <p className={`text-muted-foreground leading-[2] font-light ${
             hasLongDescription && !isExpanded ? 'line-clamp-3' : ''
           }`}>
             {description}
@@ -40,7 +40,7 @@ export const ExpandableFeatureCard: React.FC<ExpandableFeatureCardProps> = ({
           {hasLongDescription && (
             <button
               onClick={() => setIsExpanded(!isExpanded)}
-              className="mt-3 text-sm text-foreground/60 hover:text-foreground flex items-center gap-1 transition-colors"
+              className="mt-4 text-sm text-foreground/60 hover:text-foreground flex items-center gap-2 transition-colors font-light"
             >
               {isExpanded ? 'Show less' : 'Read more'}
               <ChevronDown className={`w-4 h-4 transition-transform duration-300 ${

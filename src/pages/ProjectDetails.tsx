@@ -164,35 +164,35 @@ const ProjectDetails: React.FC = () => {
         captions={lightboxCaptions}
       />
 
-      <main className="w-[98vw] mx-auto px-4 md:px-6">
+      <main className="w-full max-w-[1600px] mx-auto px-6 md:px-12 lg:px-20">
         {/* Main layout with ProjectNav + content */}
-        <div className="flex gap-8 lg:gap-12">
+        <div className="flex gap-16 lg:gap-24">
           <ProjectNav />
           
           <section className="flex flex-col flex-1 min-w-0 py-[20vh]">
         {/* Hero Section */}
-        <section id="overview" className="py-20 pt-16">
-            <div className="mb-16">
+        <section id="overview" className="py-32">
+            <div className="mb-24">
             {/* Project Tags */}
-            <div className="flex flex-wrap gap-2 mb-6 animate-fade-in">
-              <span className="px-3 py-1 text-xs rounded-full bg-muted text-muted-foreground">
+            <div className="flex flex-wrap gap-3 mb-12 animate-fade-in">
+              <span className="px-4 py-2 text-xs rounded-full bg-muted/50 text-muted-foreground tracking-wider">
                 {project.category.charAt(0).toUpperCase() + project.category.slice(1)} Design
               </span>
-              <span className="px-3 py-1 text-xs rounded-full bg-muted text-muted-foreground">
+              <span className="px-4 py-2 text-xs rounded-full bg-muted/50 text-muted-foreground tracking-wider">
                 {project.year}
               </span>
             </div>
             
-            <h1 className="text-5xl md:text-6xl lg:text-7xl font-light tracking-tight leading-[1.1] mb-6 animate-fade-in">
+            <h1 className="text-6xl md:text-7xl lg:text-8xl font-extralight tracking-tight leading-[1.05] mb-12 animate-fade-in">
               {project.title}
             </h1>
-            <p className="text-xl md:text-2xl text-muted-foreground font-light leading-relaxed mb-12 animate-fade-in" style={{ animationDelay: '100ms' }}>
+            <p className="text-2xl md:text-3xl text-muted-foreground font-extralight leading-[1.6] mb-20 animate-fade-in max-w-4xl" style={{ animationDelay: '100ms' }}>
               {project.subtitle}
             </p>
 
             {/* Hero Image or Video Section */}
             {project.videoUrl ? (
-              <div className="relative aspect-video rounded-lg overflow-hidden mb-8 animate-fade-in group" style={{ animationDelay: '200ms' }}>
+              <div className="relative aspect-video rounded-2xl overflow-hidden mb-20 animate-fade-in group" style={{ animationDelay: '200ms' }}>
                 <iframe
                   src={project.videoUrl}
                   className="absolute inset-0 w-full h-full"
@@ -203,18 +203,18 @@ const ProjectDetails: React.FC = () => {
               </div>
             ) : project.mockupImages && project.mockupImages.length > 0 ? (
               <div 
-                className="relative rounded-lg overflow-hidden mb-8 animate-fade-in group cursor-pointer hover:shadow-xl transition-shadow duration-300" 
+                className="relative rounded-2xl overflow-hidden mb-20 animate-fade-in group cursor-pointer hover:shadow-2xl transition-all duration-500" 
                 style={{ animationDelay: '200ms' }}
                 onClick={() => openLightbox([mockupImageMap[project.mockupImages[0]] || project.mockupImages[0]], 0)}
               >
                 <img 
                   src={mockupImageMap[project.mockupImages[0]] || project.mockupImages[0]} 
                   alt={`${project.title} interface mockup`}
-                  className="w-full h-auto object-cover group-hover:scale-105 transition-transform duration-500"
+                  className="w-full h-auto object-cover group-hover:scale-[1.02] transition-transform duration-700"
                 />
               </div>
             ) : (
-              <div className="relative aspect-video bg-muted/50 rounded-lg overflow-hidden group cursor-pointer mb-8 animate-fade-in" style={{ animationDelay: '200ms' }}>
+              <div className="relative aspect-video bg-muted/30 rounded-2xl overflow-hidden group cursor-pointer mb-20 animate-fade-in" style={{ animationDelay: '200ms' }}>
                 <div className="absolute inset-0 bg-gradient-to-br from-background/20 to-background/5 flex items-center justify-center">
                   <div className="bg-background/90 rounded-full p-8 group-hover:scale-110 transition-transform">
                     <Play className="h-12 w-12 text-foreground ml-1" />
@@ -224,7 +224,7 @@ const ProjectDetails: React.FC = () => {
             )}
             
             {/* Quick Stats Bar */}
-            <div className="mb-16 animate-fade-in" style={{ animationDelay: '400ms' }}>
+            <div className="mb-20 animate-fade-in" style={{ animationDelay: '400ms' }}>
               <QuickStatsBar
                 team={project.role.team}
                 duration={project.role.duration}
@@ -233,8 +233,8 @@ const ProjectDetails: React.FC = () => {
               />
             </div>
             
-            <div className="max-w-3xl">
-              <p className="text-base md:text-lg text-muted-foreground leading-[1.8] font-light">
+            <div className="max-w-4xl">
+              <p className="text-lg md:text-xl text-muted-foreground leading-[2] font-light">
                 {project.description}
               </p>
               {project.id === "wedding-verse" && (
@@ -249,33 +249,32 @@ const ProjectDetails: React.FC = () => {
         </section>
 
         {/* Challenge Highlight Callout */}
-        <div className="py-12 animate-fade-in">
-          <div className="max-w-3xl mx-auto text-center">
-            <div className="inline-flex items-center gap-2 mb-4 text-muted-foreground">
-              <AlertCircle className="w-5 h-5" />
-              <span className="text-sm uppercase tracking-wider">Key Challenge</span>
+        <div className="py-32 animate-fade-in">
+          <div className="max-w-5xl mx-auto text-center">
+            <div className="inline-flex items-center gap-3 mb-8 text-muted-foreground">
+              <span className="text-xs uppercase tracking-[0.2em] font-light">Key Challenge</span>
             </div>
-            <p className="text-2xl md:text-3xl font-light leading-relaxed text-foreground">
+            <p className="text-3xl md:text-4xl lg:text-5xl font-extralight leading-[1.4] text-foreground">
               {project.context.problem.split('.')[0]}.
             </p>
           </div>
         </div>
 
         {/* Context Section */}
-        <section id="context" className="py-20 border-b border-border/10">
-          <h2 className="text-2xl font-light mb-8">Context & Challenge</h2>
-          <div className="grid md:grid-cols-2 gap-12">
-            <div className="space-y-8">
+        <section id="context" className="py-32">
+          <h2 className="text-4xl font-extralight mb-16 tracking-tight">Context & Challenge</h2>
+          <div className="grid lg:grid-cols-2 gap-20 items-center">
+            <div className="space-y-16">
               <div>
-                <h3 className="text-sm font-medium text-muted-foreground uppercase tracking-[0.15em] mb-3">Problem</h3>
-                <p className="text-base leading-[1.8] font-light">
+                <h3 className="text-xs font-medium text-muted-foreground uppercase tracking-[0.2em] mb-6">Problem</h3>
+                <p className="text-lg leading-[2] font-light">
                   {project.context.problem}
                 </p>
               </div>
               
               <div>
-                <h3 className="text-sm font-medium text-muted-foreground uppercase tracking-[0.15em] mb-3">Objective</h3>
-                <p className="text-base leading-[1.8] font-light">
+                <h3 className="text-xs font-medium text-muted-foreground uppercase tracking-[0.2em] mb-6">Objective</h3>
+                <p className="text-lg leading-[2] font-light">
                   {project.context.objective}
                 </p>
               </div>
@@ -283,82 +282,86 @@ const ProjectDetails: React.FC = () => {
             
             {project.mockupImages && project.mockupImages[1] ? (
               <div 
-                className="rounded-lg overflow-hidden cursor-pointer group hover:shadow-xl transition-shadow duration-300"
+                className="rounded-2xl overflow-hidden cursor-pointer group hover:shadow-2xl transition-all duration-500 h-full"
                 onClick={() => openLightbox([mockupImageMap[project.mockupImages[1]] || project.mockupImages[1]], 0)}
               >
                 <img 
                   src={mockupImageMap[project.mockupImages[1]] || project.mockupImages[1]} 
                   alt={`${project.title} context mockup`}
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  className="w-full h-full object-cover group-hover:scale-[1.02] transition-transform duration-700"
                 />
               </div>
             ) : (
-              <div className="bg-muted/30 rounded-lg h-80"></div>
+              <div className="bg-muted/20 rounded-2xl h-96"></div>
             )}
           </div>
         </section>
 
         {/* Role & Impact */}
-        <section id="role" className="py-20 border-b border-border/10">
-          <h2 className="text-2xl font-light mb-8">Role & Impact</h2>
-          <div className="grid md:grid-cols-2 gap-12">
+        <section id="role" className="py-32">
+          <h2 className="text-4xl font-extralight mb-16 tracking-tight">Role & Impact</h2>
+          <div className="grid lg:grid-cols-2 gap-20 items-center">
             {project.mockupImages && project.mockupImages[2] ? (
               <div 
-                className="rounded-lg overflow-hidden h-full cursor-pointer group hover:shadow-xl transition-shadow duration-300"
+                className="rounded-2xl overflow-hidden h-full cursor-pointer group hover:shadow-2xl transition-all duration-500 order-2 lg:order-1"
                 onClick={() => openLightbox([mockupImageMap[project.mockupImages[2]] || project.mockupImages[2]], 0)}
               >
                 <img 
                   src={mockupImageMap[project.mockupImages[2]] || project.mockupImages[2]} 
                   alt={`${project.title} role mockup`}
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  className="w-full h-full object-cover group-hover:scale-[1.02] transition-transform duration-700"
                 />
               </div>
             ) : (
-              <div className="bg-muted/30 rounded-lg h-80"></div>
+              <div className="bg-muted/20 rounded-2xl h-96 order-2 lg:order-1"></div>
             )}
-            <div>
-              <h3 className="text-sm font-medium mb-4 text-muted-foreground uppercase tracking-[0.15em]">
-                {project.role.title}
-              </h3>
-              <div className="bg-muted/30 rounded-lg p-4 mb-6">
-                <div className="grid grid-cols-2 gap-4 text-sm">
-                  <div>
-                    <span className="text-muted-foreground">Duration:</span>
-                    <p className="font-medium">{project.role.duration}</p>
-                  </div>
-                  <div>
-                    <span className="text-muted-foreground">Team:</span>
-                    <p className="font-medium">{project.role.team.split('•')[0].trim()}</p>
+            <div className="space-y-12 order-1 lg:order-2">
+              <div>
+                <h3 className="text-xs font-medium mb-6 text-muted-foreground uppercase tracking-[0.2em]">
+                  {project.role.title}
+                </h3>
+                <div className="bg-muted/20 rounded-xl p-6 mb-8">
+                  <div className="grid grid-cols-2 gap-6">
+                    <div>
+                      <span className="text-xs text-muted-foreground uppercase tracking-wider">Duration</span>
+                      <p className="font-light text-lg mt-2">{project.role.duration}</p>
+                    </div>
+                    <div>
+                      <span className="text-xs text-muted-foreground uppercase tracking-wider">Team</span>
+                      <p className="font-light text-lg mt-2">{project.role.team.split('•')[0].trim()}</p>
+                    </div>
                   </div>
                 </div>
               </div>
               
-              <h3 className="text-sm font-medium mb-4 text-muted-foreground uppercase tracking-[0.15em]">Key Outcomes</h3>
-              <div className="space-y-4">
-                {project.outcomes.map((outcome, index) => (
-                  <div 
-                    key={index} 
-                    className="group hover:bg-muted/30 rounded-lg p-3 transition-all duration-300 animate-fade-in"
-                    style={{ animationDelay: `${index * 100}ms` }}
-                  >
-                    <div className="flex justify-between items-start gap-4">
-                      <span className="text-sm font-light text-muted-foreground">{outcome.metric}</span>
-                      <AnimatedCounter 
-                        value={outcome.value}
-                        className="text-2xl font-light text-foreground"
-                      />
+              <div>
+                <h3 className="text-xs font-medium mb-8 text-muted-foreground uppercase tracking-[0.2em]">Key Outcomes</h3>
+                <div className="space-y-6">
+                  {project.outcomes.map((outcome, index) => (
+                    <div 
+                      key={index} 
+                      className="group hover:bg-muted/20 rounded-xl p-6 transition-all duration-300 animate-fade-in"
+                      style={{ animationDelay: `${index * 100}ms` }}
+                    >
+                      <div className="flex justify-between items-start gap-6">
+                        <span className="text-sm font-light text-muted-foreground">{outcome.metric}</span>
+                        <AnimatedCounter 
+                          value={outcome.value}
+                          className="text-3xl font-extralight text-foreground"
+                        />
+                      </div>
                     </div>
-                  </div>
-                ))}
+                  ))}
+                </div>
               </div>
             </div>
           </div>
         </section>
 
         {/* Features */}
-        <section id="features" className="py-20 border-b border-border/10">
-          <h2 className="text-2xl font-light mb-8">Features & Complexity</h2>
-          <div className="grid md:grid-cols-2 gap-6">
+        <section id="features" className="py-32">
+          <h2 className="text-4xl font-extralight mb-16 tracking-tight">Features & Complexity</h2>
+          <div className="grid md:grid-cols-2 gap-8">
             {project.features.map((feature, index) => (
               <div 
                 key={index}
@@ -377,16 +380,16 @@ const ProjectDetails: React.FC = () => {
         </section>
 
         {/* Process */}
-        <section id="process" className="py-20 border-b border-border/10">
-          <h2 className="text-2xl font-light mb-8">Process & Approach</h2>
-          <div className="grid md:grid-cols-2 gap-8">
+        <section id="process" className="py-32">
+          <h2 className="text-4xl font-extralight mb-16 tracking-tight">Process & Approach</h2>
+          <div className="grid md:grid-cols-2 gap-12">
             {project.process.map((process, index) => (
               <div 
                 key={index} 
-                className="border-l-2 border-border/20 pl-6 py-3 hover:border-foreground/40 transition-colors"
+                className="border-l border-border/30 pl-8 py-4 hover:border-foreground/50 transition-all duration-300 hover:pl-10"
               >
-                <h3 className="text-base font-normal mb-2">{process.step}</h3>
-                <p className="text-sm text-muted-foreground leading-[1.8] font-light">
+                <h3 className="text-lg font-light mb-4">{process.step}</h3>
+                <p className="text-base text-muted-foreground leading-[2] font-light">
                   {process.description}
                 </p>
               </div>
@@ -395,8 +398,8 @@ const ProjectDetails: React.FC = () => {
         </section>
         
         {/* Gallery Section - Moved Earlier */}
-        <section id="gallery" className="py-20 border-b border-border/10">
-          <h2 className="text-2xl font-light mb-8">UI Gallery</h2>
+        <section id="gallery" className="py-32">
+          <h2 className="text-4xl font-extralight mb-16 tracking-tight">UI Gallery</h2>
           {!isLoading && allUIAssets.length > 0 && (
             <UIGallery 
               assets={allUIAssets} 
@@ -412,22 +415,22 @@ const ProjectDetails: React.FC = () => {
 
         {/* Design System Section */}
         {project.designSystem && (
-          <section id="design-system" className="py-20 border-b border-border/10">
-            <h2 className="text-2xl font-light mb-8">Design System</h2>
+          <section id="design-system" className="py-32">
+            <h2 className="text-4xl font-extralight mb-16 tracking-tight">Design System</h2>
             
             {project.designSystem.note && (
-              <div className="bg-muted/30 rounded-lg p-4 mb-8">
-                <p className="text-sm text-muted-foreground leading-[1.8] font-light italic">
+              <div className="bg-muted/20 rounded-xl p-8 mb-16">
+                <p className="text-base text-muted-foreground leading-[2] font-light italic">
                   {project.designSystem.note}
                 </p>
               </div>
             )}
 
-            <div className="grid md:grid-cols-3 gap-4">
+            <div className="grid md:grid-cols-3 gap-8">
               {project.designSystem.images.map((imagePath, index) => (
                 <div 
                   key={index} 
-                  className="rounded-xl overflow-hidden bg-muted/20 cursor-pointer group hover:shadow-xl transition-all duration-300 animate-fade-in"
+                  className="rounded-2xl overflow-hidden cursor-pointer group hover:shadow-2xl transition-all duration-500 animate-fade-in"
                   style={{ animationDelay: `${index * 100}ms` }}
                   onClick={() => openLightbox(
                     project.designSystem!.images.map(img => mockupImageMap[img] || img),
@@ -438,11 +441,8 @@ const ProjectDetails: React.FC = () => {
                   <img 
                     src={mockupImageMap[imagePath] || imagePath}
                     alt={`Design System ${index + 1}`}
-                    className="w-full h-auto object-cover group-hover:scale-105 transition-transform duration-500"
+                    className="w-full h-auto object-cover group-hover:scale-[1.02] transition-transform duration-700"
                   />
-                  <div className="p-2 text-xs text-center text-muted-foreground">
-                    Design System {index + 1}
-                  </div>
                 </div>
               ))}
             </div>
@@ -451,23 +451,23 @@ const ProjectDetails: React.FC = () => {
 
         {/* Iterations & UX Decisions Section */}
         {project.iterations && (
-          <section id="iterations" className="py-20 border-b border-border/10">
-            <h2 className="text-2xl font-light mb-8">Iterations & UX Decisions</h2>
+          <section id="iterations" className="py-32">
+            <h2 className="text-4xl font-extralight mb-16 tracking-tight">Iterations & UX Decisions</h2>
             {project.iterations.intro && (
-              <p className="text-sm text-muted-foreground leading-[1.8] font-light mb-8">
+              <p className="text-base text-muted-foreground leading-[2] font-light mb-12 max-w-4xl">
                 {project.iterations.intro}
               </p>
             )}
 
             {project.iterations.note && (
-              <div className="bg-muted/30 rounded-lg p-4 mb-8">
-                <p className="text-sm text-muted-foreground leading-[1.8] font-light italic">
+              <div className="bg-muted/20 rounded-xl p-8 mb-16">
+                <p className="text-base text-muted-foreground leading-[2] font-light italic">
                   {project.iterations.note}
                 </p>
               </div>
             )}
 
-            <div className="columns-1 sm:columns-2 lg:columns-3 gap-4 space-y-4">
+            <div className="columns-1 sm:columns-2 lg:columns-3 gap-8 space-y-8">
               {project.iterations.images.map((imagePath, index) => (
                 <div 
                   key={index} 
@@ -479,15 +479,12 @@ const ProjectDetails: React.FC = () => {
                     project.iterations!.images.map((_, i) => `Iteration ${i + 1}`)
                   )}
                 >
-                  <div className="rounded-xl overflow-hidden bg-muted/20 hover:shadow-xl transition-all duration-300">
+                  <div className="rounded-2xl overflow-hidden hover:shadow-2xl transition-all duration-500">
                     <img 
                       src={mockupImageMap[imagePath] || imagePath}
                       alt={`Design Iterations ${index + 1}`}
-                      className="w-full h-auto object-cover group-hover:scale-105 transition-transform duration-500"
+                      className="w-full h-auto object-cover group-hover:scale-[1.02] transition-transform duration-700"
                     />
-                    <div className="p-2 text-xs text-center text-muted-foreground">
-                      Iteration {index + 1}
-                    </div>
                   </div>
                 </div>
               ))}
@@ -497,25 +494,25 @@ const ProjectDetails: React.FC = () => {
 
 
         {/* Reflection */}
-        <section id="reflection" className="py-20 border-b border-border/10">
-          <h2 className="text-2xl font-light mb-8">Reflection & Learnings</h2>
-          <div className="max-w-3xl">
-            <p className="text-base text-muted-foreground leading-[1.8] font-light">
+        <section id="reflection" className="py-32">
+          <h2 className="text-4xl font-extralight mb-16 tracking-tight">Reflection & Learnings</h2>
+          <div className="max-w-4xl">
+            <p className="text-lg text-muted-foreground leading-[2] font-light">
               {project.reflection}
             </p>
           </div>
         </section>
 
         {/* CTA Section */}
-        <section id="links" className="py-16 text-center">
-          <h2 className="text-2xl font-light mb-8">View the Project</h2>
-          <div className="flex flex-wrap gap-4 justify-center">
+        <section id="links" className="py-32 text-center">
+          <h2 className="text-4xl font-extralight mb-16 tracking-tight">View the Project</h2>
+          <div className="flex flex-wrap gap-6 justify-center">
             {project.links.live && (
                 <a 
                 href={project.links.live} 
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 bg-foreground text-background px-8 py-4 rounded-full hover:bg-foreground/90 hover:scale-105 transition-all duration-300 text-base font-normal"
+                className="inline-flex items-center gap-3 bg-foreground text-background px-10 py-5 rounded-full hover:bg-foreground/90 hover:scale-105 transition-all duration-300 text-base font-light"
               >
                 <ExternalLink className="h-5 w-5" />
                 Live Project
@@ -526,7 +523,7 @@ const ProjectDetails: React.FC = () => {
                 href={project.links.figma} 
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 border border-border px-8 py-4 rounded-full hover:bg-muted/50 hover:scale-105 transition-all duration-300 text-base font-normal"
+                className="inline-flex items-center gap-3 border border-border/40 px-10 py-5 rounded-full hover:bg-muted/30 hover:scale-105 transition-all duration-300 text-base font-light"
               >
                 <Figma className="h-5 w-5" />
                 Figma
@@ -537,7 +534,7 @@ const ProjectDetails: React.FC = () => {
                 href={project.links.github} 
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 border border-border px-8 py-4 rounded-full hover:bg-muted/50 hover:scale-105 transition-all duration-300 text-base font-normal"
+                className="inline-flex items-center gap-3 border border-border/40 px-10 py-5 rounded-full hover:bg-muted/30 hover:scale-105 transition-all duration-300 text-base font-light"
               >
                 <Github className="h-5 w-5" />
                 GitHub
@@ -548,7 +545,7 @@ const ProjectDetails: React.FC = () => {
                 href={project.links.playstore} 
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 border border-border px-8 py-4 rounded-full hover:bg-muted/50 hover:scale-105 transition-all duration-300 text-base font-normal"
+                className="inline-flex items-center gap-3 border border-border/40 px-10 py-5 rounded-full hover:bg-muted/30 hover:scale-105 transition-all duration-300 text-base font-light"
               >
                 <Smartphone className="h-5 w-5" />
                 Download App
