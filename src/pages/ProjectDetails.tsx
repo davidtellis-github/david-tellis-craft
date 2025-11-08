@@ -381,14 +381,24 @@ const ProjectDetails: React.FC = () => {
         <section id="walkthrough" className="py-12 border-b border-border/10">
           <h2 className="text-2xl font-light mb-8">Video Walkthrough</h2>
           <div className="relative aspect-video bg-muted/50 rounded-xl overflow-hidden">
-            <div className="absolute inset-0 bg-gradient-to-br from-background/20 to-background/5 flex items-center justify-center">
-              <div className="text-center">
-                <div className="bg-background/90 rounded-full p-8 mb-4 inline-block">
-                  <Play className="h-12 w-12 text-foreground ml-2" />
+            {project.videoUrl ? (
+              <iframe
+                src={project.videoUrl}
+                className="absolute inset-0 w-full h-full"
+                frameBorder="0"
+                allow="autoplay; fullscreen; picture-in-picture; clipboard-write"
+                title={`${project.title} Video Walkthrough`}
+              />
+            ) : (
+              <div className="absolute inset-0 bg-gradient-to-br from-background/20 to-background/5 flex items-center justify-center">
+                <div className="text-center">
+                  <div className="bg-background/90 rounded-full p-8 mb-4 inline-block">
+                    <Play className="h-12 w-12 text-foreground ml-2" />
+                  </div>
+                  <p className="text-base text-muted-foreground">Product Demo • 60 seconds</p>
                 </div>
-                <p className="text-base text-muted-foreground">Product Demo • 60 seconds</p>
               </div>
-            </div>
+            )}
           </div>
         </section>
 

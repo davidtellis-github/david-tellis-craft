@@ -67,6 +67,8 @@ export interface ProjectData {
     playstore?: string;
   };
 
+  videoUrl?: string;
+
   mockupImages?: string[];
 }
 
@@ -204,6 +206,8 @@ export const projectsData: Record<string, ProjectData> = {
         "wedding-verse-design-system-3.png"
       ]
     },
+
+    videoUrl: "https://player.vimeo.com/video/1134826452?badge=0&autopause=0&autoplay=1&muted=1",
 
     iterations: {
       intro: "The Wedding Verse interface went through multiple cycles of exploration — over 2,000 Figma frames across 12 user journeys. Each iteration was data-driven, tested, and refined for clarity and emotional resonance.",
