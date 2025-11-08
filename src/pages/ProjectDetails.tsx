@@ -137,7 +137,17 @@ const ProjectDetails: React.FC = () => {
             </p>
 
             {/* Hero Image or Video Section */}
-            {project.mockupImages && project.mockupImages.length > 0 ? (
+            {project.videoUrl ? (
+              <div className="relative aspect-video rounded-2xl overflow-hidden mb-16">
+                <iframe
+                  src={project.videoUrl}
+                  className="absolute inset-0 w-full h-full"
+                  frameBorder="0"
+                  allow="autoplay; fullscreen; picture-in-picture; clipboard-write"
+                  title={`${project.title} Video`}
+                />
+              </div>
+            ) : project.mockupImages && project.mockupImages.length > 0 ? (
               <div className="relative rounded-2xl overflow-hidden mb-16">
                 <img 
                   src={mockupImageMap[project.mockupImages[0]] || project.mockupImages[0]} 
