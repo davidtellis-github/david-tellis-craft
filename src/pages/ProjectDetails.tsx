@@ -190,8 +190,18 @@ const ProjectDetails: React.FC = () => {
               {project.subtitle}
             </p>
 
-            {/* Hero Image Section */}
-            {project.mockupImages && project.mockupImages.length > 0 ? (
+            {/* Hero Image or Video Section */}
+            {project.videoUrl ? (
+              <div className="relative aspect-video rounded-2xl overflow-hidden mb-20 animate-fade-in group" style={{ animationDelay: '200ms' }}>
+                <iframe
+                  src={project.videoUrl}
+                  className="absolute inset-0 w-full h-full"
+                  frameBorder="0"
+                  allow="autoplay; fullscreen; picture-in-picture; clipboard-write"
+                  title={`${project.title} Video`}
+                />
+              </div>
+            ) : project.mockupImages && project.mockupImages.length > 0 ? (
               <div 
                 className="relative rounded-2xl overflow-hidden mb-20 animate-fade-in group cursor-pointer hover:shadow-2xl transition-all duration-500" 
                 style={{ animationDelay: '200ms' }}
