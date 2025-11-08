@@ -238,38 +238,17 @@ const ProjectDetails: React.FC = () => {
               />
             </div>
             
-            <div className="grid md:grid-cols-2 gap-16 mb-16">
-              <div>
-                <p className="text-base md:text-lg text-muted-foreground leading-[1.8] font-light">
-                  {project.description}
-                </p>
-              </div>
-              
-              <div className="space-y-6">
-                <div>
-                  <p className="text-xs uppercase tracking-[0.15em] text-muted-foreground mb-2 font-medium">Role</p>
-                  <p className="text-base font-light">{project.role.title}</p>
+            <div className="max-w-3xl">
+              <p className="text-base md:text-lg text-muted-foreground leading-[1.8] font-light">
+                {project.description}
+              </p>
+              {project.id === "wedding-verse" && (
+                <div className="mt-6 pt-6 border-t border-border/20">
+                  <p className="text-sm text-muted-foreground">
+                    🚀 <strong>Update:</strong> Mobile app launched on Play Store (2025).
+                  </p>
                 </div>
-                <div>
-                  <p className="text-xs uppercase tracking-[0.15em] text-muted-foreground mb-2 font-medium">Duration</p>
-                  <p className="text-base font-light">{project.role.duration}</p>
-                </div>
-                <div>
-                  <p className="text-xs uppercase tracking-[0.15em] text-muted-foreground mb-2 font-medium">Team</p>
-                  <p className="text-base font-light">{project.role.team}</p>
-                </div>
-                <div>
-                  <p className="text-xs uppercase tracking-[0.15em] text-muted-foreground mb-2 font-medium">Tools</p>
-                  <p className="text-base font-light">{project.role.tools.join(" • ")}</p>
-                </div>
-                {project.id === "wedding-verse" && (
-                  <div className="pt-4 border-t border-border/20">
-                    <p className="text-sm text-muted-foreground">
-                      🚀 <strong>Update:</strong> Mobile app launched on Play Store (2025).
-                    </p>
-                  </div>
-                )}
-              </div>
+              )}
             </div>
           </div>
         </section>
