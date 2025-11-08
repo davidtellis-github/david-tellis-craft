@@ -221,7 +221,7 @@ const ProjectDetails: React.FC = () => {
               </p>
             </div>
             {project.mockupImages && project.mockupImages[1] ? (
-              <div className="rounded-2xl overflow-hidden">
+              <div className="rounded-lg overflow-hidden">
                 <img 
                   src={mockupImageMap[project.mockupImages[1]] || project.mockupImages[1]} 
                   alt={`${project.title} context mockup`}
@@ -229,7 +229,7 @@ const ProjectDetails: React.FC = () => {
                 />
               </div>
             ) : (
-              <div className="bg-muted/30 rounded-2xl h-80"></div>
+              <div className="bg-muted/30 rounded-lg h-80"></div>
             )}
           </div>
         </section>
@@ -239,7 +239,7 @@ const ProjectDetails: React.FC = () => {
           <h2 className="text-2xl font-light mb-8">Role & Impact</h2>
           <div className="grid md:grid-cols-2 gap-12">
             {project.mockupImages && project.mockupImages[2] ? (
-              <div className="rounded-2xl overflow-hidden h-full">
+              <div className="rounded-lg overflow-hidden h-full">
                 <img 
                   src={mockupImageMap[project.mockupImages[2]] || project.mockupImages[2]} 
                   alt={`${project.title} role mockup`}
@@ -247,7 +247,7 @@ const ProjectDetails: React.FC = () => {
                 />
               </div>
             ) : (
-              <div className="bg-muted/30 rounded-2xl h-80"></div>
+              <div className="bg-muted/30 rounded-lg h-80"></div>
             )}
             <div>
               <h3 className="text-sm font-medium mb-4 text-muted-foreground uppercase tracking-[0.15em]">Key Responsibilities</h3>
