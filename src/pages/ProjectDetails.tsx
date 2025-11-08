@@ -69,16 +69,6 @@ const ProjectDetails: React.FC = () => {
   };
   
   const allUIAssets = [
-    // Add mockup images from projectData
-    ...(project?.mockupImages || []).map((imagePath, index) => ({
-      id: `mockup-${index}`,
-      title: `${project?.title || 'Project'} - UI ${index + 1}`,
-      description: undefined,
-      image_url: mockupImageMap[imagePath] || imagePath,
-      tags: [],
-      contribution_level: 'full',
-      is_featured: index === 0
-    })),
     // Add database assets
     ...assets.map(asset => ({
       id: asset.id,
@@ -223,11 +213,6 @@ const ProjectDetails: React.FC = () => {
               </div>
             )}
             
-            {/* Scroll Indicator */}
-            <div className="flex justify-center mb-16 animate-fade-in" style={{ animationDelay: '300ms' }}>
-              <ScrollIndicator />
-            </div>
-            
             {/* Quick Stats Bar */}
             <div className="mb-16 animate-fade-in" style={{ animationDelay: '400ms' }}>
               <QuickStatsBar
@@ -269,105 +254,60 @@ const ProjectDetails: React.FC = () => {
         {/* Context Section */}
         <section id="context" className="py-20 border-b border-border/10">
           <h2 className="text-2xl font-light mb-8">Context & Challenge</h2>
-          <div className="grid md:grid-cols-2 gap-12">
-            <div className="space-y-6">
-              {/* Problem Card */}
-              <div className="border border-border rounded-lg p-6 hover:border-foreground/20 hover:shadow-md transition-all duration-300 bg-card">
-                <div className="flex items-center gap-3 mb-4">
-                  <div className="w-10 h-10 rounded-full bg-destructive/10 flex items-center justify-center">
-                    <AlertCircle className="w-5 h-5 text-destructive" />
-                  </div>
-                  <h3 className="text-sm font-medium text-muted-foreground uppercase tracking-[0.15em]">Problem</h3>
-                </div>
-                <p className="text-base leading-[1.8] font-light">
-                  {project.context.problem}
-                </p>
-              </div>
-              
-              {/* Objective Card */}
-              <div className="border border-border rounded-lg p-6 hover:border-foreground/20 hover:shadow-md transition-all duration-300 bg-card">
-                <div className="flex items-center gap-3 mb-4">
-                  <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center">
-                    <Target className="w-5 h-5 text-primary" />
-                  </div>
-                  <h3 className="text-sm font-medium text-muted-foreground uppercase tracking-[0.15em]">Objective</h3>
-                </div>
-                <p className="text-base leading-[1.8] font-light">
-                  {project.context.objective}
-                </p>
-              </div>
+          <div className="space-y-6">
+            <div>
+              <h3 className="text-sm font-medium text-muted-foreground uppercase tracking-[0.15em] mb-3">Problem</h3>
+              <p className="text-base leading-[1.8] font-light">
+                {project.context.problem}
+              </p>
             </div>
             
-            {project.mockupImages && project.mockupImages[1] ? (
-              <div 
-                className="rounded-lg overflow-hidden cursor-pointer group hover:shadow-xl transition-shadow duration-300"
-                onClick={() => openLightbox([mockupImageMap[project.mockupImages[1]] || project.mockupImages[1]], 0)}
-              >
-                <img 
-                  src={mockupImageMap[project.mockupImages[1]] || project.mockupImages[1]} 
-                  alt={`${project.title} context mockup`}
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                />
-              </div>
-            ) : (
-              <div className="bg-muted/30 rounded-lg h-80"></div>
-            )}
+            <div>
+              <h3 className="text-sm font-medium text-muted-foreground uppercase tracking-[0.15em] mb-3">Objective</h3>
+              <p className="text-base leading-[1.8] font-light">
+                {project.context.objective}
+              </p>
+            </div>
           </div>
         </section>
 
         {/* Role & Impact */}
         <section id="role" className="py-20 border-b border-border/10">
           <h2 className="text-2xl font-light mb-8">Role & Impact</h2>
-          <div className="grid md:grid-cols-2 gap-12">
-            {project.mockupImages && project.mockupImages[2] ? (
-              <div 
-                className="rounded-lg overflow-hidden h-full cursor-pointer group hover:shadow-xl transition-shadow duration-300"
-                onClick={() => openLightbox([mockupImageMap[project.mockupImages[2]] || project.mockupImages[2]], 0)}
-              >
-                <img 
-                  src={mockupImageMap[project.mockupImages[2]] || project.mockupImages[2]} 
-                  alt={`${project.title} role mockup`}
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                />
-              </div>
-            ) : (
-              <div className="bg-muted/30 rounded-lg h-80"></div>
-            )}
-            <div>
-              <h3 className="text-sm font-medium mb-4 text-muted-foreground uppercase tracking-[0.15em]">
-                {project.role.title}
-              </h3>
-              <div className="bg-muted/30 rounded-lg p-4 mb-6">
-                <div className="grid grid-cols-2 gap-4 text-sm">
-                  <div>
-                    <span className="text-muted-foreground">Duration:</span>
-                    <p className="font-medium">{project.role.duration}</p>
-                  </div>
-                  <div>
-                    <span className="text-muted-foreground">Team:</span>
-                    <p className="font-medium">{project.role.team.split('•')[0].trim()}</p>
-                  </div>
+          <div>
+            <h3 className="text-sm font-medium mb-4 text-muted-foreground uppercase tracking-[0.15em]">
+              {project.role.title}
+            </h3>
+            <div className="bg-muted/30 rounded-lg p-4 mb-6">
+              <div className="grid grid-cols-2 gap-4 text-sm">
+                <div>
+                  <span className="text-muted-foreground">Duration:</span>
+                  <p className="font-medium">{project.role.duration}</p>
+                </div>
+                <div>
+                  <span className="text-muted-foreground">Team:</span>
+                  <p className="font-medium">{project.role.team.split('•')[0].trim()}</p>
                 </div>
               </div>
-              
-              <h3 className="text-sm font-medium mb-4 text-muted-foreground uppercase tracking-[0.15em]">Key Outcomes</h3>
-              <div className="space-y-4">
-                {project.outcomes.map((outcome, index) => (
-                  <div 
-                    key={index} 
-                    className="group hover:bg-muted/30 rounded-lg p-3 transition-all duration-300 animate-fade-in"
-                    style={{ animationDelay: `${index * 100}ms` }}
-                  >
-                    <div className="flex justify-between items-start gap-4">
-                      <span className="text-sm font-light text-muted-foreground">{outcome.metric}</span>
-                      <AnimatedCounter 
-                        value={outcome.value}
-                        className="text-2xl font-light text-foreground"
-                      />
-                    </div>
+            </div>
+            
+            <h3 className="text-sm font-medium mb-4 text-muted-foreground uppercase tracking-[0.15em]">Key Outcomes</h3>
+            <div className="space-y-4">
+              {project.outcomes.map((outcome, index) => (
+                <div 
+                  key={index} 
+                  className="group hover:bg-muted/30 rounded-lg p-3 transition-all duration-300 animate-fade-in"
+                  style={{ animationDelay: `${index * 100}ms` }}
+                >
+                  <div className="flex justify-between items-start gap-4">
+                    <span className="text-sm font-light text-muted-foreground">{outcome.metric}</span>
+                    <AnimatedCounter 
+                      value={outcome.value}
+                      className="text-2xl font-light text-foreground"
+                    />
                   </div>
-                ))}
-              </div>
+                </div>
+              ))}
             </div>
           </div>
         </section>
