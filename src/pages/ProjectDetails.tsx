@@ -299,60 +299,97 @@ const ProjectDetails: React.FC = () => {
 
         {/* Role & Impact */}
         <section id="role" className="py-32">
-          <h2 className="text-4xl font-extralight mb-16 tracking-tight">Role & Impact</h2>
-          <div className="grid lg:grid-cols-2 gap-20 items-center">
-            {project.mockupImages && project.mockupImages[2] ? (
-              <div 
-                className="rounded-2xl overflow-hidden h-full cursor-pointer group hover:shadow-2xl transition-all duration-500 order-2 lg:order-1"
-                onClick={() => openLightbox([mockupImageMap[project.mockupImages[2]] || project.mockupImages[2]], 0)}
-              >
-                <img 
-                  src={mockupImageMap[project.mockupImages[2]] || project.mockupImages[2]} 
-                  alt={`${project.title} role mockup`}
-                  className="w-full h-full object-cover group-hover:scale-[1.02] transition-transform duration-700"
-                />
-              </div>
-            ) : (
-              <div className="bg-muted/20 rounded-2xl h-96 order-2 lg:order-1"></div>
-            )}
-            <div className="space-y-12 order-1 lg:order-2">
+          <div className="grid lg:grid-cols-[1fr_1.2fr] gap-20 items-start">
+            {/* Left Column - Role Info */}
+            <div className="space-y-16">
               <div>
-                <h3 className="text-xs font-medium mb-6 text-muted-foreground uppercase tracking-[0.2em]">
-                  {project.role.title}
-                </h3>
-                <div className="bg-muted/20 rounded-xl p-6 mb-8">
-                  <div className="grid grid-cols-2 gap-6">
-                    <div>
-                      <span className="text-xs text-muted-foreground uppercase tracking-wider">Duration</span>
-                      <p className="font-light text-lg mt-2">{project.role.duration}</p>
-                    </div>
-                    <div>
-                      <span className="text-xs text-muted-foreground uppercase tracking-wider">Team</span>
-                      <p className="font-light text-lg mt-2">{project.role.team.split('•')[0].trim()}</p>
-                    </div>
+                <h2 className="text-4xl font-extralight mb-3 tracking-tight">Role & Impact</h2>
+                <p className="text-muted-foreground text-lg font-light leading-relaxed">
+                  Leading design strategy and execution
+                </p>
+              </div>
+
+              {/* Role Card */}
+              <div className="border border-border/30 rounded-2xl p-8 bg-muted/10 backdrop-blur-sm">
+                <div className="flex items-start justify-between mb-8">
+                  <h3 className="text-2xl font-light tracking-tight">
+                    {project.role.title}
+                  </h3>
+                </div>
+                
+                <div className="space-y-6">
+                  <div className="flex items-baseline gap-3 pb-4 border-b border-border/20">
+                    <span className="text-xs text-muted-foreground uppercase tracking-[0.15em] font-medium min-w-[80px]">Duration</span>
+                    <p className="font-light text-base">{project.role.duration}</p>
                   </div>
+                  
+                  <div className="flex items-baseline gap-3 pb-4 border-b border-border/20">
+                    <span className="text-xs text-muted-foreground uppercase tracking-[0.15em] font-medium min-w-[80px]">Team</span>
+                    <p className="font-light text-base">{project.role.team}</p>
+                  </div>
+
+                  {project.role.tools && project.role.tools.length > 0 && (
+                    <div className="flex items-start gap-3 pt-2">
+                      <span className="text-xs text-muted-foreground uppercase tracking-[0.15em] font-medium min-w-[80px]">Tools</span>
+                      <div className="flex flex-wrap gap-2">
+                        {project.role.tools.map((tool, idx) => (
+                          <span 
+                            key={idx}
+                            className="px-3 py-1 text-xs rounded-full bg-muted/50 text-foreground/80 font-light"
+                          >
+                            {tool}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+                  )}
                 </div>
               </div>
+
+              {/* Image/Visual */}
+              {project.mockupImages && project.mockupImages[2] && (
+                <div 
+                  className="rounded-2xl overflow-hidden cursor-pointer group hover:shadow-2xl transition-all duration-500"
+                  onClick={() => openLightbox([mockupImageMap[project.mockupImages[2]] || project.mockupImages[2]], 0)}
+                >
+                  <img 
+                    src={mockupImageMap[project.mockupImages[2]] || project.mockupImages[2]} 
+                    alt={`${project.title} role mockup`}
+                    className="w-full h-full object-cover group-hover:scale-[1.02] transition-transform duration-700"
+                  />
+                </div>
+              )}
+            </div>
+
+            {/* Right Column - Outcomes */}
+            <div className="space-y-8 lg:mt-24">
+              <h3 className="text-xs font-medium text-muted-foreground uppercase tracking-[0.2em] mb-12">
+                Key Outcomes
+              </h3>
               
-              <div>
-                <h3 className="text-xs font-medium mb-8 text-muted-foreground uppercase tracking-[0.2em]">Key Outcomes</h3>
-                <div className="space-y-6">
-                  {project.outcomes.map((outcome, index) => (
-                    <div 
-                      key={index} 
-                      className="group hover:bg-muted/20 rounded-xl p-6 transition-all duration-300 animate-fade-in"
-                      style={{ animationDelay: `${index * 100}ms` }}
-                    >
-                      <div className="flex justify-between items-start gap-6">
-                        <span className="text-sm font-light text-muted-foreground">{outcome.metric}</span>
+              <div className="space-y-4">
+                {project.outcomes.map((outcome, index) => (
+                  <div 
+                    key={index} 
+                    className="group relative overflow-hidden rounded-2xl border border-border/30 bg-gradient-to-br from-muted/5 to-muted/20 hover:from-muted/10 hover:to-muted/30 transition-all duration-500 animate-fade-in"
+                    style={{ animationDelay: `${index * 100}ms` }}
+                  >
+                    <div className="p-8">
+                      <div className="flex flex-col gap-6">
+                        <span className="text-sm font-light text-muted-foreground uppercase tracking-wider">
+                          {outcome.metric}
+                        </span>
                         <AnimatedCounter 
                           value={outcome.value}
-                          className="text-3xl font-extralight text-foreground"
+                          className="text-5xl font-extralight text-foreground leading-none"
                         />
                       </div>
                     </div>
-                  ))}
-                </div>
+                    
+                    {/* Subtle gradient overlay on hover */}
+                    <div className="absolute inset-0 bg-gradient-to-r from-primary/0 via-primary/5 to-primary/0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
+                  </div>
+                ))}
               </div>
             </div>
           </div>
