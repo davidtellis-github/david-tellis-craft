@@ -223,11 +223,6 @@ const ProjectDetails: React.FC = () => {
               </div>
             )}
             
-            {/* Scroll Indicator */}
-            <div className="flex justify-center mb-16 animate-fade-in" style={{ animationDelay: '300ms' }}>
-              <ScrollIndicator />
-            </div>
-            
             {/* Quick Stats Bar */}
             <div className="mb-16 animate-fade-in" style={{ animationDelay: '400ms' }}>
               <QuickStatsBar
@@ -270,28 +265,16 @@ const ProjectDetails: React.FC = () => {
         <section id="context" className="py-20 border-b border-border/10">
           <h2 className="text-2xl font-light mb-8">Context & Challenge</h2>
           <div className="grid md:grid-cols-2 gap-12">
-            <div className="space-y-6">
-              {/* Problem Card */}
-              <div className="border border-border rounded-lg p-6 hover:border-foreground/20 hover:shadow-md transition-all duration-300 bg-card">
-                <div className="flex items-center gap-3 mb-4">
-                  <div className="w-10 h-10 rounded-full bg-destructive/10 flex items-center justify-center">
-                    <AlertCircle className="w-5 h-5 text-destructive" />
-                  </div>
-                  <h3 className="text-sm font-medium text-muted-foreground uppercase tracking-[0.15em]">Problem</h3>
-                </div>
+            <div className="space-y-8">
+              <div>
+                <h3 className="text-sm font-medium text-muted-foreground uppercase tracking-[0.15em] mb-3">Problem</h3>
                 <p className="text-base leading-[1.8] font-light">
                   {project.context.problem}
                 </p>
               </div>
               
-              {/* Objective Card */}
-              <div className="border border-border rounded-lg p-6 hover:border-foreground/20 hover:shadow-md transition-all duration-300 bg-card">
-                <div className="flex items-center gap-3 mb-4">
-                  <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center">
-                    <Target className="w-5 h-5 text-primary" />
-                  </div>
-                  <h3 className="text-sm font-medium text-muted-foreground uppercase tracking-[0.15em]">Objective</h3>
-                </div>
+              <div>
+                <h3 className="text-sm font-medium text-muted-foreground uppercase tracking-[0.15em] mb-3">Objective</h3>
                 <p className="text-base leading-[1.8] font-light">
                   {project.context.objective}
                 </p>
