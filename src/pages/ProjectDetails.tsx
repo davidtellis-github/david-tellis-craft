@@ -288,7 +288,7 @@ const ProjectDetails: React.FC = () => {
         </div>
 
         {/* Context Section */}
-        <section id="context" className="py-12 border-b border-border/10">
+        <section id="context" className="py-20 border-b border-border/10">
           <h2 className="text-2xl font-light mb-8">Context & Challenge</h2>
           <div className="grid md:grid-cols-2 gap-12">
             <div className="space-y-6">
@@ -337,7 +337,7 @@ const ProjectDetails: React.FC = () => {
         </section>
 
         {/* Role & Impact */}
-        <section id="role" className="py-12 border-b border-border/10">
+        <section id="role" className="py-20 border-b border-border/10">
           <h2 className="text-2xl font-light mb-8">Role & Impact</h2>
           <div className="grid md:grid-cols-2 gap-12">
             {project.mockupImages && project.mockupImages[2] ? (
@@ -394,7 +394,7 @@ const ProjectDetails: React.FC = () => {
         </section>
 
         {/* Features */}
-        <section id="features" className="py-12 border-b border-border/10">
+        <section id="features" className="py-20 border-b border-border/10">
           <h2 className="text-2xl font-light mb-8">Features & Complexity</h2>
           <div className="grid md:grid-cols-2 gap-6">
             {project.features.map((feature, index) => (
@@ -415,7 +415,7 @@ const ProjectDetails: React.FC = () => {
         </section>
 
         {/* Process */}
-        <section id="process" className="py-12 border-b border-border/10">
+        <section id="process" className="py-20 border-b border-border/10">
           <h2 className="text-2xl font-light mb-8">Process & Approach</h2>
           <div className="grid md:grid-cols-2 gap-8">
             {project.process.map((process, index) => (
@@ -433,7 +433,7 @@ const ProjectDetails: React.FC = () => {
         </section>
         
         {/* Gallery Section - Moved Earlier */}
-        <section id="gallery" className="py-12 border-b border-border/10">
+        <section id="gallery" className="py-20 border-b border-border/10">
           <h2 className="text-2xl font-light mb-8">UI Gallery</h2>
           {!isLoading && allUIAssets.length > 0 && (
             <UIGallery 
@@ -450,34 +450,9 @@ const ProjectDetails: React.FC = () => {
 
         {/* Design System Section */}
         {project.designSystem && (
-          <section id="design-system" className="py-12 border-b border-border/10">
+          <section id="design-system" className="py-20 border-b border-border/10">
             <h2 className="text-2xl font-light mb-8">Design System</h2>
-            <div className="mb-8">
-              <h3 className="text-sm font-medium mb-4 text-muted-foreground uppercase tracking-[0.15em]">System Goals</h3>
-              <ul className="space-y-2 text-sm font-light leading-relaxed">
-                {project.designSystem.goals.map((goal, index) => (
-                  <li key={index} className="flex items-start gap-2">
-                    <span className="text-muted-foreground mt-1">•</span>
-                    <span>{goal}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            <div className="mb-8">
-              <h3 className="text-sm font-medium mb-4 text-muted-foreground uppercase tracking-[0.15em]">Core Elements</h3>
-              <div className="grid md:grid-cols-2 gap-6">
-                {project.designSystem.coreElements.map((element, index) => (
-                  <div key={index} className="border-l-2 border-border/20 pl-6 py-3">
-                    <h4 className="text-base font-normal mb-1">{element.title}</h4>
-                    <p className="text-sm text-muted-foreground leading-[1.8] font-light">
-                      {element.description}
-                    </p>
-                  </div>
-                ))}
-              </div>
-            </div>
-
+            
             {project.designSystem.note && (
               <div className="bg-muted/30 rounded-lg p-4 mb-8">
                 <p className="text-sm text-muted-foreground leading-[1.8] font-light italic">
@@ -514,7 +489,7 @@ const ProjectDetails: React.FC = () => {
 
         {/* Iterations & UX Decisions Section */}
         {project.iterations && (
-          <section id="iterations" className="py-12 border-b border-border/10">
+          <section id="iterations" className="py-20 border-b border-border/10">
             <h2 className="text-2xl font-light mb-8">Iterations & UX Decisions</h2>
             {project.iterations.intro && (
               <p className="text-sm text-muted-foreground leading-[1.8] font-light mb-8">
@@ -558,33 +533,9 @@ const ProjectDetails: React.FC = () => {
           </section>
         )}
 
-        {/* Video Walkthrough */}
-        <section id="walkthrough" className="py-12 border-b border-border/10">
-          <h2 className="text-2xl font-light mb-8">Video Walkthrough</h2>
-          <div className="relative aspect-video bg-muted/50 rounded-xl overflow-hidden">
-            {project.videoUrl ? (
-              <iframe
-                src={project.videoUrl}
-                className="absolute inset-0 w-full h-full"
-                frameBorder="0"
-                allow="autoplay; fullscreen; picture-in-picture; clipboard-write"
-                title={`${project.title} Video Walkthrough`}
-              />
-            ) : (
-              <div className="absolute inset-0 bg-gradient-to-br from-background/20 to-background/5 flex items-center justify-center">
-                <div className="text-center">
-                  <div className="bg-background/90 rounded-full p-8 mb-4 inline-block">
-                    <Play className="h-12 w-12 text-foreground ml-2" />
-                  </div>
-                  <p className="text-base text-muted-foreground">Product Demo • 60 seconds</p>
-                </div>
-              </div>
-            )}
-          </div>
-        </section>
 
         {/* Reflection */}
-        <section id="reflection" className="py-12 border-b border-border/10">
+        <section id="reflection" className="py-20 border-b border-border/10">
           <h2 className="text-2xl font-light mb-8">Reflection & Learnings</h2>
           <div className="max-w-3xl">
             <p className="text-base text-muted-foreground leading-[1.8] font-light">
