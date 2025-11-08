@@ -475,8 +475,6 @@ export const projectsData: Record<string, ProjectData> = {
     
     mockupImages: [],
     
-    videoUrl: "https://player.vimeo.com/video/1134844637?badge=0&autopause=0&player_id=0&app_id=58479",
-    
     role: {
       title: "UX Strategist & Designer",
       duration: "Q2–Q3 '24 (≈ 12 weeks)",
