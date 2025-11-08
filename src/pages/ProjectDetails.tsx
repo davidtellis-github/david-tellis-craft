@@ -406,7 +406,7 @@ const ProjectDetails: React.FC = () => {
                 <ExpandableFeatureCard
                   title={feature.title}
                   description={feature.description}
-                  icon={feature.icon}
+                  icon=""
                   isComingSoon={feature.description.includes('Coming Soon')}
                 />
               </div>
@@ -423,10 +423,7 @@ const ProjectDetails: React.FC = () => {
                 key={index} 
                 className="border-l-2 border-border/20 pl-6 py-3 hover:border-foreground/40 transition-colors"
               >
-                <div className="flex items-center gap-3 mb-2">
-                  <span className="text-2xl">{process.icon}</span>
-                  <h3 className="text-base font-normal">{process.step}</h3>
-                </div>
+                <h3 className="text-base font-normal mb-2">{process.step}</h3>
                 <p className="text-sm text-muted-foreground leading-[1.8] font-light">
                   {process.description}
                 </p>

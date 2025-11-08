@@ -26,10 +26,6 @@ export const ExpandableFeatureCard: React.FC<ExpandableFeatureCardProps> = ({
       )}
       
       <div className="flex items-start gap-4">
-        <span className="text-3xl flex-shrink-0" aria-hidden="true">
-          {icon}
-        </span>
-        
         <div className="flex-1 min-w-0">
           <h3 className="text-lg font-medium mb-2 group-hover:text-foreground transition-colors">
             {title}
