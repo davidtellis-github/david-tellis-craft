@@ -5,6 +5,7 @@ import ProjectNav from "@/components/portfolio/ProjectNav";
 import { projectsData } from "@/data/projectData";
 import { useProjectAssets } from "@/hooks/useProjectAssets";
 import { UIGallery } from "@/components/portfolio/UIGallery";
+import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 // Import mockup images
 import weddingverseFeatured from '@/assets/weddingverse-featured.png';
 import ideabaazFeatured from '@/assets/ideabaaz-featured.png';
@@ -44,6 +45,19 @@ const ProjectDetails: React.FC = () => {
   
   // Get project assets for gallery
   const { assets, explorations, isLoading } = useProjectAssets(slug || "");
+  
+  // Scroll animations for sections
+  const heroAnim = useScrollAnimation();
+  const contextAnim = useScrollAnimation();
+  const roleAnim = useScrollAnimation();
+  const featuresAnim = useScrollAnimation();
+  const processAnim = useScrollAnimation();
+  const designSystemAnim = useScrollAnimation();
+  const iterationsAnim = useScrollAnimation();
+  const walkthroughAnim = useScrollAnimation();
+  const reflectionAnim = useScrollAnimation();
+  const galleryAnim = useScrollAnimation();
+  const linksAnim = useScrollAnimation();
   
   const allUIAssets = [
     // Add mockup images from projectData
@@ -131,7 +145,13 @@ const ProjectDetails: React.FC = () => {
           
           <section className="flex flex-col flex-1 min-w-0 py-[20vh]">
         {/* Hero Section */}
-        <section id="overview" className="py-20 pt-16">
+        <section 
+          ref={heroAnim.ref}
+          id="overview" 
+          className={`py-24 pt-16 transition-all duration-1000 ${
+            heroAnim.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+          }`}
+        >
             <div className="mb-16">
             <h1 className="text-5xl md:text-6xl lg:text-7xl font-light tracking-tight leading-[1.1] mb-6">
               {project.title}
@@ -206,7 +226,13 @@ const ProjectDetails: React.FC = () => {
         </section>
 
         {/* Context Section */}
-        <section id="context" className="py-12 border-b border-border/10">
+        <section 
+          ref={contextAnim.ref}
+          id="context" 
+          className={`py-24 border-b border-border/10 transition-all duration-1000 ${
+            contextAnim.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+          }`}
+        >
           <h2 className="text-2xl font-light mb-8">Context & Challenge</h2>
           <div className="grid md:grid-cols-2 gap-12">
             <div>
@@ -235,7 +261,13 @@ const ProjectDetails: React.FC = () => {
         </section>
 
         {/* Role & Impact */}
-        <section id="role" className="py-12 border-b border-border/10">
+        <section 
+          ref={roleAnim.ref}
+          id="role" 
+          className={`py-24 border-b border-border/10 transition-all duration-1000 ${
+            roleAnim.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+          }`}
+        >
           <h2 className="text-2xl font-light mb-8">Role & Impact</h2>
           <div className="grid md:grid-cols-2 gap-12">
             {project.mockupImages && project.mockupImages[2] ? (
@@ -273,7 +305,13 @@ const ProjectDetails: React.FC = () => {
         </section>
 
         {/* Features */}
-        <section id="features" className="py-12 border-b border-border/10">
+        <section 
+          ref={featuresAnim.ref}
+          id="features" 
+          className={`py-24 border-b border-border/10 transition-all duration-1000 ${
+            featuresAnim.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+          }`}
+        >
           <h2 className="text-2xl font-light mb-8">Features & Complexity</h2>
           <div className="grid md:grid-cols-2 gap-6">
             {project.features.map((feature, index) => (
@@ -288,7 +326,13 @@ const ProjectDetails: React.FC = () => {
         </section>
 
         {/* Process */}
-        <section id="process" className="py-12 border-b border-border/10">
+        <section 
+          ref={processAnim.ref}
+          id="process" 
+          className={`py-24 border-b border-border/10 transition-all duration-1000 ${
+            processAnim.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+          }`}
+        >
           <h2 className="text-2xl font-light mb-8">Process & Approach</h2>
           <div className="space-y-8">
             {project.process.map((phase, index) => (
@@ -307,7 +351,13 @@ const ProjectDetails: React.FC = () => {
 
         {/* Design System Section */}
         {project.designSystem && (
-          <section id="design-system" className="py-12 border-b border-border/10">
+          <section 
+            ref={designSystemAnim.ref}
+            id="design-system" 
+            className={`py-24 border-b border-border/10 transition-all duration-1000 ${
+              designSystemAnim.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+            }`}
+          >
             <h2 className="text-2xl font-light mb-8">Design System</h2>
             <div className="mb-8">
               <h3 className="text-sm font-medium mb-4 text-muted-foreground uppercase tracking-[0.15em]">System Goals</h3>
@@ -359,7 +409,13 @@ const ProjectDetails: React.FC = () => {
 
         {/* Iterations & UX Decisions Section */}
         {project.iterations && (
-          <section id="iterations" className="py-12 border-b border-border/10">
+          <section 
+            ref={iterationsAnim.ref}
+            id="iterations" 
+            className={`py-24 border-b border-border/10 transition-all duration-1000 ${
+              iterationsAnim.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+            }`}
+          >
             <h2 className="text-2xl font-light mb-8">Iterations & UX Decisions</h2>
             {project.iterations.intro && (
               <p className="text-sm text-muted-foreground leading-[1.8] font-light mb-8">
@@ -392,7 +448,13 @@ const ProjectDetails: React.FC = () => {
         )}
 
         {/* Video Walkthrough */}
-        <section id="walkthrough" className="py-12 border-b border-border/10">
+        <section 
+          ref={walkthroughAnim.ref}
+          id="walkthrough" 
+          className={`py-24 border-b border-border/10 transition-all duration-1000 ${
+            walkthroughAnim.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+          }`}
+        >
           <h2 className="text-2xl font-light mb-8">Video Walkthrough</h2>
           <div className="relative aspect-video bg-muted/50 rounded-xl overflow-hidden">
             {project.videoUrl ? (
@@ -417,7 +479,13 @@ const ProjectDetails: React.FC = () => {
         </section>
 
         {/* Reflection */}
-        <section id="reflection" className="py-12 border-b border-border/10">
+        <section 
+          ref={reflectionAnim.ref}
+          id="reflection" 
+          className={`py-24 border-b border-border/10 transition-all duration-1000 ${
+            reflectionAnim.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+          }`}
+        >
           <h2 className="text-2xl font-light mb-8">Reflection & Learnings</h2>
           <div className="max-w-3xl">
             <p className="text-base text-muted-foreground leading-[1.8] font-light">
@@ -427,7 +495,13 @@ const ProjectDetails: React.FC = () => {
         </section>
 
         {/* Gallery Section */}
-        <section id="gallery" className="py-12 border-b border-border/10">
+        <section 
+          ref={galleryAnim.ref}
+          id="gallery" 
+          className={`py-24 border-b border-border/10 transition-all duration-1000 ${
+            galleryAnim.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+          }`}
+        >
           <h2 className="text-2xl font-light mb-8">UI Gallery</h2>
           {!isLoading && allUIAssets.length > 0 && (
             <UIGallery 
@@ -443,7 +517,13 @@ const ProjectDetails: React.FC = () => {
         </section>
 
         {/* CTA Section */}
-        <section id="links" className="py-16 text-center">
+        <section 
+          ref={linksAnim.ref}
+          id="links" 
+          className={`py-32 text-center transition-all duration-1000 ${
+            linksAnim.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+          }`}
+        >
           <h2 className="text-2xl font-light mb-8">View the Project</h2>
           <div className="flex flex-wrap gap-4 justify-center">
             {project.links.live && (
