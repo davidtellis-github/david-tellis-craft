@@ -540,51 +540,51 @@ export const projectsData: Record<string, ProjectData> = {
   "ideabaaz": {
     id: "ideabaaz",
     title: "Ideabaaz",
-    subtitle: "A startup ecosystem that grew from a live TV show, connecting founders, investors, mentors, and corporates.",
-    description: "Led product design and early management for Ideabaaz, a digital platform built from India's first founder-focused TV show on Zee TV. Shaped the product strategy, user experience, and launch design to connect startups, investors, mentors, and corporates in one place.",
+    subtitle: "A startup ecosystem born from a live TV show that connects founders, investors, mentors, and corporates.",
+    description: "Ideabaaz started as a national TV show on Zee TV to spotlight new startups. I helped build a digital platform to turn that visibility into real connections where startups, investors, trainers, and corporates can discover, connect, and grow together.",
     category: "concepts",
-    year: "2024",
-    services: "Strategy + Design + Stakeholder Management",
+    year: "Q1 2024 (Ongoing)",
+    services: "Product Design + Project Management + Stakeholder Alignment",
     
     mockupImages: ['ideabaaz-featured.png', 'ideabaaz-laptop-mockup.png'],
     
     role: {
-      title: "Lead Product Designer & Early Project Manager",
-      duration: "Q1 2024 to Present (Platform in development)",
-      team: "Presented by Zee, Curated by Turbostart",
+      title: "Lead Product Designer and Early Project Manager",
+      duration: "Q1 2024 – Ongoing (Platform in development)",
+      team: "Cross-functional team including producers, developers, and marketing",
       tools: ["Figma", "FigJam"]
     },
 
     context: {
-      problem: "India's startup scene is full of ambitious founders, but they're disconnected. They pitch constantly but rarely reach the right investors or mentors. Ideabaaz started as a national TV show on Zee TV, bringing startup stories to millions of viewers, but there was no platform to turn that exposure into real opportunities.",
-      objective: "Transform Ideabaaz from a TV pitch show into a digital ecosystem where startups, investors, mentors, corporates, and franchise seekers can actually find each other and build relationships.",
+      problem: "India's startup ecosystem is crowded but disconnected. Founders struggle to reach the right investors and mentors. Ideabaaz started as a national TV show on Zee TV to spotlight new startups but needed a digital platform to turn that visibility into real connections.",
+      objective: "Build a unified digital ecosystem where startups, investors, trainers, corporates, and franchise seekers can discover, connect, and grow together.",
       audience: "Founders, investors, mentors, corporates, and franchise seekers in India's startup ecosystem"
     },
 
     features: [
       {
         title: "Live Show Integration",
-        description: "Featured startups and investors from the Zee TV series, with ways to engage in real-time.",
+        description: "Highlights startups and investors featured on the Zee TV show with real-time engagement.",
         icon: "📺"
       },
       {
         title: "Founder Profiles",
-        description: "Public startup pages where founders can be discovered, followed, and contacted by interested investors.",
+        description: "Interactive public startup profiles with investor connection options.",
         icon: "🚀"
       },
       {
         title: "Investor Discovery",
-        description: "Smart filters and recommendations to match founders with investors based on industry and stage.",
+        description: "Smart filters and recommendations for matching startups with relevant investors.",
         icon: "💼"
       },
       {
-        title: "Training & Mentorship Hub",
-        description: "Mentor programs and learning tracks specifically for early-stage founders.",
+        title: "Training and Mentorship Hub",
+        description: "Curated mentor programs and learning tracks for early-stage founders.",
         icon: "🎓"
       },
       {
-        title: "Corporate & Franchise Network",
-        description: "A space for corporates and franchise seekers to find and collaborate with startups.",
+        title: "Corporate and Franchise Network",
+        description: "Enables collaborations between corporates and startups, and supports franchise seekers.",
         icon: "🤝"
       }
     ],
@@ -592,39 +592,38 @@ export const projectsData: Record<string, ProjectData> = {
     process: [
       { 
         step: "Research", 
-        description: "Mapped out how founders, investors, and TV audiences would actually use the platform.", 
+        description: "Interviewed founders and investors to map ecosystem needs.", 
         icon: "🔍" 
       },
       { 
-        step: "Ideation & Wireframes", 
-        description: "Sketched flows and early UX structure in FigJam and Figma.", 
+        step: "Ideation and Wireframes", 
+        description: "Created user flows and low-fidelity wireframes in FigJam.", 
         icon: "📐" 
       },
       { 
         step: "Visual Design", 
-        description: "Built a UI system that matched the Ideabaaz brand and TV show identity.", 
+        description: "Developed a scalable UI system in Figma aligned with the Ideabaaz brand.", 
         icon: "🎨" 
       },
       { 
         step: "Collaboration", 
-        description: "Kept founders, producers, and stakeholders aligned on the roadmap and what we were building.", 
+        description: "Worked with the show's creative team, stakeholders, and developers to maintain consistency.", 
         icon: "🤝" 
       },
       { 
-        step: "Management", 
-        description: "Coordinated between design, marketing, and dev to hit early milestones.", 
+        step: "Project Management", 
+        description: "Coordinated deliverables, timelines, and communication across marketing and product teams.", 
         icon: "📋" 
       }
     ],
 
     outcomes: [
-      { metric: "Product direction", value: "Unified across teams" },
-      { metric: "Early validation", value: "Prototypes validated positioning" },
-      { metric: "Ecosystem foundation", value: "Set for 2025 web launch" },
-      { metric: "Stakeholder alignment", value: "Synced tech, marketing, media" }
+      { metric: "Design direction", value: "Established clear platform vision" },
+      { metric: "Product validation", value: "Concept validated with stakeholders" },
+      { metric: "Foundation built", value: "Ready for 2025 digital rollout" }
     ],
 
-    reflection: "Building a digital product from a TV show taught me how storytelling and systems design work together. Managing creative, tech, and marketing people early on helped me connect ideas to execution, which is what shaped the product direction.",
+    reflection: "Building Ideabaaz taught me how to bridge media and product ecosystems. Managing design, marketing, and stakeholder collaboration early shaped a clear product direction and a strong foundation for scaling the platform beyond television.",
 
     links: {
       figma: "https://figma.com/ideabaaz"
