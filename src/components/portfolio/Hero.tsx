@@ -8,7 +8,7 @@ const tabsData: {
   key: "anyone",
   label: "For anyone",
   headline: <>
-        Hey there, I design <br />   digital experiences<br />  that work beautifully <br />nd make sense to people.
+        Hey there, I design <br />   digital experiences<br />  that work beautifully <br />and make sense to people.
       </>
 }, {
   key: "recruiters",
