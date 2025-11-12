@@ -20,6 +20,8 @@ import iterations2 from '@/assets/wedding-verse-iterations-2.png';
 import iterations3 from '@/assets/wedding-verse-iterations-3.png';
 import weddingverseContext from '@/assets/wedding-verse-context.jpg';
 import weddingverseRole from '@/assets/wedding-verse-role.jpg';
+import bostonFinancial1 from '@/assets/boston-financial-1.png';
+import bostonFinancial2 from '@/assets/boston-financial-2.png';
 
 // Map of mockup images
 const mockupImageMap: Record<string, string> = {
@@ -36,6 +38,8 @@ const mockupImageMap: Record<string, string> = {
   'wedding-verse-iterations-3.png': iterations3,
   'wedding-verse-context.jpg': weddingverseContext,
   'wedding-verse-role.jpg': weddingverseRole,
+  'boston-financial-1.png': bostonFinancial1,
+  'boston-financial-2.png': bostonFinancial2,
 };
 
 const ProjectDetails: React.FC = () => {

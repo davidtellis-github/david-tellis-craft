@@ -473,7 +473,7 @@ export const projectsData: Record<string, ProjectData> = {
     year: "2024",
     services: "UX Strategy + Design",
     
-    mockupImages: [],
+    mockupImages: ['boston-financial-1.png', 'boston-financial-2.png'],
     
     role: {
       title: "UX Strategist & Designer",
