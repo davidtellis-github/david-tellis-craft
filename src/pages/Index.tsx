@@ -32,9 +32,9 @@ const Index = () => {
       <AmbientSpotlight />
       <MobileHeader />
       
-      <main className="w-[98vw] mx-auto px-4 md:px-6 pt-16 lg:pt-0">
+      <main className="w-[98vw] mx-auto sm:px-4 md:px-6 pt-16 lg:pt-0">
         {/* Main layout with SideNav + sections */}
-        <div className="flex gap-[4vw] lg:gap-[10%]">
+        <div className="flex gap-[4vw] lg:gap-[15%]">
           <div 
             className={`transition-opacity duration-500 ease-out ${
               showContent ? 'opacity-100' : 'opacity-0'
