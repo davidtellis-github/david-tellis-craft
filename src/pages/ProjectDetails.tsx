@@ -166,10 +166,10 @@ const ProjectDetails: React.FC = () => {
             {project.videoUrl ? (
               <div className="relative aspect-video rounded-lg overflow-hidden mb-16">
                 <iframe
-                  src={project.videoUrl}
+                  src={`${project.videoUrl}&background=1`}
                   className="absolute inset-0 w-full h-full"
                   frameBorder="0"
-                  allow="autoplay; fullscreen; picture-in-picture; clipboard-write"
+                  allow="autoplay"
                   title={`${project.title} Video`}
                 />
               </div>
