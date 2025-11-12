@@ -8,36 +8,35 @@ const tabsData: {
   key: "anyone",
   label: "For anyone",
   headline: <>
-        Hey there, I design <br />   digital experiences<br />  that work beautifully <br />and make sense to people.
+        Hey there, I design <br />   digital experiences<br />  that work beautifully <br />and make sense.
       </>
 }, {
   key: "recruiters",
   label: "Recruiters",
   headline: <>
-        2+ years of designing products, landing pages, and design systems for 10+ startups/clients.
-      </>
+       Over 2 years of experience designing products, strategy, visuals and making human interaction pleasent.      </>
 }, {
   key: "directors",
   label: "Design Directors",
   headline: <>
-       I adore system thinking. I think beyond the goals and briefs to make it scalable. I respect both product goals and creative standards, and say "big no" to patch works.
+I love solving problems with design keeping it consistent and care about my craft like an artist.
       </>
 }, {
   key: "designers",
   label: "Product Designers",
   headline: <>
-      I juggle projects, stay curious, and talk dev. I know when to break rules and how to make it look good. Learing on my documentation skills - currently;
+      Curious to new trends and best practices, always in the state of learning. Lately learning to improve my documentation.
       </>
 }, {
   key: "pms",
   label: "Product Managers",
-  headline: <>I get what needs to be built,  why it matters, and how it’ll impact users and numbers. I connect dots between vision, design, and dev.
+  headline: <>I get what needs to be built, why it matters. I bridge between vision, design, and dev.
        </>
 }, {
   key: "engineers",
   label: "Engineers",
   headline: <>
-I’ve studied computers and practicing design, so I get both worlds; I'll ask right questions and love to sit next to a dev while designing </>
+I’ve studied computers <br/> and practicing design, <br/> so I get both worlds; </>
 }];
 const Hero: React.FC = () => {
   const [active, setActive] = React.useState<string>(tabsData[0].key);
