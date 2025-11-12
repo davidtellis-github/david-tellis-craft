@@ -25,22 +25,50 @@ import React from "react";
 const words = ["Fun.","Curious.", "Adaptive.","Passionate." ];
 
 const ValuesSection: React.FC = () => (
-  
-  <section
-    id="values"
-    className=" grid grid-cols-1 grid-cols-2 grid-rows-3 lg:pt-[20vh] "
-  >
-    {/* Top Left: Big Values */}
-    <div className="flex flex-col justify-start items-start h-full mb-6">
+
+<div className="">
+      <div className="flex sm:hidden flex-col justify-start items-start mb-6">
       {words.map((w) => (
         <div
           key={w}
           className="
-          text-4xl           /* Default mobile size */
+          text-5xl           /* Default mobile size */
           sm:text-4xl         /* Small screens */
+          
+          font-medium 
+          tracking-tight
+          
+      
+          leading-tight        /* Default line-height for mobile */
+          sm:leading-snug     /* Slightly tighter on small screens */
+          md:leading-tight   /* Normal on medium and above */
+      
+          text-foreground 
+          
+        "
+        >
+          {w}
+        </div>
+      ))}
+    </div>
+
+
+    
+  
+  <section
+    id="values"
+    className=" grid grid-cols-1 sm:grid-cols-2 grid-rows-2 lg:pt-[20vh] "
+  >
+    {/* Top Left: Big Values */}
+      <div className="hidden sm:flex flex flex-col justify-start items-start mb-6 h-fit">
+      {words.map((w) => (
+        <div
+          key={w}
+          className="
+         
           md:text-6xl         /* Tablets */
           lg:text-7xl         /* Large screens */
-          xl:text-7xl         /* Extra large screens */
+          xl:text-8xl         /* Extra large screens */
           2xl:text-8xl        /* Very large screens */
       
           font-medium 
@@ -60,10 +88,10 @@ const ValuesSection: React.FC = () => (
     </div>
 
     {/* Top Right = empty (keeps spacing diagonal) */}
-    <div />
+    <div className="hidden sm:flex h-fit"/>
 
     {/* Bottom Left = empty (keeps spacing diagonal) */}
-    <div  />
+    <div className="hidden sm:flex"/>
 
     {/* Bottom Right: Paragraph */}
     <div className="flex justify-start items-start ">
@@ -91,6 +119,8 @@ Right now, I’m looking for opportunities that let me grow as a designer while 
       
     </p></div>
   </section>
+  
+  </div>
 );
 
 export default ValuesSection;

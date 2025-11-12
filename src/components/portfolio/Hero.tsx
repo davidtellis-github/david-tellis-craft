@@ -84,7 +84,7 @@ const Hero: React.FC = () => {
   {t.headline}
           </h1>
           </TabsContent>)}
-      </Tabs>
+      
 
       <p className="
     h-auto
@@ -104,8 +104,9 @@ const Hero: React.FC = () => {
     text-muted-foreground
    
   ">
-        Currently open to impactful, product-focused opportunities — especially {activeLabel.toLowerCase()}.
+        Currently open to impactful, product-focused opportunities — especially.
       </p>
+      </Tabs>
     </div>
   );
 };
