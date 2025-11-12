@@ -80,7 +80,7 @@ export const projectsData: Record<string, ProjectData> = {
     description: "Wedding Verse is a unified digital workspace where couples, planners, and vendors collaborate seamlessly to plan weddings — visually, transparently, and stress-free. It blends design clarity with automation and human connection, reimagining the fragmented wedding ecosystem into one cohesive experience.",
     category: "product",
     year: "2023",
-    services: "Product Design • UX/UI Design • System Design",
+    services: "Product Design and Strategy",
     
     mockupImages: ['weddingverse-featured.png', 'wedding-verse-context.jpg', 'wedding-verse-role.jpg'],
     
@@ -256,6 +256,99 @@ export const projectsData: Record<string, ProjectData> = {
     }
   },
 
+  "ideabaaz": {
+    id: "ideabaaz",
+    title: "Ideabaaz",
+    subtitle: "A startup ecosystem born from a live TV show that connects founders, investors, mentors, and corporates.",
+    description: "Ideabaaz started as a national TV show on Zee TV to spotlight new startups. I helped build a digital platform to turn that visibility into real connections where startups, investors, trainers, and corporates can discover, connect, and grow together.",
+    category: "concepts",
+    year: "Q1 2024 (Ongoing)",
+    services: "Product Design and Strategy",
+    
+    mockupImages: ['ideabaaz-featured.png', 'ideabaaz-laptop-mockup.png'],
+    
+    role: {
+      title: "Lead Product Designer and Early Project Manager",
+      duration: "Q1 2024 – Ongoing (Platform in development)",
+      team: "Cross-functional team including producers, developers, and marketing",
+      tools: ["Figma", "FigJam"]
+    },
+
+    context: {
+      problem: "India's startup ecosystem is crowded but disconnected. Founders struggle to reach the right investors and mentors. Ideabaaz started as a national TV show on Zee TV to spotlight new startups but needed a digital platform to turn that visibility into real connections.",
+      objective: "Build a unified digital ecosystem where startups, investors, trainers, corporates, and franchise seekers can discover, connect, and grow together.",
+      audience: "Founders, investors, mentors, corporates, and franchise seekers in India's startup ecosystem"
+    },
+
+    features: [
+      {
+        title: "Live Show Integration",
+        description: "Highlights startups and investors featured on the Zee TV show with real-time engagement.",
+        icon: "📺"
+      },
+      {
+        title: "Founder Profiles",
+        description: "Interactive public startup profiles with investor connection options.",
+        icon: "🚀"
+      },
+      {
+        title: "Investor Discovery",
+        description: "Smart filters and recommendations for matching startups with relevant investors.",
+        icon: "💼"
+      },
+      {
+        title: "Training and Mentorship Hub",
+        description: "Curated mentor programs and learning tracks for early-stage founders.",
+        icon: "🎓"
+      },
+      {
+        title: "Corporate and Franchise Network",
+        description: "Enables collaborations between corporates and startups, and supports franchise seekers.",
+        icon: "🤝"
+      }
+    ],
+
+    process: [
+      { 
+        step: "Research", 
+        description: "Interviewed founders and investors to map ecosystem needs.", 
+        icon: "🔍" 
+      },
+      { 
+        step: "Ideation and Wireframes", 
+        description: "Created user flows and low-fidelity wireframes in FigJam.", 
+        icon: "📐" 
+      },
+      { 
+        step: "Visual Design", 
+        description: "Developed a scalable UI system in Figma aligned with the Ideabaaz brand.", 
+        icon: "🎨" 
+      },
+      { 
+        step: "Collaboration", 
+        description: "Worked with the show's creative team, stakeholders, and developers to maintain consistency.", 
+        icon: "🤝" 
+      },
+      { 
+        step: "Project Management", 
+        description: "Coordinated deliverables, timelines, and communication across marketing and product teams.", 
+        icon: "📋" 
+      }
+    ],
+
+    outcomes: [
+      { metric: "Design direction", value: "Established clear platform vision" },
+      { metric: "Product validation", value: "Concept validated with stakeholders" },
+      { metric: "Foundation built", value: "Ready for 2025 digital rollout" }
+    ],
+
+    reflection: "Building Ideabaaz taught me how to bridge media and product ecosystems. Managing design, marketing, and stakeholder collaboration early shaped a clear product direction and a strong foundation for scaling the platform beyond television.",
+
+    links: {
+      figma: "https://figma.com/ideabaaz"
+    }
+  },
+
   "futurcraft-ai": {
     id: "futurcraft-ai",
     title: "Futurcraft AI",
@@ -263,7 +356,7 @@ export const projectsData: Record<string, ProjectData> = {
     description: "A comprehensive AI platform that empowers designers and creators with intelligent design assistance, automated workflows, and collaborative features for modern creative teams.",
     category: "product",
     year: "2025",
-    services: "Strategy + Design + Engineering",
+    services: "Design and UX",
     
     mockupImages: ['futurcraft-featured.png'],
     
@@ -333,7 +426,7 @@ export const projectsData: Record<string, ProjectData> = {
     description: "Enterprise FinOps solution that provides real-time cloud cost visibility, automated optimization recommendations, and collaborative budget management for engineering and finance teams.",
     category: "product",
     year: "2025",
-    services: "Strategy + Design + Engineering",
+    services: "Dashboard, UX",
     
     role: {
       title: "Lead UX Designer",
@@ -403,7 +496,7 @@ export const projectsData: Record<string, ProjectData> = {
     description: "Comprehensive healthcare platform connecting patients, providers, and care coordinators through seamless digital experiences, improving care accessibility and health outcomes.",
     category: "product",
     year: "2024",
-    services: "Strategy + Design",
+    services: "Design, UX",
     
     mockupImages: [],
     
@@ -471,7 +564,7 @@ export const projectsData: Record<string, ProjectData> = {
     description: "UX strategy and design solution for improving compliance management and enabling better task assignment workflows through an AI-driven approach. Focused on reducing manual inefficiencies and automating regulatory compliance processes.",
     category: "concepts",
     year: "2024",
-    services: "UX Strategy + Design",
+    services: "Workflow UX, Design",
     
     mockupImages: ['boston-financial-1.png', 'boston-financial-2.png'],
     
@@ -546,7 +639,7 @@ export const projectsData: Record<string, ProjectData> = {
     description: "Ideabaaz started as a national TV show on Zee TV to spotlight new startups. I helped build a digital platform to turn that visibility into real connections where startups, investors, trainers, and corporates can discover, connect, and grow together.",
     category: "concepts",
     year: "Q1 2024 (Ongoing)",
-    services: "Product Design + Project Management + Stakeholder Alignment",
+    services: "Product Design and Strategy",
     
     mockupImages: ['ideabaaz-featured.png', 'ideabaaz-laptop-mockup.png'],
     
