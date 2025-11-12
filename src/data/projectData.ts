@@ -534,7 +534,9 @@ export const projectsData: Record<string, ProjectData> = {
 
     links: {
       figma: "https://figma.com/boston-financial-compliance"
-    }
+    },
+
+    videoUrl: "https://player.vimeo.com/video/1134844637?autoplay=1&muted=1&loop=1"
   },
 
   "ideabaaz": {
