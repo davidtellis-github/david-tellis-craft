@@ -62,7 +62,22 @@ export const useProjectAssets = (projectSlug: string) => {
           created_at: new Date().toISOString()
         }));
 
-        setAssets(mockupAssets);
+        // Transform images array to assets format
+        const imageAssets: ProjectAsset[] = (project.images || []).map((imgPath, index) => ({
+          id: `${project.id}-image-${index}`,
+          project_id: project.id,
+          asset_type: 'image',
+          file_name: imgPath,
+          file_path: getImageUrl(imgPath),
+          alt_text: `${project.title} - Screen ${index + 1}`,
+          caption: undefined,
+          is_featured: false,
+          asset_tags: [],
+          sort_order: mockupAssets.length + index,
+          created_at: new Date().toISOString()
+        }));
+
+        setAssets([...mockupAssets, ...imageAssets]);
         setExplorations([]);
 
       } catch (err) {
