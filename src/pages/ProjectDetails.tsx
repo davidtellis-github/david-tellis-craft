@@ -72,27 +72,7 @@ const ProjectDetails: React.FC = () => {
   const linksAnim = useScrollAnimation();
   
   const allUIAssets = [
-    // Add mockup images from projectData
-    ...(project?.mockupImages || []).map((imagePath, index) => ({
-      id: `mockup-${index}`,
-      title: `${project?.title || 'Project'} - UI ${index + 1}`,
-      description: undefined,
-      image_url: mockupImageMap[imagePath] || imagePath,
-      tags: [],
-      contribution_level: 'full',
-      is_featured: index === 0
-    })),
-    // Add images from projectData
-    ...(project?.images || []).map((imagePath, index) => ({
-      id: `image-${index}`,
-      title: `${project?.title || 'Project'} - Screen ${index + 1}`,
-      description: undefined,
-      image_url: mockupImageMap[imagePath] || imagePath,
-      tags: [],
-      contribution_level: 'full',
-      is_featured: false
-    })),
-    // Add database assets
+    // Add database assets (now includes both mockupImages and images from useProjectAssets hook)
     ...assets.map(asset => ({
       id: asset.id,
       title: asset.alt_text || `${project?.title || 'Project'} UI`,
