@@ -70,6 +70,8 @@ export interface ProjectData {
   videoUrl?: string;
 
   mockupImages?: string[];
+  
+  images?: string[];
 }
 
 export const projectsData: Record<string, ProjectData> = {
@@ -486,7 +488,13 @@ export const projectsData: Record<string, ProjectData> = {
       figma: "https://figma.com/turbocloud"
     },
 
-    mockupImages: ['turbocloud-featured.png']
+    mockupImages: ['turbocloud-featured.png'],
+    
+    images: [
+      'turbocloud-dashboard-1.jpg',
+      'turbocloud-provider-selection.jpg',
+      'turbocloud-signup.jpg'
+    ]
   },
 
   "health-project": {

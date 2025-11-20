@@ -4,6 +4,11 @@ import ideabaazFeatured from '@/assets/ideabaaz-featured.png';
 import futurcraftFeatured from '@/assets/futurcraft-featured.png';
 import turbocloudFeatured from '@/assets/turbocloud-featured.png';
 
+// Turbocloud project images
+import turbocloudDashboard1 from '@/assets/turbocloud-dashboard-1.jpg';
+import turbocloudProviderSelection from '@/assets/turbocloud-provider-selection.jpg';
+import turbocloudSignup from '@/assets/turbocloud-signup.jpg';
+
 // Wedding Verse Design System
 import designSystem1 from '@/assets/wedding-verse-design-system-1.png';
 import designSystem2 from '@/assets/wedding-verse-design-system-2.png';
@@ -30,6 +35,9 @@ export const imageAssets: Record<string, string> = {
   'wedding-verse-iterations-3.png': wvIterations3,
   'wedding-verse-iterations-4.png': wvIterations4,
   'wedding-verse-iterations-5.png': wvIterations5,
+  'turbocloud-dashboard-1.jpg': turbocloudDashboard1,
+  'turbocloud-provider-selection.jpg': turbocloudProviderSelection,
+  'turbocloud-signup.jpg': turbocloudSignup,
 };
 
 // Helper function to resolve image paths
