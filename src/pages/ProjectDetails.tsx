@@ -22,6 +22,9 @@ import weddingverseContext from '@/assets/wedding-verse-context.jpg';
 import weddingverseRole from '@/assets/wedding-verse-role.jpg';
 import bostonFinancial1 from '@/assets/boston-financial-1.png';
 import bostonFinancial2 from '@/assets/boston-financial-2.png';
+import turbocloudDashboard1 from '@/assets/turbocloud-dashboard-1.jpg';
+import turbocloudProviderSelection from '@/assets/turbocloud-provider-selection.jpg';
+import turbocloudSignup from '@/assets/turbocloud-signup.jpg';
 
 // Map of mockup images
 const mockupImageMap: Record<string, string> = {
@@ -40,6 +43,9 @@ const mockupImageMap: Record<string, string> = {
   'wedding-verse-role.jpg': weddingverseRole,
   'boston-financial-1.png': bostonFinancial1,
   'boston-financial-2.png': bostonFinancial2,
+  'turbocloud-dashboard-1.jpg': turbocloudDashboard1,
+  'turbocloud-provider-selection.jpg': turbocloudProviderSelection,
+  'turbocloud-signup.jpg': turbocloudSignup,
 };
 
 const ProjectDetails: React.FC = () => {
@@ -75,6 +81,16 @@ const ProjectDetails: React.FC = () => {
       tags: [],
       contribution_level: 'full',
       is_featured: index === 0
+    })),
+    // Add images from projectData
+    ...(project?.images || []).map((imagePath, index) => ({
+      id: `image-${index}`,
+      title: `${project?.title || 'Project'} - Screen ${index + 1}`,
+      description: undefined,
+      image_url: mockupImageMap[imagePath] || imagePath,
+      tags: [],
+      contribution_level: 'full',
+      is_featured: false
     })),
     // Add database assets
     ...assets.map(asset => ({
