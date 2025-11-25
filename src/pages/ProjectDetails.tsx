@@ -64,7 +64,6 @@ const ProjectDetails: React.FC = () => {
   const roleAnim = useScrollAnimation();
   const featuresAnim = useScrollAnimation();
   const processAnim = useScrollAnimation();
-  const designSystemAnim = useScrollAnimation();
   const iterationsAnim = useScrollAnimation();
   const walkthroughAnim = useScrollAnimation();
   const reflectionAnim = useScrollAnimation();
@@ -351,63 +350,6 @@ const ProjectDetails: React.FC = () => {
           </div>
         </section>
 
-        {/* Design System Section */}
-        {project.designSystem && (
-          <section 
-            ref={designSystemAnim.ref}
-            id="design-system" 
-            className={`py-24 border-b border-border/10 transition-all duration-1000 ${
-              designSystemAnim.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
-            }`}
-          >
-            <h2 className="text-2xl font-light mb-8">Design System</h2>
-            <div className="mb-8">
-              <h3 className="text-sm font-medium mb-4 text-muted-foreground uppercase tracking-[0.15em]">System Goals</h3>
-              <ul className="space-y-2 text-sm font-light leading-relaxed">
-                {project.designSystem.goals.map((goal, index) => (
-                  <li key={index} className="flex items-start gap-2">
-                    <span className="text-muted-foreground mt-1">•</span>
-                    <span>{goal}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            <div className="mb-8">
-              <h3 className="text-sm font-medium mb-4 text-muted-foreground uppercase tracking-[0.15em]">Core Elements</h3>
-              <div className="grid md:grid-cols-2 gap-6">
-                {project.designSystem.coreElements.map((element, index) => (
-                  <div key={index} className="border-l-2 border-border/20 pl-6 py-3">
-                    <h4 className="text-base font-normal mb-1">{element.title}</h4>
-                    <p className="text-sm text-muted-foreground leading-[1.8] font-light">
-                      {element.description}
-                    </p>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            {project.designSystem.note && (
-              <div className="bg-muted/30 rounded-lg p-4 mb-8">
-                <p className="text-sm text-muted-foreground leading-[1.8] font-light italic">
-                  {project.designSystem.note}
-                </p>
-              </div>
-            )}
-
-            <div className="grid md:grid-cols-3 gap-4">
-              {project.designSystem.images.map((imagePath, index) => (
-                <div key={index} className="rounded-xl overflow-hidden bg-muted/20">
-                  <img 
-                    src={mockupImageMap[imagePath] || imagePath}
-                    alt={`Design System ${index + 1}`}
-                    className="w-full h-auto object-cover"
-                  />
-                </div>
-              ))}
-            </div>
-          </section>
-        )}
 
         {/* Iterations & UX Decisions Section */}
         {project.iterations && (
