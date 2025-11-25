@@ -27,6 +27,16 @@ const quotes = [
     author: "Chris",
     role: "UX designer",
   },
+  {
+    text: "I know I can approach you with reasonable questions, and you'll actually thinks things through instead of shutting ideas down. Always up for a good chat about flows and UX, which I love!",
+    author: "Yashaswini",
+    role: "UX Developer",
+  },
+  {
+    text: "Working with you is super chill and fun. You make things clear, keep the chaos in check, and somehow make long workdays feel less painful",
+    author: "Garima",
+    role: "Product designer",
+  },
   
   
 ];
