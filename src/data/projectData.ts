@@ -78,8 +78,8 @@ export const projectsData: Record<string, ProjectData> = {
   "wedding-verse": {
     id: "wedding-verse",
     title: "Wedding Verse",
-    subtitle: "Led end-to-end product design for a wedding planning platform serving couples and vendors.",
-    description: "Owned strategy, UX research, interface design, and AI conversation flows—delivering a scalable MVP in 5 months that increased vendor discovery speed by 63% and improved early retention by 28%.",
+    subtitle: "Led complete product design for a dual-sided marketplace connecting couples with wedding vendors through AI-powered discovery.",
+    description: "Owned end-to-end design strategy, UX research, interface design, and AI conversation flows. Built a comprehensive 120-component design system, designed AI voice onboarding, and delivered a scalable MVP in 5 months—achieving 63% faster vendor discovery, 42% higher response rates, and 28% Week 1 retention lift.",
     category: "product",
     year: "2024",
     services: "Product Design and Strategy",
