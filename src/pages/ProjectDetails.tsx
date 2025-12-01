@@ -61,18 +61,13 @@ const ProjectDetails: React.FC = () => {
   
   // Scroll animations for sections
   const heroAnim = useScrollAnimation();
-  const metricsAnim = useScrollAnimation();
   const roleAnim = useScrollAnimation();
-  const problemAnim = useScrollAnimation();
-  const solutionAnim = useScrollAnimation();
+  const challengeAnim = useScrollAnimation();
   const featuresAnim = useScrollAnimation();
-  const processAnim = useScrollAnimation();
-  const constraintsAnim = useScrollAnimation();
-  const iterationsAnim = useScrollAnimation();
-  const outcomesAnim = useScrollAnimation();
-  const reflectionAnim = useScrollAnimation();
+  const howIWorkedAnim = useScrollAnimation();
+  const designEvolutionAnim = useScrollAnimation();
+  const impactAnim = useScrollAnimation();
   const galleryAnim = useScrollAnimation();
-  const linksAnim = useScrollAnimation();
   
   const allUIAssets = [
     // Add database assets (now includes both mockupImages and images from useProjectAssets hook)
@@ -149,7 +144,7 @@ const ProjectDetails: React.FC = () => {
           <ProjectNav />
           
           <section className="flex flex-col flex-1 min-w-0 py-[20vh]">
-        {/* Hero Section */}
+        {/* Hero Section with embedded metrics */}
         <section 
           ref={heroAnim.ref}
           id="overview" 
@@ -176,7 +171,7 @@ const ProjectDetails: React.FC = () => {
 
             {/* Hero Image or Video Section */}
             {project.videoUrl ? (
-              <div className="relative aspect-video rounded-lg overflow-hidden">
+              <div className="relative aspect-video rounded-lg overflow-hidden mb-20">
                 <iframe
                   src={`${project.videoUrl}&background=1`}
                   className="absolute inset-0 w-full h-full"
@@ -186,7 +181,7 @@ const ProjectDetails: React.FC = () => {
                 />
               </div>
             ) : project.mockupImages && project.mockupImages.length > 0 ? (
-              <div className="relative rounded-2xl overflow-hidden shadow-2xl shadow-background/20">
+              <div className="relative rounded-2xl overflow-hidden shadow-2xl shadow-background/20 mb-20">
                 <img 
                   src={mockupImageMap[project.mockupImages[0]] || project.mockupImages[0]} 
                   alt={`${project.title} interface mockup`}
@@ -194,7 +189,7 @@ const ProjectDetails: React.FC = () => {
                 />
               </div>
             ) : (
-              <div className="relative aspect-video bg-muted/50 rounded-2xl overflow-hidden group cursor-pointer">
+              <div className="relative aspect-video bg-muted/50 rounded-2xl overflow-hidden group cursor-pointer mb-20">
                 <div className="absolute inset-0 bg-gradient-to-br from-background/20 to-background/5 flex items-center justify-center">
                   <div className="bg-background/90 rounded-full p-8 group-hover:scale-110 transition-transform">
                     <Play className="h-12 w-12 text-foreground ml-1" />
@@ -202,30 +197,24 @@ const ProjectDetails: React.FC = () => {
                 </div>
               </div>
             )}
-        </section>
 
-        {/* Metrics Highlight - Only for wedding-verse */}
-        {project.id === "wedding-verse" && (
-          <section 
-            ref={metricsAnim.ref}
-            id="metrics" 
-            className={`py-24 border-b border-border/10 transition-all duration-1000 ${
-              metricsAnim.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
-            }`}
-          >
-            <h2 className="text-2xl font-light mb-4">Impact Metrics</h2>
-            <p className="text-muted-foreground font-light mb-12 max-w-2xl">
-              Measurable improvements that demonstrate real value delivered to users and business.
-            </p>
-            <MetricsHighlight 
-              metrics={[
-                { label: "faster vendor discovery", value: "63%" },
-                { label: "higher vendor response rate", value: "42%" },
-                { label: "better Week 1 retention", value: "28%" }
-              ]}
-            />
-          </section>
-        )}
+            {/* Embedded Metrics - Only for wedding-verse */}
+            {project.id === "wedding-verse" && (
+              <div className="mt-20">
+                <h2 className="text-2xl font-light mb-4">Impact Metrics</h2>
+                <p className="text-muted-foreground font-light mb-12 max-w-2xl">
+                  Measurable improvements that demonstrate real value delivered to users and business.
+                </p>
+                <MetricsHighlight 
+                  metrics={[
+                    { label: "faster vendor discovery", value: "63%" },
+                    { label: "higher vendor response rate", value: "42%" },
+                    { label: "better Week 1 retention", value: "28%" }
+                  ]}
+                />
+              </div>
+            )}
+        </section>
 
         {/* My Role - Enhanced for wedding-verse */}
         <section 
@@ -296,38 +285,39 @@ const ProjectDetails: React.FC = () => {
           </div>
         </section>
 
-        {/* Problem - Compressed */}
+        {/* Challenge & Solution - Combined */}
         <section 
-          ref={problemAnim.ref}
-          id="problem" 
+          ref={challengeAnim.ref}
+          id="challenge" 
           className={`py-24 border-b border-border/10 transition-all duration-1000 ${
-            problemAnim.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+            challengeAnim.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
           }`}
         >
-          <h2 className="text-2xl font-light mb-8">The Problem</h2>
-          <div className="max-w-4xl">
-            <p className="text-base leading-[1.8] font-light text-muted-foreground">
-              {project.context.problem}
-            </p>
-          </div>
-        </section>
+          <h2 className="text-3xl md:text-4xl font-light mb-16">Challenge & Solution</h2>
+          
+          <div className="grid md:grid-cols-2 gap-16">
+            {/* Problem Column */}
+            <div className="space-y-6">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-muted/30 border border-border/20">
+                <AlertCircle className="w-4 h-4 text-muted-foreground" />
+                <span className="text-sm font-medium text-muted-foreground">The Problem</span>
+              </div>
+              <p className="text-base leading-[1.8] font-light text-muted-foreground">
+                {project.context.problem}
+              </p>
+            </div>
 
-        {/* Solution Overview */}
-        <section 
-          ref={solutionAnim.ref}
-          id="solution" 
-          className={`py-24 border-b border-border/10 transition-all duration-1000 ${
-            solutionAnim.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
-          }`}
-        >
-          <h2 className="text-2xl font-light mb-8">Solution Overview</h2>
-          <div className="grid md:grid-cols-2 gap-12">
-            <div>
+            {/* Solution Column */}
+            <div className="space-y-6">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20">
+                <CheckCircle2 className="w-4 h-4 text-primary" />
+                <span className="text-sm font-medium text-primary">The Solution</span>
+              </div>
               <p className="text-base leading-[1.8] font-light mb-6">
                 {project.context.objective}
               </p>
               {project.id === "wedding-verse" && (
-                <div className="bg-primary/5 border border-primary/10 rounded-xl p-6 mt-6">
+                <div className="bg-primary/5 border border-primary/10 rounded-xl p-6">
                   <p className="text-sm font-medium text-primary mb-2">Core Innovation</p>
                   <p className="text-sm text-muted-foreground leading-relaxed">
                     Transformed chaotic vendor search into a calm, personalized experience that respects emotional decision-making patterns.
@@ -335,16 +325,18 @@ const ProjectDetails: React.FC = () => {
                 </div>
               )}
             </div>
-            {project.mockupImages && project.mockupImages[1] ? (
-              <div className="rounded-2xl overflow-hidden shadow-xl shadow-background/20">
-                <img 
-                  src={mockupImageMap[project.mockupImages[1]] || project.mockupImages[1]} 
-                  alt={`${project.title} solution mockup`}
-                  className="w-full h-full object-cover"
-                />
-              </div>
-            ) : null}
           </div>
+
+          {/* Solution Image */}
+          {project.mockupImages && project.mockupImages[1] && (
+            <div className="rounded-2xl overflow-hidden shadow-xl shadow-background/20 mt-16">
+              <img 
+                src={mockupImageMap[project.mockupImages[1]] || project.mockupImages[1]} 
+                alt={`${project.title} solution mockup`}
+                className="w-full h-auto object-cover"
+              />
+            </div>
+          )}
         </section>
 
         {/* Core Features Delivered */}
@@ -372,340 +364,336 @@ const ProjectDetails: React.FC = () => {
           </div>
         </section>
 
-        {/* Design Process */}
+        {/* How I Worked - Process + Constraints Combined */}
         <section 
-          ref={processAnim.ref}
-          id="process" 
+          ref={howIWorkedAnim.ref}
+          id="how-i-worked" 
           className={`py-24 border-b border-border/10 transition-all duration-1000 ${
-            processAnim.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+            howIWorkedAnim.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
           }`}
         >
-          <h2 className="text-2xl font-light mb-4">Design Process</h2>
-          <p className="text-muted-foreground font-light mb-12 max-w-2xl">
-            A structured approach from research to launch, with continuous iteration and validation.
-          </p>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {project.process.map((phase, index) => (
-              <div key={index} className="relative">
-                <div className="flex items-start gap-4">
-                  <div className="flex-shrink-0 w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-sm font-medium text-primary">
-                    {String(index + 1).padStart(2, '0')}
-                  </div>
-                  <div>
-                    <h3 className="text-base font-medium mb-2">{phase.step}</h3>
-                    <p className="text-sm text-muted-foreground font-light leading-[1.7]">{phase.description}</p>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </section>
-
-        {/* Constraints & Challenges - wedding-verse only */}
-        {project.id === "wedding-verse" && (
-          <section 
-            ref={constraintsAnim.ref}
-            id="constraints" 
-            className={`py-24 border-b border-border/10 transition-all duration-1000 ${
-              constraintsAnim.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
-            }`}
-          >
-            <h2 className="text-2xl font-light mb-4">Constraints & Challenges</h2>
-            <p className="text-muted-foreground font-light mb-12 max-w-2xl">
-              Real-world limitations that shaped design decisions and demonstrated problem-solving maturity.
-            </p>
-            <div className="grid md:grid-cols-2 gap-6">
-              <div className="flex items-start gap-4 p-6 bg-muted/10 rounded-xl border border-border/20">
-                <AlertCircle className="w-5 h-5 text-muted-foreground mt-0.5 flex-shrink-0" />
-                <div>
-                  <h3 className="text-base font-medium mb-1">Resource Limits</h3>
-                  <p className="text-sm text-muted-foreground leading-relaxed">Small engineering team required strict scope discipline and phased delivery.</p>
-                </div>
-              </div>
-              <div className="flex items-start gap-4 p-6 bg-muted/10 rounded-xl border border-border/20">
-                <AlertCircle className="w-5 h-5 text-muted-foreground mt-0.5 flex-shrink-0" />
-                <div>
-                  <h3 className="text-base font-medium mb-1">Dual-Persona Complexity</h3>
-                  <p className="text-sm text-muted-foreground leading-relaxed">Designing for emotionally-driven couples vs. business-focused vendors simultaneously.</p>
-                </div>
-              </div>
-              <div className="flex items-start gap-4 p-6 bg-muted/10 rounded-xl border border-border/20">
-                <AlertCircle className="w-5 h-5 text-muted-foreground mt-0.5 flex-shrink-0" />
-                <div>
-                  <h3 className="text-base font-medium mb-1">AI Reliability</h3>
-                  <p className="text-sm text-muted-foreground leading-relaxed">Voice agent needed protective UX layers to handle edge cases gracefully.</p>
-                </div>
-              </div>
-              <div className="flex items-start gap-4 p-6 bg-muted/10 rounded-xl border border-border/20">
-                <AlertCircle className="w-5 h-5 text-muted-foreground mt-0.5 flex-shrink-0" />
-                <div>
-                  <h3 className="text-base font-medium mb-1">Data Inconsistency</h3>
-                  <p className="text-sm text-muted-foreground leading-relaxed">Vendor inputs varied wildly; required intelligent validation and normalization.</p>
-                </div>
-              </div>
-              <div className="flex items-start gap-4 p-6 bg-muted/10 rounded-xl border border-border/20">
-                <AlertCircle className="w-5 h-5 text-muted-foreground mt-0.5 flex-shrink-0" />
-                <div>
-                  <h3 className="text-base font-medium mb-1">Aggressive Timeline</h3>
-                  <p className="text-sm text-muted-foreground leading-relaxed">2 months for UI design, 5 months for MVP engineering, 3 months for expansion.</p>
-                </div>
-              </div>
-            </div>
-          </section>
-        )}
-
-
-        {/* Iterations & UX Decisions Section */}
-        {project.iterations && (
-          <section 
-            ref={iterationsAnim.ref}
-            id="iterations" 
-            className={`py-24 border-b border-border/10 transition-all duration-1000 ${
-              iterationsAnim.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
-            }`}
-          >
-            <h2 className="text-2xl font-light mb-8">Iterations & UX Decisions</h2>
-            {project.iterations.intro && (
-              <p className="text-sm text-muted-foreground leading-[1.8] font-light mb-8">
-                {project.iterations.intro}
-              </p>
-            )}
-
-            {project.iterations.note && (
-              <div className="bg-muted/30 rounded-lg p-4 mb-8">
-                <p className="text-sm text-muted-foreground leading-[1.8] font-light italic">
-                  {project.iterations.note}
-                </p>
-              </div>
-            )}
-
-            <div className="columns-1 sm:columns-2 lg:columns-3 gap-4 space-y-4">
-              {project.iterations.images.map((imagePath, index) => (
-                <div key={index} className="break-inside-avoid cursor-pointer group">
-                  <div className="rounded-xl overflow-hidden bg-muted/20">
-                    <img 
-                      src={mockupImageMap[imagePath] || imagePath}
-                      alt={`Design Iterations ${index + 1}`}
-                      className="w-full h-auto object-cover transition-transform duration-300 group-hover:scale-105"
-                    />
-                  </div>
-                </div>
-              ))}
-            </div>
-          </section>
-        )}
-
-        {/* Video Walkthrough */}
-        {project.videoUrl && (
-          <section 
-            ref={outcomesAnim.ref}
-            id="walkthrough" 
-            className={`py-24 border-b border-border/10 transition-all duration-1000 ${
-              outcomesAnim.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
-            }`}
-          >
-            <h2 className="text-2xl font-light mb-8">Video Walkthrough</h2>
-            <div className="relative aspect-video bg-muted/50 rounded-xl overflow-hidden shadow-2xl shadow-background/20">
-              <iframe
-                src={project.videoUrl}
-                className="absolute inset-0 w-full h-full"
-                frameBorder="0"
-                allow="autoplay; fullscreen; picture-in-picture; clipboard-write"
-                title={`${project.title} Video Walkthrough`}
-              />
-            </div>
-          </section>
-        )}
-
-        {/* Final Outcomes & Business Value */}
-        <section 
-          ref={outcomesAnim.ref}
-          id="outcomes" 
-          className={`py-24 border-b border-border/10 transition-all duration-1000 ${
-            outcomesAnim.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
-          }`}
-        >
-          <h2 className="text-2xl font-light mb-4">Outcomes & Business Value</h2>
-          <p className="text-muted-foreground font-light mb-12 max-w-2xl">
-            Measurable results that demonstrate the product's success and strategic impact.
-          </p>
+          <h2 className="text-3xl md:text-4xl font-light mb-16">How I Worked</h2>
           
-          {project.id === "wedding-verse" ? (
-            <div className="space-y-8">
-              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-                <div className="bg-gradient-to-br from-primary/5 to-primary/10 rounded-xl p-6 border border-primary/20">
-                  <h3 className="text-sm font-medium text-primary mb-2">Faster Time-to-Match</h3>
-                  <p className="text-sm text-muted-foreground leading-relaxed">Couples find relevant vendors 63% faster, reducing drop-off</p>
-                </div>
-                <div className="bg-gradient-to-br from-primary/5 to-primary/10 rounded-xl p-6 border border-primary/20">
-                  <h3 className="text-sm font-medium text-primary mb-2">Improved Engagement</h3>
-                  <p className="text-sm text-muted-foreground leading-relaxed">Vendor response rates increased 42%, creating healthier marketplace dynamics</p>
-                </div>
-                <div className="bg-gradient-to-br from-primary/5 to-primary/10 rounded-xl p-6 border border-primary/20">
-                  <h3 className="text-sm font-medium text-primary mb-2">Retention Lift</h3>
-                  <p className="text-sm text-muted-foreground leading-relaxed">28% more couples returned in Week 1, indicating stronger early value perception</p>
-                </div>
-                <div className="bg-muted/20 rounded-xl p-6 border border-border/20">
-                  <h3 className="text-sm font-medium mb-2">Operational Efficiency</h3>
-                  <p className="text-sm text-muted-foreground leading-relaxed">AI onboarding freed team from manual vendor setup, scaling to 100+ vendors/month</p>
-                </div>
-                <div className="bg-muted/20 rounded-xl p-6 border border-border/20">
-                  <h3 className="text-sm font-medium mb-2">Foundation for Growth</h3>
-                  <p className="text-sm text-muted-foreground leading-relaxed">Design system accelerated Phase 2 feature development by 3x</p>
-                </div>
-                <div className="bg-muted/20 rounded-xl p-6 border border-border/20">
-                  <h3 className="text-sm font-medium mb-2">Platform Trust</h3>
-                  <p className="text-sm text-muted-foreground leading-relaxed">Structured profiles and guided flows reduced uncertainty, increasing booking intent</p>
-                </div>
-              </div>
-            </div>
-          ) : (
-            <div className="space-y-3">
-              {project.outcomes.map((outcome, index) => (
-                <div key={index} className="flex justify-between items-center py-4 border-b border-border/20">
-                  <span className="text-base font-light">{outcome.metric}</span>
-                  <span className="text-base font-mono font-normal">{outcome.value}</span>
+          {/* Process */}
+          <div className="mb-20">
+            <h3 className="text-xl font-light mb-4 text-muted-foreground">Design Process</h3>
+            <p className="text-muted-foreground font-light mb-12 max-w-2xl">
+              A structured approach from research to launch, with continuous iteration and validation.
+            </p>
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {project.process.map((phase, index) => (
+                <div key={index} className="relative">
+                  <div className="flex items-start gap-4">
+                    <div className="flex-shrink-0 w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-sm font-medium text-primary">
+                      {String(index + 1).padStart(2, '0')}
+                    </div>
+                    <div>
+                      <h4 className="text-base font-medium mb-2">{phase.step}</h4>
+                      <p className="text-sm text-muted-foreground font-light leading-[1.7]">{phase.description}</p>
+                    </div>
+                  </div>
                 </div>
               ))}
+            </div>
+          </div>
+
+          {/* Constraints - wedding-verse only */}
+          {project.id === "wedding-verse" && (
+            <div>
+              <h3 className="text-xl font-light mb-4 text-muted-foreground">Constraints & Challenges</h3>
+              <p className="text-muted-foreground font-light mb-12 max-w-2xl">
+                Real-world limitations that shaped design decisions and demonstrated problem-solving maturity.
+              </p>
+              <div className="grid md:grid-cols-2 gap-6">
+                <div className="flex items-start gap-4 p-6 bg-muted/10 rounded-xl border border-border/20">
+                  <AlertCircle className="w-5 h-5 text-muted-foreground mt-0.5 flex-shrink-0" />
+                  <div>
+                    <h4 className="text-base font-medium mb-1">Resource Limits</h4>
+                    <p className="text-sm text-muted-foreground leading-relaxed">Small engineering team required strict scope discipline and phased delivery.</p>
+                  </div>
+                </div>
+                <div className="flex items-start gap-4 p-6 bg-muted/10 rounded-xl border border-border/20">
+                  <AlertCircle className="w-5 h-5 text-muted-foreground mt-0.5 flex-shrink-0" />
+                  <div>
+                    <h4 className="text-base font-medium mb-1">Dual-Persona Complexity</h4>
+                    <p className="text-sm text-muted-foreground leading-relaxed">Designing for emotionally-driven couples vs. business-focused vendors simultaneously.</p>
+                  </div>
+                </div>
+                <div className="flex items-start gap-4 p-6 bg-muted/10 rounded-xl border border-border/20">
+                  <AlertCircle className="w-5 h-5 text-muted-foreground mt-0.5 flex-shrink-0" />
+                  <div>
+                    <h4 className="text-base font-medium mb-1">AI Reliability</h4>
+                    <p className="text-sm text-muted-foreground leading-relaxed">Voice agent needed protective UX layers to handle edge cases gracefully.</p>
+                  </div>
+                </div>
+                <div className="flex items-start gap-4 p-6 bg-muted/10 rounded-xl border border-border/20">
+                  <AlertCircle className="w-5 h-5 text-muted-foreground mt-0.5 flex-shrink-0" />
+                  <div>
+                    <h4 className="text-base font-medium mb-1">Data Inconsistency</h4>
+                    <p className="text-sm text-muted-foreground leading-relaxed">Vendor inputs varied wildly; required intelligent validation and normalization.</p>
+                  </div>
+                </div>
+                <div className="flex items-start gap-4 p-6 bg-muted/10 rounded-xl border border-border/20">
+                  <AlertCircle className="w-5 h-5 text-muted-foreground mt-0.5 flex-shrink-0" />
+                  <div>
+                    <h4 className="text-base font-medium mb-1">Aggressive Timeline</h4>
+                    <p className="text-sm text-muted-foreground leading-relaxed">2 months for UI design, 5 months for MVP engineering, 3 months for expansion.</p>
+                  </div>
+                </div>
+              </div>
             </div>
           )}
         </section>
 
-        {/* Key Learnings */}
+
+        {/* Design Evolution - Iterations + Walkthrough Combined */}
+        {(project.iterations || project.videoUrl) && (
+          <section 
+            ref={designEvolutionAnim.ref}
+            id="design-evolution" 
+            className={`py-24 border-b border-border/10 transition-all duration-1000 ${
+              designEvolutionAnim.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+            }`}
+          >
+            <h2 className="text-3xl md:text-4xl font-light mb-16">Design Evolution</h2>
+            
+            {/* Iterations */}
+            {project.iterations && (
+              <div className="mb-20">
+                <h3 className="text-xl font-light mb-4 text-muted-foreground">Iterations & UX Decisions</h3>
+                {project.iterations.intro && (
+                  <p className="text-sm text-muted-foreground leading-[1.8] font-light mb-8">
+                    {project.iterations.intro}
+                  </p>
+                )}
+
+                {project.iterations.note && (
+                  <div className="bg-muted/30 rounded-lg p-4 mb-8">
+                    <p className="text-sm text-muted-foreground leading-[1.8] font-light italic">
+                      {project.iterations.note}
+                    </p>
+                  </div>
+                )}
+
+                <div className="columns-1 sm:columns-2 lg:columns-3 gap-4 space-y-4">
+                  {project.iterations.images.map((imagePath, index) => (
+                    <div key={index} className="break-inside-avoid cursor-pointer group">
+                      <div className="rounded-xl overflow-hidden bg-muted/20">
+                        <img 
+                          src={mockupImageMap[imagePath] || imagePath}
+                          alt={`Design Iterations ${index + 1}`}
+                          className="w-full h-auto object-cover transition-transform duration-300 group-hover:scale-105"
+                        />
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {/* Video Walkthrough */}
+            {project.videoUrl && (
+              <div>
+                <h3 className="text-xl font-light mb-8 text-muted-foreground">Video Walkthrough</h3>
+                <div className="relative aspect-video bg-muted/50 rounded-xl overflow-hidden shadow-2xl shadow-background/20">
+                  <iframe
+                    src={project.videoUrl}
+                    className="absolute inset-0 w-full h-full"
+                    frameBorder="0"
+                    allow="autoplay; fullscreen; picture-in-picture; clipboard-write"
+                    title={`${project.title} Video Walkthrough`}
+                  />
+                </div>
+              </div>
+            )}
+          </section>
+        )}
+
+        {/* Impact - Outcomes + Learnings Combined */}
         <section 
-          ref={reflectionAnim.ref}
-          id="learnings" 
+          ref={impactAnim.ref}
+          id="impact" 
           className={`py-24 border-b border-border/10 transition-all duration-1000 ${
-            reflectionAnim.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+            impactAnim.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
           }`}
         >
-          <h2 className="text-2xl font-light mb-4">Key Learnings</h2>
-          <p className="text-muted-foreground font-light mb-12 max-w-2xl">
-            Strategic insights gained from designing and shipping this product.
-          </p>
-          <div className="max-w-4xl">
+          <h2 className="text-3xl md:text-4xl font-light mb-16">Impact</h2>
+          
+          {/* Outcomes */}
+          <div className="mb-20">
+            <h3 className="text-xl font-light mb-4 text-muted-foreground">Outcomes & Business Value</h3>
+            <p className="text-muted-foreground font-light mb-12 max-w-2xl">
+              Measurable results that demonstrate the product's success and strategic impact.
+            </p>
+            
             {project.id === "wedding-verse" ? (
-              <div className="space-y-6">
-                <div className="flex items-start gap-4">
-                  <div className="flex-shrink-0 w-2 h-2 rounded-full bg-primary mt-2" />
-                  <div>
-                    <h3 className="text-base font-medium mb-1">Emotion-first design wins</h3>
-                    <p className="text-sm text-muted-foreground leading-relaxed">Wedding planning requires UX that acknowledges anxiety, not just efficiency</p>
+              <div className="space-y-8">
+                <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                  <div className="bg-gradient-to-br from-primary/5 to-primary/10 rounded-xl p-6 border border-primary/20">
+                    <h4 className="text-sm font-medium text-primary mb-2">Faster Time-to-Match</h4>
+                    <p className="text-sm text-muted-foreground leading-relaxed">Couples find relevant vendors 63% faster, reducing drop-off</p>
                   </div>
-                </div>
-                <div className="flex items-start gap-4">
-                  <div className="flex-shrink-0 w-2 h-2 rounded-full bg-primary mt-2" />
-                  <div>
-                    <h3 className="text-base font-medium mb-1">Scope discipline scales impact</h3>
-                    <p className="text-sm text-muted-foreground leading-relaxed">Saying "no" to 20 features enabled shipping 5 features that actually mattered</p>
+                  <div className="bg-gradient-to-br from-primary/5 to-primary/10 rounded-xl p-6 border border-primary/20">
+                    <h4 className="text-sm font-medium text-primary mb-2">Improved Engagement</h4>
+                    <p className="text-sm text-muted-foreground leading-relaxed">Vendor response rates increased 42%, creating healthier marketplace dynamics</p>
                   </div>
-                </div>
-                <div className="flex items-start gap-4">
-                  <div className="flex-shrink-0 w-2 h-2 rounded-full bg-primary mt-2" />
-                  <div>
-                    <h3 className="text-base font-medium mb-1">Multi-persona success requires unified mental models</h3>
-                    <p className="text-sm text-muted-foreground leading-relaxed">Both users succeeded when platform logic felt consistent</p>
+                  <div className="bg-gradient-to-br from-primary/5 to-primary/10 rounded-xl p-6 border border-primary/20">
+                    <h4 className="text-sm font-medium text-primary mb-2">Retention Lift</h4>
+                    <p className="text-sm text-muted-foreground leading-relaxed">28% more couples returned in Week 1, indicating stronger early value perception</p>
                   </div>
-                </div>
-                <div className="flex items-start gap-4">
-                  <div className="flex-shrink-0 w-2 h-2 rounded-full bg-primary mt-2" />
-                  <div>
-                    <h3 className="text-base font-medium mb-1">AI needs guardrails</h3>
-                    <p className="text-sm text-muted-foreground leading-relaxed">Conversational interfaces require both personality and strict boundary conditions</p>
+                  <div className="bg-muted/20 rounded-xl p-6 border border-border/20">
+                    <h4 className="text-sm font-medium mb-2">Operational Efficiency</h4>
+                    <p className="text-sm text-muted-foreground leading-relaxed">AI onboarding freed team from manual vendor setup, scaling to 100+ vendors/month</p>
                   </div>
-                </div>
-                <div className="flex items-start gap-4">
-                  <div className="flex-shrink-0 w-2 h-2 rounded-full bg-primary mt-2" />
-                  <div>
-                    <h3 className="text-base font-medium mb-1">Systems thinking creates velocity</h3>
-                    <p className="text-sm text-muted-foreground leading-relaxed">Design systems aren't documentation—they're strategic accelerators</p>
+                  <div className="bg-muted/20 rounded-xl p-6 border border-border/20">
+                    <h4 className="text-sm font-medium mb-2">Foundation for Growth</h4>
+                    <p className="text-sm text-muted-foreground leading-relaxed">Design system accelerated Phase 2 feature development by 3x</p>
+                  </div>
+                  <div className="bg-muted/20 rounded-xl p-6 border border-border/20">
+                    <h4 className="text-sm font-medium mb-2">Platform Trust</h4>
+                    <p className="text-sm text-muted-foreground leading-relaxed">Structured profiles and guided flows reduced uncertainty, increasing booking intent</p>
                   </div>
                 </div>
               </div>
             ) : (
-              <p className="text-base text-muted-foreground leading-[1.8] font-light">
-                {project.reflection}
-              </p>
+              <div className="space-y-3">
+                {project.outcomes.map((outcome, index) => (
+                  <div key={index} className="flex justify-between items-center py-4 border-b border-border/20">
+                    <span className="text-base font-light">{outcome.metric}</span>
+                    <span className="text-base font-mono font-normal">{outcome.value}</span>
+                  </div>
+                ))}
+              </div>
             )}
+          </div>
+
+          {/* Learnings */}
+          <div>
+            <h3 className="text-xl font-light mb-4 text-muted-foreground">Key Learnings</h3>
+            <p className="text-muted-foreground font-light mb-12 max-w-2xl">
+              Strategic insights gained from designing and shipping this product.
+            </p>
+            <div className="max-w-4xl">
+              {project.id === "wedding-verse" ? (
+                <div className="space-y-6">
+                  <div className="flex items-start gap-4">
+                    <div className="flex-shrink-0 w-2 h-2 rounded-full bg-primary mt-2" />
+                    <div>
+                      <h4 className="text-base font-medium mb-1">Emotion-first design wins</h4>
+                      <p className="text-sm text-muted-foreground leading-relaxed">Wedding planning requires UX that acknowledges anxiety, not just efficiency</p>
+                    </div>
+                  </div>
+                  <div className="flex items-start gap-4">
+                    <div className="flex-shrink-0 w-2 h-2 rounded-full bg-primary mt-2" />
+                    <div>
+                      <h4 className="text-base font-medium mb-1">Scope discipline scales impact</h4>
+                      <p className="text-sm text-muted-foreground leading-relaxed">Saying "no" to 20 features enabled shipping 5 features that actually mattered</p>
+                    </div>
+                  </div>
+                  <div className="flex items-start gap-4">
+                    <div className="flex-shrink-0 w-2 h-2 rounded-full bg-primary mt-2" />
+                    <div>
+                      <h4 className="text-base font-medium mb-1">Multi-persona success requires unified mental models</h4>
+                      <p className="text-sm text-muted-foreground leading-relaxed">Both users succeeded when platform logic felt consistent</p>
+                    </div>
+                  </div>
+                  <div className="flex items-start gap-4">
+                    <div className="flex-shrink-0 w-2 h-2 rounded-full bg-primary mt-2" />
+                    <div>
+                      <h4 className="text-base font-medium mb-1">AI needs guardrails</h4>
+                      <p className="text-sm text-muted-foreground leading-relaxed">Conversational interfaces require both personality and strict boundary conditions</p>
+                    </div>
+                  </div>
+                  <div className="flex items-start gap-4">
+                    <div className="flex-shrink-0 w-2 h-2 rounded-full bg-primary mt-2" />
+                    <div>
+                      <h4 className="text-base font-medium mb-1">Systems thinking creates velocity</h4>
+                      <p className="text-sm text-muted-foreground leading-relaxed">Design systems aren't documentation—they're strategic accelerators</p>
+                    </div>
+                  </div>
+                </div>
+              ) : (
+                <p className="text-base text-muted-foreground leading-[1.8] font-light">
+                  {project.reflection}
+                </p>
+              )}
+            </div>
           </div>
         </section>
 
-        {/* Gallery Section */}
+        {/* Gallery & Links - Combined */}
         <section 
           ref={galleryAnim.ref}
           id="gallery" 
-          className={`py-24 border-b border-border/10 transition-all duration-1000 ${
+          className={`py-24 transition-all duration-1000 ${
             galleryAnim.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
           }`}
         >
-          <h2 className="text-2xl font-light mb-8">UI Gallery</h2>
-          {!isLoading && allUIAssets.length > 0 && (
-            <UIGallery 
-              assets={allUIAssets} 
-              projectTitle={project.title}
-            />
-          )}
-          {!isLoading && allUIAssets.length === 0 && (
-            <p className="text-muted-foreground text-center py-12">
-              No UI assets available for this project yet.
-            </p>
-          )}
-        </section>
+          {/* Gallery */}
+          <div className="mb-20">
+            <h2 className="text-3xl md:text-4xl font-light mb-16">UI Gallery</h2>
+            {!isLoading && allUIAssets.length > 0 && (
+              <UIGallery 
+                assets={allUIAssets} 
+                projectTitle={project.title}
+              />
+            )}
+            {!isLoading && allUIAssets.length === 0 && (
+              <p className="text-muted-foreground text-center py-12">
+                No UI assets available for this project yet.
+              </p>
+            )}
+          </div>
 
-        {/* CTA Section */}
-        <section 
-          ref={linksAnim.ref}
-          id="links" 
-          className={`py-32 text-center transition-all duration-1000 ${
-            linksAnim.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
-          }`}
-        >
-          <h2 className="text-2xl font-light mb-8">View the Project</h2>
-          <div className="flex flex-wrap gap-4 justify-center">
-            {project.links.live && (
-                <a 
-                href={project.links.live} 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 bg-foreground text-background px-8 py-4 rounded-full hover:bg-foreground/90 transition-colors text-base font-normal"
-              >
-                <ExternalLink className="h-5 w-5" />
-                Live Project
-              </a>
-            )}
-            {project.links.figma && (
-                <a 
-                href={project.links.figma} 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 border border-border px-8 py-4 rounded-full hover:bg-muted/50 transition-colors text-base font-normal"
-              >
-                <Figma className="h-5 w-5" />
-                Figma
-              </a>
-            )}
-            {project.links.github && (
-                <a 
-                href={project.links.github} 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 border border-border px-8 py-4 rounded-full hover:bg-muted/50 transition-colors text-base font-normal"
-              >
-                <Github className="h-5 w-5" />
-                GitHub
-              </a>
-            )}
-            {project.links.playstore && (
-                <a 
-                href={project.links.playstore} 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 border border-border px-8 py-4 rounded-full hover:bg-muted/50 transition-colors text-base font-normal"
-              >
-                <Smartphone className="h-5 w-5" />
-                Download App
-              </a>
-            )}
+          {/* Links */}
+          <div className="text-center border-t border-border/10 pt-20">
+            <h3 className="text-2xl font-light mb-8">View the Project</h3>
+            <div className="flex flex-wrap gap-4 justify-center">
+              {project.links.live && (
+                  <a 
+                  href={project.links.live} 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 bg-foreground text-background px-8 py-4 rounded-full hover:bg-foreground/90 transition-colors text-base font-normal"
+                >
+                  <ExternalLink className="h-5 w-5" />
+                  Live Project
+                </a>
+              )}
+              {project.links.figma && (
+                  <a 
+                  href={project.links.figma} 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 border border-border px-8 py-4 rounded-full hover:bg-muted/50 transition-colors text-base font-normal"
+                >
+                  <Figma className="h-5 w-5" />
+                  Figma
+                </a>
+              )}
+              {project.links.github && (
+                  <a 
+                  href={project.links.github} 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 border border-border px-8 py-4 rounded-full hover:bg-muted/50 transition-colors text-base font-normal"
+                >
+                  <Github className="h-5 w-5" />
+                  GitHub
+                </a>
+              )}
+              {project.links.playstore && (
+                  <a 
+                  href={project.links.playstore} 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 border border-border px-8 py-4 rounded-full hover:bg-muted/50 transition-colors text-base font-normal"
+                >
+                  <Smartphone className="h-5 w-5" />
+                  Download App
+                </a>
+              )}
+            </div>
           </div>
         </section>
           </section>

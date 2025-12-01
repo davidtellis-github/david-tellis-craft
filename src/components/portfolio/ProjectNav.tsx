@@ -4,19 +4,13 @@ import { Link } from "react-router-dom";
 
 const sections = [
   { id: "overview", label: "Overview" },
-  { id: "metrics", label: "Metrics" },
   { id: "role", label: "Role" },
-  { id: "problem", label: "Problem" },
-  { id: "solution", label: "Solution" },
+  { id: "challenge", label: "Challenge & Solution" },
   { id: "features", label: "Features" },
-  { id: "process", label: "Process" },
-  { id: "constraints", label: "Constraints" },
-  { id: "iterations", label: "Iterations" },
-  { id: "walkthrough", label: "Walkthrough" },
-  { id: "outcomes", label: "Outcomes" },
-  { id: "learnings", label: "Learnings" },
-  { id: "gallery", label: "Gallery" },
-  { id: "links", label: "Links" },
+  { id: "how-i-worked", label: "How I Worked" },
+  { id: "design-evolution", label: "Design Evolution" },
+  { id: "impact", label: "Impact" },
+  { id: "gallery", label: "Gallery & Links" },
 ];
 
 const ProjectNav: React.FC = () => {
