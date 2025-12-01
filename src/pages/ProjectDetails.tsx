@@ -157,20 +157,26 @@ const ProjectDetails: React.FC = () => {
             heroAnim.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
           }`}
         >
-            <div className="mb-16">
-            <h1 className="text-5xl md:text-6xl lg:text-7xl font-light tracking-tight leading-[1.1] mb-4">
-              {project.title}
-            </h1>
-            <p className="text-lg md:text-xl text-muted-foreground font-light leading-relaxed max-w-4xl mb-4">
+            <div className="mb-20 space-y-8">
+            <div className="space-y-6">
+              <h1 className="text-5xl md:text-6xl lg:text-7xl font-light tracking-tight leading-[1.1]">
+                {project.title}
+              </h1>
+              <div className="h-px w-20 bg-primary/40" />
+            </div>
+            
+            <p className="text-xl md:text-2xl text-foreground font-light leading-[1.5] max-w-4xl">
               {project.subtitle}
             </p>
-            <p className="text-base md:text-lg text-muted-foreground/80 font-light leading-relaxed max-w-4xl">
+            
+            <p className="text-base md:text-lg text-muted-foreground font-light leading-[1.8] max-w-3xl pt-4">
               {project.description}
             </p>
+          </div>
 
             {/* Hero Image or Video Section */}
             {project.videoUrl ? (
-              <div className="relative aspect-video rounded-lg overflow-hidden mb-16">
+              <div className="relative aspect-video rounded-lg overflow-hidden">
                 <iframe
                   src={`${project.videoUrl}&background=1`}
                   className="absolute inset-0 w-full h-full"
@@ -180,7 +186,7 @@ const ProjectDetails: React.FC = () => {
                 />
               </div>
             ) : project.mockupImages && project.mockupImages.length > 0 ? (
-              <div className="relative rounded-2xl overflow-hidden mb-16">
+              <div className="relative rounded-2xl overflow-hidden shadow-2xl shadow-background/20">
                 <img 
                   src={mockupImageMap[project.mockupImages[0]] || project.mockupImages[0]} 
                   alt={`${project.title} interface mockup`}
@@ -188,7 +194,7 @@ const ProjectDetails: React.FC = () => {
                 />
               </div>
             ) : (
-              <div className="relative aspect-video bg-muted/50 rounded-2xl overflow-hidden group cursor-pointer mb-16">
+              <div className="relative aspect-video bg-muted/50 rounded-2xl overflow-hidden group cursor-pointer">
                 <div className="absolute inset-0 bg-gradient-to-br from-background/20 to-background/5 flex items-center justify-center">
                   <div className="bg-background/90 rounded-full p-8 group-hover:scale-110 transition-transform">
                     <Play className="h-12 w-12 text-foreground ml-1" />
@@ -196,7 +202,6 @@ const ProjectDetails: React.FC = () => {
                 </div>
               </div>
             )}
-          </div>
         </section>
 
         {/* Metrics Highlight - Only for wedding-verse */}
