@@ -148,7 +148,7 @@ const ProjectDetails: React.FC = () => {
         <section 
           ref={heroAnim.ref}
           id="overview" 
-          className={`py-24 pt-16 transition-all duration-1000 ${
+          className={`min-h-screen flex flex-col justify-start py-[20vh] transition-all duration-1000 ${
             heroAnim.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
           }`}
         >
@@ -220,11 +220,11 @@ const ProjectDetails: React.FC = () => {
         <section 
           ref={roleAnim.ref}
           id="role" 
-          className={`py-32 border-b border-border/10 transition-all duration-1000 ${
+          className={`min-h-[80vh] flex flex-col justify-start pt-[20vh] transition-all duration-1000 ${
             roleAnim.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
           }`}
         >
-          <h2 className="text-3xl md:text-4xl font-light mb-16">My Role</h2>
+          <h2 className="text-3xl md:text-4xl font-light mb-20">My Role</h2>
           <div className="grid md:grid-cols-2 gap-12">
             <div>
               <div className="mb-8">
@@ -289,11 +289,11 @@ const ProjectDetails: React.FC = () => {
         <section 
           ref={challengeAnim.ref}
           id="challenge" 
-          className={`py-24 border-b border-border/10 transition-all duration-1000 ${
+          className={`min-h-[80vh] flex flex-col justify-start pt-[20vh] transition-all duration-1000 ${
             challengeAnim.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
           }`}
         >
-          <h2 className="text-3xl md:text-4xl font-light mb-16">Challenge & Solution</h2>
+          <h2 className="text-3xl md:text-4xl font-light mb-20">Challenge & Solution</h2>
           
           <div className="grid md:grid-cols-2 gap-16">
             {/* Problem Column */}
@@ -343,11 +343,11 @@ const ProjectDetails: React.FC = () => {
         <section 
           ref={featuresAnim.ref}
           id="features" 
-          className={`py-32 border-b border-border/10 transition-all duration-1000 ${
+          className={`min-h-screen flex flex-col justify-start py-[20vh] transition-all duration-1000 ${
             featuresAnim.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
           }`}
         >
-          <div className="mb-16">
+          <div className="mb-20">
             <h2 className="text-3xl md:text-4xl font-light mb-6">Core Features Delivered</h2>
             <p className="text-base md:text-lg text-muted-foreground font-light leading-relaxed max-w-3xl">
               Key capabilities that solve user problems and deliver business value.
@@ -370,11 +370,11 @@ const ProjectDetails: React.FC = () => {
         <section 
           ref={howIWorkedAnim.ref}
           id="how-i-worked" 
-          className={`py-32 border-b border-border/10 transition-all duration-1000 ${
+          className={`min-h-screen flex flex-col justify-start py-[20vh] transition-all duration-1000 ${
             howIWorkedAnim.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
           }`}
         >
-          <h2 className="text-3xl md:text-5xl font-light mb-24">How I Worked</h2>
+          <h2 className="text-3xl md:text-5xl font-light mb-20">How I Worked</h2>
           
           {/* Process */}
           <div className="mb-24">
@@ -457,11 +457,11 @@ const ProjectDetails: React.FC = () => {
           <section 
             ref={designEvolutionAnim.ref}
             id="design-evolution" 
-            className={`py-32 border-b border-border/10 transition-all duration-1000 ${
+            className={`min-h-screen flex flex-col justify-start py-[20vh] transition-all duration-1000 ${
               designEvolutionAnim.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
             }`}
           >
-            <h2 className="text-3xl md:text-5xl font-light mb-24">Design Evolution</h2>
+            <h2 className="text-3xl md:text-5xl font-light mb-20">Design Evolution</h2>
             
             {/* Iterations */}
             {project.iterations && (
@@ -521,11 +521,11 @@ const ProjectDetails: React.FC = () => {
         <section 
           ref={impactAnim.ref}
           id="impact" 
-          className={`py-32 border-b border-border/10 transition-all duration-1000 ${
+          className={`min-h-screen flex flex-col justify-start py-[20vh] transition-all duration-1000 ${
             impactAnim.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
           }`}
         >
-          <h2 className="text-3xl md:text-5xl font-light mb-24">Impact</h2>
+          <h2 className="text-3xl md:text-5xl font-light mb-20">Impact</h2>
           
           {/* Outcomes */}
           <div className="mb-24">
@@ -637,7 +637,7 @@ const ProjectDetails: React.FC = () => {
         <section 
           ref={galleryAnim.ref}
           id="gallery" 
-          className={`py-32 transition-all duration-1000 ${
+          className={`min-h-screen flex flex-col justify-start py-[20vh] transition-all duration-1000 ${
             galleryAnim.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
           }`}
         >
