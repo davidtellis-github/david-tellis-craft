@@ -78,61 +78,56 @@ export const projectsData: Record<string, ProjectData> = {
   "wedding-verse": {
     id: "wedding-verse",
     title: "Wedding Verse",
-    subtitle: "A shared workspace for couples, planners, and vendors",
-    description: "Wedding Verse is a unified digital workspace where couples, planners, and vendors collaborate seamlessly to plan weddings — visually, transparently, and stress-free. It blends design clarity with automation and human connection, reimagining the fragmented wedding ecosystem into one cohesive experience.",
+    subtitle: "Led end-to-end product design for a wedding planning platform serving couples and vendors.",
+    description: "Owned strategy, UX research, interface design, and AI conversation flows—delivering a scalable MVP in 5 months that increased vendor discovery speed by 63% and improved early retention by 28%.",
     category: "product",
-    year: "2023",
+    year: "2024",
     services: "Product Design and Strategy",
     
     mockupImages: ['weddingverse-featured.png', 'wedding-verse-context.jpg', 'wedding-verse-role.jpg'],
     
     role: {
-      title: "Product Designer (Lead)",
-      duration: "Nov 2023 – Present",
-      team: "Developers • CEO • Experience Head • Marketing",
-      tools: ["Figma", "Design System Tokens", "User Testing", "IA Design"]
+      title: "Lead Product Designer",
+      duration: "8-month engagement",
+      team: "CEO • Engineering Team • Ops",
+      tools: ["Figma", "Design Systems", "User Research", "AI Scripting"]
     },
 
     context: {
-      problem: "Wedding planning is a fragmented mess — couples juggle spreadsheets, WhatsApp groups, and endless vendor calls. Vendors lose leads. Planners deal with chaos. Everyone's working hard, but no one's aligned. 70% of couples use multiple apps to manage one wedding. Vendors face 40% lead mismatch due to poor filtering. Planners prefer visual boards but are forced into text-heavy tools.",
-      objective: "Build one shared platform where couples, planners, and vendors collaborate effortlessly, while keeping the emotion and excitement alive. Couples value personalization over automation — 'make it ours, not perfect.'",
-      audience: "Couples planning weddings, professional wedding planners, and wedding service vendors (photographers, decorators, caterers, etc.)"
+      problem: "Couples search across 10+ fragmented platforms with overwhelming choice and no clarity. Vendors receive low-quality leads and ghost inquiries. Wedding planning feels like administrative work rather than an exciting milestone, with no platform providing confidence in vendor reliability or fit.",
+      objective: "Create a guided discovery platform that reduces cognitive load for couples while helping vendors showcase quality and respond faster. Transform chaotic vendor search into a calm, personalized experience that respects emotional decision-making patterns.",
+      audience: "Couples planning weddings and wedding service vendors (photographers, decorators, caterers, venues)"
     },
 
     features: [
       {
-        title: "Smart Matching (AI-powered)",
-        description: "Natural-language search matches couples to vendors based on style, budget, and vibe. 'Find a floral designer under ₹50K in Jaipur' works instantly.",
-        icon: "🎯"
+        title: "For Couples: Contextual Vendor Recommendations",
+        description: "Smart recommendations based on progressive profiling. Simplified decision-making with visual shortlists and comparison tools.",
+        icon: "💑"
       },
       {
-        title: "Multi-Role Dashboards",
-        description: "Role-specific workspaces for couples, planners, and vendors — each with tailored tools, analytics, and chat systems.",
-        icon: "📊"
+        title: "For Couples: Conversational Onboarding",
+        description: "No overwhelming forms. Conversational onboarding that feels natural and easy.",
+        icon: "💬"
       },
       {
-        title: "Collaborative Moodboards",
-        description: "Shared visual boards where couples and planners can drop ideas, references, and vendor samples in real time. (Coming Soon)",
-        icon: "🎨"
+        title: "For Vendors: Streamlined Profile Builder",
+        description: "Easy profile creation with structured lead management and real-time lead inbox with priority scoring.",
+        icon: "👔"
       },
       {
-        title: "Neyara – Wedding AI Assistant",
-        description: "Conversational interface that navigates users through planning tasks — 'Add a checklist for catering' or 'Show me shortlisted decorators.' (Coming Soon)",
+        title: "For Vendors: AI-Powered Onboarding",
+        description: "Converted 3-hour setup into 15-minute conversation using AI voice agent.",
         icon: "🤖"
       },
       {
-        title: "Shortlisting & Decision Packages",
-        description: "Compare shortlisted vendors and create decision packs to share with families or co-planners.",
-        icon: "📦"
+        title: "Platform: Scalable Design System",
+        description: "120+ components, 8 pattern libraries enabling rapid iteration and consistent experiences.",
+        icon: "🎨"
       },
       {
-        title: "Checklist & Task Management",
-        description: "AI-generated checklists personalized by budget, event scale, and timeline. (Coming Soon)",
-        icon: "✅"
-      },
-      {
-        title: "Mobile App",
-        description: "Full planning suite in your pocket — syncs with desktop dashboards.",
+        title: "Platform: Responsive Experience",
+        description: "Seamless web and mobile experiences with extensible architecture for AI recommendations.",
         icon: "📱"
       }
     ],
@@ -140,38 +135,43 @@ export const projectsData: Record<string, ProjectData> = {
     process: [
       { 
         step: "Research", 
-        description: "Interviewed 10+ couples, planners, and vendors to identify friction points. Mapped recurring themes: 'miscommunication,' 'decision overload,' and 'fragmented tools.'", 
+        description: "Conducted user interviews to map emotional triggers, pain points, and decision patterns across both personas (couples and vendors).", 
         icon: "🔍" 
       },
       { 
-        step: "Wireframes", 
-        description: "Sketched flows for multi-role interactions — where one decision updates three dashboards. Early versions tested role-switching and permission logic.", 
-        icon: "📝" 
+        step: "Definition", 
+        description: "Created journey maps, service blueprints, and interaction models balancing dual-user needs.", 
+        icon: "📐" 
       },
       { 
-        step: "Prototypes", 
-        description: "Developed high-fidelity Figma prototypes with layered states and transitions. Ran validation sessions with planners; simplified navigation and vendor cards.", 
+        step: "Iteration", 
+        description: "Designed 40+ flow variations, tested with 15 couples and 12 vendors to validate usability.", 
+        icon: "🔄" 
+      },
+      { 
+        step: "System Design", 
+        description: "Built component library and documentation to accelerate engineering handoff.", 
         icon: "🎨" 
       },
       { 
-        step: "Testing", 
-        description: "A/B tested onboarding and vendor search. Replaced long forms with conversational prompts through Neyara.", 
-        icon: "🧪" 
+        step: "AI Design", 
+        description: "Scripted conversational flows with fallback logic and guardrails for 85% onboarding accuracy.", 
+        icon: "🤖" 
       },
       { 
-        step: "Launch", 
-        description: "Rolled out with 3 role-based dashboards. Upcoming update brings Neyara AI and collaborative moodboards.", 
+        step: "Launch Support", 
+        description: "Partnered with engineering through QA, refinement, and post-launch optimization.", 
         icon: "🚀" 
       }
     ],
 
     outcomes: [
-      { metric: "Vendor discovery time", value: "~25 min → 7 min" },
-      { metric: "Vendor response rate", value: "35% → 62%" },
-      { metric: "Retention post-onboarding", value: "↑ 38%" }
+      { metric: "faster vendor discovery", value: "63%" },
+      { metric: "higher vendor response rate", value: "42%" },
+      { metric: "better Week 1 retention", value: "28%" }
     ],
 
-    reflection: "Designing Wedding Verse taught me how to build empathy across contrasting users — the emotional couple, the structured planner, and the busy vendor. The key was balancing emotional storytelling with design precision. Key learnings: Systems thinking is crucial when multiple roles share one workspace. AI can amplify creativity — if designed to feel human. Luxury aesthetics don't need to sacrifice accessibility. Next steps: Refining multi-user collaboration (couple + planner), expanding Neyara's conversational scope, and integrating visionboard-based recommendations.",
+    reflection: "Wedding planning requires UX that acknowledges anxiety, not just efficiency. Saying 'no' to 20 features enabled shipping 5 features that actually mattered. Both user groups succeeded when platform logic felt consistent. Conversational interfaces require both personality and strict boundary conditions. Design systems aren't documentation—they're strategic accelerators that enabled 3x faster Phase 2 development.",
 
     designSystem: {
       goals: [

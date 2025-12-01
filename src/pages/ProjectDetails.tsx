@@ -1,11 +1,12 @@
 import React, { useEffect } from "react";
 import { useParams, Link, useNavigate } from "react-router-dom";
-import { ArrowLeft, Play, ExternalLink, Github, Figma, Smartphone } from "lucide-react";
+import { ArrowLeft, Play, ExternalLink, Github, Figma, Smartphone, CheckCircle2, AlertCircle } from "lucide-react";
 import ProjectNav from "@/components/portfolio/ProjectNav";
 import { projectsData } from "@/data/projectData";
 import { useProjectAssets } from "@/hooks/useProjectAssets";
 import { UIGallery } from "@/components/portfolio/UIGallery";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
+import { MetricsHighlight } from "@/components/portfolio/MetricsHighlight";
 // Import mockup images
 import weddingverseFeatured from '@/assets/weddingverse-featured.png';
 import ideabaazFeatured from '@/assets/ideabaaz-featured.png';
@@ -60,12 +61,15 @@ const ProjectDetails: React.FC = () => {
   
   // Scroll animations for sections
   const heroAnim = useScrollAnimation();
-  const contextAnim = useScrollAnimation();
+  const metricsAnim = useScrollAnimation();
   const roleAnim = useScrollAnimation();
+  const problemAnim = useScrollAnimation();
+  const solutionAnim = useScrollAnimation();
   const featuresAnim = useScrollAnimation();
   const processAnim = useScrollAnimation();
+  const constraintsAnim = useScrollAnimation();
   const iterationsAnim = useScrollAnimation();
-  const walkthroughAnim = useScrollAnimation();
+  const outcomesAnim = useScrollAnimation();
   const reflectionAnim = useScrollAnimation();
   const galleryAnim = useScrollAnimation();
   const linksAnim = useScrollAnimation();
@@ -154,11 +158,14 @@ const ProjectDetails: React.FC = () => {
           }`}
         >
             <div className="mb-16">
-            <h1 className="text-5xl md:text-6xl lg:text-7xl font-light tracking-tight leading-[1.1] mb-6">
+            <h1 className="text-5xl md:text-6xl lg:text-7xl font-light tracking-tight leading-[1.1] mb-4">
               {project.title}
             </h1>
-            <p className="text-xl md:text-2xl text-muted-foreground font-light leading-relaxed mb-12">
+            <p className="text-lg md:text-xl text-muted-foreground font-light leading-relaxed max-w-4xl mb-4">
               {project.subtitle}
+            </p>
+            <p className="text-base md:text-lg text-muted-foreground/80 font-light leading-relaxed max-w-4xl">
+              {project.description}
             </p>
 
             {/* Hero Image or Video Section */}
@@ -189,79 +196,33 @@ const ProjectDetails: React.FC = () => {
                 </div>
               </div>
             )}
-            
-            <div className="grid md:grid-cols-2 gap-16 mb-16">
-              <div>
-                <p className="text-base md:text-lg text-muted-foreground leading-[1.8] font-light">
-                  {project.description}
-                </p>
-              </div>
-              
-              <div className="space-y-6">
-                <div>
-                  <p className="text-xs uppercase tracking-[0.15em] text-muted-foreground mb-2 font-medium">Role</p>
-                  <p className="text-base font-light">{project.role.title}</p>
-                </div>
-                <div>
-                  <p className="text-xs uppercase tracking-[0.15em] text-muted-foreground mb-2 font-medium">Duration</p>
-                  <p className="text-base font-light">{project.role.duration}</p>
-                </div>
-                <div>
-                  <p className="text-xs uppercase tracking-[0.15em] text-muted-foreground mb-2 font-medium">Team</p>
-                  <p className="text-base font-light">{project.role.team}</p>
-                </div>
-                <div>
-                  <p className="text-xs uppercase tracking-[0.15em] text-muted-foreground mb-2 font-medium">Tools</p>
-                  <p className="text-base font-light">{project.role.tools.join(" • ")}</p>
-                </div>
-                {project.id === "wedding-verse" && (
-                  <div className="pt-4 border-t border-border/20">
-                    <p className="text-sm text-muted-foreground">
-                      🚀 <strong>Update:</strong> Mobile app launched on Play Store (2025).
-                    </p>
-                  </div>
-                )}
-              </div>
-            </div>
           </div>
         </section>
 
-        {/* Context Section */}
-        <section 
-          ref={contextAnim.ref}
-          id="context" 
-          className={`py-24 border-b border-border/10 transition-all duration-1000 ${
-            contextAnim.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
-          }`}
-        >
-          <h2 className="text-2xl font-light mb-8">Context & Challenge</h2>
-          <div className="grid md:grid-cols-2 gap-12">
-            <div>
-              <h3 className="text-sm font-medium mb-3 text-muted-foreground uppercase tracking-[0.15em]">Problem</h3>
-              <p className="text-base leading-[1.8] font-light mb-6">
-                {project.context.problem}
-              </p>
-              
-              <h3 className="text-sm font-medium mb-3 text-muted-foreground uppercase tracking-[0.15em]">Objective</h3>
-              <p className="text-base leading-[1.8] font-light">
-                {project.context.objective}
-              </p>
-            </div>
-            {project.mockupImages && project.mockupImages[1] ? (
-              <div className="rounded-lg overflow-hidden">
-                <img 
-                  src={mockupImageMap[project.mockupImages[1]] || project.mockupImages[1]} 
-                  alt={`${project.title} context mockup`}
-                  className="w-full h-full object-cover"
-                />
-              </div>
-            ) : (
-              <div className="bg-muted/30 rounded-lg h-80"></div>
-            )}
-          </div>
-        </section>
+        {/* Metrics Highlight - Only for wedding-verse */}
+        {project.id === "wedding-verse" && (
+          <section 
+            ref={metricsAnim.ref}
+            id="metrics" 
+            className={`py-24 border-b border-border/10 transition-all duration-1000 ${
+              metricsAnim.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+            }`}
+          >
+            <h2 className="text-2xl font-light mb-4">Impact Metrics</h2>
+            <p className="text-muted-foreground font-light mb-12 max-w-2xl">
+              Measurable improvements that demonstrate real value delivered to users and business.
+            </p>
+            <MetricsHighlight 
+              metrics={[
+                { label: "faster vendor discovery", value: "63%" },
+                { label: "higher vendor response rate", value: "42%" },
+                { label: "better Week 1 retention", value: "28%" }
+              ]}
+            />
+          </section>
+        )}
 
-        {/* Role & Impact */}
+        {/* My Role - Enhanced for wedding-verse */}
         <section 
           ref={roleAnim.ref}
           id="role" 
@@ -269,43 +230,119 @@ const ProjectDetails: React.FC = () => {
             roleAnim.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
           }`}
         >
-          <h2 className="text-2xl font-light mb-8">Role & Impact</h2>
+          <h2 className="text-2xl font-light mb-8">My Role</h2>
           <div className="grid md:grid-cols-2 gap-12">
-            {project.mockupImages && project.mockupImages[2] ? (
-              <div className="rounded-lg overflow-hidden h-full">
-                <img 
-                  src={mockupImageMap[project.mockupImages[2]] || project.mockupImages[2]} 
-                  alt={`${project.title} role mockup`}
-                  className="w-full h-full object-cover"
-                />
-              </div>
-            ) : (
-              <div className="bg-muted/30 rounded-lg h-80"></div>
-            )}
             <div>
-              <h3 className="text-sm font-medium mb-4 text-muted-foreground uppercase tracking-[0.15em]">Key Responsibilities</h3>
-              <ul className="space-y-2 text-base font-light leading-relaxed mb-8">
-                <li>Led end-to-end product design strategy</li>
-                <li>Conducted user research and stakeholder interviews</li>
-                <li>Designed multi-role interaction experiences</li>
-                <li>Created and maintained design system</li>
-                <li>Collaborated closely with engineering team</li>
-              </ul>
-              
-              <h3 className="text-sm font-medium mb-4 text-muted-foreground uppercase tracking-[0.15em]">Outcomes</h3>
-              <div className="space-y-3">
-                {project.outcomes.map((outcome, index) => (
-                  <div key={index} className="flex justify-between items-center py-2 border-b border-border/20">
-                    <span className="text-sm font-light">{outcome.metric}</span>
-                    <span className="text-sm font-mono font-normal">{outcome.value}</span>
-                  </div>
-                ))}
+              <div className="mb-8">
+                <p className="text-lg font-normal mb-2">{project.role.title}</p>
+                <p className="text-sm text-muted-foreground">{project.role.duration}</p>
               </div>
+              
+              {project.id === "wedding-verse" ? (
+                <ul className="space-y-3">
+                  <li className="flex items-start gap-3">
+                    <CheckCircle2 className="w-5 h-5 text-primary mt-0.5 flex-shrink-0" />
+                    <span className="text-base font-light leading-relaxed">Defined product direction alongside CEO and engineering team</span>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <CheckCircle2 className="w-5 h-5 text-primary mt-0.5 flex-shrink-0" />
+                    <span className="text-base font-light leading-relaxed">Designed dual-sided platform experience (couples + vendors) and internal ops tools</span>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <CheckCircle2 className="w-5 h-5 text-primary mt-0.5 flex-shrink-0" />
+                    <span className="text-base font-light leading-relaxed">Built comprehensive design system from scratch to enable rapid iteration</span>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <CheckCircle2 className="w-5 h-5 text-primary mt-0.5 flex-shrink-0" />
+                    <span className="text-base font-light leading-relaxed">Designed AI voice agent flows with natural language scripting and error handling</span>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <CheckCircle2 className="w-5 h-5 text-primary mt-0.5 flex-shrink-0" />
+                    <span className="text-base font-light leading-relaxed">Led user research, journey mapping, prototyping, and validation through launch</span>
+                  </li>
+                </ul>
+              ) : (
+                <ul className="space-y-2 text-base font-light leading-relaxed">
+                  <li>Led end-to-end product design strategy</li>
+                  <li>Conducted user research and stakeholder interviews</li>
+                  <li>Designed multi-role interaction experiences</li>
+                  <li>Created and maintained design system</li>
+                  <li>Collaborated closely with engineering team</li>
+                </ul>
+              )}
+            </div>
+            <div className="space-y-6">
+              <div>
+                <p className="text-xs uppercase tracking-[0.15em] text-muted-foreground mb-2 font-medium">Team</p>
+                <p className="text-base font-light">{project.role.team}</p>
+              </div>
+              <div>
+                <p className="text-xs uppercase tracking-[0.15em] text-muted-foreground mb-2 font-medium">Tools</p>
+                <p className="text-base font-light">{project.role.tools.join(" • ")}</p>
+              </div>
+              {project.id === "wedding-verse" && (
+                <div className="pt-4 border-t border-border/20">
+                  <p className="text-sm text-muted-foreground">
+                    🚀 <strong>Update:</strong> Mobile app launched on Play Store (2025).
+                  </p>
+                </div>
+              )}
             </div>
           </div>
         </section>
 
-        {/* Features */}
+        {/* Problem - Compressed */}
+        <section 
+          ref={problemAnim.ref}
+          id="problem" 
+          className={`py-24 border-b border-border/10 transition-all duration-1000 ${
+            problemAnim.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+          }`}
+        >
+          <h2 className="text-2xl font-light mb-8">The Problem</h2>
+          <div className="max-w-4xl">
+            <p className="text-base leading-[1.8] font-light text-muted-foreground">
+              {project.context.problem}
+            </p>
+          </div>
+        </section>
+
+        {/* Solution Overview */}
+        <section 
+          ref={solutionAnim.ref}
+          id="solution" 
+          className={`py-24 border-b border-border/10 transition-all duration-1000 ${
+            solutionAnim.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+          }`}
+        >
+          <h2 className="text-2xl font-light mb-8">Solution Overview</h2>
+          <div className="grid md:grid-cols-2 gap-12">
+            <div>
+              <p className="text-base leading-[1.8] font-light mb-6">
+                {project.context.objective}
+              </p>
+              {project.id === "wedding-verse" && (
+                <div className="bg-primary/5 border border-primary/10 rounded-xl p-6 mt-6">
+                  <p className="text-sm font-medium text-primary mb-2">Core Innovation</p>
+                  <p className="text-sm text-muted-foreground leading-relaxed">
+                    Transformed chaotic vendor search into a calm, personalized experience that respects emotional decision-making patterns.
+                  </p>
+                </div>
+              )}
+            </div>
+            {project.mockupImages && project.mockupImages[1] ? (
+              <div className="rounded-2xl overflow-hidden shadow-xl shadow-background/20">
+                <img 
+                  src={mockupImageMap[project.mockupImages[1]] || project.mockupImages[1]} 
+                  alt={`${project.title} solution mockup`}
+                  className="w-full h-full object-cover"
+                />
+              </div>
+            ) : null}
+          </div>
+        </section>
+
+        {/* Core Features Delivered */}
         <section 
           ref={featuresAnim.ref}
           id="features" 
@@ -313,12 +350,16 @@ const ProjectDetails: React.FC = () => {
             featuresAnim.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
           }`}
         >
-          <h2 className="text-2xl font-light mb-8">Features & Complexity</h2>
-          <div className="grid md:grid-cols-2 gap-6">
+          <h2 className="text-2xl font-light mb-4">Core Features Delivered</h2>
+          <p className="text-muted-foreground font-light mb-12 max-w-2xl">
+            Key capabilities that solve user problems and deliver business value.
+          </p>
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {project.features.map((feature, index) => (
-              <div key={index} className="border-l-2 border-border/20 pl-6 py-4">
-                <h3 className="text-lg font-normal mb-2">{feature.title}</h3>
-                <p className="text-sm text-muted-foreground leading-[1.8] font-light">
+              <div key={index} className="bg-muted/10 rounded-xl p-6 border border-border/20 hover:border-border/40 transition-all">
+                <div className="text-3xl mb-4">{feature.icon}</div>
+                <h3 className="text-base font-medium mb-2">{feature.title}</h3>
+                <p className="text-sm text-muted-foreground leading-[1.7] font-light">
                   {feature.description}
                 </p>
               </div>
@@ -326,7 +367,7 @@ const ProjectDetails: React.FC = () => {
           </div>
         </section>
 
-        {/* Process */}
+        {/* Design Process */}
         <section 
           ref={processAnim.ref}
           id="process" 
@@ -334,21 +375,79 @@ const ProjectDetails: React.FC = () => {
             processAnim.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
           }`}
         >
-          <h2 className="text-2xl font-light mb-8">Process & Approach</h2>
-          <div className="space-y-8">
+          <h2 className="text-2xl font-light mb-4">Design Process</h2>
+          <p className="text-muted-foreground font-light mb-12 max-w-2xl">
+            A structured approach from research to launch, with continuous iteration and validation.
+          </p>
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {project.process.map((phase, index) => (
-              <div key={index} className="flex items-start gap-6">
-                <div className="text-2xl font-light text-muted-foreground min-w-[3rem]">
-                  {String(index + 1).padStart(2, '0')}
-                </div>
-                <div>
-                  <h3 className="text-lg font-normal mb-1">{phase.step}</h3>
-                  <p className="text-sm text-muted-foreground font-light leading-[1.8]">{phase.description}</p>
+              <div key={index} className="relative">
+                <div className="flex items-start gap-4">
+                  <div className="flex-shrink-0 w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-sm font-medium text-primary">
+                    {String(index + 1).padStart(2, '0')}
+                  </div>
+                  <div>
+                    <h3 className="text-base font-medium mb-2">{phase.step}</h3>
+                    <p className="text-sm text-muted-foreground font-light leading-[1.7]">{phase.description}</p>
+                  </div>
                 </div>
               </div>
             ))}
           </div>
         </section>
+
+        {/* Constraints & Challenges - wedding-verse only */}
+        {project.id === "wedding-verse" && (
+          <section 
+            ref={constraintsAnim.ref}
+            id="constraints" 
+            className={`py-24 border-b border-border/10 transition-all duration-1000 ${
+              constraintsAnim.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+            }`}
+          >
+            <h2 className="text-2xl font-light mb-4">Constraints & Challenges</h2>
+            <p className="text-muted-foreground font-light mb-12 max-w-2xl">
+              Real-world limitations that shaped design decisions and demonstrated problem-solving maturity.
+            </p>
+            <div className="grid md:grid-cols-2 gap-6">
+              <div className="flex items-start gap-4 p-6 bg-muted/10 rounded-xl border border-border/20">
+                <AlertCircle className="w-5 h-5 text-muted-foreground mt-0.5 flex-shrink-0" />
+                <div>
+                  <h3 className="text-base font-medium mb-1">Resource Limits</h3>
+                  <p className="text-sm text-muted-foreground leading-relaxed">Small engineering team required strict scope discipline and phased delivery.</p>
+                </div>
+              </div>
+              <div className="flex items-start gap-4 p-6 bg-muted/10 rounded-xl border border-border/20">
+                <AlertCircle className="w-5 h-5 text-muted-foreground mt-0.5 flex-shrink-0" />
+                <div>
+                  <h3 className="text-base font-medium mb-1">Dual-Persona Complexity</h3>
+                  <p className="text-sm text-muted-foreground leading-relaxed">Designing for emotionally-driven couples vs. business-focused vendors simultaneously.</p>
+                </div>
+              </div>
+              <div className="flex items-start gap-4 p-6 bg-muted/10 rounded-xl border border-border/20">
+                <AlertCircle className="w-5 h-5 text-muted-foreground mt-0.5 flex-shrink-0" />
+                <div>
+                  <h3 className="text-base font-medium mb-1">AI Reliability</h3>
+                  <p className="text-sm text-muted-foreground leading-relaxed">Voice agent needed protective UX layers to handle edge cases gracefully.</p>
+                </div>
+              </div>
+              <div className="flex items-start gap-4 p-6 bg-muted/10 rounded-xl border border-border/20">
+                <AlertCircle className="w-5 h-5 text-muted-foreground mt-0.5 flex-shrink-0" />
+                <div>
+                  <h3 className="text-base font-medium mb-1">Data Inconsistency</h3>
+                  <p className="text-sm text-muted-foreground leading-relaxed">Vendor inputs varied wildly; required intelligent validation and normalization.</p>
+                </div>
+              </div>
+              <div className="flex items-start gap-4 p-6 bg-muted/10 rounded-xl border border-border/20">
+                <AlertCircle className="w-5 h-5 text-muted-foreground mt-0.5 flex-shrink-0" />
+                <div>
+                  <h3 className="text-base font-medium mb-1">Aggressive Timeline</h3>
+                  <p className="text-sm text-muted-foreground leading-relaxed">2 months for UI design, 5 months for MVP engineering, 3 months for expansion.</p>
+                </div>
+              </div>
+            </div>
+          </section>
+        )}
 
 
         {/* Iterations & UX Decisions Section */}
@@ -392,16 +491,16 @@ const ProjectDetails: React.FC = () => {
         )}
 
         {/* Video Walkthrough */}
-        <section 
-          ref={walkthroughAnim.ref}
-          id="walkthrough" 
-          className={`py-24 border-b border-border/10 transition-all duration-1000 ${
-            walkthroughAnim.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
-          }`}
-        >
-          <h2 className="text-2xl font-light mb-8">Video Walkthrough</h2>
-          <div className="relative aspect-video bg-muted/50 rounded-xl overflow-hidden">
-            {project.videoUrl ? (
+        {project.videoUrl && (
+          <section 
+            ref={outcomesAnim.ref}
+            id="walkthrough" 
+            className={`py-24 border-b border-border/10 transition-all duration-1000 ${
+              outcomesAnim.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+            }`}
+          >
+            <h2 className="text-2xl font-light mb-8">Video Walkthrough</h2>
+            <div className="relative aspect-video bg-muted/50 rounded-xl overflow-hidden shadow-2xl shadow-background/20">
               <iframe
                 src={project.videoUrl}
                 className="absolute inset-0 w-full h-full"
@@ -409,32 +508,120 @@ const ProjectDetails: React.FC = () => {
                 allow="autoplay; fullscreen; picture-in-picture; clipboard-write"
                 title={`${project.title} Video Walkthrough`}
               />
-            ) : (
-              <div className="absolute inset-0 bg-gradient-to-br from-background/20 to-background/5 flex items-center justify-center">
-                <div className="text-center">
-                  <div className="bg-background/90 rounded-full p-8 mb-4 inline-block">
-                    <Play className="h-12 w-12 text-foreground ml-2" />
-                  </div>
-                  <p className="text-base text-muted-foreground">Product Demo • 60 seconds</p>
+            </div>
+          </section>
+        )}
+
+        {/* Final Outcomes & Business Value */}
+        <section 
+          ref={outcomesAnim.ref}
+          id="outcomes" 
+          className={`py-24 border-b border-border/10 transition-all duration-1000 ${
+            outcomesAnim.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+          }`}
+        >
+          <h2 className="text-2xl font-light mb-4">Outcomes & Business Value</h2>
+          <p className="text-muted-foreground font-light mb-12 max-w-2xl">
+            Measurable results that demonstrate the product's success and strategic impact.
+          </p>
+          
+          {project.id === "wedding-verse" ? (
+            <div className="space-y-8">
+              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div className="bg-gradient-to-br from-primary/5 to-primary/10 rounded-xl p-6 border border-primary/20">
+                  <h3 className="text-sm font-medium text-primary mb-2">Faster Time-to-Match</h3>
+                  <p className="text-sm text-muted-foreground leading-relaxed">Couples find relevant vendors 63% faster, reducing drop-off</p>
+                </div>
+                <div className="bg-gradient-to-br from-primary/5 to-primary/10 rounded-xl p-6 border border-primary/20">
+                  <h3 className="text-sm font-medium text-primary mb-2">Improved Engagement</h3>
+                  <p className="text-sm text-muted-foreground leading-relaxed">Vendor response rates increased 42%, creating healthier marketplace dynamics</p>
+                </div>
+                <div className="bg-gradient-to-br from-primary/5 to-primary/10 rounded-xl p-6 border border-primary/20">
+                  <h3 className="text-sm font-medium text-primary mb-2">Retention Lift</h3>
+                  <p className="text-sm text-muted-foreground leading-relaxed">28% more couples returned in Week 1, indicating stronger early value perception</p>
+                </div>
+                <div className="bg-muted/20 rounded-xl p-6 border border-border/20">
+                  <h3 className="text-sm font-medium mb-2">Operational Efficiency</h3>
+                  <p className="text-sm text-muted-foreground leading-relaxed">AI onboarding freed team from manual vendor setup, scaling to 100+ vendors/month</p>
+                </div>
+                <div className="bg-muted/20 rounded-xl p-6 border border-border/20">
+                  <h3 className="text-sm font-medium mb-2">Foundation for Growth</h3>
+                  <p className="text-sm text-muted-foreground leading-relaxed">Design system accelerated Phase 2 feature development by 3x</p>
+                </div>
+                <div className="bg-muted/20 rounded-xl p-6 border border-border/20">
+                  <h3 className="text-sm font-medium mb-2">Platform Trust</h3>
+                  <p className="text-sm text-muted-foreground leading-relaxed">Structured profiles and guided flows reduced uncertainty, increasing booking intent</p>
                 </div>
               </div>
-            )}
-          </div>
+            </div>
+          ) : (
+            <div className="space-y-3">
+              {project.outcomes.map((outcome, index) => (
+                <div key={index} className="flex justify-between items-center py-4 border-b border-border/20">
+                  <span className="text-base font-light">{outcome.metric}</span>
+                  <span className="text-base font-mono font-normal">{outcome.value}</span>
+                </div>
+              ))}
+            </div>
+          )}
         </section>
 
-        {/* Reflection */}
+        {/* Key Learnings */}
         <section 
           ref={reflectionAnim.ref}
-          id="reflection" 
+          id="learnings" 
           className={`py-24 border-b border-border/10 transition-all duration-1000 ${
             reflectionAnim.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
           }`}
         >
-          <h2 className="text-2xl font-light mb-8">Reflection & Learnings</h2>
-          <div className="max-w-3xl">
-            <p className="text-base text-muted-foreground leading-[1.8] font-light">
-              {project.reflection}
-            </p>
+          <h2 className="text-2xl font-light mb-4">Key Learnings</h2>
+          <p className="text-muted-foreground font-light mb-12 max-w-2xl">
+            Strategic insights gained from designing and shipping this product.
+          </p>
+          <div className="max-w-4xl">
+            {project.id === "wedding-verse" ? (
+              <div className="space-y-6">
+                <div className="flex items-start gap-4">
+                  <div className="flex-shrink-0 w-2 h-2 rounded-full bg-primary mt-2" />
+                  <div>
+                    <h3 className="text-base font-medium mb-1">Emotion-first design wins</h3>
+                    <p className="text-sm text-muted-foreground leading-relaxed">Wedding planning requires UX that acknowledges anxiety, not just efficiency</p>
+                  </div>
+                </div>
+                <div className="flex items-start gap-4">
+                  <div className="flex-shrink-0 w-2 h-2 rounded-full bg-primary mt-2" />
+                  <div>
+                    <h3 className="text-base font-medium mb-1">Scope discipline scales impact</h3>
+                    <p className="text-sm text-muted-foreground leading-relaxed">Saying "no" to 20 features enabled shipping 5 features that actually mattered</p>
+                  </div>
+                </div>
+                <div className="flex items-start gap-4">
+                  <div className="flex-shrink-0 w-2 h-2 rounded-full bg-primary mt-2" />
+                  <div>
+                    <h3 className="text-base font-medium mb-1">Multi-persona success requires unified mental models</h3>
+                    <p className="text-sm text-muted-foreground leading-relaxed">Both users succeeded when platform logic felt consistent</p>
+                  </div>
+                </div>
+                <div className="flex items-start gap-4">
+                  <div className="flex-shrink-0 w-2 h-2 rounded-full bg-primary mt-2" />
+                  <div>
+                    <h3 className="text-base font-medium mb-1">AI needs guardrails</h3>
+                    <p className="text-sm text-muted-foreground leading-relaxed">Conversational interfaces require both personality and strict boundary conditions</p>
+                  </div>
+                </div>
+                <div className="flex items-start gap-4">
+                  <div className="flex-shrink-0 w-2 h-2 rounded-full bg-primary mt-2" />
+                  <div>
+                    <h3 className="text-base font-medium mb-1">Systems thinking creates velocity</h3>
+                    <p className="text-sm text-muted-foreground leading-relaxed">Design systems aren't documentation—they're strategic accelerators</p>
+                  </div>
+                </div>
+              </div>
+            ) : (
+              <p className="text-base text-muted-foreground leading-[1.8] font-light">
+                {project.reflection}
+              </p>
+            )}
           </div>
         </section>
 

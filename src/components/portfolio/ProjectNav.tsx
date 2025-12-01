@@ -4,13 +4,18 @@ import { Link } from "react-router-dom";
 
 const sections = [
   { id: "overview", label: "Overview" },
-  { id: "context", label: "Context" },
+  { id: "metrics", label: "Metrics" },
   { id: "role", label: "Role" },
+  { id: "problem", label: "Problem" },
+  { id: "solution", label: "Solution" },
   { id: "features", label: "Features" },
   { id: "process", label: "Process" },
+  { id: "constraints", label: "Constraints" },
   { id: "iterations", label: "Iterations" },
   { id: "walkthrough", label: "Walkthrough" },
-  { id: "reflection", label: "Reflection" },
+  { id: "outcomes", label: "Outcomes" },
+  { id: "learnings", label: "Learnings" },
+  { id: "gallery", label: "Gallery" },
   { id: "links", label: "Links" },
 ];
 
