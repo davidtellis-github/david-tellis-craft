@@ -220,11 +220,11 @@ const ProjectDetails: React.FC = () => {
         <section 
           ref={roleAnim.ref}
           id="role" 
-          className={`py-24 border-b border-border/10 transition-all duration-1000 ${
+          className={`py-32 border-b border-border/10 transition-all duration-1000 ${
             roleAnim.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
           }`}
         >
-          <h2 className="text-2xl font-light mb-8">My Role</h2>
+          <h2 className="text-3xl md:text-4xl font-light mb-16">My Role</h2>
           <div className="grid md:grid-cols-2 gap-12">
             <div>
               <div className="mb-8">
@@ -343,20 +343,22 @@ const ProjectDetails: React.FC = () => {
         <section 
           ref={featuresAnim.ref}
           id="features" 
-          className={`py-24 border-b border-border/10 transition-all duration-1000 ${
+          className={`py-32 border-b border-border/10 transition-all duration-1000 ${
             featuresAnim.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
           }`}
         >
-          <h2 className="text-2xl font-light mb-4">Core Features Delivered</h2>
-          <p className="text-muted-foreground font-light mb-12 max-w-2xl">
-            Key capabilities that solve user problems and deliver business value.
-          </p>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="mb-16">
+            <h2 className="text-3xl md:text-4xl font-light mb-6">Core Features Delivered</h2>
+            <p className="text-base md:text-lg text-muted-foreground font-light leading-relaxed max-w-3xl">
+              Key capabilities that solve user problems and deliver business value.
+            </p>
+          </div>
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {project.features.map((feature, index) => (
-              <div key={index} className="bg-muted/10 rounded-xl p-6 border border-border/20 hover:border-border/40 transition-all">
-                <div className="text-3xl mb-4">{feature.icon}</div>
-                <h3 className="text-base font-medium mb-2">{feature.title}</h3>
-                <p className="text-sm text-muted-foreground leading-[1.7] font-light">
+              <div key={index} className="bg-muted/10 rounded-2xl p-8 border border-border/20 hover:border-border/40 transition-all group">
+                <div className="text-4xl mb-6 group-hover:scale-110 transition-transform duration-300">{feature.icon}</div>
+                <h3 className="text-lg font-medium mb-3">{feature.title}</h3>
+                <p className="text-sm text-muted-foreground leading-[1.8] font-light">
                   {feature.description}
                 </p>
               </div>
@@ -368,18 +370,20 @@ const ProjectDetails: React.FC = () => {
         <section 
           ref={howIWorkedAnim.ref}
           id="how-i-worked" 
-          className={`py-24 border-b border-border/10 transition-all duration-1000 ${
+          className={`py-32 border-b border-border/10 transition-all duration-1000 ${
             howIWorkedAnim.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
           }`}
         >
-          <h2 className="text-3xl md:text-4xl font-light mb-16">How I Worked</h2>
+          <h2 className="text-3xl md:text-5xl font-light mb-24">How I Worked</h2>
           
           {/* Process */}
-          <div className="mb-20">
-            <h3 className="text-xl font-light mb-4 text-muted-foreground">Design Process</h3>
-            <p className="text-muted-foreground font-light mb-12 max-w-2xl">
-              A structured approach from research to launch, with continuous iteration and validation.
-            </p>
+          <div className="mb-24">
+            <div className="mb-12">
+              <h3 className="text-2xl md:text-3xl font-light mb-4">Design Process</h3>
+              <p className="text-base md:text-lg text-muted-foreground font-light leading-relaxed max-w-3xl">
+                A structured approach from research to launch, with continuous iteration and validation.
+              </p>
+            </div>
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
               {project.process.map((phase, index) => (
                 <div key={index} className="relative">
@@ -400,10 +404,12 @@ const ProjectDetails: React.FC = () => {
           {/* Constraints - wedding-verse only */}
           {project.id === "wedding-verse" && (
             <div>
-              <h3 className="text-xl font-light mb-4 text-muted-foreground">Constraints & Challenges</h3>
-              <p className="text-muted-foreground font-light mb-12 max-w-2xl">
-                Real-world limitations that shaped design decisions and demonstrated problem-solving maturity.
-              </p>
+              <div className="mb-12">
+                <h3 className="text-2xl md:text-3xl font-light mb-4">Constraints & Challenges</h3>
+                <p className="text-base md:text-lg text-muted-foreground font-light leading-relaxed max-w-3xl">
+                  Real-world limitations that shaped design decisions and demonstrated problem-solving maturity.
+                </p>
+              </div>
               <div className="grid md:grid-cols-2 gap-6">
                 <div className="flex items-start gap-4 p-6 bg-muted/10 rounded-xl border border-border/20">
                   <AlertCircle className="w-5 h-5 text-muted-foreground mt-0.5 flex-shrink-0" />
@@ -451,21 +457,23 @@ const ProjectDetails: React.FC = () => {
           <section 
             ref={designEvolutionAnim.ref}
             id="design-evolution" 
-            className={`py-24 border-b border-border/10 transition-all duration-1000 ${
+            className={`py-32 border-b border-border/10 transition-all duration-1000 ${
               designEvolutionAnim.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
             }`}
           >
-            <h2 className="text-3xl md:text-4xl font-light mb-16">Design Evolution</h2>
+            <h2 className="text-3xl md:text-5xl font-light mb-24">Design Evolution</h2>
             
             {/* Iterations */}
             {project.iterations && (
-              <div className="mb-20">
-                <h3 className="text-xl font-light mb-4 text-muted-foreground">Iterations & UX Decisions</h3>
-                {project.iterations.intro && (
-                  <p className="text-sm text-muted-foreground leading-[1.8] font-light mb-8">
-                    {project.iterations.intro}
-                  </p>
-                )}
+              <div className="mb-24">
+                <div className="mb-12">
+                  <h3 className="text-2xl md:text-3xl font-light mb-4">Iterations & UX Decisions</h3>
+                  {project.iterations.intro && (
+                    <p className="text-base md:text-lg text-muted-foreground leading-relaxed font-light">
+                      {project.iterations.intro}
+                    </p>
+                  )}
+                </div>
 
                 {project.iterations.note && (
                   <div className="bg-muted/30 rounded-lg p-4 mb-8">
@@ -494,7 +502,7 @@ const ProjectDetails: React.FC = () => {
             {/* Video Walkthrough */}
             {project.videoUrl && (
               <div>
-                <h3 className="text-xl font-light mb-8 text-muted-foreground">Video Walkthrough</h3>
+                <h3 className="text-2xl md:text-3xl font-light mb-12">Video Walkthrough</h3>
                 <div className="relative aspect-video bg-muted/50 rounded-xl overflow-hidden shadow-2xl shadow-background/20">
                   <iframe
                     src={project.videoUrl}
@@ -513,18 +521,20 @@ const ProjectDetails: React.FC = () => {
         <section 
           ref={impactAnim.ref}
           id="impact" 
-          className={`py-24 border-b border-border/10 transition-all duration-1000 ${
+          className={`py-32 border-b border-border/10 transition-all duration-1000 ${
             impactAnim.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
           }`}
         >
-          <h2 className="text-3xl md:text-4xl font-light mb-16">Impact</h2>
+          <h2 className="text-3xl md:text-5xl font-light mb-24">Impact</h2>
           
           {/* Outcomes */}
-          <div className="mb-20">
-            <h3 className="text-xl font-light mb-4 text-muted-foreground">Outcomes & Business Value</h3>
-            <p className="text-muted-foreground font-light mb-12 max-w-2xl">
-              Measurable results that demonstrate the product's success and strategic impact.
-            </p>
+          <div className="mb-24">
+            <div className="mb-12">
+              <h3 className="text-2xl md:text-3xl font-light mb-4">Outcomes & Business Value</h3>
+              <p className="text-base md:text-lg text-muted-foreground font-light leading-relaxed max-w-3xl">
+                Measurable results that demonstrate the product's success and strategic impact.
+              </p>
+            </div>
             
             {project.id === "wedding-verse" ? (
               <div className="space-y-8">
@@ -569,10 +579,12 @@ const ProjectDetails: React.FC = () => {
 
           {/* Learnings */}
           <div>
-            <h3 className="text-xl font-light mb-4 text-muted-foreground">Key Learnings</h3>
-            <p className="text-muted-foreground font-light mb-12 max-w-2xl">
-              Strategic insights gained from designing and shipping this product.
-            </p>
+            <div className="mb-12">
+              <h3 className="text-2xl md:text-3xl font-light mb-4">Key Learnings</h3>
+              <p className="text-base md:text-lg text-muted-foreground font-light leading-relaxed max-w-3xl">
+                Strategic insights gained from designing and shipping this product.
+              </p>
+            </div>
             <div className="max-w-4xl">
               {project.id === "wedding-verse" ? (
                 <div className="space-y-6">
@@ -625,13 +637,13 @@ const ProjectDetails: React.FC = () => {
         <section 
           ref={galleryAnim.ref}
           id="gallery" 
-          className={`py-24 transition-all duration-1000 ${
+          className={`py-32 transition-all duration-1000 ${
             galleryAnim.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
           }`}
         >
           {/* Gallery */}
-          <div className="mb-20">
-            <h2 className="text-3xl md:text-4xl font-light mb-16">UI Gallery</h2>
+          <div className="mb-24">
+            <h2 className="text-3xl md:text-5xl font-light mb-20">UI Gallery</h2>
             {!isLoading && allUIAssets.length > 0 && (
               <UIGallery 
                 assets={allUIAssets} 
@@ -646,8 +658,8 @@ const ProjectDetails: React.FC = () => {
           </div>
 
           {/* Links */}
-          <div className="text-center border-t border-border/10 pt-20">
-            <h3 className="text-2xl font-light mb-8">View the Project</h3>
+          <div className="text-center border-t border-border/10 pt-24">
+            <h3 className="text-2xl md:text-3xl font-light mb-12">View the Project</h3>
             <div className="flex flex-wrap gap-4 justify-center">
               {project.links.live && (
                   <a 
