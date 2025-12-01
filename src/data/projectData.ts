@@ -101,6 +101,26 @@ export const projectsData: Record<string, ProjectData> = {
 
     features: [
       {
+        title: "NLP-Powered Search",
+        description: "Natural language search that understands user intent for better vendor discovery and faster results.",
+        icon: "🔎"
+      },
+      {
+        title: "Landing Page for Traction",
+        description: "Marketing-optimized landing page designed to drive user acquisition and vendor sign-ups.",
+        icon: "🚀"
+      },
+      {
+        title: "Budget Planner",
+        description: "Comprehensive budget management tool helping couples organize and track all wedding expenses in one place.",
+        icon: "💰"
+      },
+      {
+        title: "Vision Board Creation",
+        description: "AI-powered quiz that generates personalized wedding moodboards matching the couple's style preferences.",
+        icon: "✨"
+      },
+      {
         title: "For Couples: Contextual Vendor Recommendations",
         description: "Smart recommendations based on progressive profiling. Simplified decision-making with visual shortlists and comparison tools.",
         icon: "💑"
@@ -129,26 +149,6 @@ export const projectsData: Record<string, ProjectData> = {
         title: "Platform: Responsive Experience",
         description: "Seamless web and mobile experiences with extensible architecture for AI recommendations.",
         icon: "📱"
-      },
-      {
-        title: "NLP-Powered Search",
-        description: "Natural language search that understands user intent for better vendor discovery and faster results.",
-        icon: "🔎"
-      },
-      {
-        title: "Landing Page for Traction",
-        description: "Marketing-optimized landing page designed to drive user acquisition and vendor sign-ups.",
-        icon: "🚀"
-      },
-      {
-        title: "Budget Planner",
-        description: "Comprehensive budget management tool helping couples organize and track all wedding expenses in one place.",
-        icon: "💰"
-      },
-      {
-        title: "Vision Board Creation",
-        description: "AI-powered quiz that generates personalized wedding moodboards matching the couple's style preferences.",
-        icon: "🎨"
       }
     ],
 
