@@ -294,7 +294,6 @@ const ProjectDetails: React.FC = () => {
           </div>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {project.features.map((feature, index) => <div key={index} className="bg-muted/10 rounded-2xl p-8 border border-border/20 hover:border-border/40 transition-all group">
-                <div className="text-4xl mb-6 group-hover:scale-110 transition-transform duration-300">{feature.icon}</div>
                 <h3 className="text-lg font-medium mb-3">{feature.title}</h3>
                 <p className="text-sm text-muted-foreground leading-[1.8] font-light">
                   {feature.description}
