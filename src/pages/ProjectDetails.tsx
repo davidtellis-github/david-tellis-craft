@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useParams, Link, useNavigate } from "react-router-dom";
-import { ArrowLeft, Play, ExternalLink, Github, Figma, Smartphone, CheckCircle2, AlertCircle } from "lucide-react";
+import { ArrowLeft, Play, ExternalLink, Figma, Smartphone, CheckCircle2, AlertCircle } from "lucide-react";
 import ProjectNav from "@/components/portfolio/ProjectNav";
 import { projectsData } from "@/data/projectData";
 import { useProjectAssets } from "@/hooks/useProjectAssets";
@@ -681,17 +681,6 @@ const ProjectDetails: React.FC = () => {
                 >
                   <Figma className="h-5 w-5" />
                   Figma
-                </a>
-              )}
-              {project.links.github && (
-                  <a 
-                  href={project.links.github} 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 border border-border px-8 py-4 rounded-full hover:bg-muted/50 transition-colors text-base font-normal"
-                >
-                  <Github className="h-5 w-5" />
-                  GitHub
                 </a>
               )}
               {project.links.playstore && (
