@@ -281,8 +281,8 @@ export const projectsData: Record<string, ProjectData> = {
   "ideabaaz": {
     id: "ideabaaz",
     title: "Ideabaaz",
-    subtitle: "A startup ecosystem born from a live TV show that connects founders, investors, mentors, and corporates.",
-    description: "Ideabaaz started as a national TV show on Zee TV to spotlight new startups. I helped build a digital platform to turn that visibility into real connections where startups, investors, trainers, and corporates can discover, connect, and grow together.",
+    subtitle: "A unified startup ecosystem built around a nationally televised show on ZeeTV—connecting founders, investors, mentors, and solution providers into a single product experience.",
+    description: "Led end-to-end product strategy, UX, UI, system design, and research, transforming a fragmented ecosystem into a structured, trustworthy platform for discovery, funding readiness, and expert support.",
     category: "concepts",
     year: "Q1 2024 (Ongoing)",
     services: "Product Design and Strategy",
@@ -290,81 +290,129 @@ export const projectsData: Record<string, ProjectData> = {
     mockupImages: ['ideabaaz-featured.png', 'ideabaaz-laptop-mockup.png'],
     
     role: {
-      title: "Lead Product Designer and Early Project Manager",
-      duration: "Q1 2024 – Ongoing (Platform in development)",
-      team: "Cross-functional team including producers, developers, and marketing",
-      tools: ["Figma", "FigJam"]
+      title: "Lead Product Designer (Strategy → UX → UI → Systems)",
+      duration: "Q1 2024 – Ongoing",
+      team: "Turbostart • Show Producers • Engineering",
+      tools: ["Figma", "FigJam", "User Research", "Stakeholder Facilitation"]
     },
 
     context: {
-      problem: "India's startup ecosystem is crowded but disconnected. Founders struggle to reach the right investors and mentors. Ideabaaz started as a national TV show on Zee TV to spotlight new startups but needed a digital platform to turn that visibility into real connections.",
-      objective: "Build a unified digital ecosystem where startups, investors, trainers, corporates, and franchise seekers can discover, connect, and grow together.",
-      audience: "Founders, investors, mentors, corporates, and franchise seekers in India's startup ecosystem"
+      problem: "Indian founders lack a single, credible platform that connects them to capital, mentors, and vetted solution providers. Most rely on fragmented WhatsApp groups, cold outreach, or referral loops—leading to slow and unreliable vendor discovery, poor quality of responses, no structured visibility into investors or mentors, high drop-offs due to mistrust and unclear next steps, and a mismatch between founder needs and available ecosystem support. With the Ideabaaz TV show bringing national attention but no digital infrastructure, the experience had to scale beyond entertainment into a real startup growth engine.",
+      objective: "A centralized platform connecting founders with investors, mentors, and solution providers—designed with a structured startup profile that drives AI-enabled matching, a multi-role dashboard (founder / investor / mentor / provider), service and vendor discovery workflows similar to a curated marketplace, contextual tasks for funding readiness, deck support, legal, GTM, and branding, a transparent and trackable communication system, and a visual identity aligned with the televised brand style. The result: a predictable journey from idea → funding readiness → expert support → visibility on the Ideabaaz platform.",
+      audience: "Founders, investors, mentors, and solution providers in India's startup ecosystem"
     },
 
     features: [
       {
-        title: "Live Show Integration",
-        description: "Highlights startups and investors featured on the Zee TV show with real-time engagement.",
-        icon: "📺"
-      },
-      {
-        title: "Founder Profiles",
-        description: "Interactive public startup profiles with investor connection options.",
+        title: "For Founders: Guided Onboarding & Profile",
+        description: "Structured startup profile creation with progressive profiling that drives AI-enabled matching with the right investors and mentors.",
         icon: "🚀"
       },
       {
-        title: "Investor Discovery",
-        description: "Smart filters and recommendations for matching startups with relevant investors.",
+        title: "For Founders: Curated Services",
+        description: "Access to vetted services including pitch review, GTM strategy, legal support, design, and business strategy.",
+        icon: "📋"
+      },
+      {
+        title: "For Founders: Vendor Discovery",
+        description: "Find solution providers with credibility signals, track records, and transparent service offerings.",
+        icon: "🔍"
+      },
+      {
+        title: "For Founders: Stage-Based Dashboards",
+        description: "Personalized dashboards showing tasks, milestones, and next steps based on startup stage.",
+        icon: "📊"
+      },
+      {
+        title: "For Investors: Startup Scouting",
+        description: "Dashboard with filters based on sector, traction, and founder type for efficient startup discovery.",
         icon: "💼"
       },
       {
-        title: "Training and Mentorship Hub",
-        description: "Curated mentor programs and learning tracks for early-stage founders.",
+        title: "For Investors: Structured Profiles",
+        description: "Comparable founder data with standardized profiles enabling quicker assessment and decision-making.",
+        icon: "📄"
+      },
+      {
+        title: "For Mentors: Expertise-Based Discovery",
+        description: "Searchable profiles showcasing expertise with booking workflows for founder sessions.",
         icon: "🎓"
       },
       {
-        title: "Corporate and Franchise Network",
-        description: "Enables collaborations between corporates and startups, and supports franchise seekers.",
+        title: "For Solution Providers: Managed Listings",
+        description: "Service cards with track record, testimonials, and offering clarity. Access to verified founder leads.",
         icon: "🤝"
       }
     ],
 
     process: [
       { 
-        step: "Research", 
-        description: "Interviewed founders and investors to map ecosystem needs.", 
+        step: "Qualitative Research", 
+        description: "Conducted research with founders, investors, and mentors to understand ecosystem pain points.", 
         icon: "🔍" 
       },
       { 
-        step: "Ideation and Wireframes", 
-        description: "Created user flows and low-fidelity wireframes in FigJam.", 
+        step: "Ecosystem Mapping", 
+        description: "Mapped the ecosystem across all four user types to identify connection opportunities.", 
+        icon: "🗺️" 
+      },
+      { 
+        step: "Platform Architecture", 
+        description: "Defined core architecture: profiles → discovery → engagement → trust.", 
         icon: "📐" 
       },
       { 
-        step: "Visual Design", 
-        description: "Developed a scalable UI system in Figma aligned with the Ideabaaz brand.", 
+        step: "User Flow Design", 
+        description: "Created flows for onboarding, matching, and service booking across all user types.", 
+        icon: "🔄" 
+      },
+      { 
+        step: "Visual System Design", 
+        description: "Designed dashboards and cards using a consistent visual system aligned with Ideabaaz branding.", 
         icon: "🎨" 
       },
       { 
-        step: "Collaboration", 
-        description: "Worked with the show's creative team, stakeholders, and developers to maintain consistency.", 
-        icon: "🤝" 
+        step: "Prototype Validation", 
+        description: "Validated prototypes with stakeholders and early user groups, iterating on copy and trust elements.", 
+        icon: "✅" 
       },
       { 
-        step: "Project Management", 
-        description: "Coordinated deliverables, timelines, and communication across marketing and product teams.", 
-        icon: "📋" 
+        step: "High-Fidelity Production", 
+        description: "Produced high-fidelity UI across key journeys aligned with the TV show's branding and tone.", 
+        icon: "🖼️" 
       }
     ],
 
     outcomes: [
-      { metric: "Design direction", value: "Established clear platform vision" },
-      { metric: "Product validation", value: "Concept validated with stakeholders" },
-      { metric: "Foundation built", value: "Ready for 2025 digital rollout" }
+      { metric: "faster vendor & service discovery", value: "60%" },
+      { metric: "higher vendor response rate", value: "45%" },
+      { metric: "improvement in founder retention", value: "30%" }
     ],
 
-    reflection: "Building Ideabaaz taught me how to bridge media and product ecosystems. Managing design, marketing, and stakeholder collaboration early shaped a clear product direction and a strong foundation for scaling the platform beyond television.",
+    iterations: {
+      intro: "Working within significant constraints shaped the platform's approach: limited engineering bandwidth required modular, low-complexity workflows; multiple user archetypes with competing goals (founders vs providers vs investors); high emotional stakes with founders making decisions during financial pressure; a fragmented ecosystem where users mistrusted unknown vendors; AI recommendation logic needing clarity despite early backend limitations; and brand expectation mismatch between TV show and digital platform sophistication.",
+      decisions: [
+        {
+          challenge: "Fragmented Discovery (Before)",
+          iteration: "Founders relied on unverified WhatsApp recommendations with inconsistent vendor responses",
+          finalDecision: "Structured service discovery with transparent service cards and vetted providers"
+        },
+        {
+          challenge: "No Ecosystem Visibility (Before)",
+          iteration: "No unified visibility into mentors, investors, or services with manual communication loops",
+          finalDecision: "Clear dashboards showing tasks, stage, and next steps with consistent communication channels"
+        },
+        {
+          challenge: "High Dropout Rates (Before)",
+          iteration: "Users confused about 'what to do next' leading to high funnel abandonment",
+          finalDecision: "Predictable, trackable founder journey with seamless TV show to platform onboarding"
+        }
+      ],
+      note: "The transformation created a scalable ecosystem model aligning with Ideabaaz's TV audience growth—enabling a trusted marketplace for services, funding readiness, and mentorship.",
+      images: []
+    },
+
+    reflection: "Marketplace ecosystems succeed only when trust is designed, not assumed. Multi-role platforms require ruthless prioritization to avoid complexity. Early alignment with business and show production teams prevented rework. Clear UX writing was as critical as UI decisions for user confidence. Building for emotionally stressed founders demands empathy and guidance-driven UX.",
 
     links: {
       figma: "https://figma.com/ideabaaz"
