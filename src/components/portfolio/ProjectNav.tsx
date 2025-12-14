@@ -49,7 +49,7 @@ const ProjectNav: React.FC = () => {
       el.scrollIntoView({ behavior: "smooth", block: "start" });
       setActiveSection(id);
     }
-    window.history.pushState(null, "", `#${id}`);
+    window.history.replaceState(null, "", `#${id}`);
   };
 
   return (
