@@ -49,7 +49,7 @@ const MobileHeader: React.FC = () => {
       element.scrollIntoView({ behavior: "smooth", block: "start" });
       setActiveSection(id);
       setIsOpen(false);
-      window.history.pushState(null, "", `#${id}`);
+      window.history.replaceState(null, "", `#${id}`);
     }
   };
 
