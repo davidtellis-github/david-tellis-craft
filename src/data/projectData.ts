@@ -428,7 +428,16 @@ export const projectsData: Record<string, ProjectData> = {
     year: "2025",
     services: "Design and UX",
     
-    mockupImages: ['futurcraft-featured.png'],
+    mockupImages: [
+      'futurcraft-featured.png',
+      'futurcraft-url-input.png',
+      'futurcraft-brandforge.png',
+      'futurcraft-content-compare.png',
+      'futurcraft-dashboard-dark.png',
+      'futurcraft-blogs.png',
+      'futurcraft-blog-list.png',
+      'futurcraft-blog-editor.png'
+    ],
     
     role: {
       title: "Senior Product Designer",

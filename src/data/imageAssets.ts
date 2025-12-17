@@ -21,6 +21,15 @@ import wvIterations3 from '@/assets/wedding-verse-iterations-3.png';
 import wvIterations4 from '@/assets/wedding-verse-iterations-4.png';
 import wvIterations5 from '@/assets/wedding-verse-iterations-5.png';
 
+// Futurcraft AI project images
+import futurcraftUrlInput from '@/assets/futurcraft-url-input.png';
+import futurcraftBrandforge from '@/assets/futurcraft-brandforge.png';
+import futurcraftContentCompare from '@/assets/futurcraft-content-compare.png';
+import futurcraftDashboardDark from '@/assets/futurcraft-dashboard-dark.png';
+import futurcraftBlogs from '@/assets/futurcraft-blogs.png';
+import futurcraftBlogList from '@/assets/futurcraft-blog-list.png';
+import futurcraftBlogEditor from '@/assets/futurcraft-blog-editor.png';
+
 // Image asset mapping
 export const imageAssets: Record<string, string> = {
   'weddingverse-featured.png': weddingverseFeatured,
@@ -38,6 +47,13 @@ export const imageAssets: Record<string, string> = {
   'turbocloud-dashboard-1.jpg': turbocloudDashboard1,
   'turbocloud-provider-selection.jpg': turbocloudProviderSelection,
   'turbocloud-signup.jpg': turbocloudSignup,
+  'futurcraft-url-input.png': futurcraftUrlInput,
+  'futurcraft-brandforge.png': futurcraftBrandforge,
+  'futurcraft-content-compare.png': futurcraftContentCompare,
+  'futurcraft-dashboard-dark.png': futurcraftDashboardDark,
+  'futurcraft-blogs.png': futurcraftBlogs,
+  'futurcraft-blog-list.png': futurcraftBlogList,
+  'futurcraft-blog-editor.png': futurcraftBlogEditor,
 };
 
 // Helper function to resolve image paths
