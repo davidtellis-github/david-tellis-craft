@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import AmbientSpotlight from "@/components/portfolio/AmbientSpotlight";
 import SideNav from "@/components/portfolio/SideNav";
 import MobileHeader from "@/components/portfolio/MobileHeader";
@@ -32,6 +33,18 @@ const Index = () => {
     <div className="min-h-screen bg-background text-foreground">
       <AmbientSpotlight />
       <MobileHeader />
+      
+      {/* All work link - top right, aligned with D logo */}
+      <Link 
+        to="/portfolio"
+        className={`hidden lg:block fixed top-0 right-6 pt-10 z-50 
+                   text-foreground text-[clamp(14px,1.6vmin,18px)] 
+                   hover:text-muted-foreground transition-colors duration-300
+                   ${showContent ? 'opacity-100' : 'opacity-0'}`}
+        style={{ transitionDelay: '200ms' }}
+      >
+        All work
+      </Link>
       
       <main className="w-[98vw] mx-auto sm:px-4 md:px-6 pt-16 lg:pt-0">
         {/* Main layout with SideNav + sections */}
