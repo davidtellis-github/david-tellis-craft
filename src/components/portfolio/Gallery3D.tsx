@@ -33,7 +33,7 @@ const galleryImages: GalleryImage[] = [
     src: lunaAiHero,
     title: "Luna AI",
     description: "AI co-worker landing page design",
-    prototypeUrl: "https://embed.figma.com/proto/Ow4QpYUgooZfFeaK3PqNzi/UI?page-id=167%3A77082&node-id=532-4406&viewport=-16113%2C-7665%2C0.2&scaling=scale-down&content-scaling=fixed&embed-host=share",
+    prototypeUrl: "https://embed.figma.com/proto/Ow4QpYUgooZfFeaK3PqNzi/UI?page-id=546%3A9435&node-id=546-9442&viewport=347%2C-5%2C0.27&scaling=min-zoom&content-scaling=fixed&starting-point-node-id=546%3A9442&embed-host=share",
   },
   {
     src: galleryDjController,
@@ -225,20 +225,6 @@ const Gallery3D: React.FC = () => {
               <p className="text-muted-foreground text-sm">
                 Interactive preview
               </p>
-            </div>
-            <div className="flex items-center gap-3">
-              {prototypeImage?.prototypeUrl && (
-                <a
-                  href={prototypeImage.prototypeUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center gap-2 px-3 py-1.5 text-sm text-muted-foreground 
-                             hover:text-foreground transition-colors"
-                >
-                  Open in Figma
-                  <ExternalLink className="w-4 h-4" />
-                </a>
-              )}
             </div>
           </div>
           
