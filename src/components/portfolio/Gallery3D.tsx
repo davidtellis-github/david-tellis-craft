@@ -13,6 +13,7 @@ import {
   DialogContent,
   DialogTrigger,
 } from "@/components/ui/dialog";
+import { X, ExternalLink } from "lucide-react";
 
 // Import gallery images
 import galleryDjController from "@/assets/gallery-dj-controller.png";
@@ -53,6 +54,14 @@ const galleryImages: GalleryImage[] = [
 
 const Gallery3D: React.FC = () => {
   const [selectedImage, setSelectedImage] = useState<GalleryImage | null>(null);
+  const [prototypeOpen, setPrototypeOpen] = useState(false);
+  const [prototypeImage, setPrototypeImage] = useState<GalleryImage | null>(null);
+
+  const handleOpenPrototype = (e: React.MouseEvent, image: GalleryImage) => {
+    e.stopPropagation();
+    setPrototypeImage(image);
+    setPrototypeOpen(true);
+  };
 
   return (
     <section
@@ -134,22 +143,19 @@ const Gallery3D: React.FC = () => {
                           )}
                         </div>
                         {image.prototypeUrl && (
-                          <a
-                            href={image.prototypeUrl}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            onClick={(e) => e.stopPropagation()}
+                          <button
+                            onClick={(e) => handleOpenPrototype(e, image)}
                             className="flex items-center gap-2 px-4 py-2 bg-primary/10 hover:bg-primary/20 
                                        border border-primary/30 rounded-full text-sm font-medium text-primary
                                        transition-colors"
                           >
                             View Prototype
                             <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                              <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
-                              <polyline points="15 3 21 3 21 9" />
-                              <line x1="10" y1="14" x2="21" y2="3" />
+                              <rect x="3" y="3" width="18" height="18" rx="2" ry="2" />
+                              <circle cx="8.5" cy="8.5" r="1.5" />
+                              <polyline points="21 15 16 10 5 21" />
                             </svg>
-                          </a>
+                          </button>
                         )}
                       </div>
 
@@ -206,6 +212,49 @@ const Gallery3D: React.FC = () => {
           </CarouselContent>
         </div>
       </Carousel>
+
+      {/* Prototype Modal */}
+      <Dialog open={prototypeOpen} onOpenChange={setPrototypeOpen}>
+        <DialogContent className="max-w-[95vw] h-[90vh] p-0 bg-background border-border/50 overflow-hidden">
+          {/* Header */}
+          <div className="flex items-center justify-between px-4 sm:px-6 py-4 border-b border-border/50 bg-background">
+            <div>
+              <h3 className="text-foreground font-medium text-lg">
+                {prototypeImage?.title} — Prototype
+              </h3>
+              <p className="text-muted-foreground text-sm">
+                Interactive preview
+              </p>
+            </div>
+            <div className="flex items-center gap-3">
+              {prototypeImage?.prototypeUrl && (
+                <a
+                  href={prototypeImage.prototypeUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-2 px-3 py-1.5 text-sm text-muted-foreground 
+                             hover:text-foreground transition-colors"
+                >
+                  Open in Figma
+                  <ExternalLink className="w-4 h-4" />
+                </a>
+              )}
+            </div>
+          </div>
+          
+          {/* Iframe Container */}
+          <div className="flex-1 w-full h-[calc(90vh-73px)] bg-muted/20">
+            {prototypeImage?.prototypeUrl && (
+              <iframe
+                src={prototypeImage.prototypeUrl}
+                className="w-full h-full border-0"
+                allowFullScreen
+                title={`${prototypeImage.title} Prototype`}
+              />
+            )}
+          </div>
+        </DialogContent>
+      </Dialog>
     </section>
   );
 };
