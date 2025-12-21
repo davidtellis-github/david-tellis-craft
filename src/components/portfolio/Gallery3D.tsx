@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import Autoplay from "embla-carousel-autoplay";
 import {
   Carousel,
   CarouselContent,
@@ -66,6 +67,13 @@ const Gallery3D: React.FC = () => {
             align: "start",
             loop: galleryImages.length > 1,
           }}
+          plugins={[
+            Autoplay({
+              delay: 4000,
+              stopOnInteraction: true,
+              stopOnMouseEnter: true,
+            }),
+          ]}
           className="w-full"
         >
           <CarouselContent className="-ml-4 lg:-ml-6">
@@ -82,12 +90,12 @@ const Gallery3D: React.FC = () => {
                                  transition-all duration-300 hover:border-border/80 hover:shadow-lg"
                       onClick={() => setSelectedImage(image)}
                     >
-                      {/* Image Container with generous padding */}
-                      <div className="p-4 sm:p-6 lg:p-8">
+                      {/* Image Container with fixed height */}
+                      <div className="p-4 sm:p-6 lg:p-8 h-[50vh] lg:h-[60vh]">
                         <img
                           src={image.src}
                           alt={image.title}
-                          className="w-full h-auto rounded-lg transition-transform duration-500 
+                          className="w-full h-full object-cover rounded-lg transition-transform duration-500 
                                      group-hover:scale-[1.02]"
                         />
                       </div>
