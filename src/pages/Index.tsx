@@ -4,6 +4,7 @@ import SideNav from "@/components/portfolio/SideNav";
 import MobileHeader from "@/components/portfolio/MobileHeader";
 import Hero from "@/components/portfolio/Hero";
 import WorkGrid from "@/components/portfolio/WorkGrid";
+import Gallery3D from "@/components/portfolio/Gallery3D";
 import ValuesSection from "@/components/portfolio/ValuesSection";
 import BackgroundTimeline from "@/components/portfolio/BackgroundTimeline";
 import Testimonials from "@/components/portfolio/Testimonials";
@@ -51,6 +52,7 @@ const Index = () => {
           >
             <Hero />
             <WorkGrid />
+            <Gallery3D />
             <ValuesSection />
             <BackgroundTimeline />
             <Testimonials />
