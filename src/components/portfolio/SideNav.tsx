@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 const sections = [
   { id: "intro", label: "Intro" },
   { id: "work", label: "Work" },
+  { id: "gallery", label: "Gallery" },
   { id: "values", label: "Values" },
   { id: "background", label: "Background" },
   { id: "references", label: "References" },
