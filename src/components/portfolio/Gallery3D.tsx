@@ -37,8 +37,9 @@ const galleryImages: GalleryImage[] = [
   },
   {
     src: galleryDjController,
-    title: "DJ Controller",
-    description: "3D product recreation in Figma",
+    title: "3D Orb - in Spline",
+    description: "Interactive 3D orb created in Spline",
+    prototypeUrl: "https://my.spline.design/orbitalbluestarcopy-nq984esCJzKdPTWNTKR2cD8d/",
   },
   {
     src: gallerySynthUI,
