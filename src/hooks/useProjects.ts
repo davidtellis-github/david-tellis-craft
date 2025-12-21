@@ -102,8 +102,9 @@ export const useProjects = () => {
     try {
       setLoading(true);
       
-      // Define custom project order - Ideabaaz as 2nd
+      // Define custom project order - Luna AI added at top
       const projectOrder = [
+        'luna-ai',
         'wedding-verse',
         'ideabaaz',
         'futurcraft-ai',
