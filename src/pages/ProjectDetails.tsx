@@ -95,6 +95,20 @@ const ProjectDetails: React.FC = () => {
     is_featured: exploration.is_featured
   }))];
 
+  // SEO setup
+  useEffect(() => {
+    if (project) {
+      document.title = `${project.title} - Project Case Study`;
+      let meta = document.querySelector('meta[name="description"]');
+      if (!meta) {
+        meta = document.createElement("meta");
+        meta.setAttribute("name", "description");
+        document.head.appendChild(meta);
+      }
+      meta.setAttribute("content", project.description);
+    }
+  }, [project]);
+
   // Redirect to 404 if project not found
   if (!project) {
     return <div className="min-h-screen bg-background text-foreground flex items-end justify-center">
@@ -108,18 +122,6 @@ const ProjectDetails: React.FC = () => {
         </div>
       </div>;
   }
-
-  // SEO setup
-  useEffect(() => {
-    document.title = `${project.title} - Project Case Study`;
-    let meta = document.querySelector('meta[name="description"]');
-    if (!meta) {
-      meta = document.createElement("meta");
-      meta.setAttribute("name", "description");
-      document.head.appendChild(meta);
-    }
-    meta.setAttribute("content", project.description);
-  }, [project.title, project.description]);
   return <div className="min-h-screen bg-background text-foreground">
      
 
