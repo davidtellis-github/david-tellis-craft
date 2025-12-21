@@ -18,14 +18,22 @@ import {
 import galleryDjController from "@/assets/gallery-dj-controller.png";
 import gallerySynthUI from "@/assets/gallery-synth-ui.png";
 import galleryKeysAngled from "@/assets/gallery-keys-angled.png";
+import lunaAiHero from "@/assets/luna-ai-hero.png";
 
 interface GalleryImage {
   src: string;
   title: string;
   description?: string;
+  prototypeUrl?: string;
 }
 
 const galleryImages: GalleryImage[] = [
+  {
+    src: lunaAiHero,
+    title: "Luna AI",
+    description: "AI co-worker landing page design",
+    prototypeUrl: "https://embed.figma.com/proto/Ow4QpYUgooZfFeaK3PqNzi/UI?page-id=167%3A77082&node-id=532-4406&viewport=-16113%2C-7665%2C0.2&scaling=scale-down&content-scaling=fixed&embed-host=share",
+  },
   {
     src: galleryDjController,
     title: "DJ Controller",
@@ -114,14 +122,34 @@ const Gallery3D: React.FC = () => {
                       </div>
 
                       {/* Caption Overlay */}
-                      <div className="px-4 sm:px-6 lg:px-8 pb-4 sm:pb-6 lg:pb-8 pt-0">
-                        <h3 className="text-foreground font-medium text-lg lg:text-xl">
-                          {image.title}
-                        </h3>
-                        {image.description && (
-                          <p className="text-muted-foreground text-sm lg:text-base mt-1">
-                            {image.description}
-                          </p>
+                      <div className="px-4 sm:px-6 lg:px-8 pb-4 sm:pb-6 lg:pb-8 pt-0 flex items-end justify-between">
+                        <div>
+                          <h3 className="text-foreground font-medium text-lg lg:text-xl">
+                            {image.title}
+                          </h3>
+                          {image.description && (
+                            <p className="text-muted-foreground text-sm lg:text-base mt-1">
+                              {image.description}
+                            </p>
+                          )}
+                        </div>
+                        {image.prototypeUrl && (
+                          <a
+                            href={image.prototypeUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            onClick={(e) => e.stopPropagation()}
+                            className="flex items-center gap-2 px-4 py-2 bg-primary/10 hover:bg-primary/20 
+                                       border border-primary/30 rounded-full text-sm font-medium text-primary
+                                       transition-colors"
+                          >
+                            View Prototype
+                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                              <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+                              <polyline points="15 3 21 3 21 9" />
+                              <line x1="10" y1="14" x2="21" y2="3" />
+                            </svg>
+                          </a>
                         )}
                       </div>
 
