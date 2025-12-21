@@ -88,8 +88,8 @@ const Gallery3D: React.FC = () => {
         </div>
 
         {/* Horizontal Carousel */}
-        <div className="relative w-[100vw]">
-          <CarouselContent className="ml-0 pl-[calc((100vw-100%)/2)]">
+        <div className="relative -mx-4 sm:-mx-6 lg:-mx-8">
+          <CarouselContent className="-ml-4 lg:-ml-6">
             {galleryImages.map((image, index) => (
               <CarouselItem
                 key={index}
