@@ -65,7 +65,7 @@ const Gallery3D: React.FC = () => {
         className="w-full"
       >
         {/* Section Header with Navigation */}
-        <div className="mb-10 lg:mb-14 flex items-start justify-between">
+        <div className="mb-10 lg:mb-14 flex items-end justify-between">
           <div>
             <h2 className="text-[clamp(24px,4vw,40px)] font-medium text-foreground mb-3">
               Gallery
@@ -75,11 +75,11 @@ const Gallery3D: React.FC = () => {
             </p>
           </div>
 
-          {/* Navigation Arrows - Top Right with 12px gap */}
+          {/* Navigation Arrows - Bottom Right with 12px gap */}
           {galleryImages.length > 1 && (
             <div className="flex items-center gap-3">
-              <CarouselPrevious className="static translate-x-0 translate-y-0 bg-background/80 backdrop-blur-sm border-border/50 hover:bg-background" />
-              <CarouselNext className="static translate-x-0 translate-y-0 bg-background/80 backdrop-blur-sm border-border/50 hover:bg-background" />
+              <CarouselPrevious className="static translate-x-0 translate-y-0 h-10 w-10 bg-background/80 backdrop-blur-sm border-border/50 hover:bg-background [&_svg]:h-6 [&_svg]:w-6" />
+              <CarouselNext className="static translate-x-0 translate-y-0 h-10 w-10 bg-background/80 backdrop-blur-sm border-border/50 hover:bg-background [&_svg]:h-6 [&_svg]:w-6" />
             </div>
           )}
         </div>
