@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import Autoplay from "embla-carousel-autoplay";
+import { WheelGesturesPlugin } from "embla-carousel-wheel-gestures";
 import {
   Carousel,
   CarouselContent,
@@ -54,6 +55,7 @@ const Gallery3D: React.FC = () => {
         opts={{
           align: "start",
           loop: galleryImages.length > 1,
+          dragFree: true,
         }}
         plugins={[
           Autoplay({
@@ -61,6 +63,7 @@ const Gallery3D: React.FC = () => {
             stopOnInteraction: true,
             stopOnMouseEnter: true,
           }),
+          WheelGesturesPlugin(),
         ]}
         className="w-full"
       >
