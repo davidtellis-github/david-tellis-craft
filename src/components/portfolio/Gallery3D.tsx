@@ -14,6 +14,8 @@ import {
 
 // Import gallery images
 import galleryDjController from "@/assets/gallery-dj-controller.png";
+import gallerySynthUI from "@/assets/gallery-synth-ui.png";
+import galleryKeysAngled from "@/assets/gallery-keys-angled.png";
 
 interface GalleryImage {
   src: string;
@@ -27,7 +29,16 @@ const galleryImages: GalleryImage[] = [
     title: "DJ Controller",
     description: "3D product recreation in Figma",
   },
-  // Add more images here as you create them
+  {
+    src: gallerySynthUI,
+    title: "Synth UI",
+    description: "3D synthesizer recreation in Figma",
+  },
+  {
+    src: galleryKeysAngled,
+    title: "Keys Angled",
+    description: "3D keyboard keys detail in Figma",
+  },
 ];
 
 const Gallery3D: React.FC = () => {
