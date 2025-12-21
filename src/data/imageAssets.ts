@@ -3,7 +3,6 @@ import weddingverseFeatured from '@/assets/weddingverse-featured.png';
 import ideabaazFeatured from '@/assets/ideabaaz-featured.png';
 import futurcraftFeatured from '@/assets/futurcraft-featured.png';
 import turbocloudFeatured from '@/assets/turbocloud-featured.png';
-import lunaAiFeatured from '@/assets/luna-ai-featured.png';
 
 // Turbocloud project images
 import turbocloudDashboard1 from '@/assets/turbocloud-dashboard-1.jpg';
@@ -37,7 +36,6 @@ export const imageAssets: Record<string, string> = {
   'ideabaaz-featured.png': ideabaazFeatured,
   'futurcraft-featured.png': futurcraftFeatured,
   'turbocloud-featured.png': turbocloudFeatured,
-  'luna-ai-featured.png': lunaAiFeatured,
   'wedding-verse-design-system-1.png': designSystem1,
   'wedding-verse-design-system-2.png': designSystem2,
   'wedding-verse-design-system-3.png': designSystem3,
