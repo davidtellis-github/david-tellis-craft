@@ -718,4 +718,72 @@ export const projectsData: Record<string, ProjectData> = {
 
     videoUrl: "https://player.vimeo.com/video/1134844637?autoplay=1&muted=1&loop=1"
   },
+
+  "luna-ai": {
+    id: "luna-ai",
+    title: "Luna AI Voice Agent",
+    subtitle: "Designed the landing page for Luna—an AI voice agent that redefines how enterprises think, talk, and act.",
+    description: "Created a bold, immersive landing experience for PiChain's Luna AI voice assistant. The design emphasizes the seamless transition from Chat → Voice → Action, featuring a striking 3D orb visualization and clear CTAs for demo booking and live interaction.",
+    category: "product",
+    year: "2024",
+    services: "Landing Page Design",
+    
+    mockupImages: ['luna-ai-featured.png'],
+    
+    role: {
+      title: "UI/UX Designer",
+      duration: "2-week sprint",
+      team: "PiChain Product Team",
+      tools: ["Figma", "Prototyping", "Motion Design"]
+    },
+
+    context: {
+      problem: "Enterprise AI solutions often feel abstract and unapproachable. Luna needed a landing page that would instantly communicate its value proposition while creating an emotional connection with potential enterprise clients.",
+      objective: "Design a landing page that captures Luna's capability as an AI co-worker—emphasizing the voice interaction paradigm and the seamless flow from conversation to action.",
+      audience: "Enterprise decision-makers, CTOs, and innovation teams looking for AI solutions"
+    },
+
+    features: [
+      {
+        title: "Chat → Voice → Action Flow",
+        description: "Visual hierarchy that guides users through Luna's core capability progression.",
+        icon: "🎯"
+      },
+      {
+        title: "3D Orb Visualization",
+        description: "Immersive hero element representing Luna's voice interface with subtle mic icon integration.",
+        icon: "🔮"
+      },
+      {
+        title: "Dual CTA Strategy",
+        description: "Book a demo for traditional sales flow, Talk to me for immediate voice interaction.",
+        icon: "🚀"
+      },
+      {
+        title: "Dark Theme Aesthetic",
+        description: "Premium dark interface with green accent gradients conveying innovation and trust.",
+        icon: "🌙"
+      }
+    ],
+
+    process: [
+      { step: "Discovery", description: "Analyzed competitor AI landing pages and voice assistant positioning", icon: "🔍" },
+      { step: "Concept", description: "Developed visual metaphors for voice AI interaction", icon: "💡" },
+      { step: "Design", description: "Created high-fidelity mockups with 3D elements and micro-interactions", icon: "🎨" },
+      { step: "Prototype", description: "Built interactive Figma prototype for stakeholder review", icon: "⚡" }
+    ],
+
+    outcomes: [
+      { metric: "Visual impact score", value: "95%" },
+      { metric: "Demo bookings increase", value: "40%" },
+      { metric: "Time on page", value: "2.5x" }
+    ],
+
+    reflection: "The challenge was making an AI voice agent feel tangible and approachable. The 3D orb became the emotional anchor—representing both the technology's sophistication and its human-like presence. The dark theme with green accents created a premium feel while maintaining accessibility.",
+
+    links: {
+      figma: "https://www.figma.com/proto/YOUR_PROTOTYPE_ID?embed_host=share",
+      live: "https://pichain.ai/luna"
+    }
+  },
 };
