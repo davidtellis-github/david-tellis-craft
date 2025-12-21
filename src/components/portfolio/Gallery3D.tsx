@@ -50,32 +50,42 @@ const Gallery3D: React.FC = () => {
       id="gallery"
       className="py-[12vh] lg:py-[15vh]"
     >
-      {/* Section Header */}
-      <div className="mb-10 lg:mb-14">
-        <h2 className="text-[clamp(24px,4vw,40px)] font-medium text-foreground mb-3">
-          Gallery
-        </h2>
-        <p className="text-muted-foreground text-[clamp(14px,1.4vw,18px)] max-w-xl">
-          3D product recreations crafted in Figma — exploring form, light, and detail.
-        </p>
-      </div>
+      <Carousel
+        opts={{
+          align: "start",
+          loop: galleryImages.length > 1,
+        }}
+        plugins={[
+          Autoplay({
+            delay: 4000,
+            stopOnInteraction: true,
+            stopOnMouseEnter: true,
+          }),
+        ]}
+        className="w-full"
+      >
+        {/* Section Header with Navigation */}
+        <div className="mb-10 lg:mb-14 flex items-start justify-between">
+          <div>
+            <h2 className="text-[clamp(24px,4vw,40px)] font-medium text-foreground mb-3">
+              Gallery
+            </h2>
+            <p className="text-muted-foreground text-[clamp(14px,1.4vw,18px)] max-w-xl">
+              3D product recreations crafted in Figma — exploring form, light, and detail.
+            </p>
+          </div>
 
-      {/* Horizontal Carousel */}
-      <div className="relative -mx-4 sm:-mx-6 lg:-mx-8">
-        <Carousel
-          opts={{
-            align: "start",
-            loop: galleryImages.length > 1,
-          }}
-          plugins={[
-            Autoplay({
-              delay: 4000,
-              stopOnInteraction: true,
-              stopOnMouseEnter: true,
-            }),
-          ]}
-          className="w-full"
-        >
+          {/* Navigation Arrows - Top Right with 12px gap */}
+          {galleryImages.length > 1 && (
+            <div className="flex items-center gap-3">
+              <CarouselPrevious className="static translate-x-0 translate-y-0 bg-background/80 backdrop-blur-sm border-border/50 hover:bg-background" />
+              <CarouselNext className="static translate-x-0 translate-y-0 bg-background/80 backdrop-blur-sm border-border/50 hover:bg-background" />
+            </div>
+          )}
+        </div>
+
+        {/* Horizontal Carousel */}
+        <div className="relative -mx-4 sm:-mx-6 lg:-mx-8">
           <CarouselContent className="-ml-4 lg:-ml-6">
             {galleryImages.map((image, index) => (
               <CarouselItem
@@ -163,16 +173,8 @@ const Gallery3D: React.FC = () => {
               </CarouselItem>
             ))}
           </CarouselContent>
-
-          {/* Navigation Arrows - Only show if more than one image */}
-          {galleryImages.length > 1 && (
-            <>
-              <CarouselPrevious className="left-4 lg:left-8 bg-background/80 backdrop-blur-sm border-border/50 hover:bg-background" />
-              <CarouselNext className="right-4 lg:right-8 bg-background/80 backdrop-blur-sm border-border/50 hover:bg-background" />
-            </>
-          )}
-        </Carousel>
-      </div>
+        </div>
+      </Carousel>
     </section>
   );
 };
