@@ -26,6 +26,7 @@ interface GalleryImage {
   title: string;
   description?: string;
   prototypeUrl?: string;
+  isEmbed?: boolean; // Render as live embed instead of static image
 }
 
 const galleryImages: GalleryImage[] = [
@@ -37,9 +38,15 @@ const galleryImages: GalleryImage[] = [
   },
   {
     src: galleryDjController,
+    title: "DJ Controller",
+    description: "3D product recreation in Figma",
+  },
+  {
+    src: galleryDjController, // Fallback image
     title: "3D Orb - in Spline",
     description: "Interactive 3D orb created in Spline",
     prototypeUrl: "https://my.spline.design/orbitalbluestarcopy-nq984esCJzKdPTWNTKR2cD8d/",
+    isEmbed: true,
   },
   {
     src: gallerySynthUI,
@@ -113,101 +120,144 @@ const Gallery3D: React.FC = () => {
                 key={index}
                 className="pl-4 lg:pl-6 basis-[90vw] sm:basis-[85vw] lg:basis-[70vw] xl:basis-[60vw]"
               >
-                <Dialog>
-                  <DialogTrigger asChild>
-                    <div
-                      className="group cursor-pointer relative overflow-hidden rounded-xl lg:rounded-2xl 
-                                 bg-muted/30 border border-border/40 
-                                 transition-all duration-300 hover:border-border/80 hover:shadow-lg"
-                      onClick={() => setSelectedImage(image)}
-                    >
-                      {/* Image Container with fixed height */}
-                      <div className="p-4 sm:p-6 lg:p-8 h-[50vh] lg:h-[60vh]">
+                {image.isEmbed ? (
+                  // Embedded item - no dialog, directly interactive
+                  <div
+                    className="group relative overflow-hidden rounded-xl lg:rounded-2xl 
+                               bg-muted/30 border border-border/40 
+                               transition-all duration-300 hover:border-border/80 hover:shadow-lg"
+                  >
+                    {/* Interactive Badge */}
+                    <div className="absolute top-4 left-4 sm:top-6 sm:left-6 z-10">
+                      <div className="flex items-center gap-1.5 px-3 py-1.5 bg-primary/90 backdrop-blur-sm rounded-full text-xs font-medium text-primary-foreground">
+                        <span className="relative flex h-2 w-2">
+                          <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary-foreground opacity-75"></span>
+                          <span className="relative inline-flex rounded-full h-2 w-2 bg-primary-foreground"></span>
+                        </span>
+                        Interactive
+                      </div>
+                    </div>
+
+                    {/* Embedded Iframe Container */}
+                    <div className="p-4 sm:p-6 lg:p-8 h-[50vh] lg:h-[60vh]">
+                      <iframe
+                        src={image.prototypeUrl}
+                        className="w-full h-full rounded-lg border-0"
+                        title={image.title}
+                        allowFullScreen
+                      />
+                    </div>
+
+                    {/* Caption */}
+                    <div className="px-4 sm:px-6 lg:px-8 pb-4 sm:pb-6 lg:pb-8 pt-0">
+                      <h3 className="text-foreground font-medium text-lg lg:text-xl">
+                        {image.title}
+                      </h3>
+                      {image.description && (
+                        <p className="text-muted-foreground text-sm lg:text-base mt-1">
+                          {image.description}
+                        </p>
+                      )}
+                    </div>
+                  </div>
+                ) : (
+                  // Regular image item - with dialog lightbox
+                  <Dialog>
+                    <DialogTrigger asChild>
+                      <div
+                        className="group cursor-pointer relative overflow-hidden rounded-xl lg:rounded-2xl 
+                                   bg-muted/30 border border-border/40 
+                                   transition-all duration-300 hover:border-border/80 hover:shadow-lg"
+                        onClick={() => setSelectedImage(image)}
+                      >
+                        {/* Image Container with fixed height */}
+                        <div className="p-4 sm:p-6 lg:p-8 h-[50vh] lg:h-[60vh]">
+                          <img
+                            src={image.src}
+                            alt={image.title}
+                            className="w-full h-full object-cover rounded-lg transition-transform duration-500 
+                                       group-hover:scale-[1.02]"
+                          />
+                        </div>
+
+                        {/* Caption Overlay */}
+                        <div className="px-4 sm:px-6 lg:px-8 pb-4 sm:pb-6 lg:pb-8 pt-0 flex items-end justify-between">
+                          <div>
+                            <h3 className="text-foreground font-medium text-lg lg:text-xl">
+                              {image.title}
+                            </h3>
+                            {image.description && (
+                              <p className="text-muted-foreground text-sm lg:text-base mt-1">
+                                {image.description}
+                              </p>
+                            )}
+                          </div>
+                          {image.prototypeUrl && (
+                            <button
+                              onClick={(e) => handleOpenPrototype(e, image)}
+                              className="flex items-center gap-2 px-4 py-2 bg-primary/10 hover:bg-primary/20 
+                                         border border-primary/30 rounded-full text-sm font-medium text-primary
+                                         transition-colors"
+                            >
+                              View Prototype
+                              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                                <rect x="3" y="3" width="18" height="18" rx="2" ry="2" />
+                                <circle cx="8.5" cy="8.5" r="1.5" />
+                                <polyline points="21 15 16 10 5 21" />
+                              </svg>
+                            </button>
+                          )}
+                        </div>
+
+                        {/* Hover Expand Hint */}
+                        <div className="absolute top-4 right-4 sm:top-6 sm:right-6 
+                                        opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                          <div className="bg-background/80 backdrop-blur-sm rounded-full p-2 
+                                          border border-border/50">
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              width="18"
+                              height="18"
+                              viewBox="0 0 24 24"
+                              fill="none"
+                              stroke="currentColor"
+                              strokeWidth="2"
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              className="text-foreground"
+                            >
+                              <path d="M15 3h6v6" />
+                              <path d="M9 21H3v-6" />
+                              <path d="M21 3l-7 7" />
+                              <path d="M3 21l7-7" />
+                            </svg>
+                          </div>
+                        </div>
+                      </div>
+                    </DialogTrigger>
+
+                    {/* Lightbox Dialog */}
+                    <DialogContent className="max-w-[95vw] lg:max-w-[85vw] xl:max-w-[75vw] p-0 bg-background/95 backdrop-blur-md border-border/50">
+                      <div className="p-4 sm:p-6 lg:p-8">
                         <img
                           src={image.src}
                           alt={image.title}
-                          className="w-full h-full object-cover rounded-lg transition-transform duration-500 
-                                     group-hover:scale-[1.02]"
+                          className="w-full h-auto rounded-lg"
                         />
-                      </div>
-
-                      {/* Caption Overlay */}
-                      <div className="px-4 sm:px-6 lg:px-8 pb-4 sm:pb-6 lg:pb-8 pt-0 flex items-end justify-between">
-                        <div>
-                          <h3 className="text-foreground font-medium text-lg lg:text-xl">
+                        <div className="mt-4 lg:mt-6">
+                          <h3 className="text-foreground font-medium text-xl lg:text-2xl">
                             {image.title}
                           </h3>
                           {image.description && (
-                            <p className="text-muted-foreground text-sm lg:text-base mt-1">
+                            <p className="text-muted-foreground text-base lg:text-lg mt-2">
                               {image.description}
                             </p>
                           )}
                         </div>
-                        {image.prototypeUrl && (
-                          <button
-                            onClick={(e) => handleOpenPrototype(e, image)}
-                            className="flex items-center gap-2 px-4 py-2 bg-primary/10 hover:bg-primary/20 
-                                       border border-primary/30 rounded-full text-sm font-medium text-primary
-                                       transition-colors"
-                          >
-                            View Prototype
-                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                              <rect x="3" y="3" width="18" height="18" rx="2" ry="2" />
-                              <circle cx="8.5" cy="8.5" r="1.5" />
-                              <polyline points="21 15 16 10 5 21" />
-                            </svg>
-                          </button>
-                        )}
                       </div>
-
-                      {/* Hover Expand Hint */}
-                      <div className="absolute top-4 right-4 sm:top-6 sm:right-6 
-                                      opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                        <div className="bg-background/80 backdrop-blur-sm rounded-full p-2 
-                                        border border-border/50">
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            width="18"
-                            height="18"
-                            viewBox="0 0 24 24"
-                            fill="none"
-                            stroke="currentColor"
-                            strokeWidth="2"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            className="text-foreground"
-                          >
-                            <path d="M15 3h6v6" />
-                            <path d="M9 21H3v-6" />
-                            <path d="M21 3l-7 7" />
-                            <path d="M3 21l7-7" />
-                          </svg>
-                        </div>
-                      </div>
-                    </div>
-                  </DialogTrigger>
-
-                  {/* Lightbox Dialog */}
-                  <DialogContent className="max-w-[95vw] lg:max-w-[85vw] xl:max-w-[75vw] p-0 bg-background/95 backdrop-blur-md border-border/50">
-                    <div className="p-4 sm:p-6 lg:p-8">
-                      <img
-                        src={image.src}
-                        alt={image.title}
-                        className="w-full h-auto rounded-lg"
-                      />
-                      <div className="mt-4 lg:mt-6">
-                        <h3 className="text-foreground font-medium text-xl lg:text-2xl">
-                          {image.title}
-                        </h3>
-                        {image.description && (
-                          <p className="text-muted-foreground text-base lg:text-lg mt-2">
-                            {image.description}
-                          </p>
-                        )}
-                      </div>
-                    </div>
-                  </DialogContent>
-                </Dialog>
+                    </DialogContent>
+                  </Dialog>
+                )}
               </CarouselItem>
             ))}
           </CarouselContent>
