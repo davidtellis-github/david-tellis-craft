@@ -236,22 +236,22 @@ const Gallery3D: React.FC = () => {
                       </div>
                     </DialogTrigger>
 
-                    {/* Lightbox Dialog - Square Aspect Ratio */}
-                    <DialogContent className="max-w-[90vmin] w-[90vmin] h-[90vmin] p-0 bg-background/95 backdrop-blur-md border-border/50">
-                      <div className="p-4 sm:p-6 lg:p-8 h-full flex flex-col">
-                        <div className="flex-1 overflow-hidden">
+                    {/* Lightbox Dialog - Responsive Aspect Ratios */}
+                    <DialogContent className="w-[92vw] h-[85vh] sm:w-[85vw] sm:h-[80vh] lg:w-[75vmin] lg:h-[75vmin] max-w-none p-0 bg-background/95 backdrop-blur-md border-border/50">
+                      <div className="p-3 sm:p-5 lg:p-6 h-full flex flex-col">
+                        <div className="flex-1 min-h-0 overflow-hidden flex items-center justify-center">
                           <img
                             src={image.src}
                             alt={image.title}
-                            className="w-full h-full object-contain rounded-lg"
+                            className="max-w-full max-h-full object-contain rounded-lg"
                           />
                         </div>
-                        <div className="mt-4 flex-shrink-0">
-                          <h3 className="text-foreground font-medium text-xl lg:text-2xl">
+                        <div className="mt-3 sm:mt-4 flex-shrink-0">
+                          <h3 className="text-foreground font-medium text-lg sm:text-xl lg:text-2xl">
                             {image.title}
                           </h3>
                           {image.description && (
-                            <p className="text-muted-foreground text-base lg:text-lg mt-2">
+                            <p className="text-muted-foreground text-sm sm:text-base lg:text-lg mt-1 sm:mt-2">
                               {image.description}
                             </p>
                           )}
