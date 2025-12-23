@@ -236,15 +236,17 @@ const Gallery3D: React.FC = () => {
                       </div>
                     </DialogTrigger>
 
-                    {/* Lightbox Dialog */}
-                    <DialogContent className="max-w-[95vw] lg:max-w-[85vw] xl:max-w-[75vw] p-0 bg-background/95 backdrop-blur-md border-border/50">
-                      <div className="p-4 sm:p-6 lg:p-8">
-                        <img
-                          src={image.src}
-                          alt={image.title}
-                          className="w-full h-auto rounded-lg"
-                        />
-                        <div className="mt-4 lg:mt-6">
+                    {/* Lightbox Dialog - Square Aspect Ratio */}
+                    <DialogContent className="max-w-[90vmin] w-[90vmin] h-[90vmin] p-0 bg-background/95 backdrop-blur-md border-border/50">
+                      <div className="p-4 sm:p-6 lg:p-8 h-full flex flex-col">
+                        <div className="flex-1 overflow-hidden">
+                          <img
+                            src={image.src}
+                            alt={image.title}
+                            className="w-full h-full object-contain rounded-lg"
+                          />
+                        </div>
+                        <div className="mt-4 flex-shrink-0">
                           <h3 className="text-foreground font-medium text-xl lg:text-2xl">
                             {image.title}
                           </h3>
