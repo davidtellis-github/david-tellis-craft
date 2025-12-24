@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 interface TimelineNavProps {
   activeCategory: string;
@@ -38,6 +38,33 @@ const TimelineNav: React.FC<TimelineNavProps> = ({
     id: 'ui-designs-gallery',
     name: 'UI Designs'
   }];
+
+  const [activeSection, setActiveSection] = useState('projects');
+
+  useEffect(() => {
+    const handleScroll = () => {
+      let current = 'projects';
+
+      for (const s of sections) {
+        const el = document.getElementById(s.id);
+        if (el) {
+          const rect = el.getBoundingClientRect();
+          if (rect.top <= window.innerHeight * 0.3 && rect.bottom >= 0) {
+            current = s.id;
+            break;
+          }
+        }
+      }
+
+      setActiveSection(current);
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    handleScroll();
+
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   const handleCategoryClick = (category: string) => {
     onCategoryChange(category);
   };
@@ -72,21 +99,17 @@ const TimelineNav: React.FC<TimelineNavProps> = ({
             text-[clamp(12px,1.6vmin,16px)]
           ">
           {sections.map(section => <li key={section.id}>
-              <button onClick={() => handleSectionClick(section.id)} className="transition-colors hover:text-foreground cursor-pointer">
+              <button 
+                onClick={() => handleSectionClick(section.id)} 
+                className={`transition-colors hover:text-foreground cursor-pointer ${
+                  activeSection === section.id ? "text-foreground font-normal" : ""
+                }`}
+              >
                 {section.name}
               </button>
             </li>)}
         </ul>
 
-        {/* --- Category Filters --- */}
-        <ul className="
-            space-y-0
-            text-muted-foreground
-            text-[clamp(12px,1.6vmin,16px)]
-          ">
-          
-          {allCategories.map(category => {})}
-        </ul>
       </div>
     </nav>;
 };
