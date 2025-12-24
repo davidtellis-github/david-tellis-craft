@@ -53,58 +53,68 @@ const SideNav: React.FC = () => {
   return (
     <nav
       aria-label="Section navigation"
-      className="flex flex-col hidden lg:block sticky top-0 h-svh w-[min(18rem,24vw)]  "
+      className="flex flex-col hidden lg:block sticky top-0 h-svh w-[min(18rem,24vw)]"
     >
-      <div className="relative h-full flex flex-col gap-[14vh]">
-        {/* --- Animated Logo --- */}
-       <Link
-  to="/"
-  aria-label="Home"
-  className="pt-10 leading-none select-none text-foreground 
-             text-[clamp(20px,4vmin,32px)]  font-normal flex group relative"
->
-  {/* Always-visible "D" */}
-    <span className="inline-block">D</span>
-  <span
-    className="
-      inline-block opacity-0
-      group-hover:animate-spreadOut
-      group-hover:opacity-100
-    "
-  >
-    avid Tellis
-  </span>
-</Link>
+      <div className="relative h-full flex flex-col justify-between pb-10">
+        <div className="flex flex-col gap-[14vh]">
+          {/* --- Animated Logo --- */}
+          <Link
+            to="/"
+            aria-label="Home"
+            className="pt-10 leading-none select-none text-foreground 
+                       text-[clamp(20px,4vmin,32px)] font-normal flex group relative"
+          >
+            {/* Always-visible "D" */}
+            <span className="inline-block">D</span>
+            <span
+              className="
+                inline-block opacity-0
+                group-hover:animate-spreadOut
+                group-hover:opacity-100
+              "
+            >
+              avid Tellis
+            </span>
+          </Link>
 
-        {/* --- Nav Menu --- */}
-        <ul
-          className="
-        
-            space-y-0 
-            text-muted-foreground
-            text-[clamp(12px,1.6vmin,16px)]
-          "
+          {/* --- Nav Menu --- */}
+          <ul
+            className="
+              space-y-0 
+              text-muted-foreground
+              text-[clamp(12px,1.6vmin,16px)]
+            "
+          >
+            {sections.map((s) => (
+              <li key={s.id}>
+                <a
+                  href={`#${s.id}`}
+                  onClick={handleClick(s.id)}
+                  className={`
+                    transition-colors 
+                    hover:text-foreground 
+                    ${
+                      activeSection === s.id
+                        ? "text-foreground font-normal"
+                        : ""
+                    }
+                  `}
+                >
+                  {s.label}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        {/* --- All Work CTA --- */}
+        <Link
+          to="/portfolio"
+          className="text-muted-foreground text-[clamp(12px,1.6vmin,16px)] 
+                     hover:text-foreground transition-colors duration-300"
         >
-          {sections.map((s) => (
-            <li key={s.id}>
-              <a
-                href={`#${s.id}`}
-                onClick={handleClick(s.id)}
-                className={`
-                  transition-colors 
-                  hover:text-foreground 
-                  ${
-                    activeSection === s.id
-                      ? "text-foreground font-normal"
-                      : ""
-                  }
-                `}
-              >
-                {s.label}
-              </a>
-            </li>
-          ))}
-        </ul>
+          All work
+        </Link>
       </div>
     </nav>
   );
