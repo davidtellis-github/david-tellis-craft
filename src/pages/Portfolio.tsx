@@ -65,32 +65,23 @@ const Portfolio = () => {
             
 
             {/* Project Timeline */}
-            <div className="w-full mb-20">
+            <div id="projects" className="w-full mb-20 scroll-mt-20">
               <ProjectTimeline 
                 activeCategory={activeCategory}
                 onProjectHover={setHoveredProject}
                 hoveredCategory={hoveredCategory}
               />
             </div>
-             {/* Featured Video
-             <div className="relative min-h-screen flex flex-col justify-start py-[20vh]">
-              <div className="relative overflow-hidden rounded-2xl">
-                <div className="relative aspect-video">
-                  <video 
-                    src="https://gksxdznfdxrsjqkuzxmg.supabase.co/storage/v1/object/public/project-videos/keyboard%202.mp4"
-                    className="w-full h-full object-cover rounded-2xl"
-                    controls
-                    poster={w1}
-                  />
-                </div>
-              </div>
-            </div> */}
 
             {/* 3D Product Gallery */}
-            <Gallery3D />
+            <div id="3d-gallery" className="scroll-mt-20">
+              <Gallery3D />
+            </div>
 
             {/* UI Designs Masonry Gallery */}
-            <UIMasonryGallery />
+            <div id="ui-designs-gallery" className="scroll-mt-20">
+              <UIMasonryGallery />
+            </div>
 
            
 

@@ -14,23 +14,28 @@ const TimelineNav: React.FC<TimelineNavProps> = ({
   hoveredProject,
   onCategoryHover
 }) => {
-  // Define fixed categories
+  // Define fixed categories for project filtering
   const allCategories = [
     { id: 'all', name: 'All', slug: 'all' },
     { id: 'product', name: 'Product', slug: 'product' },
     { id: 'concepts', name: 'Concepts', slug: 'concepts' },
-    { id: 'ui-designs', name: 'UI Designs', slug: 'ui-designs' }
   ];
 
-  const handleClick = (category: string) => {
+  // Section navigation items
+  const sections = [
+    { id: 'projects', name: 'Projects' },
+    { id: '3d-gallery', name: '3D Gallery' },
+    { id: 'ui-designs-gallery', name: 'UI Designs' },
+  ];
+
+  const handleCategoryClick = (category: string) => {
     onCategoryChange(category);
-    
-    // Scroll to UI Designs gallery if that category is clicked
-    if (category === 'ui-designs') {
-      const gallerySection = document.getElementById('ui-designs-gallery');
-      if (gallerySection) {
-        gallerySection.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      }
+  };
+
+  const handleSectionClick = (sectionId: string) => {
+    const section = document.getElementById(sectionId);
+    if (section) {
+      section.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
   };
 
@@ -60,18 +65,41 @@ const TimelineNav: React.FC<TimelineNavProps> = ({
     avid Tellis
   </span>
 </Link>
+        {/* --- Section Navigation --- */}
         <ul
           className="
-            sticky z-99
             space-y-0
             text-muted-foreground
             text-[clamp(12px,1.6vmin,16px)]
           "
         >
+          {sections.map((section) => (
+            <li key={section.id}>
+              <button
+                onClick={() => handleSectionClick(section.id)}
+                className="transition-colors hover:text-foreground cursor-pointer"
+              >
+                {section.name}
+              </button>
+            </li>
+          ))}
+        </ul>
+
+        {/* --- Category Filters --- */}
+        <ul
+          className="
+            space-y-0
+            text-muted-foreground
+            text-[clamp(12px,1.6vmin,16px)]
+          "
+        >
+          <li className="text-foreground/50 text-[clamp(10px,1.2vmin,12px)] uppercase tracking-wider mb-2">
+            Filter by
+          </li>
           {allCategories.map((category) => (
             <li key={category.slug}>
               <button
-                onClick={() => handleClick(category.slug)}
+                onClick={() => handleCategoryClick(category.slug)}
                 onMouseEnter={() => onCategoryHover(category.slug)}
                 onMouseLeave={() => onCategoryHover(null)}
                 className={`
