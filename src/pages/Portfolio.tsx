@@ -4,6 +4,7 @@ import { ArrowLeft } from "lucide-react";
 import ProjectTimeline from "@/components/portfolio/ProjectTimeline";
 import TimelineNav from "@/components/portfolio/TimelineNav";
 import UIMasonryGallery from "@/components/portfolio/UIMasonryGallery";
+import Gallery3D from "@/components/portfolio/Gallery3D";
 import portfolioGallery from "@/assets/portfolio-gallery.png";
 
 
@@ -84,6 +85,9 @@ const Portfolio = () => {
                 </div>
               </div>
             </div> */}
+
+            {/* 3D Product Gallery */}
+            <Gallery3D />
 
             {/* UI Designs Masonry Gallery */}
             <UIMasonryGallery />
