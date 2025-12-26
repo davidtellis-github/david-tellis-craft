@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams, Link, useNavigate } from "react-router-dom";
 import { ArrowLeft, Play, ExternalLink, Figma, Smartphone, CheckCircle2, AlertCircle } from "lucide-react";
-import { Dialog, DialogContent } from "@/components/ui/dialog";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 import ProjectNav from "@/components/portfolio/ProjectNav";
 import { projectsData } from "@/data/projectData";
 import { useProjectAssets } from "@/hooks/useProjectAssets";
@@ -806,16 +806,14 @@ const ProjectDetails: React.FC = () => {
       {/* Ideabaaz Prototype Modal */}
       <Dialog open={prototypeOpen} onOpenChange={setPrototypeOpen}>
         <DialogContent className="max-w-[95vw] w-full h-[90vh] p-0 bg-background border-border/50 overflow-hidden flex flex-col">
-          <div className="flex items-center justify-between px-4 sm:px-6 py-4 border-b border-border/50 bg-background flex-shrink-0">
-            <div>
-              <h3 className="text-foreground font-medium text-lg">
-                Ideabaaz — Interactive Prototype
-              </h3>
-              <p className="text-muted-foreground text-sm">
-                Explore the full platform experience
-              </p>
-            </div>
-          </div>
+          <DialogHeader className="px-4 sm:px-6 py-4 border-b border-border/50 bg-background flex-shrink-0">
+            <DialogTitle className="text-foreground font-medium text-lg">
+              Ideabaaz — Interactive Prototype
+            </DialogTitle>
+            <DialogDescription className="text-muted-foreground text-sm">
+              Explore the full platform experience
+            </DialogDescription>
+          </DialogHeader>
           <div className="flex-1 w-full bg-muted/20">
             <iframe
               src="https://embed.figma.com/proto/Ow4QpYUgooZfFeaK3PqNzi/UI?node-id=559-14557&viewport=316%2C209%2C0.16&scaling=min-zoom&content-scaling=fixed&starting-point-node-id=559%3A14557&embed-host=share"
