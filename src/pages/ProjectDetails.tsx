@@ -457,10 +457,10 @@ const ProjectDetails: React.FC = () => {
                     <p className="text-sm text-muted-foreground leading-relaxed">Structured profiles and guided flows reduced uncertainty, increasing booking intent</p>
                   </div>
                 </div>
-              </div> : <div className="space-y-3">
-                {project.outcomes.map((outcome, index) => <div key={index} className="flex justify-between items-center py-4 border-b border-border/20">
-                    <span className="text-base font-light">{outcome.metric}</span>
-                    <span className="text-base font-mono font-normal">{outcome.value}</span>
+              </div> : <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {project.outcomes.map((outcome, index) => <div key={index} className="bg-gradient-to-br from-primary/5 to-primary/10 rounded-xl p-6 border border-primary/20 text-center">
+                    <span className="block text-3xl md:text-4xl font-mono font-normal text-primary mb-2">{outcome.value}</span>
+                    <span className="text-sm text-muted-foreground font-light">{outcome.metric}</span>
                   </div>)}
               </div>}
           </div>
