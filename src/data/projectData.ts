@@ -72,6 +72,39 @@ export interface ProjectData {
   mockupImages?: string[];
   
   images?: string[];
+
+  // Ideabaaz narrative case study structure
+  caseStudy?: {
+    theContext: {
+      hook: string;
+      intro: string;
+    };
+    theFriction: {
+      headline: string;
+      intro: string;
+      designChallenge: string;
+      personas: Array<{ type: string; need: string }>;
+    };
+    theStrategy: {
+      headline: string;
+      intro: string;
+      approaches: Array<{ persona: string; approach: string }>;
+    };
+    theCockpit: {
+      headline: string;
+      intro: string;
+      features: Array<{ title: string; description: string }>;
+      keyDesignMove: string;
+    };
+    theTitans: {
+      headline: string;
+      intro: string;
+    };
+    theImpact: {
+      headline: string;
+      outcomes: string[];
+    };
+  };
 }
 
 export const projectsData: Record<string, ProjectData> = {
@@ -281,8 +314,8 @@ export const projectsData: Record<string, ProjectData> = {
   "ideabaaz": {
     id: "ideabaaz",
     title: "Ideabaaz",
-    subtitle: "A unified startup ecosystem built around a nationally televised show on ZeeTV—connecting founders, investors, mentors, and solution providers into a single product experience.",
-    description: "Led end-to-end product strategy, UX, UI, system design, and research, transforming a fragmented ecosystem into a structured, trustworthy platform for discovery, funding readiness, and expert support.",
+    subtitle: "Building the Digital Green Room for India's Next Unicorns.",
+    description: "Product Designer & Interaction Designer for the official digital partner of ZeeTV & Zee5's startup reality revolution.",
     category: "concepts",
     year: "Q1 2024 (Ongoing)",
     services: "Product Design and Strategy",
@@ -290,58 +323,102 @@ export const projectsData: Record<string, ProjectData> = {
     mockupImages: ['ideabaaz-featured.png', 'ideabaaz-laptop-mockup.png'],
     
     role: {
-      title: "Lead Product Designer (Strategy → UX → UI → Systems)",
+      title: "Product Designer & Interaction Designer",
       duration: "Q1 2024 – Ongoing",
-      team: "Turbostart • Show Producers • Engineering",
+      team: "Turbostart • House of Cheer • ZeeTV/Zee5 • Engineering",
       tools: ["Figma", "FigJam", "User Research", "Stakeholder Facilitation"]
     },
 
+    // Narrative-driven case study structure
+    caseStudy: {
+      // 01. The Context (The Hook)
+      theContext: {
+        hook: "Everyone watches the pitch on TV, but nobody sees the chaos behind the scenes.",
+        intro: "Ideabaaz isn't just a website; it's the official digital partner for ZeeTV & Zee5's startup reality revolution. Backed by giants like Turbostart and House of Cheer, the goal was ambitious: take the high-stakes energy of a televised pitch and digitize it into a functional platform."
+      },
+
+      // 02. The Problem (The Friction)
+      theFriction: {
+        headline: "The \"Scavenger Hunt\" Issue",
+        intro: "The Indian startup ecosystem is fragmented. Founders are running around trying to find capital, mentors are hidden behind gatekeepers, and service providers (legal, tech, branding) are scattered.",
+        designChallenge: "How do we build a Single Pane of Glass that serves three distinct masters without looking cluttered?",
+        personas: [
+          { type: "Founders", need: "Needing funding & mentorship" },
+          { type: "Investors", need: "Needing high-potential deal flow" },
+          { type: "Partners", need: "Needing to offer B2B solutions" }
+        ]
+      },
+
+      // 03. The Strategy (The Fix)
+      theStrategy: {
+        headline: "From Chaos to Clarity",
+        intro: "We didn't just \"design pages\"; we created an ecosystem. The strategy was to gamify the serious business of fundraising.",
+        approaches: [
+          { persona: "For Founders", approach: "We turned \"begging for money\" into a streamlined \"Application & Growth Tracking\" dashboard." },
+          { persona: "For Investors", approach: "We turned \"due diligence\" into a browsing experience, similar to shopping for high-value assets." }
+        ]
+      },
+
+      // 04. The Solution: The "Cockpit" Dashboard
+      theCockpit: {
+        headline: "Designing the Founder's Command Center",
+        intro: "The dashboard had to be the hero. A founder logs in and needs to see their entire universe at a glance.",
+        features: [
+          { 
+            title: "Status at a Glance", 
+            description: "We introduced a modular card system. \"Apply for Funding,\" \"Mentorship,\" and \"Service Support\" are front and center—no digging through menus." 
+          },
+          { 
+            title: "Service Marketplace", 
+            description: "We treated B2B services (Legal, Branding, Tech) like an App Store. Clean, card-based UI allows founders to \"shop\" for verified solution providers like Alt Dash or Design Delta." 
+          }
+        ],
+        keyDesignMove: "We utilized a dark-mode aesthetic with high-contrast orange accents (brand colors) to maintain that \"Premium/Media\" vibe while keeping the data legible."
+      },
+
+      // 05. Feature Spotlight: The "Titan" Connection
+      theTitans: {
+        headline: "Meet the Titans",
+        intro: "The platform leverages celebrity investors (\"Titans\"). We needed a way to showcase them that felt authoritative yet accessible. We used high-fidelity profile cards for mentors like Rishabh Mariwala and Shaili Chopra, making them feel like unlockable characters in the startup journey."
+      },
+
+      // 06. The Impact (The Receipt)
+      theImpact: {
+        headline: "Ready for Primetime",
+        outcomes: [
+          "Successfully delivered a platform that handles the traffic of a national TV audience.",
+          "Unified Ecosystem: Successfully merged Funding, Mentorship, and Services into one URL.",
+          "Scalable Architecture: The modular design allows for new \"Seasons\" and partners to be added without breaking the UX."
+        ]
+      }
+    },
+
     context: {
-      problem: "Indian founders lack a single, credible platform that connects them to capital, mentors, and vetted solution providers. Most rely on fragmented WhatsApp groups, cold outreach, or referral loops—leading to slow and unreliable vendor discovery, poor quality of responses, no structured visibility into investors or mentors, high drop-offs due to mistrust and unclear next steps, and a mismatch between founder needs and available ecosystem support. With the Ideabaaz TV show bringing national attention but no digital infrastructure, the experience had to scale beyond entertainment into a real startup growth engine.",
-      objective: "A centralized platform connecting founders with investors, mentors, and solution providers—designed with a structured startup profile that drives AI-enabled matching, a multi-role dashboard (founder / investor / mentor / provider), service and vendor discovery workflows similar to a curated marketplace, contextual tasks for funding readiness, deck support, legal, GTM, and branding, a transparent and trackable communication system, and a visual identity aligned with the televised brand style. The result: a predictable journey from idea → funding readiness → expert support → visibility on the Ideabaaz platform.",
+      problem: "The Indian startup ecosystem is fragmented. Founders are running around trying to find capital, mentors are hidden behind gatekeepers, and service providers (legal, tech, branding) are scattered. The design challenge: How do we build a Single Pane of Glass that serves three distinct masters without looking cluttered?",
+      objective: "A unified digital platform connecting founders with investors, mentors, and solution providers—designed with a \"cockpit\" dashboard that gives founders visibility into their entire startup journey at a glance.",
       audience: "Founders, investors, mentors, and solution providers in India's startup ecosystem"
     },
 
     features: [
       {
-        title: "For Founders: Guided Onboarding & Profile",
-        description: "Structured startup profile creation with progressive profiling that drives AI-enabled matching with the right investors and mentors.",
-        icon: "🚀"
-      },
-      {
-        title: "For Founders: Curated Services",
-        description: "Access to vetted services including pitch review, GTM strategy, legal support, design, and business strategy.",
-        icon: "📋"
-      },
-      {
-        title: "For Founders: Vendor Discovery",
-        description: "Find solution providers with credibility signals, track records, and transparent service offerings.",
-        icon: "🔍"
-      },
-      {
-        title: "For Founders: Stage-Based Dashboards",
-        description: "Personalized dashboards showing tasks, milestones, and next steps based on startup stage.",
+        title: "Modular Card System",
+        description: "\"Apply for Funding,\" \"Mentorship,\" and \"Service Support\" are front and center—no digging through menus.",
         icon: "📊"
       },
       {
-        title: "For Investors: Startup Scouting",
-        description: "Dashboard with filters based on sector, traction, and founder type for efficient startup discovery.",
-        icon: "💼"
+        title: "Service Marketplace",
+        description: "B2B services treated like an App Store. Clean, card-based UI allows founders to \"shop\" for verified solution providers.",
+        icon: "🛍️"
       },
       {
-        title: "For Investors: Structured Profiles",
-        description: "Comparable founder data with standardized profiles enabling quicker assessment and decision-making.",
-        icon: "📄"
+        title: "Titan Profiles",
+        description: "High-fidelity profile cards for celebrity investors, making them feel like unlockable characters in the startup journey.",
+        icon: "⭐"
       },
       {
-        title: "For Mentors: Expertise-Based Discovery",
-        description: "Searchable profiles showcasing expertise with booking workflows for founder sessions.",
-        icon: "🎓"
-      },
-      {
-        title: "For Solution Providers: Managed Listings",
-        description: "Service cards with track record, testimonials, and offering clarity. Access to verified founder leads.",
-        icon: "🤝"
+        title: "Stage-Based Dashboards",
+        description: "Personalized dashboards showing tasks, milestones, and next steps based on startup stage.",
+        icon: "📈"
       }
     ],
 
@@ -353,7 +430,7 @@ export const projectsData: Record<string, ProjectData> = {
       },
       { 
         step: "Ecosystem Mapping", 
-        description: "Mapped the ecosystem across all four user types to identify connection opportunities.", 
+        description: "Mapped the ecosystem across all user types to identify connection opportunities.", 
         icon: "🗺️" 
       },
       { 
@@ -362,19 +439,9 @@ export const projectsData: Record<string, ProjectData> = {
         icon: "📐" 
       },
       { 
-        step: "User Flow Design", 
-        description: "Created flows for onboarding, matching, and service booking across all user types.", 
-        icon: "🔄" 
-      },
-      { 
         step: "Visual System Design", 
-        description: "Designed dashboards and cards using a consistent visual system aligned with Ideabaaz branding.", 
+        description: "Dark-mode aesthetic with high-contrast orange accents aligned with TV show branding.", 
         icon: "🎨" 
-      },
-      { 
-        step: "Prototype Validation", 
-        description: "Validated prototypes with stakeholders and early user groups, iterating on copy and trust elements.", 
-        icon: "✅" 
       },
       { 
         step: "High-Fidelity Production", 
@@ -390,7 +457,7 @@ export const projectsData: Record<string, ProjectData> = {
     ],
 
     iterations: {
-      intro: "Working within significant constraints shaped the platform's approach: limited engineering bandwidth required modular, low-complexity workflows; multiple user archetypes with competing goals (founders vs providers vs investors); high emotional stakes with founders making decisions during financial pressure; a fragmented ecosystem where users mistrusted unknown vendors; AI recommendation logic needing clarity despite early backend limitations; and brand expectation mismatch between TV show and digital platform sophistication.",
+      intro: "Working within significant constraints shaped the platform's approach: limited engineering bandwidth, multiple user archetypes with competing goals, and the need to bridge TV show entertainment with digital platform utility.",
       decisions: [
         {
           challenge: "Fragmented Discovery (Before)",
@@ -412,7 +479,7 @@ export const projectsData: Record<string, ProjectData> = {
       images: []
     },
 
-    reflection: "Marketplace ecosystems succeed only when trust is designed, not assumed. Multi-role platforms require ruthless prioritization to avoid complexity. Early alignment with business and show production teams prevented rework. Clear UX writing was as critical as UI decisions for user confidence. Building for emotionally stressed founders demands empathy and guidance-driven UX.",
+    reflection: "Marketplace ecosystems succeed only when trust is designed, not assumed. Multi-role platforms require ruthless prioritization to avoid complexity.",
 
     links: {
       figma: "https://www.figma.com/proto/Ow4QpYUgooZfFeaK3PqNzi/UI?node-id=559-14557&viewport=316%2C209%2C0.16&t=yTUSZ9k26SoeAo91-0&scaling=min-zoom&content-scaling=fixed&starting-point-node-id=559%3A14557&show-proto-sidebar=1"
