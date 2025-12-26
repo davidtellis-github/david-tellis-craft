@@ -409,13 +409,7 @@ export const projectsData: Record<string, ProjectData> = {
         }
       ],
       note: "The transformation created a scalable ecosystem model aligning with Ideabaaz's TV audience growth—enabling a trusted marketplace for services, funding readiness, and mentorship.",
-      images: [
-        'ideabaaz-dashboard.png',
-        'ideabaaz-documents.png',
-        'ideabaaz-mentor-profile.png',
-        'ideabaaz-startup-team.png',
-        'ideabaaz-startup-pitch.png'
-      ]
+      images: []
     },
 
     reflection: "Marketplace ecosystems succeed only when trust is designed, not assumed. Multi-role platforms require ruthless prioritization to avoid complexity. Early alignment with business and show production teams prevented rework. Clear UX writing was as critical as UI decisions for user confidence. Building for emotionally stressed founders demands empathy and guidance-driven UX.",
