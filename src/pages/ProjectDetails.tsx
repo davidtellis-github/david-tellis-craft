@@ -225,22 +225,35 @@ const ProjectDetails: React.FC = () => {
                 </div>
               </div>}
 
-            {/* Embedded Metrics - Only for wedding-verse */}
-            {project.id === "wedding-verse" && <div className="mt-20">
+            {/* Embedded Metrics - Wedding Verse and Ideabaaz */}
+            {(project.id === "wedding-verse" || project.id === "ideabaaz") && <div className="mt-20">
                 <h2 className="text-2xl font-light mb-4">Impact Metrics</h2>
                 <p className="text-muted-foreground font-light mb-12 max-w-2xl">
                   Measurable improvements that demonstrate real value delivered to users and business.
                 </p>
-                <MetricsHighlight metrics={[{
-                label: "faster vendor discovery",
-                value: "63%"
-              }, {
-                label: "higher vendor response rate",
-                value: "42%"
-              }, {
-                label: "better Week 1 retention",
-                value: "28%"
-              }]} />
+                <MetricsHighlight metrics={
+                  project.id === "wedding-verse" 
+                    ? [{
+                        label: "faster vendor discovery",
+                        value: "63%"
+                      }, {
+                        label: "higher vendor response rate",
+                        value: "42%"
+                      }, {
+                        label: "better Week 1 retention",
+                        value: "28%"
+                      }]
+                    : [{
+                        label: "faster vendor & service discovery",
+                        value: "60%"
+                      }, {
+                        label: "higher vendor response rate",
+                        value: "45%"
+                      }, {
+                        label: "improvement in founder retention",
+                        value: "30%"
+                      }]
+                } />
               </div>}
         </section>
 
@@ -274,6 +287,27 @@ const ProjectDetails: React.FC = () => {
                   <li className="flex items-start gap-3">
                     <CheckCircle2 className="w-5 h-5 text-primary mt-0.5 flex-shrink-0" />
                     <span className="text-base font-light leading-relaxed">Led user research, journey mapping, prototyping, and validation through launch</span>
+                  </li>
+                </ul> : project.id === "ideabaaz" ? <ul className="space-y-3">
+                  <li className="flex items-start gap-3">
+                    <CheckCircle2 className="w-5 h-5 text-primary mt-0.5 flex-shrink-0" />
+                    <span className="text-base font-light leading-relaxed">Led multi-persona platform strategy for 4 distinct user types (founders, investors, mentors, providers)</span>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <CheckCircle2 className="w-5 h-5 text-primary mt-0.5 flex-shrink-0" />
+                    <span className="text-base font-light leading-relaxed">Designed ecosystem architecture: profiles → discovery → engagement → trust</span>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <CheckCircle2 className="w-5 h-5 text-primary mt-0.5 flex-shrink-0" />
+                    <span className="text-base font-light leading-relaxed">Created structured startup profiling system for AI-enabled matching</span>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <CheckCircle2 className="w-5 h-5 text-primary mt-0.5 flex-shrink-0" />
+                    <span className="text-base font-light leading-relaxed">Navigated constraints: limited engineering bandwidth, competing stakeholder goals</span>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <CheckCircle2 className="w-5 h-5 text-primary mt-0.5 flex-shrink-0" />
+                    <span className="text-base font-light leading-relaxed">Aligned digital platform with TV show branding and audience expectations</span>
                   </li>
                 </ul> : <ul className="space-y-2 text-base font-light leading-relaxed">
                   <li>Led end-to-end product design strategy</li>
@@ -330,6 +364,12 @@ const ProjectDetails: React.FC = () => {
                   <p className="text-sm font-medium text-primary mb-2">Core Innovation</p>
                   <p className="text-sm text-muted-foreground leading-relaxed">
                     Transformed chaotic vendor search into a calm, personalized experience that respects emotional decision-making patterns.
+                  </p>
+                </div>}
+              {project.id === "ideabaaz" && <div className="bg-primary/5 border border-primary/10 rounded-xl p-6">
+                  <p className="text-sm font-medium text-primary mb-2">Core Innovation</p>
+                  <p className="text-sm text-muted-foreground leading-relaxed">
+                    Transformed fragmented ecosystem into a structured, trust-designed platform connecting TV show audience to actionable startup support.
                   </p>
                 </div>}
             </div>
@@ -467,51 +507,91 @@ const ProjectDetails: React.FC = () => {
             </div>
           </div>
 
-          {/* Constraints - wedding-verse only */}
-          {project.id === "wedding-verse" && <div>
+          {/* Constraints - wedding-verse and ideabaaz */}
+          {(project.id === "wedding-verse" || project.id === "ideabaaz") && <div>
               <div className="mb-12">
                 <h3 className="text-2xl md:text-3xl font-light mb-4">Constraints & Challenges</h3>
                 <p className="text-base md:text-lg text-muted-foreground font-light leading-relaxed max-w-3xl">
                   Real-world limitations that shaped design decisions and demonstrated problem-solving maturity.
                 </p>
               </div>
-              <div className="grid md:grid-cols-2 gap-6">
-                <div className="flex items-start gap-4 p-6 bg-muted/10 rounded-xl border border-border/20">
-                  <AlertCircle className="w-5 h-5 text-muted-foreground mt-0.5 flex-shrink-0" />
-                  <div>
-                    <h4 className="text-base font-medium mb-1">Resource Limits</h4>
-                    <p className="text-sm text-muted-foreground leading-relaxed">Small engineering team required strict scope discipline and phased delivery.</p>
+              {project.id === "wedding-verse" ? (
+                <div className="grid md:grid-cols-2 gap-6">
+                  <div className="flex items-start gap-4 p-6 bg-muted/10 rounded-xl border border-border/20">
+                    <AlertCircle className="w-5 h-5 text-muted-foreground mt-0.5 flex-shrink-0" />
+                    <div>
+                      <h4 className="text-base font-medium mb-1">Resource Limits</h4>
+                      <p className="text-sm text-muted-foreground leading-relaxed">Small engineering team required strict scope discipline and phased delivery.</p>
+                    </div>
+                  </div>
+                  <div className="flex items-start gap-4 p-6 bg-muted/10 rounded-xl border border-border/20">
+                    <AlertCircle className="w-5 h-5 text-muted-foreground mt-0.5 flex-shrink-0" />
+                    <div>
+                      <h4 className="text-base font-medium mb-1">Dual-Persona Complexity</h4>
+                      <p className="text-sm text-muted-foreground leading-relaxed">Designing for emotionally-driven couples vs. business-focused vendors simultaneously.</p>
+                    </div>
+                  </div>
+                  <div className="flex items-start gap-4 p-6 bg-muted/10 rounded-xl border border-border/20">
+                    <AlertCircle className="w-5 h-5 text-muted-foreground mt-0.5 flex-shrink-0" />
+                    <div>
+                      <h4 className="text-base font-medium mb-1">AI Reliability</h4>
+                      <p className="text-sm text-muted-foreground leading-relaxed">Voice agent needed protective UX layers to handle edge cases gracefully.</p>
+                    </div>
+                  </div>
+                  <div className="flex items-start gap-4 p-6 bg-muted/10 rounded-xl border border-border/20">
+                    <AlertCircle className="w-5 h-5 text-muted-foreground mt-0.5 flex-shrink-0" />
+                    <div>
+                      <h4 className="text-base font-medium mb-1">Data Inconsistency</h4>
+                      <p className="text-sm text-muted-foreground leading-relaxed">Vendor inputs varied wildly; required intelligent validation and normalization.</p>
+                    </div>
+                  </div>
+                  <div className="flex items-start gap-4 p-6 bg-muted/10 rounded-xl border border-border/20">
+                    <AlertCircle className="w-5 h-5 text-muted-foreground mt-0.5 flex-shrink-0" />
+                    <div>
+                      <h4 className="text-base font-medium mb-1">Aggressive Timeline</h4>
+                      <p className="text-sm text-muted-foreground leading-relaxed">2 months for UI design, 5 months for MVP engineering, 3 months for expansion.</p>
+                    </div>
                   </div>
                 </div>
-                <div className="flex items-start gap-4 p-6 bg-muted/10 rounded-xl border border-border/20">
-                  <AlertCircle className="w-5 h-5 text-muted-foreground mt-0.5 flex-shrink-0" />
-                  <div>
-                    <h4 className="text-base font-medium mb-1">Dual-Persona Complexity</h4>
-                    <p className="text-sm text-muted-foreground leading-relaxed">Designing for emotionally-driven couples vs. business-focused vendors simultaneously.</p>
+              ) : (
+                <div className="grid md:grid-cols-2 gap-6">
+                  <div className="flex items-start gap-4 p-6 bg-muted/10 rounded-xl border border-border/20">
+                    <AlertCircle className="w-5 h-5 text-muted-foreground mt-0.5 flex-shrink-0" />
+                    <div>
+                      <h4 className="text-base font-medium mb-1">Limited Engineering Bandwidth</h4>
+                      <p className="text-sm text-muted-foreground leading-relaxed">Required modular, low-complexity workflows that could be built incrementally.</p>
+                    </div>
+                  </div>
+                  <div className="flex items-start gap-4 p-6 bg-muted/10 rounded-xl border border-border/20">
+                    <AlertCircle className="w-5 h-5 text-muted-foreground mt-0.5 flex-shrink-0" />
+                    <div>
+                      <h4 className="text-base font-medium mb-1">Multi-Persona Complexity</h4>
+                      <p className="text-sm text-muted-foreground leading-relaxed">4 user archetypes with competing goals: founders vs investors vs mentors vs providers.</p>
+                    </div>
+                  </div>
+                  <div className="flex items-start gap-4 p-6 bg-muted/10 rounded-xl border border-border/20">
+                    <AlertCircle className="w-5 h-5 text-muted-foreground mt-0.5 flex-shrink-0" />
+                    <div>
+                      <h4 className="text-base font-medium mb-1">High Emotional Stakes</h4>
+                      <p className="text-sm text-muted-foreground leading-relaxed">Founders making critical decisions during financial pressure and uncertainty.</p>
+                    </div>
+                  </div>
+                  <div className="flex items-start gap-4 p-6 bg-muted/10 rounded-xl border border-border/20">
+                    <AlertCircle className="w-5 h-5 text-muted-foreground mt-0.5 flex-shrink-0" />
+                    <div>
+                      <h4 className="text-base font-medium mb-1">Fragmented Ecosystem Trust</h4>
+                      <p className="text-sm text-muted-foreground leading-relaxed">Users mistrusted unknown vendors; needed credibility signals throughout.</p>
+                    </div>
+                  </div>
+                  <div className="flex items-start gap-4 p-6 bg-muted/10 rounded-xl border border-border/20">
+                    <AlertCircle className="w-5 h-5 text-muted-foreground mt-0.5 flex-shrink-0" />
+                    <div>
+                      <h4 className="text-base font-medium mb-1">Brand Expectation Mismatch</h4>
+                      <p className="text-sm text-muted-foreground leading-relaxed">TV show audience expected entertainment; platform needed to deliver real utility.</p>
+                    </div>
                   </div>
                 </div>
-                <div className="flex items-start gap-4 p-6 bg-muted/10 rounded-xl border border-border/20">
-                  <AlertCircle className="w-5 h-5 text-muted-foreground mt-0.5 flex-shrink-0" />
-                  <div>
-                    <h4 className="text-base font-medium mb-1">AI Reliability</h4>
-                    <p className="text-sm text-muted-foreground leading-relaxed">Voice agent needed protective UX layers to handle edge cases gracefully.</p>
-                  </div>
-                </div>
-                <div className="flex items-start gap-4 p-6 bg-muted/10 rounded-xl border border-border/20">
-                  <AlertCircle className="w-5 h-5 text-muted-foreground mt-0.5 flex-shrink-0" />
-                  <div>
-                    <h4 className="text-base font-medium mb-1">Data Inconsistency</h4>
-                    <p className="text-sm text-muted-foreground leading-relaxed">Vendor inputs varied wildly; required intelligent validation and normalization.</p>
-                  </div>
-                </div>
-                <div className="flex items-start gap-4 p-6 bg-muted/10 rounded-xl border border-border/20">
-                  <AlertCircle className="w-5 h-5 text-muted-foreground mt-0.5 flex-shrink-0" />
-                  <div>
-                    <h4 className="text-base font-medium mb-1">Aggressive Timeline</h4>
-                    <p className="text-sm text-muted-foreground leading-relaxed">2 months for UI design, 5 months for MVP engineering, 3 months for expansion.</p>
-                  </div>
-                </div>
-              </div>
+              )}
             </div>}
         </section>
 
@@ -644,6 +724,42 @@ const ProjectDetails: React.FC = () => {
                     <div>
                       <h4 className="text-base font-medium mb-1">Systems thinking creates velocity</h4>
                       <p className="text-sm text-muted-foreground leading-relaxed">Design systems aren't documentation—they're strategic accelerators</p>
+                    </div>
+                  </div>
+                </div> : project.id === "ideabaaz" ? <div className="space-y-6">
+                  <div className="flex items-start gap-4">
+                    <div className="flex-shrink-0 w-2 h-2 rounded-full bg-primary mt-2" />
+                    <div>
+                      <h4 className="text-base font-medium mb-1">Trust is designed, not assumed</h4>
+                      <p className="text-sm text-muted-foreground leading-relaxed">Marketplace ecosystems succeed only when credibility signals are built into every interaction</p>
+                    </div>
+                  </div>
+                  <div className="flex items-start gap-4">
+                    <div className="flex-shrink-0 w-2 h-2 rounded-full bg-primary mt-2" />
+                    <div>
+                      <h4 className="text-base font-medium mb-1">Ruthless prioritization is essential</h4>
+                      <p className="text-sm text-muted-foreground leading-relaxed">Multi-role platforms require scope discipline to avoid complexity that blocks users</p>
+                    </div>
+                  </div>
+                  <div className="flex items-start gap-4">
+                    <div className="flex-shrink-0 w-2 h-2 rounded-full bg-primary mt-2" />
+                    <div>
+                      <h4 className="text-base font-medium mb-1">Early stakeholder alignment prevents rework</h4>
+                      <p className="text-sm text-muted-foreground leading-relaxed">Aligning with show production teams early prevented costly pivots downstream</p>
+                    </div>
+                  </div>
+                  <div className="flex items-start gap-4">
+                    <div className="flex-shrink-0 w-2 h-2 rounded-full bg-primary mt-2" />
+                    <div>
+                      <h4 className="text-base font-medium mb-1">UX writing = UI decisions</h4>
+                      <p className="text-sm text-muted-foreground leading-relaxed">Clear copy was as critical as visual design for building user confidence</p>
+                    </div>
+                  </div>
+                  <div className="flex items-start gap-4">
+                    <div className="flex-shrink-0 w-2 h-2 rounded-full bg-primary mt-2" />
+                    <div>
+                      <h4 className="text-base font-medium mb-1">Empathy-driven UX for stressed users</h4>
+                      <p className="text-sm text-muted-foreground leading-relaxed">Designing for emotionally stressed founders demands guidance-driven, not feature-driven UX</p>
                     </div>
                   </div>
                 </div> : <p className="text-base text-muted-foreground leading-[1.8] font-light">
