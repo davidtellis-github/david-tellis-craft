@@ -247,7 +247,7 @@ const ProjectDetails: React.FC = () => {
         </section>
 
         {/* Challenge & Solution - Combined */}
-        <section ref={challengeAnim.ref} id="challenge" className={`min-h-[80vh] flex flex-col justify-start pt-[20vh] transition-all duration-1000 ${challengeAnim.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+        <section ref={challengeAnim.ref} id="challenge" className="">
           <h2 className="text-3xl md:text-4xl font-light mb-20">Challenge & Solution</h2>
           
           <div className="grid md:grid-cols-2 gap-16">
