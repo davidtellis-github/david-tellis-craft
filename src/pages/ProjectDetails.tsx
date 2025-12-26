@@ -8,6 +8,7 @@ import { useProjectAssets } from "@/hooks/useProjectAssets";
 import { UIGallery } from "@/components/portfolio/UIGallery";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 import { MetricsHighlight } from "@/components/portfolio/MetricsHighlight";
+import { IdeabaazCaseStudy } from "@/components/portfolio/IdeabaazCaseStudy";
 // Import mockup images
 import weddingverseFeatured from '@/assets/weddingverse-featured.png';
 import ideabaazFeatured from '@/assets/ideabaaz-featured.png';
@@ -259,6 +260,11 @@ const ProjectDetails: React.FC = () => {
               </div>}
         </section>
 
+        {/* Ideabaaz uses a custom narrative case study */}
+        {project.id === "ideabaaz" && project.caseStudy ? (
+          <IdeabaazCaseStudy project={project} />
+        ) : (
+          <>
         {/* My Role - Enhanced for wedding-verse */}
         <section ref={roleAnim.ref} id="role" className={`min-h-[80vh] flex flex-col justify-start pt-[20vh] transition-all duration-1000 ${roleAnim.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
           <h2 className="text-3xl md:text-4xl font-light mb-20">My Role</h2>
@@ -799,6 +805,8 @@ const ProjectDetails: React.FC = () => {
             </div>
           </div>
         </section>
+          </>
+        )}
           </section>
         </div>
       </main>
