@@ -257,7 +257,7 @@ const ProjectDetails: React.FC = () => {
                 <span className="w-2 h-2 rounded-full bg-red-500" />
                 <span className="text-sm font-medium text-muted-foreground">The Problem</span>
               </div>
-              <p className="text-base leading-[1.8] font-light text-muted-foreground">
+              <p className="text-base leading-[1.8] font-light text-primary">
                 {project.context.problem}
               </p>
             </div>
