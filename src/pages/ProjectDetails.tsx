@@ -26,6 +26,56 @@ import bostonFinancial2 from '@/assets/boston-financial-2.png';
 import turbocloudDashboard1 from '@/assets/turbocloud-dashboard-1.jpg';
 import turbocloudProviderSelection from '@/assets/turbocloud-provider-selection.jpg';
 import turbocloudSignup from '@/assets/turbocloud-signup.jpg';
+// Ideabaaz UI screens
+import ideabaazDashboard from '@/assets/ideabaaz-dashboard.png';
+import ideabaazDocuments from '@/assets/ideabaaz-documents.png';
+import ideabaazMentorProfile from '@/assets/ideabaaz-mentor-profile.png';
+import ideabaazStartupTeam from '@/assets/ideabaaz-startup-team.png';
+import ideabaazStartupPitch from '@/assets/ideabaaz-startup-pitch.png';
+
+// Ideabaaz solution showcase data
+const ideabaazShowcaseScreens = [
+  {
+    id: 'founders-dashboard',
+    title: 'Startup Dashboard',
+    description: 'Personalized dashboard showing tasks, milestones, and funding readiness score for founders.',
+    image: ideabaazDashboard,
+    persona: 'Founders',
+    personaColor: 'from-blue-500/20 to-blue-600/10'
+  },
+  {
+    id: 'founders-documents',
+    title: 'Document Management',
+    description: 'Structured document upload flow for pitch decks, financials, and legal documents.',
+    image: ideabaazDocuments,
+    persona: 'Founders',
+    personaColor: 'from-blue-500/20 to-blue-600/10'
+  },
+  {
+    id: 'founders-team',
+    title: 'Team & Vision Profile',
+    description: 'Comprehensive startup profile showcasing team, vision, and company details.',
+    image: ideabaazStartupTeam,
+    persona: 'Founders',
+    personaColor: 'from-blue-500/20 to-blue-600/10'
+  },
+  {
+    id: 'founders-pitch',
+    title: 'Pitch Details',
+    description: 'Detailed pitch information including funding requirements, traction, and market opportunity.',
+    image: ideabaazStartupPitch,
+    persona: 'Founders',
+    personaColor: 'from-blue-500/20 to-blue-600/10'
+  },
+  {
+    id: 'mentors-profile',
+    title: 'Mentor Profile',
+    description: 'Searchable mentor profiles with expertise areas, booking workflows, and session availability.',
+    image: ideabaazMentorProfile,
+    persona: 'Mentors',
+    personaColor: 'from-purple-500/20 to-purple-600/10'
+  }
+];
 
 // Map of mockup images
 const mockupImageMap: Record<string, string> = {
@@ -46,7 +96,12 @@ const mockupImageMap: Record<string, string> = {
   'boston-financial-2.png': bostonFinancial2,
   'turbocloud-dashboard-1.jpg': turbocloudDashboard1,
   'turbocloud-provider-selection.jpg': turbocloudProviderSelection,
-  'turbocloud-signup.jpg': turbocloudSignup
+  'turbocloud-signup.jpg': turbocloudSignup,
+  'ideabaaz-dashboard.png': ideabaazDashboard,
+  'ideabaaz-documents.png': ideabaazDocuments,
+  'ideabaaz-mentor-profile.png': ideabaazMentorProfile,
+  'ideabaaz-startup-team.png': ideabaazStartupTeam,
+  'ideabaaz-startup-pitch.png': ideabaazStartupPitch
 };
 const ProjectDetails: React.FC = () => {
   const {
@@ -304,7 +359,88 @@ const ProjectDetails: React.FC = () => {
           </div>
         </section>
 
-        {/* How I Worked - Process + Constraints Combined */}
+        {/* Ideabaaz Final Solution Showcase */}
+        {project.id === "ideabaaz" && (
+          <section className="min-h-screen flex flex-col justify-start py-[20vh]">
+            <div className="mb-20">
+              <h2 className="text-3xl md:text-5xl font-light mb-6">The Platform Solution</h2>
+              <p className="text-base md:text-lg text-muted-foreground font-light leading-relaxed max-w-3xl">
+                A unified ecosystem connecting founders, investors, mentors, and solution providers—designed for trust, clarity, and actionable next steps.
+              </p>
+            </div>
+            
+            {/* Persona Pills */}
+            <div className="flex flex-wrap gap-3 mb-12">
+              <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-500/10 border border-blue-500/20">
+                <span className="w-2 h-2 rounded-full bg-blue-500" />
+                <span className="text-sm font-medium text-blue-400">Founders</span>
+              </span>
+              <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-purple-500/10 border border-purple-500/20">
+                <span className="w-2 h-2 rounded-full bg-purple-500" />
+                <span className="text-sm font-medium text-purple-400">Mentors</span>
+              </span>
+              <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-green-500/10 border border-green-500/20">
+                <span className="w-2 h-2 rounded-full bg-green-500" />
+                <span className="text-sm font-medium text-green-400">Investors</span>
+              </span>
+              <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-amber-500/10 border border-amber-500/20">
+                <span className="w-2 h-2 rounded-full bg-amber-500" />
+                <span className="text-sm font-medium text-amber-400">Solution Providers</span>
+              </span>
+            </div>
+
+            {/* Solution Screens Grid */}
+            <div className="grid md:grid-cols-2 gap-8">
+              {ideabaazShowcaseScreens.map((screen) => (
+                <div 
+                  key={screen.id} 
+                  className={`group relative bg-gradient-to-br ${screen.personaColor} rounded-2xl overflow-hidden border border-border/20 hover:border-border/40 transition-all duration-300`}
+                >
+                  {/* Persona Badge */}
+                  <div className="absolute top-4 left-4 z-10">
+                    <span className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full backdrop-blur-sm text-xs font-medium ${
+                      screen.persona === 'Founders' ? 'bg-blue-500/20 text-blue-300 border border-blue-500/30' :
+                      screen.persona === 'Mentors' ? 'bg-purple-500/20 text-purple-300 border border-purple-500/30' :
+                      screen.persona === 'Investors' ? 'bg-green-500/20 text-green-300 border border-green-500/30' :
+                      'bg-amber-500/20 text-amber-300 border border-amber-500/30'
+                    }`}>
+                      {screen.persona}
+                    </span>
+                  </div>
+                  
+                  {/* Image */}
+                  <div className="aspect-[16/10] overflow-hidden">
+                    <img 
+                      src={screen.image} 
+                      alt={screen.title}
+                      className="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
+                    />
+                  </div>
+                  
+                  {/* Content */}
+                  <div className="p-6 bg-background/80 backdrop-blur-sm">
+                    <h3 className="text-lg font-medium mb-2">{screen.title}</h3>
+                    <p className="text-sm text-muted-foreground leading-relaxed">{screen.description}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            {/* Figma Prototype CTA */}
+            <div className="mt-16 text-center">
+              <a 
+                href="https://www.figma.com/proto/Ow4QpYUgooZfFeaK3PqNzi/UI?node-id=559-14557&viewport=316%2C209%2C0.16&t=yTUSZ9k26SoeAo91-0&scaling=min-zoom&content-scaling=fixed&starting-point-node-id=559%3A14557&show-proto-sidebar=1"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-3 bg-primary/10 hover:bg-primary/20 border border-primary/20 px-8 py-4 rounded-full transition-colors"
+              >
+                <Figma className="w-5 h-5 text-primary" />
+                <span className="font-medium">Explore Interactive Prototype</span>
+                <ExternalLink className="w-4 h-4 text-muted-foreground" />
+              </a>
+            </div>
+          </section>
+        )}
         <section ref={howIWorkedAnim.ref} id="how-i-worked" className={`min-h-screen flex flex-col justify-start py-[20vh] transition-all duration-1000 ${howIWorkedAnim.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
           <h2 className="text-3xl md:text-5xl font-light mb-20">How I Worked</h2>
           
