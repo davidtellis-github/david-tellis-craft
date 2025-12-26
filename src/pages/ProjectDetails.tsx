@@ -254,7 +254,7 @@ const ProjectDetails: React.FC = () => {
             {/* Problem Column */}
             <div className="space-y-6">
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-muted/30 border border-border/20">
-                <AlertCircle className="w-4 h-4 text-muted-foreground" />
+                <span className="w-2 h-2 rounded-full bg-red-500" />
                 <span className="text-sm font-medium text-muted-foreground">The Problem</span>
               </div>
               <p className="text-base leading-[1.8] font-light text-muted-foreground">
@@ -264,9 +264,9 @@ const ProjectDetails: React.FC = () => {
 
             {/* Solution Column */}
             <div className="space-y-6">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20">
-                <CheckCircle2 className="w-4 h-4 text-primary" />
-                <span className="text-sm font-medium text-primary">The Solution</span>
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-muted/30 border border-border/20">
+                <span className="w-2 h-2 rounded-full bg-green-500" />
+                <span className="text-sm font-medium text-muted-foreground">The Solution</span>
               </div>
               <p className="text-base leading-[1.8] font-light mb-6">
                 {project.context.objective}
