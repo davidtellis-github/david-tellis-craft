@@ -192,7 +192,7 @@ const ProjectDetails: React.FC = () => {
 
       <main className="w-[98vw] mx-auto px-4 md:px-6">
         {/* Main layout with ProjectNav + content */}
-        <div className="flex gap-8 lg:gap-12">
+        <div className="flex gap-[4vw] lg:gap-[6vw]">
           <ProjectNav />
           
           <section className="flex flex-col flex-1 min-w-0 py-[20vh]">
