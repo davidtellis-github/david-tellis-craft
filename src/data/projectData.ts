@@ -119,6 +119,18 @@ export const projectsData: Record<string, ProjectData> = {
     
     mockupImages: ['weddingverse-featured.png', 'wedding-verse-context.jpg', 'wedding-verse-role.jpg'],
     
+    images: [
+      'wedding-verse-home.png',
+      'wedding-verse-welcome.png',
+      'wedding-verse-date-picker.png',
+      'wedding-verse-dashboard.png',
+      'wedding-verse-vision-board.png',
+      'wedding-verse-theme.png',
+      'wedding-verse-gallery.png',
+      'wedding-verse-budget.png',
+      'wedding-verse-trending.png'
+    ],
+    
     role: {
       title: "Lead Product Designer",
       duration: "8-month engagement",
