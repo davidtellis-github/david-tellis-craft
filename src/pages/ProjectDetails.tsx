@@ -324,7 +324,7 @@ const ProjectDetails: React.FC = () => {
                   <div className="grid md:grid-cols-2 gap-12">
                     <div>
                       <div className="mb-8">
-                        <p className="text-lg font-normal mb-2">{project.role.title}</p>
+                        <p className="text-lg font-normal mb-2">Contributions</p>
                         <p className="text-sm text-muted-foreground">{project.role.duration}</p>
                       </div>
 
