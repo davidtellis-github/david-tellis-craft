@@ -192,22 +192,33 @@ const ProjectDetails: React.FC = () => {
           <section className="flex-col flex-1 min-w-0 py-[20vh] mx-0 flex items-start justify-start gap-0">
         {/* Hero Section with embedded metrics */}
         <section ref={heroAnim.ref} id="overview" className="">
-            <div className="mb-20 space-y-8">
-            <div className="space-y-6">
-              <h1 className="text-5xl md:text-6xl lg:text-7xl font-light tracking-tight leading-[1.1]">
-                {project.title}
-              </h1>
-              <div className="h-px w-20 bg-primary/40" />
+            <div className="mb-20">
+              {/* Asymmetric Grid Layout */}
+              <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-0 min-h-[60vh]">
+                {/* Left Column - Title */}
+                <div className="lg:col-span-5 flex flex-col justify-start">
+                  <h1 className="text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-light tracking-tight leading-[1.05]">
+                    {project.title.split(' ').map((word, i) => (
+                      <span key={i} className="block">{word}</span>
+                    ))}
+                  </h1>
+                </div>
+                
+                {/* Right Column - Subtitle (offset down) */}
+                <div className="lg:col-span-7 flex flex-col justify-center lg:pl-12">
+                  <p className="text-base md:text-lg lg:text-xl text-foreground/90 font-light leading-[1.8] max-w-2xl">
+                    {project.subtitle}
+                  </p>
+                </div>
+              </div>
+              
+              {/* Bottom Left - Description */}
+              <div className="mt-16 lg:mt-24 max-w-2xl">
+                <p className="text-sm md:text-base text-muted-foreground font-light leading-[1.9]">
+                  {project.description}
+                </p>
+              </div>
             </div>
-            
-            <p className="text-xl md:text-2xl text-foreground font-light leading-[1.5] max-w-4xl">
-              {project.subtitle}
-            </p>
-            
-            <p className="text-base md:text-lg text-muted-foreground font-light leading-[1.8] max-w-3xl pt-4">
-              {project.description}
-            </p>
-          </div>
 
             {/* Hero Image or Video Section */}
             {project.videoUrl ? <div className="relative aspect-video rounded-lg overflow-hidden mb-20">
