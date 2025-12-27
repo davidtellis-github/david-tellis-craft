@@ -30,7 +30,7 @@ I love solving problems with design keeping it consistent and care about my craf
 }, {
   key: "pms",
   label: "Product Managers",
-  headline: <>I get what needs to be built, why it matters. I bridge between vision, design, and dev.
+  headline: <>I understand development, and I get what needs to be built, why it matters. I bridge between vision, design, and dev.
        </>
 }, {
   key: "engineers",
