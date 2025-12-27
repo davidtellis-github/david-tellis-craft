@@ -46,7 +46,7 @@ export const UIGallery: React.FC<UIGalleryProps> = ({
   return (
     <div className={`ui-gallery ${className}`}>
       {/* Masonry Gallery Grid */}
-      <div className="columns-2 gap-3">
+      <div className="columns-1 md:columns-2 gap-3">
         {filteredAssets.map((asset, index) => (
           <div
             key={asset.id}
@@ -59,6 +59,10 @@ export const UIGallery: React.FC<UIGalleryProps> = ({
                 alt={asset.title || `${projectTitle} UI ${index + 1}`}
                 className="w-full h-auto object-cover transition-transform duration-300 group-hover:scale-105"
                 loading="lazy"
+                onError={(e) => {
+                  // Hide broken images
+                  (e.target as HTMLImageElement).parentElement!.parentElement!.style.display = 'none';
+                }}
               />
               
               {/* Hover Overlay */}
