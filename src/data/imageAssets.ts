@@ -4,6 +4,17 @@ import ideabaazFeatured from '@/assets/ideabaaz-featured.png';
 import futurcraftFeatured from '@/assets/futurcraft-featured.png';
 import turbocloudFeatured from '@/assets/turbocloud-featured.png';
 
+// Wedding Verse UI screens
+import weddingVerseHome from '@/assets/wedding-verse-home.png';
+import weddingVerseWelcome from '@/assets/wedding-verse-welcome.png';
+import weddingVerseDatePicker from '@/assets/wedding-verse-date-picker.png';
+import weddingVerseDashboard from '@/assets/wedding-verse-dashboard.png';
+import weddingVerseVisionBoard from '@/assets/wedding-verse-vision-board.png';
+import weddingVerseTheme from '@/assets/wedding-verse-theme.png';
+import weddingVerseGallery from '@/assets/wedding-verse-gallery.png';
+import weddingVerseBudget from '@/assets/wedding-verse-budget.png';
+import weddingVerseTrending from '@/assets/wedding-verse-trending.png';
+
 // Turbocloud project images
 import turbocloudDashboard1 from '@/assets/turbocloud-dashboard-1.jpg';
 import turbocloudProviderSelection from '@/assets/turbocloud-provider-selection.jpg';
@@ -44,6 +55,15 @@ export const imageAssets: Record<string, string> = {
   'wedding-verse-iterations-3.png': wvIterations3,
   'wedding-verse-iterations-4.png': wvIterations4,
   'wedding-verse-iterations-5.png': wvIterations5,
+  'wedding-verse-home.png': weddingVerseHome,
+  'wedding-verse-welcome.png': weddingVerseWelcome,
+  'wedding-verse-date-picker.png': weddingVerseDatePicker,
+  'wedding-verse-dashboard.png': weddingVerseDashboard,
+  'wedding-verse-vision-board.png': weddingVerseVisionBoard,
+  'wedding-verse-theme.png': weddingVerseTheme,
+  'wedding-verse-gallery.png': weddingVerseGallery,
+  'wedding-verse-budget.png': weddingVerseBudget,
+  'wedding-verse-trending.png': weddingVerseTrending,
   'turbocloud-dashboard-1.jpg': turbocloudDashboard1,
   'turbocloud-provider-selection.jpg': turbocloudProviderSelection,
   'turbocloud-signup.jpg': turbocloudSignup,
