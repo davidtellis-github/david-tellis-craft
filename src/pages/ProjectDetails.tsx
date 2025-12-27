@@ -34,6 +34,16 @@ import ideabaazDocuments from "@/assets/ideabaaz-documents.png";
 import ideabaazMentorProfile from "@/assets/ideabaaz-mentor-profile.png";
 import ideabaazStartupTeam from "@/assets/ideabaaz-startup-team.png";
 import ideabaazStartupPitch from "@/assets/ideabaaz-startup-pitch.png";
+// Wedding Verse UI screens
+import weddingVerseHome from "@/assets/wedding-verse-home.png";
+import weddingVerseWelcome from "@/assets/wedding-verse-welcome.png";
+import weddingVerseDatePicker from "@/assets/wedding-verse-date-picker.png";
+import weddingVerseDashboard from "@/assets/wedding-verse-dashboard.png";
+import weddingVerseVisionBoard from "@/assets/wedding-verse-vision-board.png";
+import weddingVerseTheme from "@/assets/wedding-verse-theme.png";
+import weddingVerseGallery from "@/assets/wedding-verse-gallery.png";
+import weddingVerseBudget from "@/assets/wedding-verse-budget.png";
+import weddingVerseTrending from "@/assets/wedding-verse-trending.png";
 
 // Ideabaaz solution showcase data
 const ideabaazShowcaseScreens = [
@@ -104,6 +114,15 @@ const mockupImageMap: Record<string, string> = {
   "ideabaaz-mentor-profile.png": ideabaazMentorProfile,
   "ideabaaz-startup-team.png": ideabaazStartupTeam,
   "ideabaaz-startup-pitch.png": ideabaazStartupPitch,
+  "wedding-verse-home.png": weddingVerseHome,
+  "wedding-verse-welcome.png": weddingVerseWelcome,
+  "wedding-verse-date-picker.png": weddingVerseDatePicker,
+  "wedding-verse-dashboard.png": weddingVerseDashboard,
+  "wedding-verse-vision-board.png": weddingVerseVisionBoard,
+  "wedding-verse-theme.png": weddingVerseTheme,
+  "wedding-verse-gallery.png": weddingVerseGallery,
+  "wedding-verse-budget.png": weddingVerseBudget,
+  "wedding-verse-trending.png": weddingVerseTrending,
 };
 const ProjectDetails: React.FC = () => {
   const { slug } = useParams();
