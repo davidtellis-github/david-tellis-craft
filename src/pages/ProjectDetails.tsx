@@ -36,48 +36,42 @@ import ideabaazStartupTeam from '@/assets/ideabaaz-startup-team.png';
 import ideabaazStartupPitch from '@/assets/ideabaaz-startup-pitch.png';
 
 // Ideabaaz solution showcase data
-const ideabaazShowcaseScreens = [
-  {
-    id: 'founders-dashboard',
-    title: 'Startup Dashboard',
-    description: 'Personalized dashboard showing tasks, milestones, and funding readiness score for founders.',
-    image: ideabaazDashboard,
-    persona: 'Founders',
-    personaColor: 'from-blue-500/20 to-blue-600/10'
-  },
-  {
-    id: 'founders-documents',
-    title: 'Document Management',
-    description: 'Structured document upload flow for pitch decks, financials, and legal documents.',
-    image: ideabaazDocuments,
-    persona: 'Founders',
-    personaColor: 'from-blue-500/20 to-blue-600/10'
-  },
-  {
-    id: 'founders-team',
-    title: 'Team & Vision Profile',
-    description: 'Comprehensive startup profile showcasing team, vision, and company details.',
-    image: ideabaazStartupTeam,
-    persona: 'Founders',
-    personaColor: 'from-blue-500/20 to-blue-600/10'
-  },
-  {
-    id: 'founders-pitch',
-    title: 'Pitch Details',
-    description: 'Detailed pitch information including funding requirements, traction, and market opportunity.',
-    image: ideabaazStartupPitch,
-    persona: 'Founders',
-    personaColor: 'from-blue-500/20 to-blue-600/10'
-  },
-  {
-    id: 'mentors-profile',
-    title: 'Mentor Profile',
-    description: 'Searchable mentor profiles with expertise areas, booking workflows, and session availability.',
-    image: ideabaazMentorProfile,
-    persona: 'Mentors',
-    personaColor: 'from-purple-500/20 to-purple-600/10'
-  }
-];
+const ideabaazShowcaseScreens = [{
+  id: 'founders-dashboard',
+  title: 'Startup Dashboard',
+  description: 'Personalized dashboard showing tasks, milestones, and funding readiness score for founders.',
+  image: ideabaazDashboard,
+  persona: 'Founders',
+  personaColor: 'from-blue-500/20 to-blue-600/10'
+}, {
+  id: 'founders-documents',
+  title: 'Document Management',
+  description: 'Structured document upload flow for pitch decks, financials, and legal documents.',
+  image: ideabaazDocuments,
+  persona: 'Founders',
+  personaColor: 'from-blue-500/20 to-blue-600/10'
+}, {
+  id: 'founders-team',
+  title: 'Team & Vision Profile',
+  description: 'Comprehensive startup profile showcasing team, vision, and company details.',
+  image: ideabaazStartupTeam,
+  persona: 'Founders',
+  personaColor: 'from-blue-500/20 to-blue-600/10'
+}, {
+  id: 'founders-pitch',
+  title: 'Pitch Details',
+  description: 'Detailed pitch information including funding requirements, traction, and market opportunity.',
+  image: ideabaazStartupPitch,
+  persona: 'Founders',
+  personaColor: 'from-blue-500/20 to-blue-600/10'
+}, {
+  id: 'mentors-profile',
+  title: 'Mentor Profile',
+  description: 'Searchable mentor profiles with expertise areas, booking workflows, and session availability.',
+  image: ideabaazMentorProfile,
+  persona: 'Mentors',
+  personaColor: 'from-purple-500/20 to-purple-600/10'
+}];
 
 // Map of mockup images
 const mockupImageMap: Record<string, string> = {
@@ -192,10 +186,10 @@ const ProjectDetails: React.FC = () => {
 
       <main className="w-[98vw] mx-auto px-4 md:px-6">
         {/* Main layout with ProjectNav + content */}
-        <div className="flex gap-[4vw] lg:gap-[6vw]">
+        <div className="gap-[4vw] lg:gap-[6vw] flex items-start justify-start">
           <ProjectNav />
           
-          <section className="flex flex-col flex-1 min-w-0 py-[20vh]">
+          <section className="flex-col flex-1 min-w-0 py-[20vh] mx-0 flex items-start justify-start gap-0">
         {/* Hero Section with embedded metrics */}
         <section ref={heroAnim.ref} id="overview" className="">
             <div className="mb-20 space-y-8">
@@ -234,37 +228,30 @@ const ProjectDetails: React.FC = () => {
                 <p className="text-muted-foreground font-light mb-12 max-w-2xl">
                   Measurable improvements that demonstrate real value delivered to users and business.
                 </p>
-                <MetricsHighlight metrics={
-                  project.id === "wedding-verse" 
-                    ? [{
-                        label: "faster vendor discovery",
-                        value: "63%"
-                      }, {
-                        label: "higher vendor response rate",
-                        value: "42%"
-                      }, {
-                        label: "better Week 1 retention",
-                        value: "28%"
-                      }]
-                    : [{
-                        label: "faster vendor & service discovery",
-                        value: "60%"
-                      }, {
-                        label: "higher vendor response rate",
-                        value: "45%"
-                      }, {
-                        label: "improvement in founder retention",
-                        value: "30%"
-                      }]
-                } />
+                <MetricsHighlight metrics={project.id === "wedding-verse" ? [{
+                label: "faster vendor discovery",
+                value: "63%"
+              }, {
+                label: "higher vendor response rate",
+                value: "42%"
+              }, {
+                label: "better Week 1 retention",
+                value: "28%"
+              }] : [{
+                label: "faster vendor & service discovery",
+                value: "60%"
+              }, {
+                label: "higher vendor response rate",
+                value: "45%"
+              }, {
+                label: "improvement in founder retention",
+                value: "30%"
+              }]} />
               </div>}
         </section>
 
         {/* Ideabaaz uses a custom narrative case study */}
-        {project.id === "ideabaaz" && project.caseStudy ? (
-          <IdeabaazCaseStudy project={project} />
-        ) : (
-          <>
+        {project.id === "ideabaaz" && project.caseStudy ? <IdeabaazCaseStudy project={project} /> : <>
         {/* My Role - Enhanced for wedding-verse */}
         <section ref={roleAnim.ref} id="role" className={`min-h-[80vh] flex flex-col justify-start pt-[20vh] transition-all duration-1000 ${roleAnim.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
           <h2 className="text-3xl md:text-4xl font-light mb-20">My Role</h2>
@@ -408,8 +395,7 @@ const ProjectDetails: React.FC = () => {
         </section>
 
         {/* Ideabaaz Final Solution Showcase */}
-        {project.id === "ideabaaz" && (
-          <section className="min-h-screen flex flex-col justify-start py-[20vh]">
+        {project.id === "ideabaaz" && <section className="min-h-screen flex flex-col justify-start py-[20vh]">
             <div className="mb-20">
               <h2 className="text-3xl md:text-5xl font-light mb-6">The Platform Solution</h2>
               <p className="text-base md:text-lg text-muted-foreground font-light leading-relaxed max-w-3xl">
@@ -439,30 +425,17 @@ const ProjectDetails: React.FC = () => {
 
             {/* Solution Screens Grid */}
             <div className="grid md:grid-cols-2 gap-8">
-              {ideabaazShowcaseScreens.map((screen) => (
-                <div 
-                  key={screen.id} 
-                  className={`group relative bg-gradient-to-br ${screen.personaColor} rounded-2xl overflow-hidden border border-border/20 hover:border-border/40 transition-all duration-300`}
-                >
+              {ideabaazShowcaseScreens.map(screen => <div key={screen.id} className={`group relative bg-gradient-to-br ${screen.personaColor} rounded-2xl overflow-hidden border border-border/20 hover:border-border/40 transition-all duration-300`}>
                   {/* Persona Badge */}
                   <div className="absolute top-4 left-4 z-10">
-                    <span className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full backdrop-blur-sm text-xs font-medium ${
-                      screen.persona === 'Founders' ? 'bg-blue-500/20 text-blue-300 border border-blue-500/30' :
-                      screen.persona === 'Mentors' ? 'bg-purple-500/20 text-purple-300 border border-purple-500/30' :
-                      screen.persona === 'Investors' ? 'bg-green-500/20 text-green-300 border border-green-500/30' :
-                      'bg-amber-500/20 text-amber-300 border border-amber-500/30'
-                    }`}>
+                    <span className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full backdrop-blur-sm text-xs font-medium ${screen.persona === 'Founders' ? 'bg-blue-500/20 text-blue-300 border border-blue-500/30' : screen.persona === 'Mentors' ? 'bg-purple-500/20 text-purple-300 border border-purple-500/30' : screen.persona === 'Investors' ? 'bg-green-500/20 text-green-300 border border-green-500/30' : 'bg-amber-500/20 text-amber-300 border border-amber-500/30'}`}>
                       {screen.persona}
                     </span>
                   </div>
                   
                   {/* Image */}
                   <div className="aspect-[16/10] overflow-hidden">
-                    <img 
-                      src={screen.image} 
-                      alt={screen.title}
-                      className="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
-                    />
+                    <img src={screen.image} alt={screen.title} className="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-105" />
                   </div>
                   
                   {/* Content */}
@@ -470,23 +443,18 @@ const ProjectDetails: React.FC = () => {
                     <h3 className="text-lg font-medium mb-2">{screen.title}</h3>
                     <p className="text-sm text-muted-foreground leading-relaxed">{screen.description}</p>
                   </div>
-                </div>
-              ))}
+                </div>)}
             </div>
 
             {/* Figma Prototype CTA */}
             <div className="mt-16 text-center">
-              <button 
-                onClick={() => setPrototypeOpen(true)}
-                className="inline-flex items-center gap-3 bg-primary/10 hover:bg-primary/20 border border-primary/20 px-8 py-4 rounded-full transition-colors"
-              >
+              <button onClick={() => setPrototypeOpen(true)} className="inline-flex items-center gap-3 bg-primary/10 hover:bg-primary/20 border border-primary/20 px-8 py-4 rounded-full transition-colors">
                 <Figma className="w-5 h-5 text-primary" />
                 <span className="font-medium">Explore Interactive Prototype</span>
                 <Play className="w-4 h-4 text-muted-foreground" />
               </button>
             </div>
-          </section>
-        )}
+          </section>}
         <section ref={howIWorkedAnim.ref} id="how-i-worked" className={`min-h-screen flex flex-col justify-start py-[20vh] transition-all duration-1000 ${howIWorkedAnim.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
           <h2 className="text-3xl md:text-5xl font-light mb-20">How I Worked</h2>
           
@@ -521,8 +489,7 @@ const ProjectDetails: React.FC = () => {
                   Real-world limitations that shaped design decisions and demonstrated problem-solving maturity.
                 </p>
               </div>
-              {project.id === "wedding-verse" ? (
-                <div className="grid md:grid-cols-2 gap-6">
+              {project.id === "wedding-verse" ? <div className="grid md:grid-cols-2 gap-6">
                   <div className="flex items-start gap-4 p-6 bg-muted/10 rounded-xl border border-border/20">
                     <AlertCircle className="w-5 h-5 text-muted-foreground mt-0.5 flex-shrink-0" />
                     <div>
@@ -558,9 +525,7 @@ const ProjectDetails: React.FC = () => {
                       <p className="text-sm text-muted-foreground leading-relaxed">2 months for UI design, 5 months for MVP engineering, 3 months for expansion.</p>
                     </div>
                   </div>
-                </div>
-              ) : (
-                <div className="grid md:grid-cols-2 gap-6">
+                </div> : <div className="grid md:grid-cols-2 gap-6">
                   <div className="flex items-start gap-4 p-6 bg-muted/10 rounded-xl border border-border/20">
                     <AlertCircle className="w-5 h-5 text-muted-foreground mt-0.5 flex-shrink-0" />
                     <div>
@@ -596,8 +561,7 @@ const ProjectDetails: React.FC = () => {
                       <p className="text-sm text-muted-foreground leading-relaxed">TV show audience expected entertainment; platform needed to deliver real utility.</p>
                     </div>
                   </div>
-                </div>
-              )}
+                </div>}
             </div>}
         </section>
 
@@ -805,8 +769,7 @@ const ProjectDetails: React.FC = () => {
             </div>
           </div>
         </section>
-          </>
-        )}
+          </>}
           </section>
         </div>
       </main>
@@ -823,12 +786,7 @@ const ProjectDetails: React.FC = () => {
             </DialogDescription>
           </DialogHeader>
           <div className="flex-1 w-full bg-muted/20">
-            <iframe
-              src="https://embed.figma.com/proto/Ow4QpYUgooZfFeaK3PqNzi/UI?node-id=559-14557&viewport=316%2C209%2C0.16&scaling=min-zoom&content-scaling=fixed&starting-point-node-id=559%3A14557&embed-host=share"
-              className="w-full h-full border-0"
-              allowFullScreen
-              title="Ideabaaz Prototype"
-            />
+            <iframe src="https://embed.figma.com/proto/Ow4QpYUgooZfFeaK3PqNzi/UI?node-id=559-14557&viewport=316%2C209%2C0.16&scaling=min-zoom&content-scaling=fixed&starting-point-node-id=559%3A14557&embed-host=share" className="w-full h-full border-0" allowFullScreen title="Ideabaaz Prototype" />
           </div>
         </DialogContent>
       </Dialog>
