@@ -54,7 +54,7 @@ export const IdeabaazCaseStudy: React.FC<IdeabaazCaseStudyProps> = ({ project })
         {/* Role Info */}
         <div className="flex flex-wrap gap-6 mb-16">
           <div className="bg-muted/20 rounded-full px-6 py-3 border border-border/20">
-            <span className="text-sm font-medium">{project.role.title}</span>
+            <span className="text-sm font-medium">Contributions</span>
           </div>
           <div className="bg-muted/20 rounded-full px-6 py-3 border border-border/20">
             <span className="text-sm text-muted-foreground">{project.role.duration}</span>
