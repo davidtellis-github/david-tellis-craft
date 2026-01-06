@@ -36,7 +36,7 @@ I love solving problems with design keeping it consistent and caring about my cr
   key: "engineers",
   label: "Engineers",
   headline: <>
-I’ve studied computers <br/> and practicing design, <br/> so I get both worlds; </>
+I’ve studied computers <br /> and practicing design, <br /> so I get both worlds; </>
 }];
 const Hero: React.FC = () => {
   const [active, setActive] = React.useState<string>(tabsData[0].key);
@@ -79,7 +79,7 @@ const Hero: React.FC = () => {
         </TabsList>
 
         {tabsData.map(t => <TabsContent key={t.key} value={t.key} className="focus:outline-none">
-          <h1 className="text-4xl /* Default mobile size */ sm:text-6xl /* Small screens */ md:text-7xl /* Tablets */ lg:text-7xl /* Large screens */ /* Extra large screens */ 2xl:text-8xl /* Very large screens */ font-medium tracking-tight leading-snug /* Default line-height for mobile */ sm:leading-tight /* Slightly tighter on small screens */ md:leading-[1.2] /* Normal on medium and above */ text-foreground max-w-[90vw] xl:text-8xl">
+          <h1 className="/* Default mobile size */ sm:text-6xl /* Small screens */ md:text-7xl /* Tablets */ lg:text-7xl /* Large screens */ /* Extra large screens */ 2xl:text-8xl /* Very large screens */ font-medium tracking-tight leading-snug /* Default line-height for mobile */ sm:leading-tight /* Slightly tighter on small screens */ md:leading-[1.2] /* Normal on medium and above */ text-foreground max-w-[90vw] xl:text-8xl text-7xl">
   {t.headline}
           </h1>
           </TabsContent>)}
