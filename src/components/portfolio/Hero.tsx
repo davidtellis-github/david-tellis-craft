@@ -79,7 +79,7 @@ const Hero: React.FC = () => {
         </TabsList>
 
         {tabsData.map(t => <TabsContent key={t.key} value={t.key} className="focus:outline-none">
-          <h1 className="/* Default mobile size */ sm:text-6xl /* Small screens */ md:text-7xl /* Tablets */ lg:text-7xl /* Large screens */ /* Extra large screens */ 2xl:text-8xl /* Very large screens */ font-medium tracking-tight leading-snug /* Default line-height for mobile */ sm:leading-tight /* Slightly tighter on small screens */ md:leading-[1.2] /* Normal on medium and above */ text-foreground max-w-[90vw] xl:text-8xl text-5xl">
+          <h1 className="text-[clamp(2.5rem,8vw,8rem)] font-medium tracking-tight leading-[1.1] text-foreground max-w-[90vw]">
   {t.headline}
           </h1>
           </TabsContent>)}
