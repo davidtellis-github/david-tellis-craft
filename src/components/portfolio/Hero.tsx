@@ -8,27 +8,27 @@ const tabsData: {
 }[] = [{
   key: "anyone",
   label: "For anyone",
-  headline: <>Hey there, I design<br />digital experiences<br />that work beautifully<br />and make sense.</>
+  headline: "Hey there, I design digital experiences that work beautifully and make sense."
 }, {
   key: "recruiters",
   label: "Recruiters",
-  headline: <>Over 2 years of experience<br />designing products, strategy, visuals<br />and making human interaction pleasant.</>
+  headline: "Over 2 years of experience designing products, strategy, visuals and making human interaction pleasant."
 }, {
   key: "directors",
   label: "Design Directors",
-  headline: <>I love solving problems<br />with design keeping it consistent<br />and caring about my craft<br />like an artist.</>
+  headline: "I love solving problems with design keeping it consistent and caring about my craft like an artist."
 }, {
   key: "designers",
   label: "Product Designers",
-  headline: <>Curious to new trends<br />and best practices, always<br />in the state of learning.<br />Lately improving my documentation.</>
+  headline: "Curious to new trends and best practices, always in the state of learning. Lately improving my documentation."
 }, {
   key: "pms",
   label: "Product Managers",
-  headline: <>I understand development,<br />and I get what needs to be built,<br />why it matters. I bridge between<br />vision, design, and dev.</>
+  headline: "I understand development, and I get what needs to be built, why it matters. I bridge between vision, design, and dev."
 }, {
   key: "engineers",
   label: "Engineers",
-  headline: <>I've studied computers<br />and practicing design,<br />so I get both worlds.</>
+  headline: "I've studied computers and practicing design, so I get both worlds."
 }];
 
 const Hero: React.FC = () => {
