@@ -19,7 +19,7 @@ const tabsData: {
   key: "directors",
   label: "Design Directors",
   headline: <>
-I love solving problems <br />with design keeping it consistent <br />and caring about my craft <br />like an artist.
+I love solving problems <br />with design keeping it consistent <br />and caring about<br /> my craft like an artist.
       </>
 }, {
   key: "designers",
