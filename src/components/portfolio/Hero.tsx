@@ -69,7 +69,7 @@ const Hero: React.FC = () => {
 
         {tabsData.map(t => (
           <TabsContent key={t.key} value={t.key} className="focus:outline-none">
-            <h1 className="text-[clamp(2.5rem,6vw,9rem)] font-medium tracking-tight leading-[1.1] text-foreground max-w-[90vw]">
+            <h1 className="text-[clamp(2.5rem,6vw,9rem)] font-medium tracking-tight leading-[1.1] text-foreground max-w-[18ch]">
               {t.headline}
             </h1>
           </TabsContent>
