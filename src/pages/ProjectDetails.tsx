@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams, Link, useNavigate } from "react-router-dom";
-import { ArrowLeft, Play, ExternalLink, Figma, Smartphone, CheckCircle2, AlertCircle } from "lucide-react";
+import { ArrowLeft, Play, ExternalLink, Figma, Smartphone, CheckCircle2, AlertCircle, Expand } from "lucide-react";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 import ProjectNav from "@/components/portfolio/ProjectNav";
 import { projectsData } from "@/data/projectData";
@@ -128,6 +128,7 @@ const ProjectDetails: React.FC = () => {
   const { slug } = useParams();
   const navigate = useNavigate();
   const [prototypeOpen, setPrototypeOpen] = useState(false);
+  const [selectedUIImage, setSelectedUIImage] = useState<string | null>(null);
 
   // Get project data based on slug
   const project = slug ? projectsData[slug] : null;
@@ -267,23 +268,52 @@ const ProjectDetails: React.FC = () => {
 
               {/* Full-width UI Gallery for Wedding Verse */}
               {project.id === "wedding-verse" && project.images && project.images.length > 0 && (
-                <div className="mt-20 space-y-6">
+                <div className="mt-20 space-y-8">
                   <h2 className="text-2xl font-light mb-8">UI Screens</h2>
-                  <div className="space-y-6">
-                    {project.images.slice(0, -1).map((imagePath, index) => (
-                      <div 
-                        key={index} 
-                        className="w-full rounded-2xl overflow-hidden shadow-lg shadow-background/10"
-                      >
+                  <div className="space-y-8">
+                    {project.images.slice(0, -1).map((imagePath, index) => {
+                      const imageUrl = mockupImageMap[imagePath] || imagePath;
+                      return (
+                        <div 
+                          key={index} 
+                          onClick={() => setSelectedUIImage(imageUrl)}
+                          className="group relative w-full rounded-2xl overflow-hidden cursor-pointer
+                                     bg-muted/30 border border-border/40 p-3 md:p-4
+                                     shadow-lg shadow-background/10
+                                     transition-all duration-300 
+                                     hover:border-border/80 hover:shadow-2xl hover:shadow-background/20"
+                        >
+                          <div className="relative overflow-hidden rounded-xl">
+                            <img
+                              src={imageUrl}
+                              alt={`${project.title} - Screen ${index + 1}`}
+                              className="w-full h-auto object-cover transition-transform duration-500 group-hover:scale-[1.02]"
+                              loading="lazy"
+                            />
+                            {/* Hover Overlay */}
+                            <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                              <div className="bg-background/80 backdrop-blur-sm rounded-full p-3 border border-border/50">
+                                <Expand className="h-6 w-6 text-foreground" />
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      );
+                    })}
+                  </div>
+
+                  {/* Lightbox Dialog */}
+                  <Dialog open={!!selectedUIImage} onOpenChange={() => setSelectedUIImage(null)}>
+                    <DialogContent className="w-[95vw] h-[90vh] max-w-none p-0 bg-background/95 backdrop-blur-md border-border/50">
+                      <div className="p-4 sm:p-6 h-full flex items-center justify-center">
                         <img
-                          src={mockupImageMap[imagePath] || imagePath}
-                          alt={`${project.title} - Screen ${index + 1}`}
-                          className="w-full h-auto object-cover"
-                          loading="lazy"
+                          src={selectedUIImage || ''}
+                          alt="UI Design Detail"
+                          className="max-w-full max-h-full object-contain rounded-lg"
                         />
                       </div>
-                    ))}
-                  </div>
+                    </DialogContent>
+                  </Dialog>
                 </div>
               )}
 
