@@ -359,6 +359,68 @@ const ProjectDetails: React.FC = () => {
                   />
                 </div>
               )}
+
+              {/* Gallery & Links - Second Fold for Wedding Verse */}
+              {project.id === "wedding-verse" && (
+                <section
+                  ref={galleryAnim.ref}
+                  id="gallery"
+                  className={`min-h-screen flex flex-col justify-start py-[20vh] transition-all duration-1000 ${galleryAnim.isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}
+                >
+                  {/* Gallery */}
+                  <div className="mb-24">
+                    <h2 className="text-3xl md:text-5xl font-light mb-20">UI Gallery</h2>
+                    {!isLoading && allUIAssets.length > 0 && (
+                      <UIGallery assets={allUIAssets} projectTitle={project.title} />
+                    )}
+                    {!isLoading && allUIAssets.length === 0 && (
+                      <p className="text-muted-foreground text-center py-12">
+                        No UI assets available for this project yet.
+                      </p>
+                    )}
+                  </div>
+
+                  {/* Links */}
+                  <div className="text-center border-t border-border/10 pt-24">
+                    <h3 className="text-2xl md:text-3xl font-light mb-12">View the Project</h3>
+                    <div className="flex flex-wrap gap-4 justify-center">
+                      {project.links.live && (
+                        <a
+                          href={project.links.live}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center gap-2 bg-foreground text-background px-8 py-4 rounded-full hover:bg-foreground/90 transition-colors text-base font-normal"
+                        >
+                          <ExternalLink className="h-5 w-5" />
+                          Live Project
+                        </a>
+                      )}
+                      {project.links.figma && (
+                        <a
+                          href={project.links.figma}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center gap-2 border border-border px-8 py-4 rounded-full hover:bg-muted/50 transition-colors text-base font-normal"
+                        >
+                          <Figma className="h-5 w-5" />
+                          Figma
+                        </a>
+                      )}
+                      {project.links.playstore && (
+                        <a
+                          href={project.links.playstore}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center gap-2 border border-border px-8 py-4 rounded-full hover:bg-muted/50 transition-colors text-base font-normal"
+                        >
+                          <Smartphone className="h-5 w-5" />
+                          Download App
+                        </a>
+                      )}
+                    </div>
+                  </div>
+                </section>
+              )}
             </section>
 
             {/* Ideabaaz uses a custom narrative case study */}
@@ -1038,10 +1100,11 @@ const ProjectDetails: React.FC = () => {
                   </div>
                 </section>
 
-                {/* Gallery & Links - Combined */}
+                {/* Gallery & Links - Combined (for non-Wedding Verse projects) */}
+                {project.id !== "wedding-verse" && (
                 <section
-                  ref={galleryAnim.ref}
-                  id="gallery"
+                  ref={project.id !== "wedding-verse" ? galleryAnim.ref : undefined}
+                  id={project.id !== "wedding-verse" ? "gallery" : undefined}
                   className={`min-h-screen flex flex-col justify-start py-[20vh] transition-all duration-1000 ${galleryAnim.isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}
                 >
                   {/* Gallery */}
@@ -1097,6 +1160,7 @@ const ProjectDetails: React.FC = () => {
                     </div>
                   </div>
                 </section>
+                )}
               </>
             )}
           </section>
