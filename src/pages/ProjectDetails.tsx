@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { useParams, Link, useNavigate } from "react-router-dom";
-import { ArrowLeft, Play, ExternalLink, Figma, Smartphone, CheckCircle2, AlertCircle, Expand } from "lucide-react";
+import { ArrowLeft, Play, ExternalLink, Figma, Smartphone, CheckCircle2, AlertCircle } from "lucide-react";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 import ProjectNav from "@/components/portfolio/ProjectNav";
 import { projectsData } from "@/data/projectData";
-import { useProjectAssets } from "@/hooks/useProjectAssets";
-import { UIGallery } from "@/components/portfolio/UIGallery";
+
+
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 import { MetricsHighlight } from "@/components/portfolio/MetricsHighlight";
 import { IdeabaazCaseStudy } from "@/components/portfolio/IdeabaazCaseStudy";
@@ -34,25 +34,6 @@ import ideabaazDocuments from "@/assets/ideabaaz-documents.png";
 import ideabaazMentorProfile from "@/assets/ideabaaz-mentor-profile.png";
 import ideabaazStartupTeam from "@/assets/ideabaaz-startup-team.png";
 import ideabaazStartupPitch from "@/assets/ideabaaz-startup-pitch.png";
-// Wedding Verse UI screens
-import weddingVerseHome from "@/assets/wedding-verse-home.png";
-import weddingVerseWelcome from "@/assets/wedding-verse-welcome.png";
-import weddingVerseDatePicker from "@/assets/wedding-verse-date-picker.png";
-import weddingVerseDashboard from "@/assets/wedding-verse-dashboard.png";
-import weddingVerseVisionBoard from "@/assets/wedding-verse-vision-board.png";
-import weddingVerseTheme from "@/assets/wedding-verse-theme.png";
-import weddingVerseGallery from "@/assets/wedding-verse-gallery.png";
-import weddingVerseBudget from "@/assets/wedding-verse-budget.png";
-import weddingVerseTrending from "@/assets/wedding-verse-trending.png";
-// Futurcraft AI UI screens
-import futurcraftUrlInput from "@/assets/futurcraft-url-input.png";
-import futurcraftBrandforge from "@/assets/futurcraft-brandforge.png";
-import futurcraftContentCompare from "@/assets/futurcraft-content-compare.png";
-import futurcraftDashboardDark from "@/assets/futurcraft-dashboard-dark.png";
-import futurcraftBlogs from "@/assets/futurcraft-blogs.png";
-import futurcraftBlogList from "@/assets/futurcraft-blog-list.png";
-import futurcraftBlogEditor from "@/assets/futurcraft-blog-editor.png";
-import futurcraftAi from "@/assets/futurcraft-ai.png";
 
 // Ideabaaz solution showcase data
 const ideabaazShowcaseScreens = [
@@ -123,146 +104,16 @@ const mockupImageMap: Record<string, string> = {
   "ideabaaz-mentor-profile.png": ideabaazMentorProfile,
   "ideabaaz-startup-team.png": ideabaazStartupTeam,
   "ideabaaz-startup-pitch.png": ideabaazStartupPitch,
-  "wedding-verse-home.png": weddingVerseHome,
-  "wedding-verse-welcome.png": weddingVerseWelcome,
-  "wedding-verse-date-picker.png": weddingVerseDatePicker,
-  "wedding-verse-dashboard.png": weddingVerseDashboard,
-  "wedding-verse-vision-board.png": weddingVerseVisionBoard,
-  "wedding-verse-theme.png": weddingVerseTheme,
-  "wedding-verse-gallery.png": weddingVerseGallery,
-  "wedding-verse-budget.png": weddingVerseBudget,
-  "wedding-verse-trending.png": weddingVerseTrending,
-  // Futurcraft AI
-  "futurcraft-url-input.png": futurcraftUrlInput,
-  "futurcraft-brandforge.png": futurcraftBrandforge,
-  "futurcraft-content-compare.png": futurcraftContentCompare,
-  "futurcraft-dashboard-dark.png": futurcraftDashboardDark,
-  "futurcraft-blogs.png": futurcraftBlogs,
-  "futurcraft-blog-list.png": futurcraftBlogList,
-  "futurcraft-blog-editor.png": futurcraftBlogEditor,
-  "futurcraft-ai.png": futurcraftAi,
 };
 
-// Futurcraft AI feature-based image groups
-const futurcraftFeatureGroups = [
-  {
-    title: "Brand Analysis",
-    description: "Onboarding and brand identity tools",
-    indicatorColor: "bg-blue-500",
-    images: [
-      { src: futurcraftUrlInput, alt: "URL Input" },
-      { src: futurcraftBrandforge, alt: "Brandforge" },
-    ]
-  },
-  {
-    title: "AI Tools",
-    description: "Core AI-powered features",
-    indicatorColor: "bg-purple-500",
-    images: [
-      { src: futurcraftContentCompare, alt: "Content Compare" },
-      { src: futurcraftAi, alt: "AI Interface" },
-    ]
-  },
-  {
-    title: "Dashboard",
-    description: "Central command center",
-    indicatorColor: "bg-emerald-500",
-    images: [
-      { src: futurcraftDashboardDark, alt: "Dashboard" },
-    ]
-  },
-  {
-    title: "Blog Management",
-    description: "Content creation suite",
-    indicatorColor: "bg-amber-500",
-    images: [
-      { src: futurcraftBlogs, alt: "Blogs Overview" },
-      { src: futurcraftBlogList, alt: "Blog List" },
-      { src: futurcraftBlogEditor, alt: "Blog Editor" },
-    ]
-  }
-];
-
-// Wedding Verse feature-based image groups
-const weddingVerseFeatureGroups = [
-  {
-    title: "Onboarding",
-    description: "Welcome flow and date selection",
-    indicatorColor: "bg-rose-500",
-    images: [
-      { src: weddingVerseHome, alt: "Home Screen" },
-      { src: weddingVerseWelcome, alt: "Welcome" },
-      { src: weddingVerseDatePicker, alt: "Date Picker" },
-    ]
-  },
-  {
-    title: "Planning Hub",
-    description: "Central dashboard and vision boards",
-    indicatorColor: "bg-pink-500",
-    images: [
-      { src: weddingVerseDashboard, alt: "Dashboard" },
-      { src: weddingVerseVisionBoard, alt: "Vision Board" },
-    ]
-  },
-  {
-    title: "Vendor Discovery",
-    description: "Browse themes and trending vendors",
-    indicatorColor: "bg-purple-500",
-    images: [
-      { src: weddingVerseTheme, alt: "Theme Selection" },
-      { src: weddingVerseTrending, alt: "Trending Vendors" },
-    ]
-  },
-  {
-    title: "Tools",
-    description: "Budget management and inspiration gallery",
-    indicatorColor: "bg-amber-500",
-    images: [
-      { src: weddingVerseBudget, alt: "Budget Tracker" },
-      { src: weddingVerseGallery, alt: "Gallery" },
-    ]
-  }
-];
-
-// Turbocloud feature-based image groups
-const turbocloudFeatureGroups = [
-  {
-    title: "Onboarding",
-    description: "Account creation and setup",
-    indicatorColor: "bg-blue-500",
-    images: [
-      { src: turbocloudSignup, alt: "Sign Up" },
-    ]
-  },
-  {
-    title: "Provider Selection",
-    description: "Multi-cloud provider comparison",
-    indicatorColor: "bg-cyan-500",
-    images: [
-      { src: turbocloudProviderSelection, alt: "Provider Selection" },
-    ]
-  },
-  {
-    title: "Dashboard",
-    description: "Cloud resource management",
-    indicatorColor: "bg-emerald-500",
-    images: [
-      { src: turbocloudDashboard1, alt: "Main Dashboard" },
-    ]
-  }
-];
 
 const ProjectDetails: React.FC = () => {
   const { slug } = useParams();
   const navigate = useNavigate();
   const [prototypeOpen, setPrototypeOpen] = useState(false);
-  const [selectedUIImage, setSelectedUIImage] = useState<string | null>(null);
 
   // Get project data based on slug
   const project = slug ? projectsData[slug] : null;
-
-  // Get project assets for gallery
-  const { assets, explorations, isLoading } = useProjectAssets(slug || "");
 
   // Scroll animations for sections
   const heroAnim = useScrollAnimation();
@@ -272,29 +123,6 @@ const ProjectDetails: React.FC = () => {
   const howIWorkedAnim = useScrollAnimation();
   const designEvolutionAnim = useScrollAnimation();
   const impactAnim = useScrollAnimation();
-  const galleryAnim = useScrollAnimation();
-  const allUIAssets = [
-    // Add database assets (now includes both mockupImages and images from useProjectAssets hook)
-    ...assets.map((asset) => ({
-      id: asset.id,
-      title: asset.alt_text || `${project?.title || "Project"} UI`,
-      description: asset.caption,
-      image_url: asset.file_path,
-      tags: asset.asset_tags,
-      contribution_level: "full",
-      is_featured: asset.is_featured,
-    })),
-    // Add UI explorations
-    ...explorations.map((exploration) => ({
-      id: exploration.id,
-      title: exploration.title,
-      description: exploration.description,
-      image_url: exploration.image_url,
-      tags: exploration.tags,
-      contribution_level: exploration.contribution_level,
-      is_featured: exploration.is_featured,
-    })),
-  ];
 
   // SEO setup
   useEffect(() => {
@@ -394,179 +222,6 @@ const ProjectDetails: React.FC = () => {
                 </div>
               )}
 
-              {/* Full-width UI Gallery for Wedding Verse - Feature-based Organization */}
-              {project.id === "wedding-verse" && (
-                <div className="mt-20 space-y-16">
-                  {weddingVerseFeatureGroups.map((group, groupIndex) => (
-                    <div key={groupIndex} className="space-y-8">
-                      <div className="flex items-center gap-4">
-                        <div className={`w-4 h-4 rounded-full ${group.indicatorColor}`} />
-                        <div>
-                          <h2 className="text-2xl font-light">{group.title}</h2>
-                          <p className="text-sm text-muted-foreground">{group.description}</p>
-                        </div>
-                      </div>
-                      <div className="space-y-8">
-                        {group.images.map((image, index) => (
-                          <div 
-                            key={`wv-${groupIndex}-${index}`}
-                            onClick={() => setSelectedUIImage(image.src)}
-                            className="group relative w-full rounded-2xl overflow-hidden cursor-pointer
-                                       bg-muted/30 border border-border/40 p-3 md:p-4
-                                       shadow-lg shadow-background/10
-                                       transition-all duration-300 
-                                       hover:border-border/80 hover:shadow-2xl hover:shadow-background/20"
-                          >
-                            <div className="relative overflow-hidden rounded-xl">
-                              <img
-                                src={image.src}
-                                alt={image.alt}
-                                className="w-full h-auto object-cover transition-transform duration-500 group-hover:scale-[1.02]"
-                                loading="lazy"
-                              />
-                              {/* Hover Overlay */}
-                              <div className="absolute inset-0 bg-foreground/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                                <div className="bg-background/80 backdrop-blur-sm rounded-full p-3 border border-border/50">
-                                  <Expand className="h-6 w-6 text-foreground" />
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  ))}
-
-                  {/* Lightbox Dialog */}
-                  <Dialog open={!!selectedUIImage} onOpenChange={() => setSelectedUIImage(null)}>
-                    <DialogContent className="w-[95vw] h-[90vh] max-w-none p-0 bg-background/95 backdrop-blur-md border-border/50">
-                      <div className="p-4 sm:p-6 h-full flex items-center justify-center">
-                        <img
-                          src={selectedUIImage || ''}
-                          alt="UI Design Detail"
-                          className="max-w-full max-h-full object-contain rounded-lg"
-                        />
-                      </div>
-                    </DialogContent>
-                  </Dialog>
-                </div>
-              )}
-
-              {/* Full-width UI Gallery for Turbocloud - Feature-based Organization */}
-              {project.id === "turbocloud" && (
-                <div className="mt-20 space-y-16">
-                  {turbocloudFeatureGroups.map((group, groupIndex) => (
-                    <div key={groupIndex} className="space-y-8">
-                      <div className="flex items-center gap-4">
-                        <div className={`w-4 h-4 rounded-full ${group.indicatorColor}`} />
-                        <div>
-                          <h2 className="text-2xl font-light">{group.title}</h2>
-                          <p className="text-sm text-muted-foreground">{group.description}</p>
-                        </div>
-                      </div>
-                      <div className="space-y-8">
-                        {group.images.map((image, index) => (
-                          <div 
-                            key={`tc-${groupIndex}-${index}`}
-                            onClick={() => setSelectedUIImage(image.src)}
-                            className="group relative w-full rounded-2xl overflow-hidden cursor-pointer
-                                       bg-muted/30 border border-border/40 p-3 md:p-4
-                                       shadow-lg shadow-background/10
-                                       transition-all duration-300 
-                                       hover:border-border/80 hover:shadow-2xl hover:shadow-background/20"
-                          >
-                            <div className="relative overflow-hidden rounded-xl">
-                              <img
-                                src={image.src}
-                                alt={image.alt}
-                                className="w-full h-auto object-cover transition-transform duration-500 group-hover:scale-[1.02]"
-                                loading="lazy"
-                              />
-                              {/* Hover Overlay */}
-                              <div className="absolute inset-0 bg-foreground/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                                <div className="bg-background/80 backdrop-blur-sm rounded-full p-3 border border-border/50">
-                                  <Expand className="h-6 w-6 text-foreground" />
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  ))}
-
-                  {/* Lightbox Dialog */}
-                  <Dialog open={!!selectedUIImage} onOpenChange={() => setSelectedUIImage(null)}>
-                    <DialogContent className="w-[95vw] h-[90vh] max-w-none p-0 bg-background/95 backdrop-blur-md border-border/50">
-                      <div className="p-4 sm:p-6 h-full flex items-center justify-center">
-                        <img
-                          src={selectedUIImage || ''}
-                          alt="UI Design Detail"
-                          className="max-w-full max-h-full object-contain rounded-lg"
-                        />
-                      </div>
-                    </DialogContent>
-                  </Dialog>
-                </div>
-              )}
-
-              {/* Full-width UI Gallery for Futurcraft AI - Feature-based Organization */}
-              {project.id === "futurcraft-ai" && (
-                <div className="mt-20 space-y-16">
-                  {futurcraftFeatureGroups.map((group, groupIndex) => (
-                    <div key={groupIndex} className="space-y-8">
-                      <div className="flex items-center gap-4">
-                        <div className={`w-4 h-4 rounded-full ${group.indicatorColor}`} />
-                        <div>
-                          <h2 className="text-2xl font-light">{group.title}</h2>
-                          <p className="text-sm text-muted-foreground">{group.description}</p>
-                        </div>
-                      </div>
-                      <div className="space-y-8">
-                        {group.images.map((image, index) => (
-                          <div 
-                            key={`${groupIndex}-${index}`}
-                            onClick={() => setSelectedUIImage(image.src)}
-                            className="group relative w-full rounded-2xl overflow-hidden cursor-pointer
-                                       bg-muted/30 border border-border/40 p-3 md:p-4
-                                       shadow-lg shadow-background/10
-                                       transition-all duration-300 
-                                       hover:border-border/80 hover:shadow-2xl hover:shadow-background/20"
-                          >
-                            <div className="relative overflow-hidden rounded-xl">
-                              <img
-                                src={image.src}
-                                alt={image.alt}
-                                className="w-full h-auto object-cover transition-transform duration-500 group-hover:scale-[1.02]"
-                                loading="lazy"
-                              />
-                              {/* Hover Overlay */}
-                              <div className="absolute inset-0 bg-foreground/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                                <div className="bg-background/80 backdrop-blur-sm rounded-full p-3 border border-border/50">
-                                  <Expand className="h-6 w-6 text-foreground" />
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  ))}
-
-                  {/* Lightbox Dialog */}
-                  <Dialog open={!!selectedUIImage} onOpenChange={() => setSelectedUIImage(null)}>
-                    <DialogContent className="w-[95vw] h-[90vh] max-w-none p-0 bg-background/95 backdrop-blur-md border-border/50">
-                      <div className="p-4 sm:p-6 h-full flex items-center justify-center">
-                        <img
-                          src={selectedUIImage || ''}
-                          alt="UI Design Detail"
-                          className="max-w-full max-h-full object-contain rounded-lg"
-                        />
-                      </div>
-                    </DialogContent>
-                  </Dialog>
-                </div>
-              )}
 
               {(project.id === "wedding-verse" || project.id === "ideabaaz") && (
                 <div className="mt-20">
@@ -610,65 +265,6 @@ const ProjectDetails: React.FC = () => {
                 </div>
               )}
 
-              {/* Gallery & Links - Second Fold for All Projects */}
-              <section
-                ref={galleryAnim.ref}
-                id="gallery"
-                className={`min-h-screen flex flex-col justify-start py-[20vh] transition-all duration-1000 ${galleryAnim.isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}
-              >
-                {/* Gallery */}
-                <div className="mb-24">
-                  <h2 className="text-3xl md:text-5xl font-light mb-20">UI Gallery</h2>
-                  {!isLoading && allUIAssets.length > 0 && (
-                    <UIGallery assets={allUIAssets} projectTitle={project.title} />
-                  )}
-                  {!isLoading && allUIAssets.length === 0 && (
-                    <p className="text-muted-foreground text-center py-12">
-                      No UI assets available for this project yet.
-                    </p>
-                  )}
-                </div>
-
-                {/* Links */}
-                <div className="text-center border-t border-border/10 pt-24">
-                  <h3 className="text-2xl md:text-3xl font-light mb-12">View the Project</h3>
-                  <div className="flex flex-wrap gap-4 justify-center">
-                    {project.links.live && (
-                      <a
-                        href={project.links.live}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center gap-2 bg-foreground text-background px-8 py-4 rounded-full hover:bg-foreground/90 transition-colors text-base font-normal"
-                      >
-                        <ExternalLink className="h-5 w-5" />
-                        Live Project
-                      </a>
-                    )}
-                    {project.links.figma && (
-                      <a
-                        href={project.links.figma}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center gap-2 border border-border px-8 py-4 rounded-full hover:bg-muted/50 transition-colors text-base font-normal"
-                      >
-                        <Figma className="h-5 w-5" />
-                        Figma
-                      </a>
-                    )}
-                    {project.links.playstore && (
-                      <a
-                        href={project.links.playstore}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center gap-2 border border-border px-8 py-4 rounded-full hover:bg-muted/50 transition-colors text-base font-normal"
-                      >
-                        <Smartphone className="h-5 w-5" />
-                        Download App
-                      </a>
-                    )}
-                  </div>
-                </div>
-              </section>
             </section>
 
             {/* Ideabaaz uses a custom narrative case study */}
