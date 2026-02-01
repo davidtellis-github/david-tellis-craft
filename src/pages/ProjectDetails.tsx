@@ -265,6 +265,28 @@ const ProjectDetails: React.FC = () => {
                 </div>
               )}
 
+              {/* Full-width UI Gallery for Wedding Verse */}
+              {project.id === "wedding-verse" && project.images && project.images.length > 0 && (
+                <div className="mt-20 space-y-6">
+                  <h2 className="text-2xl font-light mb-8">UI Screens</h2>
+                  <div className="space-y-6">
+                    {project.images.map((imagePath, index) => (
+                      <div 
+                        key={index} 
+                        className="w-full rounded-2xl overflow-hidden shadow-lg shadow-background/10"
+                      >
+                        <img
+                          src={mockupImageMap[imagePath] || imagePath}
+                          alt={`${project.title} - Screen ${index + 1}`}
+                          className="w-full h-auto object-cover"
+                          loading="lazy"
+                        />
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+
               {/* Embedded Metrics - Wedding Verse and Ideabaaz */}
               {(project.id === "wedding-verse" || project.id === "ideabaaz") && (
                 <div className="mt-20">
