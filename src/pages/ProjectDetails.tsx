@@ -44,6 +44,15 @@ import weddingVerseTheme from "@/assets/wedding-verse-theme.png";
 import weddingVerseGallery from "@/assets/wedding-verse-gallery.png";
 import weddingVerseBudget from "@/assets/wedding-verse-budget.png";
 import weddingVerseTrending from "@/assets/wedding-verse-trending.png";
+// Futurcraft AI UI screens
+import futurcraftUrlInput from "@/assets/futurcraft-url-input.png";
+import futurcraftBrandforge from "@/assets/futurcraft-brandforge.png";
+import futurcraftContentCompare from "@/assets/futurcraft-content-compare.png";
+import futurcraftDashboardDark from "@/assets/futurcraft-dashboard-dark.png";
+import futurcraftBlogs from "@/assets/futurcraft-blogs.png";
+import futurcraftBlogList from "@/assets/futurcraft-blog-list.png";
+import futurcraftBlogEditor from "@/assets/futurcraft-blog-editor.png";
+import futurcraftAi from "@/assets/futurcraft-ai.png";
 
 // Ideabaaz solution showcase data
 const ideabaazShowcaseScreens = [
@@ -123,7 +132,31 @@ const mockupImageMap: Record<string, string> = {
   "wedding-verse-gallery.png": weddingVerseGallery,
   "wedding-verse-budget.png": weddingVerseBudget,
   "wedding-verse-trending.png": weddingVerseTrending,
+  // Futurcraft AI
+  "futurcraft-url-input.png": futurcraftUrlInput,
+  "futurcraft-brandforge.png": futurcraftBrandforge,
+  "futurcraft-content-compare.png": futurcraftContentCompare,
+  "futurcraft-dashboard-dark.png": futurcraftDashboardDark,
+  "futurcraft-blogs.png": futurcraftBlogs,
+  "futurcraft-blog-list.png": futurcraftBlogList,
+  "futurcraft-blog-editor.png": futurcraftBlogEditor,
+  "futurcraft-ai.png": futurcraftAi,
 };
+
+// Futurcraft AI separated light/dark mode images
+const futurcraftLightModeImages = [
+  { src: futurcraftUrlInput, alt: "URL Input - Light Mode" },
+  { src: futurcraftBrandforge, alt: "Brandforge - Light Mode" },
+  { src: futurcraftContentCompare, alt: "Content Compare - Light Mode" },
+  { src: futurcraftBlogs, alt: "Blogs Overview - Light Mode" },
+  { src: futurcraftBlogList, alt: "Blog List - Light Mode" },
+  { src: futurcraftBlogEditor, alt: "Blog Editor - Light Mode" },
+];
+
+const futurcraftDarkModeImages = [
+  { src: futurcraftDashboardDark, alt: "Dashboard - Dark Mode" },
+  { src: futurcraftAi, alt: "AI Interface - Dark Mode" },
+];
 const ProjectDetails: React.FC = () => {
   const { slug } = useParams();
   const navigate = useNavigate();
@@ -317,7 +350,96 @@ const ProjectDetails: React.FC = () => {
                 </div>
               )}
 
-              {/* Embedded Metrics - Wedding Verse and Ideabaaz */}
+              {/* Full-width UI Gallery for Futurcraft AI - Separated Light/Dark Mode */}
+              {project.id === "futurcraft-ai" && (
+                <div className="mt-20 space-y-16">
+                  {/* Light Mode Section */}
+                  <div className="space-y-8">
+                    <div className="flex items-center gap-4">
+                      <div className="w-4 h-4 rounded-full bg-muted-foreground/20 border border-border" />
+                      <h2 className="text-2xl font-light">Light Mode UI</h2>
+                    </div>
+                    <div className="space-y-8">
+                      {futurcraftLightModeImages.map((image, index) => (
+                        <div 
+                          key={`light-${index}`}
+                          onClick={() => setSelectedUIImage(image.src)}
+                          className="group relative w-full rounded-2xl overflow-hidden cursor-pointer
+                                     bg-muted/30 border border-border/40 p-3 md:p-4
+                                     shadow-lg shadow-background/10
+                                     transition-all duration-300 
+                                     hover:border-border/80 hover:shadow-2xl hover:shadow-background/20"
+                        >
+                          <div className="relative overflow-hidden rounded-xl">
+                            <img
+                              src={image.src}
+                              alt={image.alt}
+                              className="w-full h-auto object-cover transition-transform duration-500 group-hover:scale-[1.02]"
+                              loading="lazy"
+                            />
+                            {/* Hover Overlay */}
+                            <div className="absolute inset-0 bg-foreground/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                              <div className="bg-background/80 backdrop-blur-sm rounded-full p-3 border border-border/50">
+                                <Expand className="h-6 w-6 text-foreground" />
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Dark Mode Section */}
+                  <div className="space-y-8">
+                    <div className="flex items-center gap-4">
+                      <div className="w-4 h-4 rounded-full bg-foreground border border-border" />
+                      <h2 className="text-2xl font-light">Dark Mode UI</h2>
+                    </div>
+                    <div className="space-y-8">
+                      {futurcraftDarkModeImages.map((image, index) => (
+                        <div 
+                          key={`dark-${index}`}
+                          onClick={() => setSelectedUIImage(image.src)}
+                          className="group relative w-full rounded-2xl overflow-hidden cursor-pointer
+                                     bg-muted/30 border border-border/40 p-3 md:p-4
+                                     shadow-lg shadow-background/10
+                                     transition-all duration-300 
+                                     hover:border-border/80 hover:shadow-2xl hover:shadow-background/20"
+                        >
+                          <div className="relative overflow-hidden rounded-xl">
+                            <img
+                              src={image.src}
+                              alt={image.alt}
+                              className="w-full h-auto object-cover transition-transform duration-500 group-hover:scale-[1.02]"
+                              loading="lazy"
+                            />
+                            {/* Hover Overlay */}
+                            <div className="absolute inset-0 bg-foreground/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                              <div className="bg-background/80 backdrop-blur-sm rounded-full p-3 border border-border/50">
+                                <Expand className="h-6 w-6 text-foreground" />
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Lightbox Dialog */}
+                  <Dialog open={!!selectedUIImage} onOpenChange={() => setSelectedUIImage(null)}>
+                    <DialogContent className="w-[95vw] h-[90vh] max-w-none p-0 bg-background/95 backdrop-blur-md border-border/50">
+                      <div className="p-4 sm:p-6 h-full flex items-center justify-center">
+                        <img
+                          src={selectedUIImage || ''}
+                          alt="UI Design Detail"
+                          className="max-w-full max-h-full object-contain rounded-lg"
+                        />
+                      </div>
+                    </DialogContent>
+                  </Dialog>
+                </div>
+              )}
+
               {(project.id === "wedding-verse" || project.id === "ideabaaz") && (
                 <div className="mt-20">
                   <h2 className="text-2xl font-light mb-4">Impact Metrics</h2>
