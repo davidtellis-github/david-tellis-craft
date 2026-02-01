@@ -14,6 +14,7 @@ import weddingVerseTheme from '@/assets/wedding-verse-theme.png';
 import weddingVerseGallery from '@/assets/wedding-verse-gallery.png';
 import weddingVerseBudget from '@/assets/wedding-verse-budget.png';
 import weddingVerseTrending from '@/assets/wedding-verse-trending.png';
+import weddingVerseUxFlow from '@/assets/wedding-verse-ux-flow.png';
 
 // Turbocloud project images
 import turbocloudDashboard1 from '@/assets/turbocloud-dashboard-1.jpg';
@@ -64,6 +65,7 @@ export const imageAssets: Record<string, string> = {
   'wedding-verse-gallery.png': weddingVerseGallery,
   'wedding-verse-budget.png': weddingVerseBudget,
   'wedding-verse-trending.png': weddingVerseTrending,
+  'wedding-verse-ux-flow.png': weddingVerseUxFlow,
   'turbocloud-dashboard-1.jpg': turbocloudDashboard1,
   'turbocloud-provider-selection.jpg': turbocloudProviderSelection,
   'turbocloud-signup.jpg': turbocloudSignup,

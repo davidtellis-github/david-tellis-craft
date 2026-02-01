@@ -128,6 +128,7 @@ export const projectsData: Record<string, ProjectData> = {
       'wedding-verse-theme.png',
       'wedding-verse-gallery.png',
       'wedding-verse-budget.png',
+      'wedding-verse-ux-flow.png',
       'wedding-verse-trending.png'
     ],
     
