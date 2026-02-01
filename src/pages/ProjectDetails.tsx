@@ -270,7 +270,7 @@ const ProjectDetails: React.FC = () => {
                 <div className="mt-20 space-y-6">
                   <h2 className="text-2xl font-light mb-8">UI Screens</h2>
                   <div className="space-y-6">
-                    {project.images.map((imagePath, index) => (
+                    {project.images.slice(0, -1).map((imagePath, index) => (
                       <div 
                         key={index} 
                         className="w-full rounded-2xl overflow-hidden shadow-lg shadow-background/10"
