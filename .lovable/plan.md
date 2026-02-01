@@ -1,50 +1,100 @@
 
 
-## Improve Wedding Verse UI Screens Gallery
+## Organize Futurcraft AI Images by Feature Area
 
-Based on the current simple stacked layout and the design preferences, here are the improvements for a better viewing experience.
+Restructure the gallery to group images logically by product feature, making it easier for viewers to understand the product's capabilities.
 
 ### Current State
 
-- Images are displayed in a basic vertical stack with rounded corners
-- No hover effects or interactivity
-- No lightbox for viewing images in full screen
-- Basic spacing between images
+Images are currently split into Light Mode and Dark Mode sections with a somewhat random order:
 
-### Proposed Improvements
+**Light Mode (6 images):**
+1. URL Input
+2. Brandforge
+3. Content Compare
+4. Blogs Overview
+5. Blog List
+6. Blog Editor
 
-1. **Add Lightbox/Dialog for Full-Screen Viewing**
-   - Click any image to open it in a full-screen modal
-   - Smooth transition and backdrop blur for focus
+**Dark Mode (2 images):**
+1. Dashboard
+2. AI Interface
 
-2. **Enhanced Hover Effects**
-   - Subtle scale animation on hover (scale 1.02)
-   - Overlay with expand icon indicator
-   - Smooth shadow transition on hover
+### Proposed Feature-Based Organization
 
-3. **Improved Visual Treatment**
-   - Add subtle border with hover state enhancement
-   - Slightly muted background for image containers
-   - Larger shadows matching the design system (shadow-2xl)
+Reorganize into 4 clear feature areas, each with a descriptive label:
 
-4. **Better Spacing and Layout**
-   - Increase gap between images (space-y-8 instead of space-y-6)
-   - Add padding inside containers for breathing room
+**1. Brand Analysis** (Onboarding & Analysis Tools)
+   - URL Input (user enters website to analyze)
+   - Brandforge (brand identity generation)
+
+**2. AI Tools** (Core AI Features)
+   - Content Compare (AI comparison tool)
+   - AI Interface (dark mode AI chat/tools)
+
+**3. Dashboard** (Central Hub)
+   - Dashboard Dark (main control center)
+
+**4. Blog Management** (Content Creation Suite)
+   - Blogs Overview
+   - Blog List
+   - Blog Editor
+
+### Visual Design
+
+Each feature section will have:
+- A colored indicator dot matching the feature theme
+- Clear section heading
+- Images displayed in logical order within each group
 
 ### Technical Details
 
 **File: `src/pages/ProjectDetails.tsx`**
 
-Changes to the Wedding Verse UI gallery section (around lines 268-288):
+1. **Replace the two arrays** (lines 147-159):
+   ```javascript
+   const futurcraftFeatureGroups = [
+     {
+       title: "Brand Analysis",
+       description: "Onboarding and brand identity tools",
+       indicatorColor: "bg-blue-500",
+       images: [
+         { src: futurcraftUrlInput, alt: "URL Input" },
+         { src: futurcraftBrandforge, alt: "Brandforge" },
+       ]
+     },
+     {
+       title: "AI Tools",
+       description: "Core AI-powered features",
+       indicatorColor: "bg-purple-500",
+       images: [
+         { src: futurcraftContentCompare, alt: "Content Compare" },
+         { src: futurcraftAi, alt: "AI Interface" },
+       ]
+     },
+     {
+       title: "Dashboard",
+       description: "Central command center",
+       indicatorColor: "bg-emerald-500",
+       images: [
+         { src: futurcraftDashboardDark, alt: "Dashboard" },
+       ]
+     },
+     {
+       title: "Blog Management",
+       description: "Content creation suite",
+       indicatorColor: "bg-amber-500",
+       images: [
+         { src: futurcraftBlogs, alt: "Blogs Overview" },
+         { src: futurcraftBlogList, alt: "Blog List" },
+         { src: futurcraftBlogEditor, alt: "Blog Editor" },
+       ]
+     }
+   ];
+   ```
 
-- Import `useState` for lightbox state management
-- Import `Dialog` and `DialogContent` from `@/components/ui/dialog`
-- Add state to track selected image for lightbox
-- Update the image container with:
-  - `cursor-pointer` for clickability indication
-  - `group` class for hover state management
-  - Hover overlay with expand icon
-  - Subtle scale and shadow transitions
-- Add Dialog component for full-screen image viewing
-- Improve container styling with `bg-muted/30 border border-border/40` consistent with Gallery3D component
+2. **Update the rendering section** (lines 354-441):
+   - Replace the Light/Dark mode sections with a loop through feature groups
+   - Each group shows its colored indicator, title, and images
+   - Maintains the same hover effects and lightbox functionality
 
