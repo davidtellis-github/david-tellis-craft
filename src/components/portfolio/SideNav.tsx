@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import ResumeModal from "./ResumeModal";
 
 const sections = [
   { id: "intro", label: "Intro" },
@@ -107,14 +108,24 @@ const SideNav: React.FC = () => {
           </ul>
         </div>
 
-        {/* --- All Work CTA --- */}
-        <Link
-          to="/portfolio"
-          className="text-muted-foreground text-[clamp(12px,1.6vmin,16px)] 
-                     hover:text-foreground transition-colors duration-300"
-        >
-          All work
-        </Link>
+        {/* --- Resume & All Work CTAs --- */}
+        <div className="flex flex-col gap-2">
+          <ResumeModal>
+            <button
+              className="text-muted-foreground text-[clamp(12px,1.6vmin,16px)] 
+                         hover:text-foreground transition-colors duration-300 text-left"
+            >
+              Resume
+            </button>
+          </ResumeModal>
+          <Link
+            to="/portfolio"
+            className="text-muted-foreground text-[clamp(12px,1.6vmin,16px)] 
+                       hover:text-foreground transition-colors duration-300"
+          >
+            All work
+          </Link>
+        </div>
       </div>
     </nav>
   );
