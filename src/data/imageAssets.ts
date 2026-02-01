@@ -20,6 +20,12 @@ import weddingVerseUxFlow from '@/assets/wedding-verse-ux-flow.png';
 import turbocloudDashboard1 from '@/assets/turbocloud-dashboard-1.jpg';
 import turbocloudProviderSelection from '@/assets/turbocloud-provider-selection.jpg';
 import turbocloudSignup from '@/assets/turbocloud-signup.jpg';
+import turbocloudFinopsDashboard from '@/assets/turbocloud-finops-dashboard.png';
+import turbocloudMonitoring from '@/assets/turbocloud-monitoring.png';
+import turbocloudSignupMockup from '@/assets/turbocloud-signup-mockup.jpg';
+import turbocloudProviderMockup from '@/assets/turbocloud-provider-mockup.jpg';
+import turbocloudDashboardMockup from '@/assets/turbocloud-dashboard-mockup.jpg';
+import turbocloudFinopsMockup from '@/assets/turbocloud-finops-mockup.jpg';
 
 // Wedding Verse Design System
 import designSystem1 from '@/assets/wedding-verse-design-system-1.png';
@@ -69,6 +75,12 @@ export const imageAssets: Record<string, string> = {
   'turbocloud-dashboard-1.jpg': turbocloudDashboard1,
   'turbocloud-provider-selection.jpg': turbocloudProviderSelection,
   'turbocloud-signup.jpg': turbocloudSignup,
+  'turbocloud-finops-dashboard.png': turbocloudFinopsDashboard,
+  'turbocloud-monitoring.png': turbocloudMonitoring,
+  'turbocloud-signup-mockup.jpg': turbocloudSignupMockup,
+  'turbocloud-provider-mockup.jpg': turbocloudProviderMockup,
+  'turbocloud-dashboard-mockup.jpg': turbocloudDashboardMockup,
+  'turbocloud-finops-mockup.jpg': turbocloudFinopsMockup,
   'futurcraft-url-input.png': futurcraftUrlInput,
   'futurcraft-brandforge.png': futurcraftBrandforge,
   'futurcraft-content-compare.png': futurcraftContentCompare,

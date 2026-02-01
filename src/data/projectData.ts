@@ -647,13 +647,15 @@ export const projectsData: Record<string, ProjectData> = {
 
     mockupImages: [
       'turbocloud-featured.png',
-      'turbocloud-provider-selection.jpg',
-      'turbocloud-dashboard-1.jpg'
+      'turbocloud-finops-dashboard.png',
+      'turbocloud-monitoring.png',
+      'turbocloud-signup-mockup.jpg',
+      'turbocloud-provider-mockup.jpg',
+      'turbocloud-dashboard-mockup.jpg',
+      'turbocloud-finops-mockup.jpg'
     ],
     
-    images: [
-      'turbocloud-signup.jpg'
-    ]
+    images: []
   },
 
   "health-project": {
