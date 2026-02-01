@@ -516,7 +516,16 @@ export const projectsData: Record<string, ProjectData> = {
       'futurcraft-dashboard-dark.png',
       'futurcraft-blogs.png',
       'futurcraft-blog-list.png',
-      'futurcraft-blog-editor.png'
+      'futurcraft-blog-editor.png',
+      'futurcraft-analytics-mockup.jpg',
+      'futurcraft-analytics-pedestal.jpg',
+      'futurcraft-stats-blue.jpg',
+      'futurcraft-geo-analytics.jpg',
+      'futurcraft-post-editor.jpg',
+      'futurcraft-social-preview.jpg',
+      'futurcraft-image-picker.jpg',
+      'futurcraft-blog-seo.jpg',
+      'futurcraft-blog-export.jpg'
     ],
     
     role: {

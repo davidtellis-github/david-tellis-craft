@@ -47,6 +47,15 @@ import futurcraftDashboardDark from '@/assets/futurcraft-dashboard-dark.png';
 import futurcraftBlogs from '@/assets/futurcraft-blogs.png';
 import futurcraftBlogList from '@/assets/futurcraft-blog-list.png';
 import futurcraftBlogEditor from '@/assets/futurcraft-blog-editor.png';
+import futurcraftAnalyticsMockup from '@/assets/futurcraft-analytics-mockup.jpg';
+import futurcraftAnalyticsPedestal from '@/assets/futurcraft-analytics-pedestal.jpg';
+import futurcraftStatsBlue from '@/assets/futurcraft-stats-blue.jpg';
+import futurcraftGeoAnalytics from '@/assets/futurcraft-geo-analytics.jpg';
+import futurcraftPostEditor from '@/assets/futurcraft-post-editor.jpg';
+import futurcraftSocialPreview from '@/assets/futurcraft-social-preview.jpg';
+import futurcraftImagePicker from '@/assets/futurcraft-image-picker.jpg';
+import futurcraftBlogSeo from '@/assets/futurcraft-blog-seo.jpg';
+import futurcraftBlogExport from '@/assets/futurcraft-blog-export.jpg';
 
 // Image asset mapping
 export const imageAssets: Record<string, string> = {
@@ -88,6 +97,15 @@ export const imageAssets: Record<string, string> = {
   'futurcraft-blogs.png': futurcraftBlogs,
   'futurcraft-blog-list.png': futurcraftBlogList,
   'futurcraft-blog-editor.png': futurcraftBlogEditor,
+  'futurcraft-analytics-mockup.jpg': futurcraftAnalyticsMockup,
+  'futurcraft-analytics-pedestal.jpg': futurcraftAnalyticsPedestal,
+  'futurcraft-stats-blue.jpg': futurcraftStatsBlue,
+  'futurcraft-geo-analytics.jpg': futurcraftGeoAnalytics,
+  'futurcraft-post-editor.jpg': futurcraftPostEditor,
+  'futurcraft-social-preview.jpg': futurcraftSocialPreview,
+  'futurcraft-image-picker.jpg': futurcraftImagePicker,
+  'futurcraft-blog-seo.jpg': futurcraftBlogSeo,
+  'futurcraft-blog-export.jpg': futurcraftBlogExport,
 };
 
 // Helper function to resolve image paths
