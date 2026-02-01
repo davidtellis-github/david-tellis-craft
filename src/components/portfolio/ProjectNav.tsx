@@ -9,8 +9,6 @@ const sections = [
   { id: "features", label: "Features" },
   { id: "how-i-worked", label: "How I Worked" },
   { id: "design-evolution", label: "Design Evolution" },
-  { id: "impact", label: "Impact" },
-  { id: "gallery", label: "Gallery & Links" },
 ];
 
 const ProjectNav: React.FC = () => {
