@@ -130,63 +130,63 @@ const WorkGrid: React.FC = () => {
             const featuredAsset = project.assets.find(asset => asset.is_featured);
             
             return (
-              <div 
+            <div 
                 key={project.id} 
                 ref={el => projectRefs.current[index] = el}
                 data-index={index}
-                className="border-t border-border pt-10 first:border-t-0 first:pt-0 transition-all duration-500"
+                className="transition-all duration-500"
               >
                 <Link to={`/project/${project.slug}`} className="block group cursor-pointer" aria-label={`View case study: ${project.title}`}>
-                  {/* Title Row - Full Width */}
-                  <div className="flex items-center justify-between w-full pb-10">
-                    <div className="flex items-center gap-8 ">
-                      {/* Number */}
-                      <div className="text-2xl font-semibold text-muted-foreground ">
-                        {String(index + 1).padStart(2, '0')}
-                      </div>
-                      
-                      {/* Title */}
-                      <h3 className="text-2xl lg:text-4xl font-medium  tracking-loose">
-                        {project.title}
-                      </h3>
-                    </div>
-                    
-                    {/* Arrow */}
-                    <div className="w-10 h-10 flex items-center justify-center bg-foreground text-background rounded-full group-hover:scale-110 transition-all duration-300">
-                      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-5 h-5">
-                        <path d="M7 17L17 7M17 7H7M17 7V17" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                      </svg>
-                    </div>
-                  </div>
-
-                  {/* Video and Content - Shown based on scroll */}
-                  <div className={`overflow-hidden autoplay-true transition-all duration-700 mt-6 ${
+                  {/* Image with Gradient Overlay */}
+                  <div className={`relative overflow-hidden rounded-2xl aspect-[16/9] transition-all duration-700 ${
                     isExpanded 
-                      ? 'opacity-100 max-h-full' 
-                      : 'opacity-0 max-h-0'
+                      ? 'opacity-100 translate-y-0' 
+                      : 'opacity-0 translate-y-8'
                   }`}>
-                    {/* Featured Asset or Placeholder */}
-                    <div className="aspect-video w-full mb-6">
-                      {featuredAsset && featuredAsset.asset_type === 'video' ? (
-                        <iframe
-                          src={featuredAsset.file_path}
-                          className="w-full h-full rounded-lg pointer-events-none"
-                          frameBorder="0"
-                          allow="autoplay; fullscreen; picture-in-picture"
-                          allowFullScreen
-                          title={`${project.title} video preview`}
-                        ></iframe>
-                      ) : featuredAsset && featuredAsset.asset_type === 'image' ? (
-                        <img 
-                          src={featuredAsset.file_path} 
-                          alt={featuredAsset.alt_text || `${project.title} preview`}
-                          className="w-full h-full object-cover rounded-lg"
-                        />
-                      ) : (
-                        <div className="w-full h-full bg-muted rounded-lg flex items-center justify-center">
-                          <span className="text-muted-foreground">Preview coming soon</span>
+                    {/* Featured Asset */}
+                    {featuredAsset && featuredAsset.asset_type === 'video' ? (
+                      <iframe
+                        src={featuredAsset.file_path}
+                        className="w-full h-full absolute inset-0 pointer-events-none"
+                        frameBorder="0"
+                        allow="autoplay; fullscreen; picture-in-picture"
+                        allowFullScreen
+                        title={`${project.title} video preview`}
+                      ></iframe>
+                    ) : featuredAsset && featuredAsset.asset_type === 'image' ? (
+                      <img 
+                        src={featuredAsset.file_path} 
+                        alt={featuredAsset.alt_text || `${project.title} preview`}
+                        className="w-full h-full object-cover absolute inset-0 group-hover:scale-105 transition-transform duration-700"
+                      />
+                    ) : (
+                      <div className="w-full h-full absolute inset-0 bg-muted flex items-center justify-center">
+                        <span className="text-muted-foreground">Preview coming soon</span>
+                      </div>
+                    )}
+
+                    {/* Gradient Overlay */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+
+                    {/* Overlay Content: Number, Title, CTA */}
+                    <div className="absolute inset-x-0 bottom-0 p-6 md:p-10 flex items-end justify-between">
+                      <div className="flex items-center gap-4 md:gap-6">
+                        {/* Number */}
+                        <div className="text-lg md:text-2xl font-semibold text-white/60">
+                          {String(index + 1).padStart(2, '0')}
                         </div>
-                      )}
+                        {/* Title */}
+                        <h3 className="text-xl md:text-3xl lg:text-4xl font-medium tracking-tight text-white">
+                          {project.title}
+                        </h3>
+                      </div>
+
+                      {/* Arrow CTA */}
+                      <div className="w-10 h-10 md:w-12 md:h-12 flex-shrink-0 flex items-center justify-center bg-white/20 backdrop-blur-sm text-white rounded-full group-hover:bg-white group-hover:text-black group-hover:scale-110 transition-all duration-300">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-5 h-5">
+                          <path d="M7 17L17 7M17 7H7M17 7V17" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                        </svg>
+                      </div>
                     </div>
                   </div>
                 </Link>
