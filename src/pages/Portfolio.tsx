@@ -65,7 +65,7 @@ const Portfolio = () => {
             
 
             {/* Project Timeline */}
-            <div id="projects" className="w-full mb-20 scroll-mt-20">
+            <div id="projects" className="w-full scroll-mt-20">
               <ProjectTimeline 
                 activeCategory={activeCategory}
                 onProjectHover={setHoveredProject}
@@ -74,12 +74,12 @@ const Portfolio = () => {
             </div>
 
             {/* 3D Product Gallery */}
-            <div id="3d-gallery" className="scroll-mt-20">
+            <div id="3d-gallery" className="scroll-mt-20 mt-[20vh]">
               <Gallery3D />
             </div>
 
             {/* UI Designs Masonry Gallery */}
-            <div id="ui-designs-gallery" className="scroll-mt-20">
+            <div id="ui-designs-gallery" className="scroll-mt-20 mt-[20vh]">
               <UIMasonryGallery />
             </div>
 
