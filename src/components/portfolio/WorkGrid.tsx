@@ -138,7 +138,7 @@ const WorkGrid: React.FC = () => {
               >
                 <Link to={`/project/${project.slug}`} className="block group cursor-pointer" aria-label={`View case study: ${project.title}`}>
                   {/* Image with Gradient Overlay */}
-                  <div className={`relative overflow-hidden rounded-2xl aspect-[16/9] transition-all duration-700 ${
+                  <div className={`relative overflow-hidden rounded-2xl transition-all duration-700 ${
                     isExpanded 
                       ? 'opacity-100 translate-y-0' 
                       : 'opacity-0 translate-y-8'
@@ -157,7 +157,7 @@ const WorkGrid: React.FC = () => {
                       <img 
                         src={featuredAsset.file_path} 
                         alt={featuredAsset.alt_text || `${project.title} preview`}
-                        className="w-full h-full object-cover absolute inset-0"
+                        className="w-full h-auto block rounded-2xl"
                       />
                     ) : (
                       <div className="w-full h-full absolute inset-0 bg-muted flex items-center justify-center">
