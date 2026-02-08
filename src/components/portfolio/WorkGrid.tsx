@@ -168,17 +168,25 @@ const WorkGrid: React.FC = () => {
                     {/* Gradient Overlay */}
                     <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
 
-                    {/* Overlay Content: Number, Title, CTA */}
+                    {/* Overlay Content: Number, Title, Subtitle, Role, CTA */}
                     <div className="absolute inset-x-0 bottom-0 p-6 md:p-10 flex items-end justify-between">
-                      <div className="flex items-center gap-4 md:gap-6">
+                      <div className="flex items-start gap-4 md:gap-6">
                         {/* Number */}
-                        <div className="text-lg md:text-2xl font-semibold text-white/60">
+                        <div className="text-lg md:text-2xl font-semibold text-white/60 mt-1">
                           {String(index + 1).padStart(2, '0')}
                         </div>
-                        {/* Title */}
-                        <h3 className="text-xl md:text-3xl lg:text-4xl font-medium tracking-tight text-white">
-                          {project.title}
-                        </h3>
+                        {/* Title + Subtitle + Role */}
+                        <div className="flex flex-col gap-1">
+                          <h3 className="text-xl md:text-3xl lg:text-4xl font-medium tracking-tight text-white">
+                            {project.title}
+                          </h3>
+                          <p className="text-sm md:text-base text-white/70 max-w-xl leading-snug">
+                            {project.subtitle}
+                          </p>
+                          <span className="text-xs md:text-sm text-white/50 mt-1">
+                            {project.role_title}
+                          </span>
+                        </div>
                       </div>
 
                       {/* Arrow CTA */}
