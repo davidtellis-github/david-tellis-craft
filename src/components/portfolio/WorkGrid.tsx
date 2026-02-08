@@ -157,7 +157,7 @@ const WorkGrid: React.FC = () => {
                       <img 
                         src={featuredAsset.file_path} 
                         alt={featuredAsset.alt_text || `${project.title} preview`}
-                        className="w-full h-full object-cover absolute inset-0 group-hover:scale-105 transition-transform duration-700"
+                        className="w-full h-full object-cover absolute inset-0"
                       />
                     ) : (
                       <div className="w-full h-full absolute inset-0 bg-muted flex items-center justify-center">
