@@ -177,9 +177,13 @@ const WorkGrid: React.FC = () => {
                         <p className="text-sm md:text-base text-white/70 max-w-xl leading-snug">
                           {project.subtitle}
                         </p>
-                        <span className="text-xs md:text-sm text-white/50 mt-1">
-                          {project.role_title}
-                        </span>
+                        <div className="flex flex-wrap gap-2 mt-2">
+                          {project.role_title?.split('/').map((role, i) => (
+                            <span key={i} className="text-xs md:text-sm text-white/80 bg-white/15 backdrop-blur-sm px-3 py-1 rounded-full">
+                              {role.trim()}
+                            </span>
+                          ))}
+                        </div>
                       </div>
 
                       {/* Arrow CTA */}
