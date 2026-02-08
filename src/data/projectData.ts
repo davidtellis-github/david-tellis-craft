@@ -111,7 +111,7 @@ export const projectsData: Record<string, ProjectData> = {
   "wedding-verse": {
     id: "wedding-verse",
     title: "Wedding Verse",
-    subtitle: "Led complete product design for a dual-sided marketplace connecting couples with wedding vendors through AI-powered discovery.",
+    subtitle: "AI-powered collaborative wedding planning and vendor platform",
     description: "Owned end-to-end design strategy, UX research, interface design, and AI conversation flows. Built a comprehensive 120-component design system, designed AI voice onboarding, and delivered a scalable MVP in 5 months—achieving 63% faster vendor discovery, 42% higher response rates, and 28% Week 1 retention lift.",
     category: "product",
     year: "2024",
@@ -133,7 +133,7 @@ export const projectsData: Record<string, ProjectData> = {
     ],
     
     role: {
-      title: "Lead Product Designer",
+      title: "Lead Designer / UX Strategy",
       duration: "8-month engagement",
       team: "CEO • Engineering Team • Ops",
       tools: ["Figma", "Design Systems", "User Research", "AI Scripting"]
