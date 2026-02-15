@@ -113,4 +113,14 @@ All colors are in HSL.
     scrollbar-width: none;
   }
 }
+
+/* Add tracking to small text for better readability */
+.text-xs,
+.text-sm,
+[style*="font-size: 12px"],
+[style*="font-size: 13px"],
+[style*="font-size: 14px"],
+[style*="font-size: 15px"] {
+  letter-spacing: 0.02em;
+}
 /* ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', 'Apple Color Emoji', 'Segoe UI Emoji */
