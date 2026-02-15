@@ -112,6 +112,11 @@ const ProjectDetails: React.FC = () => {
   const navigate = useNavigate();
   const [prototypeOpen, setPrototypeOpen] = useState(false);
 
+  // Scroll to top when component mounts or slug changes
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [slug]);
+
   // Get project data based on slug
   const project = slug ? projectsData[slug] : null;
 
