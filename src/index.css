@@ -121,6 +121,6 @@ All colors are in HSL.
 [style*="font-size: 13px"],
 [style*="font-size: 14px"],
 [style*="font-size: 15px"] {
-  letter-spacing: 0.02em;
+  letter-spacing: 0.1em;
 }
 /* ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', 'Apple Color Emoji', 'Segoe UI Emoji */
