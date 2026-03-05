@@ -89,6 +89,7 @@ const HandGestureManager: React.FC = () => {
   const [showDebug, setShowDebug] = useState(false);
   const [cameraReady, setCameraReady] = useState(false);
   const [modelLoaded, setModelLoaded] = useState(false);
+  const [loadingStatus, setLoadingStatus] = useState<string>("");
   const [showOnboarding, setShowOnboarding] = useState(false);
   const [showTopZone, setShowTopZone] = useState(false);
   const [showBottomZone, setShowBottomZone] = useState(false);
@@ -390,37 +391,50 @@ const HandGestureManager: React.FC = () => {
 
     const init = async () => {
       try {
-        // Step 1: Load model FIRST
-        const hands = new Hands({
-          locateFile: (file) =>
-            `https://cdn.jsdelivr.net/npm/@mediapipe/hands/${file}`,
-        });
-        hands.setOptions({
-          maxNumHands: 2,
-          modelComplexity: 0,
-          minDetectionConfidence: 0.6,
-          minTrackingConfidence: 0.5,
-        });
-        hands.onResults(onResults);
+        setLoadingStatus("Loading hand model…");
 
-        // Initialize model by sending a blank frame
-        const tempCanvas = document.createElement("canvas");
-        tempCanvas.width = 640;
-        tempCanvas.height = 480;
-        await hands.send({ image: tempCanvas });
+        // Start model + camera in PARALLEL
+        const modelPromise = (async () => {
+          const hands = new Hands({
+            locateFile: (file) =>
+              `https://cdn.jsdelivr.net/npm/@mediapipe/hands/${file}`,
+          });
+          hands.setOptions({
+            maxNumHands: 2,
+            modelComplexity: 0,
+            minDetectionConfidence: 0.6,
+            minTrackingConfidence: 0.5,
+          });
+          hands.onResults(onResults);
 
-        if (cancelled) return;
-        handsRef.current = hands;
-        setModelLoaded(true);
+          // Initialize model by sending a blank frame
+          const tempCanvas = document.createElement("canvas");
+          tempCanvas.width = 640;
+          tempCanvas.height = 480;
+          await hands.send({ image: tempCanvas });
+          return hands;
+        })();
 
-        // Step 2: THEN request camera
-        const stream = await navigator.mediaDevices.getUserMedia({
-          video: { width: 640, height: 480, facingMode: "user" },
-        });
+        const cameraPromise = (async () => {
+          setLoadingStatus((prev) => prev.includes("model") ? "Loading model… Starting camera…" : "Starting camera…");
+          const stream = await navigator.mediaDevices.getUserMedia({
+            video: { width: 640, height: 480, facingMode: "user" },
+          });
+          return stream;
+        })();
+
+        const [hands, stream] = await Promise.all([modelPromise, cameraPromise]);
+
         if (cancelled) {
           stream.getTracks().forEach((t) => t.stop());
+          hands.close();
           return;
         }
+
+        handsRef.current = hands;
+        setModelLoaded(true);
+        setLoadingStatus("Starting camera…");
+
         streamRef.current = stream;
 
         if (videoRef.current) {
@@ -429,6 +443,7 @@ const HandGestureManager: React.FC = () => {
         }
 
         setCameraReady(true);
+        setLoadingStatus("");
         if (!onboardingDismissed) {
           setShowOnboarding(true);
         }
@@ -436,6 +451,7 @@ const HandGestureManager: React.FC = () => {
         detectLoop();
       } catch (err) {
         console.error("Hand tracking init failed:", err);
+        setLoadingStatus("Failed to initialize");
       }
     };
 
@@ -704,9 +720,7 @@ const HandGestureManager: React.FC = () => {
           {enabled
             ? cameraReady
               ? "Tracking"
-              : modelLoaded
-              ? "Camera…"
-              : "Loading Model…"
+              : loadingStatus || "Initializing…"
             : "Gesture"}
         </span>
         <button
