@@ -69,6 +69,7 @@ const HandGestureManager: React.FC = () => {
   const pinchTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const pinchClickFiredRef = useRef(false);
   const prevScreenYRef = useRef<number | null>(null);
+  const lastDetectionTimeRef = useRef<number>(0);
   const SCROLL_SPEED = 3;
 
   const onResults = useCallback((results: Results) => {
@@ -123,10 +124,17 @@ const HandGestureManager: React.FC = () => {
       targetRef.current.x = screenX;
       targetRef.current.y = screenY;
 
-      // === Hand-driven scrolling: vertical movement scrolls the page ===
+      // === Hand-driven scrolling with re-entry jump fix ===
+      const now = Date.now();
+      const timeSinceLast = now - lastDetectionTimeRef.current;
+      lastDetectionTimeRef.current = now;
+
       if (!state.isPinching && prevScreenYRef.current !== null) {
         const deltaY = screenY - prevScreenYRef.current;
-        if (Math.abs(deltaY) > 2) {
+        const isReentry = timeSinceLast > 150 || Math.abs(deltaY) > 80;
+        if (isReentry) {
+          prevScreenYRef.current = screenY;
+        } else if (Math.abs(deltaY) > 2) {
           window.scrollBy({ top: deltaY * SCROLL_SPEED, behavior: "instant" as ScrollBehavior });
         }
       }
