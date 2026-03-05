@@ -127,7 +127,7 @@ const HandGestureManager: React.FC = () => {
   const prevIndexXRef = useRef<number | null>(null);
   const lastSwipeTimeRef = useRef<number>(0);
   const SCROLL_SPEED = 12;
-  const SCROLL_ZONE_THRESHOLD = 0.25; // top/bottom 25% of screen triggers scrolling
+  const SCROLL_ZONE_THRESHOLD = 0.50; // top/bottom 50% of screen triggers scrolling
 
   const onResults = useCallback((results: Results) => {
     const state = stateRef.current;
