@@ -7,7 +7,6 @@ interface HandState {
   cursorX: number;
   cursorY: number;
   isPinching: boolean;
-  isPalmOpen: boolean;
   landmarks: NormalizedLandmarkList | null;
   inTopZone: boolean;
 }
@@ -29,14 +28,6 @@ const euclideanDist = (
   b: { x: number; y: number; z: number }
 ) => Math.sqrt((a.x - b.x) ** 2 + (a.y - b.y) ** 2 + (a.z - b.z) ** 2);
 
-const isOpenPalm = (lm: NormalizedLandmarkList): boolean => {
-  return (
-    lm[8].y < lm[6].y &&
-    lm[12].y < lm[10].y &&
-    lm[16].y < lm[14].y &&
-    lm[20].y < lm[18].y
-  );
-};
 
 const HandGestureManager: React.FC = () => {
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -51,7 +42,7 @@ const HandGestureManager: React.FC = () => {
   const [modelLoaded, setModelLoaded] = useState(false);
   const [showOnboarding, setShowOnboarding] = useState(false);
   const [showTopZone, setShowTopZone] = useState(false);
-  const [cursorMode, setCursorMode] = useState<"point" | "pinch" | "palm">("point");
+  const [cursorMode, setCursorMode] = useState<"point" | "pinch">("point");
   const [isPulsing, setIsPulsing] = useState(false);
   const [onboardingDismissed, setOnboardingDismissed] = useState(
     () => sessionStorage.getItem("gestureOnboardingSeen") === "true"
@@ -69,20 +60,14 @@ const HandGestureManager: React.FC = () => {
     cursorX: window.innerWidth / 2,
     cursorY: window.innerHeight / 2,
     isPinching: false,
-    isPalmOpen: false,
     landmarks: null,
     inTopZone: false,
   });
 
   const targetRef = useRef({ x: window.innerWidth / 2, y: window.innerHeight / 2 });
   const prevTargetRef = useRef({ x: window.innerWidth / 2, y: window.innerHeight / 2 });
-  const pinchAnchorYRef = useRef<number | null>(null);
-  const scrollAnchorRef = useRef<number>(0);
   const pinchTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const pinchClickFiredRef = useRef(false);
-  const pinchMovedRef = useRef(false);
-  const palmAnchorYRef = useRef<number | null>(null);
-  const palmScrollAnchorRef = useRef<number>(0);
 
   const onResults = useCallback((results: Results) => {
     const state = stateRef.current;
@@ -132,13 +117,11 @@ const HandGestureManager: React.FC = () => {
         setShowTopZone(inTopZone);
       }
 
-      // === Pinch-Lock: Only update target when NOT pinching ===
-      if (!state.isPinching) {
-        targetRef.current.x = screenX;
-        targetRef.current.y = screenY;
-      }
+      // Update target position
+      targetRef.current.x = screenX;
+      targetRef.current.y = screenY;
 
-      // Pinch detection
+      // Pinch detection (for click only)
       const dist = euclideanDist(thumbTip, indexTip);
       const wasPinching = state.isPinching;
 
@@ -152,13 +135,10 @@ const HandGestureManager: React.FC = () => {
           return;
         }
 
-        pinchAnchorYRef.current = screenY;
-        scrollAnchorRef.current = window.scrollY;
-        pinchMovedRef.current = false;
         pinchClickFiredRef.current = false;
 
         pinchTimerRef.current = setTimeout(() => {
-          if (!pinchMovedRef.current && !pinchClickFiredRef.current) {
+          if (!pinchClickFiredRef.current) {
             pinchClickFiredRef.current = true;
             const s = stateRef.current;
             const el = document.elementFromPoint(s.cursorX, s.cursorY);
@@ -171,7 +151,6 @@ const HandGestureManager: React.FC = () => {
                   clientY: s.cursorY,
                 })
               );
-              // Pulse feedback
               setIsPulsing(true);
               setTimeout(() => setIsPulsing(false), 400);
             }
@@ -180,48 +159,10 @@ const HandGestureManager: React.FC = () => {
       } else if (wasPinching && dist > PINCH_END_THRESHOLD) {
         state.isPinching = false;
         setCursorMode("point");
-        pinchAnchorYRef.current = null;
         if (pinchTimerRef.current) {
           clearTimeout(pinchTimerRef.current);
           pinchTimerRef.current = null;
         }
-      }
-
-      // Scroll while pinching (pinch-lock: cursor frozen, only deltaY for scroll)
-      if (state.isPinching && pinchAnchorYRef.current !== null) {
-        const deltaY = screenY - pinchAnchorYRef.current;
-        if (Math.abs(deltaY) > 10) {
-          pinchMovedRef.current = true;
-          if (pinchTimerRef.current) {
-            clearTimeout(pinchTimerRef.current);
-            pinchTimerRef.current = null;
-          }
-        }
-        if (pinchMovedRef.current) {
-          window.scrollBy({ top: deltaY * 2, behavior: "instant" as ScrollBehavior });
-          pinchAnchorYRef.current = screenY;
-        }
-      }
-
-      // Palm scroll
-      const palmOpen = isOpenPalm(landmarks) && !state.isPinching;
-      const wasPalmOpen = state.isPalmOpen;
-
-      if (palmOpen && !wasPalmOpen) {
-        state.isPalmOpen = true;
-        setCursorMode("palm");
-        palmAnchorYRef.current = landmarks[0].y * window.innerHeight;
-        palmScrollAnchorRef.current = window.scrollY;
-      } else if (!palmOpen && wasPalmOpen) {
-        state.isPalmOpen = false;
-        if (!state.isPinching) setCursorMode("point");
-        palmAnchorYRef.current = null;
-      }
-
-      if (state.isPalmOpen && palmAnchorYRef.current !== null) {
-        const palmY = landmarks[0].y * window.innerHeight;
-        const deltaY = palmY - palmAnchorYRef.current;
-        window.scrollTo({ top: palmScrollAnchorRef.current + deltaY * 3 });
       }
     } else {
       state.landmarks = null;
@@ -358,8 +299,6 @@ const HandGestureManager: React.FC = () => {
   const cursorBg =
     cursorMode === "pinch"
       ? "hsl(var(--primary))"
-      : cursorMode === "palm"
-      ? "hsl(var(--primary) / 0.5)"
       : "hsl(var(--foreground) / 0.3)";
 
   return (
@@ -389,7 +328,7 @@ const HandGestureManager: React.FC = () => {
           >
             <motion.div
               animate={{
-                scale: isPulsing ? [1, 1.8, 1] : cursorMode === "pinch" ? 0.6 : cursorMode === "palm" ? 1.3 : 1,
+                scale: isPulsing ? [1, 1.8, 1] : cursorMode === "pinch" ? 0.6 : 1,
                 backgroundColor: cursorBg,
               }}
               transition={
@@ -473,29 +412,11 @@ const HandGestureManager: React.FC = () => {
                 </div>
               </div>
               <div className="flex items-start gap-2.5">
-                <span className="text-base mt-0.5">🤏</span>
-                <div>
-                  <p className="text-[11px] font-medium text-foreground">Pinch to Scroll</p>
-                  <p className="text-[10px] text-muted-foreground leading-relaxed">
-                    Pinch &amp; drag up/down to scroll the page.
-                  </p>
-                </div>
-              </div>
-              <div className="flex items-start gap-2.5">
                 <span className="text-base mt-0.5">👌</span>
                 <div>
                   <p className="text-[11px] font-medium text-foreground">Pinch &amp; Hold to Click</p>
                   <p className="text-[10px] text-muted-foreground leading-relaxed">
                     Hold a pinch still for 1 second to click the element under the cursor.
-                  </p>
-                </div>
-              </div>
-              <div className="flex items-start gap-2.5">
-                <span className="text-base mt-0.5">🖐️</span>
-                <div>
-                  <p className="text-[11px] font-medium text-foreground">Open Palm to Scroll</p>
-                  <p className="text-[10px] text-muted-foreground leading-relaxed">
-                    Open your hand flat and move up/down to scroll the page.
                   </p>
                 </div>
               </div>
