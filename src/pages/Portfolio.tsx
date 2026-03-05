@@ -26,7 +26,7 @@ const Portfolio = () => {
       <div className="fixed top-6 right-6 z-50">
         <Link 
           to="/" 
-          className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-muted/80 backdrop-blur-sm hover:bg-muted transition-colors"
+          className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-muted/80 backdrop-blur-sm hover:bg-muted transition-colors interactive"
         >
           <ArrowLeft className="w-4 h-4" />
         </Link>
