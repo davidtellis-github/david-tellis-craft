@@ -60,6 +60,7 @@ const Hero: React.FC = () => {
             <TabsTrigger
               key={t.key}
               value={t.key}
+              onMouseEnter={() => setActive(t.key)}
               className="px-0 py-0 bg-transparent data-[state=active]:text-foreground text-[clamp(12px,1.6vmin,16px)] text-light transition-colors"
             >
               {t.label}
