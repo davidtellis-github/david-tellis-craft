@@ -6,6 +6,7 @@ interface HandState {
   cursorX: number;
   cursorY: number;
   isPinching: boolean;
+  isPalmOpen: boolean;
   landmarks: NormalizedLandmarkList | null;
 }
 
@@ -21,6 +22,17 @@ const euclideanDist = (
   a: { x: number; y: number; z: number },
   b: { x: number; y: number; z: number }
 ) => Math.sqrt((a.x - b.x) ** 2 + (a.y - b.y) ** 2 + (a.z - b.z) ** 2);
+
+// Detect open palm: all 4 fingertips above their respective PIP joints (extended)
+const isOpenPalm = (lm: NormalizedLandmarkList): boolean => {
+  // Index(8>6), Middle(12>10), Ring(16>14), Pinky(20>18) — tip.y < pip.y means extended
+  return (
+    lm[8].y < lm[6].y &&
+    lm[12].y < lm[10].y &&
+    lm[16].y < lm[14].y &&
+    lm[20].y < lm[18].y
+  );
+};
 
 const HandGestureManager: React.FC = () => {
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -42,6 +54,7 @@ const HandGestureManager: React.FC = () => {
     cursorX: window.innerWidth / 2,
     cursorY: window.innerHeight / 2,
     isPinching: false,
+    isPalmOpen: false,
     landmarks: null,
   });
 
@@ -51,6 +64,8 @@ const HandGestureManager: React.FC = () => {
   const pinchTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const pinchClickFiredRef = useRef(false);
   const pinchMovedRef = useRef(false);
+  const palmAnchorYRef = useRef<number | null>(null);
+  const palmScrollAnchorRef = useRef<number>(0);
 
   // Cursor DOM ref for direct manipulation (no React re-renders)
   const cursorRef = useRef<HTMLDivElement>(null);
@@ -125,6 +140,26 @@ const HandGestureManager: React.FC = () => {
           window.scrollTo({ top: scrollAnchorRef.current + deltaY * 2 });
         }
       }
+
+      // Palm scroll detection (open hand, no pinch)
+      const palmOpen = isOpenPalm(landmarks) && !state.isPinching;
+      const wasPalmOpen = state.isPalmOpen;
+
+      if (palmOpen && !wasPalmOpen) {
+        state.isPalmOpen = true;
+        // Use wrist (landmark 0) for stable palm tracking
+        palmAnchorYRef.current = landmarks[0].y * window.innerHeight;
+        palmScrollAnchorRef.current = window.scrollY;
+      } else if (!palmOpen && wasPalmOpen) {
+        state.isPalmOpen = false;
+        palmAnchorYRef.current = null;
+      }
+
+      if (state.isPalmOpen && palmAnchorYRef.current !== null) {
+        const palmY = landmarks[0].y * window.innerHeight;
+        const deltaY = palmY - palmAnchorYRef.current;
+        window.scrollTo({ top: palmScrollAnchorRef.current + deltaY * 3 });
+      }
     } else {
       state.landmarks = null;
     }
@@ -145,9 +180,11 @@ const HandGestureManager: React.FC = () => {
       cursorRef.current.style.transform = `translate(${state.cursorX - CURSOR_SIZE / 2}px, ${state.cursorY - CURSOR_SIZE / 2}px)`;
     }
     if (cursorInnerRef.current) {
-      cursorInnerRef.current.style.transform = state.isPinching ? "scale(0.6)" : "scale(1)";
+      cursorInnerRef.current.style.transform = state.isPinching ? "scale(0.6)" : state.isPalmOpen ? "scale(1.3)" : "scale(1)";
       cursorInnerRef.current.style.background = state.isPinching
         ? "hsl(var(--primary))"
+        : state.isPalmOpen
+        ? "hsl(var(--primary) / 0.5)"
         : "hsl(var(--foreground) / 0.3)";
     }
 
@@ -338,6 +375,15 @@ const HandGestureManager: React.FC = () => {
                   <p className="text-[11px] font-medium text-foreground">Pinch &amp; Hold to Click</p>
                   <p className="text-[10px] text-muted-foreground leading-relaxed">
                     Hold a pinch still for 1 second to click the element under the cursor.
+                  </p>
+                </div>
+              </div>
+              <div className="flex items-start gap-2.5">
+                <span className="text-base mt-0.5">🖐️</span>
+                <div>
+                  <p className="text-[11px] font-medium text-foreground">Open Palm to Scroll</p>
+                  <p className="text-[10px] text-muted-foreground leading-relaxed">
+                    Open your hand flat and move up/down to scroll the page.
                   </p>
                 </div>
               </div>
