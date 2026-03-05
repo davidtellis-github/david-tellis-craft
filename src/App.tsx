@@ -13,10 +13,10 @@ import HandGestureManager from "@/components/portfolio/HandGestureManager";
 const App = () => (
   <TooltipProvider>
     <SplashScreen />
-    <HandGestureManager />
     <Toaster />
     <Sonner />
     <BrowserRouter>
+      <HandGestureManager />
       <Routes>
         <Route path="/" element={<Index />} />
         <Route path="/portfolio" element={<Portfolio />} />
