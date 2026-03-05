@@ -13,6 +13,7 @@ const PINCH_START_THRESHOLD = 0.05;
 const PINCH_END_THRESHOLD = 0.08;
 const LERP_FACTOR = 0.1;
 const CURSOR_SIZE = 24;
+const PINCH_CLICK_HOLD_MS = 1000;
 
 const lerp = (a: number, b: number, t: number) => a + (b - a) * t;
 
@@ -47,6 +48,9 @@ const HandGestureManager: React.FC = () => {
   const targetRef = useRef({ x: window.innerWidth / 2, y: window.innerHeight / 2 });
   const pinchAnchorYRef = useRef<number | null>(null);
   const scrollAnchorRef = useRef<number>(0);
+  const pinchTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const pinchClickFiredRef = useRef(false);
+  const pinchMovedRef = useRef(false);
 
   // Cursor DOM ref for direct manipulation (no React re-renders)
   const cursorRef = useRef<HTMLDivElement>(null);
@@ -77,15 +81,49 @@ const HandGestureManager: React.FC = () => {
         state.isPinching = true;
         pinchAnchorYRef.current = screenY;
         scrollAnchorRef.current = window.scrollY;
+        pinchMovedRef.current = false;
+        pinchClickFiredRef.current = false;
+
+        // Start hold timer for click
+        pinchTimerRef.current = setTimeout(() => {
+          if (!pinchMovedRef.current && !pinchClickFiredRef.current) {
+            pinchClickFiredRef.current = true;
+            const s = stateRef.current;
+            const el = document.elementFromPoint(s.cursorX, s.cursorY);
+            if (el) {
+              el.dispatchEvent(new MouseEvent("click", { bubbles: true, cancelable: true, clientX: s.cursorX, clientY: s.cursorY }));
+              // Visual feedback on cursor
+              if (cursorInnerRef.current) {
+                cursorInnerRef.current.style.boxShadow = "0 0 20px hsl(var(--primary) / 0.6)";
+                setTimeout(() => {
+                  if (cursorInnerRef.current) cursorInnerRef.current.style.boxShadow = "none";
+                }, 300);
+              }
+            }
+          }
+        }, PINCH_CLICK_HOLD_MS);
       } else if (wasPinching && dist > PINCH_END_THRESHOLD) {
         state.isPinching = false;
         pinchAnchorYRef.current = null;
+        if (pinchTimerRef.current) {
+          clearTimeout(pinchTimerRef.current);
+          pinchTimerRef.current = null;
+        }
       }
 
-      // Scroll while pinching
+      // Scroll while pinching (only if moved enough)
       if (state.isPinching && pinchAnchorYRef.current !== null) {
         const deltaY = screenY - pinchAnchorYRef.current;
-        window.scrollTo({ top: scrollAnchorRef.current + deltaY * 2 });
+        if (Math.abs(deltaY) > 10) {
+          pinchMovedRef.current = true;
+          if (pinchTimerRef.current) {
+            clearTimeout(pinchTimerRef.current);
+            pinchTimerRef.current = null;
+          }
+        }
+        if (pinchMovedRef.current) {
+          window.scrollTo({ top: scrollAnchorRef.current + deltaY * 2 });
+        }
       }
     } else {
       state.landmarks = null;
@@ -290,7 +328,16 @@ const HandGestureManager: React.FC = () => {
                 <div>
                   <p className="text-[11px] font-medium text-foreground">Pinch to Scroll</p>
                   <p className="text-[10px] text-muted-foreground leading-relaxed">
-                    Touch thumb &amp; index finger, then move hand up or down to scroll.
+                    Pinch &amp; drag up/down to scroll the page.
+                  </p>
+                </div>
+              </div>
+              <div className="flex items-start gap-2.5">
+                <span className="text-base mt-0.5">👌</span>
+                <div>
+                  <p className="text-[11px] font-medium text-foreground">Pinch &amp; Hold to Click</p>
+                  <p className="text-[10px] text-muted-foreground leading-relaxed">
+                    Hold a pinch still for 1 second to click the element under the cursor.
                   </p>
                 </div>
               </div>
