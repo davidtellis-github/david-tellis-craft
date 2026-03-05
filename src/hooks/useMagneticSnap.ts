@@ -1,4 +1,4 @@
-import { useRef, useEffect, useCallback } from "react";
+import { useRef, useCallback } from "react";
 
 interface SnapTarget {
   x: number;
@@ -6,14 +6,15 @@ interface SnapTarget {
   element: Element;
 }
 
-const SNAP_RADIUS = 60;
+const SNAP_RADIUS = 80;
 
 export function useMagneticSnap() {
   const snapTargetRef = useRef<SnapTarget | null>(null);
   const isSnappingRef = useRef(false);
   const cachedRectsRef = useRef<{ el: Element; cx: number; cy: number }[]>([]);
   const lastCacheTime = useRef(0);
-  const CACHE_INTERVAL = 200; // refresh rects every 200ms
+  const prevHoveredRef = useRef<Element | null>(null);
+  const CACHE_INTERVAL = 200;
 
   const refreshCache = useCallback(() => {
     const now = performance.now();
@@ -48,6 +49,14 @@ export function useMagneticSnap() {
         }
       }
 
+      // Manage hover class on snapped element
+      const newHovered = closest?.element ?? null;
+      if (newHovered !== prevHoveredRef.current) {
+        prevHoveredRef.current?.classList.remove("gesture-hover");
+        newHovered?.classList.add("gesture-hover");
+        prevHoveredRef.current = newHovered;
+      }
+
       snapTargetRef.current = closest;
       isSnappingRef.current = closest !== null;
       return closest;
@@ -55,5 +64,10 @@ export function useMagneticSnap() {
     [refreshCache]
   );
 
-  return { findSnapTarget, snapTargetRef, isSnappingRef };
+  const clearHover = useCallback(() => {
+    prevHoveredRef.current?.classList.remove("gesture-hover");
+    prevHoveredRef.current = null;
+  }, []);
+
+  return { findSnapTarget, snapTargetRef, isSnappingRef, clearHover };
 }
