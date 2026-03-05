@@ -8,10 +8,12 @@ import WorkCaseStudy from "./pages/WorkCaseStudy";
 import ProjectDetails from "./pages/ProjectDetails";
 import NotFound from "./pages/NotFound";
 import SplashScreen from "@/components/portfolio/SplashScreen";
+import HandGestureManager from "@/components/portfolio/HandGestureManager";
 
 const App = () => (
   <TooltipProvider>
     <SplashScreen />
+    <HandGestureManager />
     <Toaster />
     <Sonner />
     <BrowserRouter>
