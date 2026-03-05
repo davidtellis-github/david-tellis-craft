@@ -126,8 +126,9 @@ const HandGestureManager: React.FC = () => {
   const openPalmTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const prevIndexXRef = useRef<number | null>(null);
   const lastSwipeTimeRef = useRef<number>(0);
-  const SCROLL_SPEED = 12;
-  const SCROLL_ZONE_THRESHOLD = 0.50; // top/bottom 50% of screen triggers scrolling
+  const SCROLL_SPEED_MIN = 4;
+  const SCROLL_SPEED_MAX = 28;
+  const SCROLL_ZONE_THRESHOLD = 0.50;
 
   const onResults = useCallback((results: Results) => {
     const state = stateRef.current;
@@ -222,15 +223,15 @@ const HandGestureManager: React.FC = () => {
         const avgFingerY = (landmarks[8].y + landmarks[12].y) / 2;
         
         if (avgFingerY < SCROLL_ZONE_THRESHOLD) {
-          // Fingers in top zone → scroll up
-          const intensity = 1 - (avgFingerY / SCROLL_ZONE_THRESHOLD); // 0-1, stronger near top
-          window.scrollBy({ top: -SCROLL_SPEED * intensity, behavior: "instant" as ScrollBehavior });
+          const intensity = 1 - (avgFingerY / SCROLL_ZONE_THRESHOLD);
+          const speed = SCROLL_SPEED_MIN + (SCROLL_SPEED_MAX - SCROLL_SPEED_MIN) * intensity;
+          window.scrollBy({ top: -speed, behavior: "instant" as ScrollBehavior });
           setShowTopZone(true);
           setShowBottomZone(false);
         } else if (avgFingerY > (1 - SCROLL_ZONE_THRESHOLD)) {
-          // Fingers in bottom zone → scroll down
           const intensity = (avgFingerY - (1 - SCROLL_ZONE_THRESHOLD)) / SCROLL_ZONE_THRESHOLD;
-          window.scrollBy({ top: SCROLL_SPEED * intensity, behavior: "instant" as ScrollBehavior });
+          const speed = SCROLL_SPEED_MIN + (SCROLL_SPEED_MAX - SCROLL_SPEED_MIN) * intensity;
+          window.scrollBy({ top: speed, behavior: "instant" as ScrollBehavior });
           setShowTopZone(false);
           setShowBottomZone(true);
         } else {
