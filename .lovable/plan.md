@@ -1,18 +1,39 @@
 
 
-## Fix: Scroll Re-entry Jump
+## Plan: Add `interactive` class to clickable elements + Index-finger-only detection
 
-**Problem**: When the user lifts their hand to reposition for another scroll, the upward movement is interpreted as a scroll command, causing an unwanted reverse scroll.
+### Two changes:
 
-**Solution**: Detect hand re-entry and ignore the first frame of movement after a gap. Two mechanisms:
+**1. Add `interactive` class to all key clickable elements**
 
-1. **Large delta threshold**: If `deltaY` between frames exceeds ~80px (indicating the hand left and re-entered at a different position), reset `prevScreenYRef` instead of scrolling. This treats it as a "new gesture start."
+Files to modify:
+- **`src/components/portfolio/WorkGrid.tsx`** — Add `interactive` to each project card's `<Link>` wrapper and the "View All Work" link
+- **`src/components/portfolio/ProjectTimeline.tsx`** — Add `interactive` to each project row div
+- **`src/components/portfolio/SideNav.tsx`** — Add `interactive` to each nav link (`<a>`), the Resume button, and the "All work" link
+- **`src/components/portfolio/TimelineNav.tsx`** — Add `interactive` to each section button and the logo link
+- **`src/pages/Portfolio.tsx`** — Add `interactive` to the back button link
+- **`src/components/portfolio/Gallery3D.tsx`** — Add `interactive` to gallery image cards and prototype buttons
+- **`src/components/portfolio/UIMasonryGallery.tsx`** — Add `interactive` to each masonry image item
 
-2. **Frame gap detection**: Track a `lastDetectionTime` ref. If more than ~150ms has passed since the last detection (hand was briefly out of frame), reset `prevScreenYRef` to `null` so the next frame becomes a new baseline rather than triggering a scroll.
+**2. Index-finger-only gesture filter in HandGestureManager**
 
-**File**: `src/components/portfolio/HandGestureManager.tsx`
-- Add `lastDetectionTimeRef = useRef<number>(0)`
-- In the scroll logic block, check `Date.now() - lastDetectionTimeRef.current > 150` → if true, skip scroll and just set `prevScreenYRef = screenY`
-- Also check `Math.abs(deltaY) > 80` → treat as repositioning, reset baseline
-- Update `lastDetectionTimeRef.current = Date.now()` each frame a hand is detected
+Currently the system tracks any detected hand. The fix: only respond when the index finger is extended and other fingers are curled (pointing gesture). When the full palm is open (all fingers extended), ignore the hand — treating it as a "resting/repositioning" pose.
+
+**Detection logic** (added as a helper in `HandGestureManager.tsx`):
+- A finger is "extended" if its tip landmark is above (lower y than) its PIP joint landmark
+- **Index finger** (landmarks 8 vs 6): must be extended
+- **Middle, Ring, Pinky** (landmarks 12/16/20 vs 10/14/18): at least 2 of 3 must be curled
+- If the palm is open (all fingers out), skip processing for that frame — no cursor movement, no scrolling
+
+This means: index finger out = active tracking. Open palm = paused. Pinch = click (already handled).
+
+### Technical details
+
+The finger extension check uses y-coordinates of MediaPipe landmarks:
+```
+isExtended(tip, pip) = tip.y < pip.y  // tip is above pip joint
+```
+
+If index is extended AND at least 2 of {middle, ring, pinky} are curled → "pointing" → process normally.
+Otherwise → treat as no valid gesture (reset scroll baseline, clear hover).
 
