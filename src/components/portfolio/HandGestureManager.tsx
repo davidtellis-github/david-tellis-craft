@@ -18,8 +18,8 @@ const PINCH_END_THRESHOLD = 0.08;
 const CURSOR_SIZE = 24;
 const PINCH_CLICK_HOLD_MS = 400;
 const VELOCITY_THRESHOLD = 200;
-const MIN_LERP = 0.05;
-const MAX_LERP = 0.2;
+const MIN_LERP = 0.15;
+const MAX_LERP = 0.45;
 const MIN_HAND_CONFIDENCE = 0.7;
 const MAX_HAND_Z_DEPTH = 0.1;
 
