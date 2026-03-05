@@ -31,6 +31,10 @@ const HandGestureManager: React.FC = () => {
   const [enabled, setEnabled] = useState(false);
   const [showDebug, setShowDebug] = useState(false);
   const [cameraReady, setCameraReady] = useState(false);
+  const [showOnboarding, setShowOnboarding] = useState(false);
+  const [onboardingDismissed, setOnboardingDismissed] = useState(
+    () => sessionStorage.getItem("gestureOnboardingSeen") === "true"
+  );
 
   // Mutable state for perf (no re-renders in the hot loop)
   const stateRef = useRef<HandState>({
@@ -172,6 +176,9 @@ const HandGestureManager: React.FC = () => {
         handsRef.current = hands;
 
         setCameraReady(true);
+        if (!onboardingDismissed) {
+          setShowOnboarding(true);
+        }
         animFrameRef.current = requestAnimationFrame(animationLoop);
         detectLoop();
       } catch (err) {
@@ -242,6 +249,72 @@ const HandGestureManager: React.FC = () => {
             className="fixed bottom-16 right-4 z-[9998] rounded-lg border border-border/50 pointer-events-none"
             style={{ width: 200, height: 150 }}
           />
+        )}
+      </AnimatePresence>
+
+      {/* Onboarding Tooltip */}
+      <AnimatePresence>
+        {showOnboarding && enabled && cameraReady && (
+          <motion.div
+            initial={{ opacity: 0, y: 10, scale: 0.95 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: 10, scale: 0.95 }}
+            transition={{ type: "spring", damping: 20, stiffness: 300 }}
+            className="fixed bottom-16 right-4 z-[9998] w-64 rounded-xl border border-border/50 bg-card/95 backdrop-blur-xl shadow-2xl p-4"
+          >
+            <button
+              onClick={() => {
+                setShowOnboarding(false);
+                setOnboardingDismissed(true);
+                sessionStorage.setItem("gestureOnboardingSeen", "true");
+              }}
+              className="absolute top-2 right-2 text-muted-foreground hover:text-foreground transition-colors text-xs"
+            >
+              ✕
+            </button>
+            <p className="text-xs font-semibold text-foreground mb-3 tracking-wider uppercase">
+              Hand Gestures
+            </p>
+            <div className="space-y-2.5">
+              <div className="flex items-start gap-2.5">
+                <span className="text-base mt-0.5">☝️</span>
+                <div>
+                  <p className="text-[11px] font-medium text-foreground">Point to Move</p>
+                  <p className="text-[10px] text-muted-foreground leading-relaxed">
+                    Raise your index finger — the cursor follows its tip.
+                  </p>
+                </div>
+              </div>
+              <div className="flex items-start gap-2.5">
+                <span className="text-base mt-0.5">🤏</span>
+                <div>
+                  <p className="text-[11px] font-medium text-foreground">Pinch to Scroll</p>
+                  <p className="text-[10px] text-muted-foreground leading-relaxed">
+                    Touch thumb &amp; index finger, then move hand up or down to scroll.
+                  </p>
+                </div>
+              </div>
+              <div className="flex items-start gap-2.5">
+                <span className="text-base mt-0.5">🪲</span>
+                <div>
+                  <p className="text-[11px] font-medium text-foreground">Debug Mode</p>
+                  <p className="text-[10px] text-muted-foreground leading-relaxed">
+                    Tap "Debug" to see your hand skeleton overlay.
+                  </p>
+                </div>
+              </div>
+            </div>
+            <button
+              onClick={() => {
+                setShowOnboarding(false);
+                setOnboardingDismissed(true);
+                sessionStorage.setItem("gestureOnboardingSeen", "true");
+              }}
+              className="mt-3 w-full text-[10px] tracking-wider uppercase font-medium py-1.5 rounded-lg bg-primary text-primary-foreground hover:opacity-90 transition-opacity"
+            >
+              Got it
+            </button>
+          </motion.div>
         )}
       </AnimatePresence>
 
