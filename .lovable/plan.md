@@ -1,39 +1,29 @@
 
 
-## Plan: Add `interactive` class to clickable elements + Index-finger-only detection
+## Why Gesture Loading is Slow
 
-### Two changes:
+The delay comes from **two sequential network-heavy steps** when gestures are enabled:
 
-**1. Add `interactive` class to all key clickable elements**
+1. **MediaPipe WASM model download** — The `Hands` constructor fetches multiple large files from `cdn.jsdelivr.net` (WASM binary ~4MB + model files). The line `await hands.send({ image: tempCanvas })` forces a full model initialization before proceeding.
+2. **Camera stream** — Only after the model loads does it request `getUserMedia`, adding another wait.
 
-Files to modify:
-- **`src/components/portfolio/WorkGrid.tsx`** — Add `interactive` to each project card's `<Link>` wrapper and the "View All Work" link
-- **`src/components/portfolio/ProjectTimeline.tsx`** — Add `interactive` to each project row div
-- **`src/components/portfolio/SideNav.tsx`** — Add `interactive` to each nav link (`<a>`), the Resume button, and the "All work" link
-- **`src/components/portfolio/TimelineNav.tsx`** — Add `interactive` to each section button and the logo link
-- **`src/pages/Portfolio.tsx`** — Add `interactive` to the back button link
-- **`src/components/portfolio/Gallery3D.tsx`** — Add `interactive` to gallery image cards and prototype buttons
-- **`src/components/portfolio/UIMasonryGallery.tsx`** — Add `interactive` to each masonry image item
+These files are **not cached between sessions** by default (depends on browser/CDN headers), so every page load re-downloads them.
 
-**2. Index-finger-only gesture filter in HandGestureManager**
+## Plan to Speed Up Gesture Loading
 
-Currently the system tracks any detected hand. The fix: only respond when the index finger is extended and other fingers are curled (pointing gesture). When the full palm is open (all fingers extended), ignore the hand — treating it as a "resting/repositioning" pose.
+### 1. Preload MediaPipe assets on page load
+Add `<link rel="preload">` tags in `index.html` for the critical MediaPipe WASM/JS files so the browser starts fetching them immediately, even before the user enables gestures.
 
-**Detection logic** (added as a helper in `HandGestureManager.tsx`):
-- A finger is "extended" if its tip landmark is above (lower y than) its PIP joint landmark
-- **Index finger** (landmarks 8 vs 6): must be extended
-- **Middle, Ring, Pinky** (landmarks 12/16/20 vs 10/14/18): at least 2 of 3 must be curled
-- If the palm is open (all fingers out), skip processing for that frame — no cursor movement, no scrolling
+### 2. Parallelize model + camera initialization
+Currently camera waits for model. Start both in parallel — the camera stream can be ready while the model is still loading, saving ~1-2 seconds.
 
-This means: index finger out = active tracking. Open palm = paused. Pinch = click (already handled).
+### 3. Use lower model complexity (already 0 — good)
+Already using `modelComplexity: 0`, which is optimal.
 
-### Technical details
+### 4. Add a loading progress indicator
+Show a more informative loading state (e.g., "Loading hand model..." → "Starting camera...") so the user knows progress is happening.
 
-The finger extension check uses y-coordinates of MediaPipe landmarks:
-```
-isExtended(tip, pip) = tip.y < pip.y  // tip is above pip joint
-```
-
-If index is extended AND at least 2 of {middle, ring, pinky} are curled → "pointing" → process normally.
-Otherwise → treat as no valid gesture (reset scroll baseline, clear hover).
+### Files to change
+- **`index.html`** — Add `<link rel="preload">` for MediaPipe WASM files
+- **`src/components/portfolio/HandGestureManager.tsx`** — Parallelize model + camera init, add loading progress states
 
