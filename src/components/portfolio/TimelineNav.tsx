@@ -80,7 +80,7 @@ const TimelineNav: React.FC<TimelineNavProps> = ({
   return <nav aria-label="Portfolio navigation" className="flex flex-col hidden lg:block sticky top-0 h-svh w-[min(18rem,24vw)]">
       <div className="relative h-full flex flex-col gap-[14vh]">
         {/* --- Animated Logo --- */}
-       <Link to="/" aria-label="Home" className="pt-10 leading-none select-none text-foreground 
+       <Link to="/" aria-label="Home" className="pt-10 leading-none select-none text-foreground interactive
              text-[clamp(20px,4vmin,32px)]  font-normal flex group relative">
   {/* Always-visible "D" */}
     <span className="inline-block">D</span>
@@ -101,7 +101,7 @@ const TimelineNav: React.FC<TimelineNavProps> = ({
           {sections.map(section => <li key={section.id}>
               <button 
                 onClick={() => handleSectionClick(section.id)} 
-                className={`transition-colors hover:text-foreground cursor-pointer ${
+                className={`transition-colors hover:text-foreground cursor-pointer interactive ${
                   activeSection === section.id ? "text-foreground font-normal" : ""
                 }`}
               >

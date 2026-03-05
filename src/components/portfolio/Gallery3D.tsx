@@ -165,7 +165,7 @@ const Gallery3D: React.FC = () => {
                   <Dialog>
                     <DialogTrigger asChild>
                       <div
-                        className="group cursor-pointer relative overflow-hidden rounded-xl lg:rounded-2xl 
+                        className="group cursor-pointer relative overflow-hidden rounded-xl lg:rounded-2xl interactive
                                    bg-muted/30 border border-border/40 
                                    transition-all duration-300 hover:border-border/80 hover:shadow-lg"
                         onClick={() => setSelectedImage(image)}
@@ -194,8 +194,8 @@ const Gallery3D: React.FC = () => {
                           </div>
                           {image.prototypeUrl && (
                             <button
-                              onClick={(e) => handleOpenPrototype(e, image)}
-                              className="flex items-center gap-2 px-4 py-2 bg-primary/10 hover:bg-primary/20 
+                             onClick={(e) => handleOpenPrototype(e, image)}
+                              className="flex items-center gap-2 px-4 py-2 bg-primary/10 hover:bg-primary/20 interactive
                                          border border-primary/30 rounded-full text-sm font-medium text-primary
                                          transition-colors"
                             >

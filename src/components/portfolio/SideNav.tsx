@@ -92,7 +92,7 @@ const SideNav: React.FC = () => {
                   href={`#${s.id}`}
                   onClick={handleClick(s.id)}
                   className={`
-                    transition-colors 
+                    transition-colors interactive
                     hover:text-foreground 
                     ${
                       activeSection === s.id
@@ -112,7 +112,7 @@ const SideNav: React.FC = () => {
         <div className="flex flex-col gap-2">
           <ResumeModal>
             <button
-              className="text-muted-foreground text-[clamp(12px,1.6vmin,16px)] 
+              className="text-muted-foreground text-[clamp(12px,1.6vmin,16px)] interactive
                          hover:text-foreground transition-colors duration-300 text-left"
             >
               Resume
@@ -120,7 +120,7 @@ const SideNav: React.FC = () => {
           </ResumeModal>
           <Link
             to="/portfolio"
-            className="text-muted-foreground text-[clamp(12px,1.6vmin,16px)] 
+            className="text-muted-foreground text-[clamp(12px,1.6vmin,16px)] interactive
                        hover:text-foreground transition-colors duration-300"
           >
             All work

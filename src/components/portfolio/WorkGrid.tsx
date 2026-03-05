@@ -136,7 +136,7 @@ const WorkGrid: React.FC = () => {
                 data-index={index}
                 className="transition-all duration-500"
               >
-                <Link to={`/project/${project.slug}`} className="block group cursor-pointer" aria-label={`View case study: ${project.title}`}>
+                <Link to={`/project/${project.slug}`} className="block group cursor-pointer interactive" aria-label={`View case study: ${project.title}`}>
                   {/* Image with Gradient Overlay */}
                   <div className={`relative overflow-hidden rounded-2xl transition-all duration-700 ${
                     isExpanded 
@@ -202,7 +202,7 @@ const WorkGrid: React.FC = () => {
         
         {/* View All Work CTA */}
         <div className="border-t border-border pt-12 mt-12">
-        <Link to="/portfolio" className="group" aria-label="View all work">
+        <Link to="/portfolio" className="group interactive" aria-label="View all work">
           <div className="bg-foreground rounded-lg p-8 group hover:bg-foreground/90 transition-colors duration-300">
             <div className="flex items-center justify-between w-full">
               <div>

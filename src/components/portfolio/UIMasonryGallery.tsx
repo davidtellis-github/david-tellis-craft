@@ -44,7 +44,7 @@ const UIMasonryGallery = () => {
           {uiImages.map((image) => (
             <div
               key={image.id}
-              className="break-inside-avoid cursor-pointer group"
+              className="break-inside-avoid cursor-pointer group interactive"
               onClick={() => setSelectedImage(image)}
             >
               <div className="relative overflow-hidden bg-muted/50">

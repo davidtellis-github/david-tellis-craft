@@ -76,7 +76,7 @@ const ProjectTimeline: React.FC<ProjectTimelineProps> = ({
           return (
             <div 
               key={project.id}
-              className={`border-t border-border pt-8 first:border-t-0 first:pt-0 transition-all duration-500 cursor-pointer ${
+              className={`border-t border-border pt-8 first:border-t-0 first:pt-0 transition-all duration-500 cursor-pointer interactive ${
                 isHighlighted ? 'opacity-100' : 'opacity-50 hover:opacity-75'
               }`}
               onMouseEnter={() => handleProjectHover(project.id)}

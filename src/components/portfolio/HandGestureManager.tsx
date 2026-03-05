@@ -28,6 +28,21 @@ const euclideanDist = (
   b: { x: number; y: number; z: number }
 ) => Math.sqrt((a.x - b.x) ** 2 + (a.y - b.y) ** 2 + (a.z - b.z) ** 2);
 
+/** Returns true if only the index finger is extended (pointing pose). */
+const isPointingPose = (landmarks: NormalizedLandmarkList): boolean => {
+  const isExtended = (tipIdx: number, pipIdx: number) =>
+    landmarks[tipIdx].y < landmarks[pipIdx].y;
+
+  const indexOut = isExtended(8, 6);
+  const middleCurled = !isExtended(12, 10);
+  const ringCurled = !isExtended(16, 14);
+  const pinkyCurled = !isExtended(20, 18);
+
+  // Index must be out, and at least 2 of the other 3 must be curled
+  const curledCount = [middleCurled, ringCurled, pinkyCurled].filter(Boolean).length;
+  return indexOut && curledCount >= 2;
+};
+
 
 const HandGestureManager: React.FC = () => {
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -107,8 +122,19 @@ const HandGestureManager: React.FC = () => {
       }
       state.landmarks = landmarks;
 
-      const indexTip = landmarks[8];
+      // === Pointing Pose Filter ===
+      // Skip processing if hand is open (not pointing)
       const thumbTip = landmarks[4];
+      const indexTip = landmarks[8];
+      const dist = euclideanDist(thumbTip, indexTip);
+      const isPinchGesture = dist < PINCH_END_THRESHOLD;
+
+      if (!isPointingPose(landmarks) && !isPinchGesture) {
+        // Open palm or non-pointing pose → pause tracking
+        prevScreenYRef.current = null;
+        clearHover();
+        return;
+      }
 
       const screenX = (1 - indexTip.x) * window.innerWidth;
       const screenY = indexTip.y * window.innerHeight;
@@ -141,10 +167,10 @@ const HandGestureManager: React.FC = () => {
       prevScreenYRef.current = screenY;
 
       // Pinch detection (for click only)
-      const dist = euclideanDist(thumbTip, indexTip);
+      const pinchDist = euclideanDist(thumbTip, indexTip);
       const wasPinching = state.isPinching;
 
-      if (!wasPinching && dist < PINCH_START_THRESHOLD) {
+      if (!wasPinching && pinchDist < PINCH_START_THRESHOLD) {
         state.isPinching = true;
         setCursorMode("pinch");
 
@@ -175,7 +201,7 @@ const HandGestureManager: React.FC = () => {
             }
           }
         }, PINCH_CLICK_HOLD_MS);
-      } else if (wasPinching && dist > PINCH_END_THRESHOLD) {
+      } else if (wasPinching && pinchDist > PINCH_END_THRESHOLD) {
         state.isPinching = false;
         setCursorMode("point");
         if (pinchTimerRef.current) {
