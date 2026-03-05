@@ -68,6 +68,8 @@ const HandGestureManager: React.FC = () => {
   const prevTargetRef = useRef({ x: window.innerWidth / 2, y: window.innerHeight / 2 });
   const pinchTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const pinchClickFiredRef = useRef(false);
+  const prevScreenYRef = useRef<number | null>(null);
+  const SCROLL_SPEED = 3;
 
   const onResults = useCallback((results: Results) => {
     const state = stateRef.current;
@@ -121,6 +123,15 @@ const HandGestureManager: React.FC = () => {
       targetRef.current.x = screenX;
       targetRef.current.y = screenY;
 
+      // === Hand-driven scrolling: vertical movement scrolls the page ===
+      if (!state.isPinching && prevScreenYRef.current !== null) {
+        const deltaY = screenY - prevScreenYRef.current;
+        if (Math.abs(deltaY) > 2) {
+          window.scrollBy({ top: deltaY * SCROLL_SPEED, behavior: "instant" as ScrollBehavior });
+        }
+      }
+      prevScreenYRef.current = screenY;
+
       // Pinch detection (for click only)
       const dist = euclideanDist(thumbTip, indexTip);
       const wasPinching = state.isPinching;
@@ -166,6 +177,7 @@ const HandGestureManager: React.FC = () => {
       }
     } else {
       state.landmarks = null;
+      prevScreenYRef.current = null;
     }
 
     if (showDebug && canvasRef.current && state.landmarks) {
