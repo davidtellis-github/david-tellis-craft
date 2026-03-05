@@ -10,6 +10,7 @@ interface HandState {
   isPinching: boolean;
   landmarks: NormalizedLandmarkList | null;
   inTopZone: boolean;
+  isTwoFinger: boolean;
 }
 
 const PINCH_START_THRESHOLD = 0.05;
@@ -41,6 +42,19 @@ const isPointingPose = (landmarks: NormalizedLandmarkList): boolean => {
 
   const curledCount = [middleCurled, ringCurled, pinkyCurled].filter(Boolean).length;
   return indexOut && curledCount >= 2;
+};
+
+/** Returns true if index AND middle fingers are extended, others curled (two-finger scroll pose). */
+const isTwoFingerPose = (landmarks: NormalizedLandmarkList): boolean => {
+  const isExtended = (tipIdx: number, pipIdx: number) =>
+    landmarks[tipIdx].y < landmarks[pipIdx].y;
+
+  const indexOut = isExtended(8, 6);
+  const middleOut = isExtended(12, 10);
+  const ringCurled = !isExtended(16, 14);
+  const pinkyCurled = !isExtended(20, 18);
+
+  return indexOut && middleOut && ringCurled && pinkyCurled;
 };
 
 /** Returns true if all 5 fingers are extended (open palm). */
@@ -77,6 +91,8 @@ const HandGestureManager: React.FC = () => {
   const [modelLoaded, setModelLoaded] = useState(false);
   const [showOnboarding, setShowOnboarding] = useState(false);
   const [showTopZone, setShowTopZone] = useState(false);
+  const [showBottomZone, setShowBottomZone] = useState(false);
+  const [showScrollZones, setShowScrollZones] = useState(false);
   const [cursorMode, setCursorMode] = useState<"point" | "pinch">("point");
   const [isPulsing, setIsPulsing] = useState(false);
   const [gestureToast, setGestureToast] = useState<string | null>(null);
@@ -98,6 +114,7 @@ const HandGestureManager: React.FC = () => {
     isPinching: false,
     landmarks: null,
     inTopZone: false,
+    isTwoFinger: false,
   });
 
   const targetRef = useRef({ x: window.innerWidth / 2, y: window.innerHeight / 2 });
@@ -109,7 +126,8 @@ const HandGestureManager: React.FC = () => {
   const openPalmTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const prevIndexXRef = useRef<number | null>(null);
   const lastSwipeTimeRef = useRef<number>(0);
-  const SCROLL_SPEED = 3;
+  const SCROLL_SPEED = 12;
+  const SCROLL_ZONE_THRESHOLD = 0.25; // top/bottom 25% of screen triggers scrolling
 
   const onResults = useCallback((results: Results) => {
     const state = stateRef.current;
@@ -175,11 +193,11 @@ const HandGestureManager: React.FC = () => {
         }
       }
 
-      // === Swipe Right → Go Back ===
+      // === Swipe Right → Go Back (only in pointing pose) ===
       if (isPointingPose(landmarks) && !isPinchGesture) {
         const now = Date.now();
         if (prevIndexXRef.current !== null && now - lastSwipeTimeRef.current > SWIPE_COOLDOWN_MS) {
-          const deltaX = prevIndexXRef.current - indexTip.x; // mirrored: moving hand right = decreasing x
+          const deltaX = prevIndexXRef.current - indexTip.x;
           if (deltaX > SWIPE_VELOCITY_THRESHOLD) {
             lastSwipeTimeRef.current = now;
             setGestureToast("👈 Going Back");
@@ -192,9 +210,49 @@ const HandGestureManager: React.FC = () => {
         prevIndexXRef.current = indexTip.x;
       }
 
+      // === Two-Finger Scroll Mode ===
+      const twoFinger = isTwoFingerPose(landmarks);
+      if (twoFinger !== state.isTwoFinger) {
+        state.isTwoFinger = twoFinger;
+        setShowScrollZones(twoFinger);
+      }
+
+      if (twoFinger && !isPinchGesture) {
+        // Use average Y of index + middle fingertips to determine scroll direction
+        const avgFingerY = (landmarks[8].y + landmarks[12].y) / 2;
+        
+        if (avgFingerY < SCROLL_ZONE_THRESHOLD) {
+          // Fingers in top zone → scroll up
+          const intensity = 1 - (avgFingerY / SCROLL_ZONE_THRESHOLD); // 0-1, stronger near top
+          window.scrollBy({ top: -SCROLL_SPEED * intensity, behavior: "instant" as ScrollBehavior });
+          setShowTopZone(true);
+          setShowBottomZone(false);
+        } else if (avgFingerY > (1 - SCROLL_ZONE_THRESHOLD)) {
+          // Fingers in bottom zone → scroll down
+          const intensity = (avgFingerY - (1 - SCROLL_ZONE_THRESHOLD)) / SCROLL_ZONE_THRESHOLD;
+          window.scrollBy({ top: SCROLL_SPEED * intensity, behavior: "instant" as ScrollBehavior });
+          setShowTopZone(false);
+          setShowBottomZone(true);
+        } else {
+          setShowTopZone(false);
+          setShowBottomZone(false);
+        }
+        
+        // Still update cursor position for visual feedback
+        const screenX = (1 - indexTip.x) * window.innerWidth;
+        const screenY = indexTip.y * window.innerHeight;
+        targetRef.current.x = screenX;
+        targetRef.current.y = screenY;
+        prevScreenYRef.current = null;
+        return;
+      }
+
+      // === Single Index Finger: Static cursor for select/click (NO scrolling) ===
       if (!isPointingPose(landmarks) && !isPinchGesture) {
         prevScreenYRef.current = null;
         prevIndexXRef.current = null;
+        setShowTopZone(false);
+        setShowBottomZone(false);
         clearHover();
         return;
       }
@@ -202,31 +260,17 @@ const HandGestureManager: React.FC = () => {
       const screenX = (1 - indexTip.x) * window.innerWidth;
       const screenY = indexTip.y * window.innerHeight;
 
-      // === Active Zone (Top 10%) ===
+      // === Active Zone (Top 10%) for pinch-to-top ===
       const inTopZone = indexTip.y < 0.1;
       if (inTopZone !== state.inTopZone) {
         state.inTopZone = inTopZone;
-        setShowTopZone(inTopZone);
+        // Only show this hint when not in two-finger mode
+        if (!twoFinger) setShowTopZone(inTopZone);
       }
 
-      // Update target position
+      // Update target position (cursor follows finger, no scrolling)
       targetRef.current.x = screenX;
       targetRef.current.y = screenY;
-
-      // === Hand-driven scrolling with re-entry jump fix ===
-      const now = Date.now();
-      const timeSinceLast = now - lastDetectionTimeRef.current;
-      lastDetectionTimeRef.current = now;
-
-      if (!state.isPinching && prevScreenYRef.current !== null) {
-        const deltaY = screenY - prevScreenYRef.current;
-        const isReentry = timeSinceLast > 150 || Math.abs(deltaY) > 80;
-        if (isReentry) {
-          prevScreenYRef.current = screenY;
-        } else if (Math.abs(deltaY) > 2) {
-          window.scrollBy({ top: deltaY * SCROLL_SPEED, behavior: "instant" as ScrollBehavior });
-        }
-      }
       prevScreenYRef.current = screenY;
 
       // Pinch detection (for click only)
@@ -472,8 +516,50 @@ const HandGestureManager: React.FC = () => {
         )}
       </AnimatePresence>
 
+      {/* === Scroll Zone Indicators === */}
       <AnimatePresence>
-        {showTopZone && enabled && cameraReady && (
+        {showScrollZones && showTopZone && enabled && cameraReady && (
+          <motion.div
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 0.6, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            className="fixed top-0 left-0 right-0 z-[9998] h-[25vh] pointer-events-none"
+            style={{
+              background: "linear-gradient(to bottom, hsl(var(--primary) / 0.15), transparent)",
+            }}
+          >
+            <div className="flex items-center justify-center pt-6">
+              <span className="text-xs tracking-wider uppercase text-muted-foreground bg-card/90 backdrop-blur-xl px-4 py-2 rounded-full border border-border/50">
+                ⬆️ Scrolling Up
+              </span>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      <AnimatePresence>
+        {showScrollZones && showBottomZone && enabled && cameraReady && (
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 0.6, y: 0 }}
+            exit={{ opacity: 0, y: 20 }}
+            className="fixed bottom-0 left-0 right-0 z-[9998] h-[25vh] pointer-events-none"
+            style={{
+              background: "linear-gradient(to top, hsl(var(--primary) / 0.15), transparent)",
+            }}
+          >
+            <div className="flex items-center justify-center pb-6 h-full items-end">
+              <span className="text-xs tracking-wider uppercase text-muted-foreground bg-card/90 backdrop-blur-xl px-4 py-2 rounded-full border border-border/50">
+                ⬇️ Scrolling Down
+              </span>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* Pinch-to-top zone hint (single finger mode) */}
+      <AnimatePresence>
+        {!showScrollZones && showTopZone && enabled && cameraReady && (
           <motion.div
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -530,9 +616,18 @@ const HandGestureManager: React.FC = () => {
               <div className="flex items-start gap-2.5">
                 <span className="text-base mt-0.5">☝️</span>
                 <div>
-                  <p className="text-[11px] font-medium text-foreground">Point to Move</p>
+                  <p className="text-[11px] font-medium text-foreground">Point to Select</p>
                   <p className="text-[10px] text-muted-foreground leading-relaxed">
-                    Raise your index finger — the cursor follows its tip.
+                    Index finger moves cursor — screen stays still for precise selection.
+                  </p>
+                </div>
+              </div>
+              <div className="flex items-start gap-2.5">
+                <span className="text-base mt-0.5">✌️</span>
+                <div>
+                  <p className="text-[11px] font-medium text-foreground">Two Fingers to Scroll</p>
+                  <p className="text-[10px] text-muted-foreground leading-relaxed">
+                    Raise index + middle finger. Move to top/bottom zone to scroll.
                   </p>
                 </div>
               </div>
@@ -560,15 +655,6 @@ const HandGestureManager: React.FC = () => {
                   <p className="text-[11px] font-medium text-foreground">Swipe Right → Back</p>
                   <p className="text-[10px] text-muted-foreground leading-relaxed">
                     Quickly swipe your hand right while pointing to go back.
-                  </p>
-                </div>
-              </div>
-              <div className="flex items-start gap-2.5">
-                <span className="text-base mt-0.5">🪲</span>
-                <div>
-                  <p className="text-[11px] font-medium text-foreground">Debug Mode</p>
-                  <p className="text-[10px] text-muted-foreground leading-relaxed">
-                    Tap "Debug" to see your hand skeleton overlay.
                   </p>
                 </div>
               </div>
