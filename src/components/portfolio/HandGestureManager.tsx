@@ -14,7 +14,7 @@ interface HandState {
 const PINCH_START_THRESHOLD = 0.05;
 const PINCH_END_THRESHOLD = 0.08;
 const CURSOR_SIZE = 24;
-const PINCH_CLICK_HOLD_MS = 1000;
+const PINCH_CLICK_HOLD_MS = 400;
 const VELOCITY_THRESHOLD = 200;
 const MIN_LERP = 0.05;
 const MAX_LERP = 0.2;
@@ -48,7 +48,7 @@ const HandGestureManager: React.FC = () => {
     () => sessionStorage.getItem("gestureOnboardingSeen") === "true"
   );
 
-  const { findSnapTarget, isSnappingRef } = useMagneticSnap();
+  const { findSnapTarget, isSnappingRef, clearHover } = useMagneticSnap();
 
   // Framer Motion values for GPU-accelerated cursor
   const cursorX = useMotionValue(window.innerWidth / 2);
@@ -186,6 +186,7 @@ const HandGestureManager: React.FC = () => {
     } else {
       state.landmarks = null;
       prevScreenYRef.current = null;
+      clearHover();
     }
 
     if (showDebug && canvasRef.current && state.landmarks) {
