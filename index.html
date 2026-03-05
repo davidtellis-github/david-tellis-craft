@@ -23,6 +23,12 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
+    <!-- Preload MediaPipe Hands WASM/model assets for faster gesture init -->
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/@mediapipe/hands/hands.js" as="script" crossorigin>
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/@mediapipe/hands/hands_solution_simd_wasm_bin.wasm" as="fetch" crossorigin>
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/@mediapipe/hands/hands_solution_simd_wasm_bin.js" as="script" crossorigin>
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/@mediapipe/hands/hand_landmark_lite.tflite" as="fetch" crossorigin>
+
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
