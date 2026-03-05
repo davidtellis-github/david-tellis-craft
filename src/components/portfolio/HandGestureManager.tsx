@@ -1,4 +1,5 @@
 import React, { useRef, useEffect, useState, useCallback } from "react";
+import { useNavigate } from "react-router-dom";
 import { Hands, Results, NormalizedLandmarkList } from "@mediapipe/hands";
 import { motion, AnimatePresence, useMotionValue, useSpring } from "framer-motion";
 import { useMagneticSnap } from "@/hooks/useMagneticSnap";
@@ -38,13 +39,32 @@ const isPointingPose = (landmarks: NormalizedLandmarkList): boolean => {
   const ringCurled = !isExtended(16, 14);
   const pinkyCurled = !isExtended(20, 18);
 
-  // Index must be out, and at least 2 of the other 3 must be curled
   const curledCount = [middleCurled, ringCurled, pinkyCurled].filter(Boolean).length;
   return indexOut && curledCount >= 2;
 };
 
+/** Returns true if all 5 fingers are extended (open palm). */
+const isOpenPalm = (landmarks: NormalizedLandmarkList): boolean => {
+  const isExtended = (tipIdx: number, pipIdx: number) =>
+    landmarks[tipIdx].y < landmarks[pipIdx].y;
+
+  // Thumb uses x-axis (tip further from palm center = extended)
+  const thumbOut = landmarks[4].x < landmarks[3].x; // for right hand (mirrored)
+  const indexOut = isExtended(8, 6);
+  const middleOut = isExtended(12, 10);
+  const ringOut = isExtended(16, 14);
+  const pinkyOut = isExtended(20, 18);
+
+  return indexOut && middleOut && ringOut && pinkyOut;
+};
+
+const OPEN_PALM_HOLD_MS = 1000;
+const SWIPE_VELOCITY_THRESHOLD = 0.15; // normalized x units per frame
+const SWIPE_COOLDOWN_MS = 1500;
+
 
 const HandGestureManager: React.FC = () => {
+  const navigate = useNavigate();
   const videoRef = useRef<HTMLVideoElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const handsRef = useRef<Hands | null>(null);
@@ -59,6 +79,7 @@ const HandGestureManager: React.FC = () => {
   const [showTopZone, setShowTopZone] = useState(false);
   const [cursorMode, setCursorMode] = useState<"point" | "pinch">("point");
   const [isPulsing, setIsPulsing] = useState(false);
+  const [gestureToast, setGestureToast] = useState<string | null>(null);
   const [onboardingDismissed, setOnboardingDismissed] = useState(
     () => sessionStorage.getItem("gestureOnboardingSeen") === "true"
   );
@@ -85,6 +106,9 @@ const HandGestureManager: React.FC = () => {
   const pinchClickFiredRef = useRef(false);
   const prevScreenYRef = useRef<number | null>(null);
   const lastDetectionTimeRef = useRef<number>(0);
+  const openPalmTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const prevIndexXRef = useRef<number | null>(null);
+  const lastSwipeTimeRef = useRef<number>(0);
   const SCROLL_SPEED = 3;
 
   const onResults = useCallback((results: Results) => {
@@ -123,15 +147,54 @@ const HandGestureManager: React.FC = () => {
       state.landmarks = landmarks;
 
       // === Pointing Pose Filter ===
-      // Skip processing if hand is open (not pointing)
       const thumbTip = landmarks[4];
       const indexTip = landmarks[8];
       const dist = euclideanDist(thumbTip, indexTip);
       const isPinchGesture = dist < PINCH_END_THRESHOLD;
+      const palmOpen = isOpenPalm(landmarks);
+
+      // === Open Palm Hold → Navigate Home ===
+      if (palmOpen && !isPinchGesture) {
+        if (!openPalmTimerRef.current) {
+          openPalmTimerRef.current = setTimeout(() => {
+            setGestureToast("🏠 Going Home");
+            setTimeout(() => setGestureToast(null), 1200);
+            navigate("/");
+            openPalmTimerRef.current = null;
+          }, OPEN_PALM_HOLD_MS);
+        }
+        prevScreenYRef.current = null;
+        prevIndexXRef.current = null;
+        clearHover();
+        return;
+      } else {
+        // Palm closed → cancel home timer
+        if (openPalmTimerRef.current) {
+          clearTimeout(openPalmTimerRef.current);
+          openPalmTimerRef.current = null;
+        }
+      }
+
+      // === Swipe Right → Go Back ===
+      if (isPointingPose(landmarks) && !isPinchGesture) {
+        const now = Date.now();
+        if (prevIndexXRef.current !== null && now - lastSwipeTimeRef.current > SWIPE_COOLDOWN_MS) {
+          const deltaX = prevIndexXRef.current - indexTip.x; // mirrored: moving hand right = decreasing x
+          if (deltaX > SWIPE_VELOCITY_THRESHOLD) {
+            lastSwipeTimeRef.current = now;
+            setGestureToast("👈 Going Back");
+            setTimeout(() => setGestureToast(null), 1200);
+            window.history.back();
+            prevIndexXRef.current = null;
+            return;
+          }
+        }
+        prevIndexXRef.current = indexTip.x;
+      }
 
       if (!isPointingPose(landmarks) && !isPinchGesture) {
-        // Open palm or non-pointing pose → pause tracking
         prevScreenYRef.current = null;
+        prevIndexXRef.current = null;
         clearHover();
         return;
       }
@@ -218,7 +281,7 @@ const HandGestureManager: React.FC = () => {
     if (showDebug && canvasRef.current && state.landmarks) {
       drawDebugSkeleton(canvasRef.current, state.landmarks);
     }
-  }, [showDebug]);
+  }, [showDebug, clearHover, navigate]);
 
   // Animation loop with velocity-adaptive lerp + magnetic snapping
   const animationLoop = useCallback(() => {
@@ -393,7 +456,22 @@ const HandGestureManager: React.FC = () => {
         )}
       </AnimatePresence>
 
-      {/* === Active Zone: Scroll to Top Tooltip === */}
+      {/* === Gesture Toast (Home / Back) === */}
+      <AnimatePresence>
+        {gestureToast && enabled && cameraReady && (
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9, y: 20 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            exit={{ opacity: 0, scale: 0.9, y: 20 }}
+            className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-[9999] px-6 py-3 rounded-2xl border border-border/50 bg-card/95 backdrop-blur-xl shadow-2xl"
+          >
+            <span className="text-sm font-medium tracking-wider uppercase text-foreground">
+              {gestureToast}
+            </span>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
       <AnimatePresence>
         {showTopZone && enabled && cameraReady && (
           <motion.div
@@ -464,6 +542,24 @@ const HandGestureManager: React.FC = () => {
                   <p className="text-[11px] font-medium text-foreground">Pinch &amp; Hold to Click</p>
                   <p className="text-[10px] text-muted-foreground leading-relaxed">
                     Hold a pinch still for 1 second to click the element under the cursor.
+                  </p>
+                </div>
+              </div>
+              <div className="flex items-start gap-2.5">
+                <span className="text-base mt-0.5">🖐️</span>
+                <div>
+                  <p className="text-[11px] font-medium text-foreground">Open Palm → Home</p>
+                  <p className="text-[10px] text-muted-foreground leading-relaxed">
+                    Hold all 5 fingers open for 1 second to go home.
+                  </p>
+                </div>
+              </div>
+              <div className="flex items-start gap-2.5">
+                <span className="text-base mt-0.5">👉</span>
+                <div>
+                  <p className="text-[11px] font-medium text-foreground">Swipe Right → Back</p>
+                  <p className="text-[10px] text-muted-foreground leading-relaxed">
+                    Quickly swipe your hand right while pointing to go back.
                   </p>
                 </div>
               </div>
