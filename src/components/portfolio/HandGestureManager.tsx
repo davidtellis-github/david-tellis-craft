@@ -75,7 +75,15 @@ const HandGestureManager: React.FC = () => {
     const state = stateRef.current;
 
     if (results.multiHandLandmarks && results.multiHandLandmarks.length > 0) {
-      const landmarks = results.multiHandLandmarks[0];
+      // Pick the closest hand by average z-depth (smaller z = closer to camera)
+      let landmarks = results.multiHandLandmarks[0];
+      if (results.multiHandLandmarks.length > 1) {
+        const avgZ = (lm: NormalizedLandmarkList) =>
+          lm.reduce((sum, p) => sum + p.z, 0) / lm.length;
+        const z0 = avgZ(results.multiHandLandmarks[0]);
+        const z1 = avgZ(results.multiHandLandmarks[1]);
+        landmarks = z0 <= z1 ? results.multiHandLandmarks[0] : results.multiHandLandmarks[1];
+      }
       state.landmarks = landmarks;
 
       const indexTip = landmarks[8]; // Index Finger Tip
@@ -242,7 +250,7 @@ const HandGestureManager: React.FC = () => {
             `https://cdn.jsdelivr.net/npm/@mediapipe/hands/${file}`,
         });
         hands.setOptions({
-          maxNumHands: 1,
+          maxNumHands: 2,
           modelComplexity: 0, // fastest
           minDetectionConfidence: 0.6,
           minTrackingConfidence: 0.5,
