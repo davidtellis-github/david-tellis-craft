@@ -61,20 +61,23 @@ const Hero: React.FC = () => {
               key={t.key}
               value={t.key}
               onMouseEnter={() => setActive(t.key)}
-              className="px-0 py-0 bg-transparent data-[state=active]:text-foreground text-[clamp(12px,1.6vmin,16px)] text-light transition-colors"
+              className="px-0 py-0 bg-transparent data-[state=active]:text-foreground text-[clamp(12px,1.6vmin,16px)] text-light transition-colors flex flex-col items-center gap-1"
             >
               {t.label}
+              <span className="w-1 h-1 rounded-full bg-foreground transition-opacity lg:hidden data-[state=active]:opacity-100 opacity-0" data-state={active === t.key ? 'active' : 'inactive'} />
             </TabsTrigger>
           ))}
         </TabsList>
 
-        {tabsData.map(t => (
-          <TabsContent key={t.key} value={t.key} className="focus:outline-none">
-            <h1 className="text-[clamp(2.5rem,6vw,9rem)] font-medium tracking-tight leading-[1.1] text-foreground max-w-[18ch]">
-              {t.headline}
-            </h1>
-          </TabsContent>
-        ))}
+        <div className="mt-4 lg:mt-0">
+          {tabsData.map(t => (
+            <TabsContent key={t.key} value={t.key} className="focus:outline-none">
+              <h1 className="text-[clamp(2.5rem,6vw,9rem)] font-medium tracking-tight leading-[1.1] text-foreground max-w-[18ch]">
+                {t.headline}
+              </h1>
+            </TabsContent>
+          ))}
+        </div>
 
         <p className="
           h-auto
