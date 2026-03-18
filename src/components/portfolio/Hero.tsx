@@ -61,9 +61,10 @@ const Hero: React.FC = () => {
               key={t.key}
               value={t.key}
               onMouseEnter={() => setActive(t.key)}
-              className="px-0 py-0 bg-transparent data-[state=active]:text-foreground text-[clamp(12px,1.6vmin,16px)] text-light transition-colors"
+              className="px-0 py-0 bg-transparent data-[state=active]:text-foreground text-[clamp(12px,1.6vmin,16px)] text-light transition-colors flex flex-col items-center gap-1"
             >
               {t.label}
+              <span className="w-1 h-1 rounded-full bg-foreground transition-opacity lg:hidden data-[state=active]:opacity-100 opacity-0" data-state={active === t.key ? 'active' : 'inactive'} />
             </TabsTrigger>
           ))}
         </TabsList>
