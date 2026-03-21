@@ -447,43 +447,43 @@ const HandGestureManager: React.FC = () => {
     let cancelled = false;
 
     const init = async () => {
+      let hands: Hands | null = null;
+      let stream: MediaStream | null = null;
+
       try {
         setLoadingStatus("Loading hand model…");
 
-        // Start model + camera in PARALLEL
         const modelPromise = (async () => {
-          const hands = new Hands({
+          const nextHands = new Hands({
             locateFile: (file) =>
               `https://cdn.jsdelivr.net/npm/@mediapipe/hands/${file}`,
           });
-          hands.setOptions({
+          nextHands.setOptions({
             maxNumHands: 2,
             modelComplexity: 0,
             minDetectionConfidence: 0.6,
             minTrackingConfidence: 0.5,
           });
-          hands.onResults(onResults);
+          nextHands.onResults(onResults);
 
-          // Initialize model by sending a blank frame
           const tempCanvas = document.createElement("canvas");
           tempCanvas.width = 640;
           tempCanvas.height = 480;
-          await hands.send({ image: tempCanvas });
-          return hands;
+          await nextHands.send({ image: tempCanvas });
+          return nextHands;
         })();
 
         const cameraPromise = (async () => {
-          setLoadingStatus((prev) => prev.includes("model") ? "Loading model… Starting camera…" : "Starting camera…");
-          const stream = await navigator.mediaDevices.getUserMedia({
-            video: { width: 640, height: 480, facingMode: "user" },
-          });
-          return stream;
+          setLoadingStatus((prev) =>
+            prev.includes("model") ? "Loading model… Starting camera…" : "Starting camera…"
+          );
+          return getCameraStream();
         })();
 
-        const [hands, stream] = await Promise.all([modelPromise, cameraPromise]);
+        [hands, stream] = await Promise.all([modelPromise, cameraPromise]);
 
         if (cancelled) {
-          stream.getTracks().forEach((t) => t.stop());
+          stream.getTracks().forEach((track) => track.stop());
           hands.close();
           return;
         }
@@ -508,7 +508,9 @@ const HandGestureManager: React.FC = () => {
         detectLoop();
       } catch (err) {
         console.error("Hand tracking init failed:", err);
-        setLoadingStatus("Failed to initialize");
+        stream?.getTracks().forEach((track) => track.stop());
+        hands?.close();
+        setLoadingStatus(getGestureInitMessage(err));
       }
     };
 
