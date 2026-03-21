@@ -76,6 +76,63 @@ const OPEN_PALM_HOLD_MS = 1000;
 const SWIPE_VELOCITY_THRESHOLD = 0.15; // normalized x units per frame
 const SWIPE_COOLDOWN_MS = 1500;
 
+const getGestureInitMessage = (error: unknown) => {
+  if (error instanceof DOMException) {
+    if (error.name === "NotAllowedError") return "Camera blocked";
+    if (error.name === "NotFoundError") return "No camera found";
+    if (error.name === "NotReadableError") return "Camera busy";
+    if (error.name === "OverconstrainedError") return "Camera unavailable";
+  }
+
+  return "Failed to initialize";
+};
+
+const getCameraStream = async (): Promise<MediaStream> => {
+  if (!navigator.mediaDevices?.getUserMedia) {
+    throw new Error("Camera API unavailable");
+  }
+
+  const cameraAttempts: MediaStreamConstraints[] = [
+    {
+      video: {
+        width: { ideal: 640 },
+        height: { ideal: 480 },
+        facingMode: { ideal: "user" },
+      },
+      audio: false,
+    },
+    {
+      video: {
+        width: { ideal: 640 },
+        height: { ideal: 480 },
+      },
+      audio: false,
+    },
+    {
+      video: true,
+      audio: false,
+    },
+  ];
+
+  let lastError: unknown = null;
+
+  for (const constraints of cameraAttempts) {
+    try {
+      return await navigator.mediaDevices.getUserMedia(constraints);
+    } catch (error) {
+      lastError = error;
+      if (
+        !(error instanceof DOMException) ||
+        !["NotFoundError", "OverconstrainedError"].includes(error.name)
+      ) {
+        throw error;
+      }
+    }
+  }
+
+  throw lastError ?? new Error("Unable to access camera");
+};
+
 
 const HandGestureManager: React.FC = () => {
   const navigate = useNavigate();
@@ -390,43 +447,43 @@ const HandGestureManager: React.FC = () => {
     let cancelled = false;
 
     const init = async () => {
+      let hands: Hands | null = null;
+      let stream: MediaStream | null = null;
+
       try {
         setLoadingStatus("Loading hand model…");
 
-        // Start model + camera in PARALLEL
         const modelPromise = (async () => {
-          const hands = new Hands({
+          const nextHands = new Hands({
             locateFile: (file) =>
               `https://cdn.jsdelivr.net/npm/@mediapipe/hands/${file}`,
           });
-          hands.setOptions({
+          nextHands.setOptions({
             maxNumHands: 2,
             modelComplexity: 0,
             minDetectionConfidence: 0.6,
             minTrackingConfidence: 0.5,
           });
-          hands.onResults(onResults);
+          nextHands.onResults(onResults);
 
-          // Initialize model by sending a blank frame
           const tempCanvas = document.createElement("canvas");
           tempCanvas.width = 640;
           tempCanvas.height = 480;
-          await hands.send({ image: tempCanvas });
-          return hands;
+          await nextHands.send({ image: tempCanvas });
+          return nextHands;
         })();
 
         const cameraPromise = (async () => {
-          setLoadingStatus((prev) => prev.includes("model") ? "Loading model… Starting camera…" : "Starting camera…");
-          const stream = await navigator.mediaDevices.getUserMedia({
-            video: { width: 640, height: 480, facingMode: "user" },
-          });
-          return stream;
+          setLoadingStatus((prev) =>
+            prev.includes("model") ? "Loading model… Starting camera…" : "Starting camera…"
+          );
+          return getCameraStream();
         })();
 
-        const [hands, stream] = await Promise.all([modelPromise, cameraPromise]);
+        [hands, stream] = await Promise.all([modelPromise, cameraPromise]);
 
         if (cancelled) {
-          stream.getTracks().forEach((t) => t.stop());
+          stream.getTracks().forEach((track) => track.stop());
           hands.close();
           return;
         }
@@ -451,7 +508,9 @@ const HandGestureManager: React.FC = () => {
         detectLoop();
       } catch (err) {
         console.error("Hand tracking init failed:", err);
-        setLoadingStatus("Failed to initialize");
+        stream?.getTracks().forEach((track) => track.stop());
+        hands?.close();
+        setLoadingStatus(getGestureInitMessage(err));
       }
     };
 
