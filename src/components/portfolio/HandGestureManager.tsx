@@ -76,6 +76,63 @@ const OPEN_PALM_HOLD_MS = 1000;
 const SWIPE_VELOCITY_THRESHOLD = 0.15; // normalized x units per frame
 const SWIPE_COOLDOWN_MS = 1500;
 
+const getGestureInitMessage = (error: unknown) => {
+  if (error instanceof DOMException) {
+    if (error.name === "NotAllowedError") return "Camera blocked";
+    if (error.name === "NotFoundError") return "No camera found";
+    if (error.name === "NotReadableError") return "Camera busy";
+    if (error.name === "OverconstrainedError") return "Camera unavailable";
+  }
+
+  return "Failed to initialize";
+};
+
+const getCameraStream = async (): Promise<MediaStream> => {
+  if (!navigator.mediaDevices?.getUserMedia) {
+    throw new Error("Camera API unavailable");
+  }
+
+  const cameraAttempts: MediaStreamConstraints[] = [
+    {
+      video: {
+        width: { ideal: 640 },
+        height: { ideal: 480 },
+        facingMode: { ideal: "user" },
+      },
+      audio: false,
+    },
+    {
+      video: {
+        width: { ideal: 640 },
+        height: { ideal: 480 },
+      },
+      audio: false,
+    },
+    {
+      video: true,
+      audio: false,
+    },
+  ];
+
+  let lastError: unknown = null;
+
+  for (const constraints of cameraAttempts) {
+    try {
+      return await navigator.mediaDevices.getUserMedia(constraints);
+    } catch (error) {
+      lastError = error;
+      if (
+        !(error instanceof DOMException) ||
+        !["NotFoundError", "OverconstrainedError"].includes(error.name)
+      ) {
+        throw error;
+      }
+    }
+  }
+
+  throw lastError ?? new Error("Unable to access camera");
+};
+
 
 const HandGestureManager: React.FC = () => {
   const navigate = useNavigate();
