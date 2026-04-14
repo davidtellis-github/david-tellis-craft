@@ -20,6 +20,9 @@ import galleryUpload2 from "@/assets/gallery-upload-2.png";
 import galleryUpload3 from "@/assets/gallery-upload-3.png";
 import galleryUpload4 from "@/assets/gallery-upload-4.png";
 import galleryUpload5 from "@/assets/gallery-upload-5.png";
+import galleryUpload6 from "@/assets/gallery-upload-6.jpg";
+import galleryUpload7 from "@/assets/gallery-upload-7.jpg";
+import galleryUpload8 from "@/assets/gallery-upload-8.jpg";
 
 const previewImages = [
   { src: lunaAiHero, alt: "Luna AI Hero" },
@@ -39,6 +42,9 @@ const previewImages = [
   { src: galleryUpload3, alt: "Portfolio Design 3" },
   { src: galleryUpload4, alt: "Index Page Design" },
   { src: galleryUpload5, alt: "Future Songs Layout" },
+  { src: galleryUpload6, alt: "VYBE Landing Page" },
+  { src: galleryUpload7, alt: "Portfolio Dashboard" },
+  { src: galleryUpload8, alt: "Portfolio Dashboard Alt" },
 ];
 
 const Gallery3D: React.FC = () => {
