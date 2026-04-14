@@ -83,7 +83,7 @@ const Gallery3D: React.FC = () => {
 
       {/* 3-column grid, internal scroll */}
       <div className="max-h-[80vh] overflow-y-auto pr-2 rounded-lg scrollbar-thin scrollbar-thumb-border scrollbar-track-transparent">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 items-start">
           {previewImages.map((img, i) => (
             <button
               key={i}
