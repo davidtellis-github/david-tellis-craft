@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { ArrowLeft } from "lucide-react";
 import ProjectTimeline from "@/components/portfolio/ProjectTimeline";
 import TimelineNav from "@/components/portfolio/TimelineNav";
-import UIMasonryGallery from "@/components/portfolio/UIMasonryGallery";
+
 import Gallery3D from "@/components/portfolio/Gallery3D";
 import portfolioGallery from "@/assets/portfolio-gallery.png";
 
@@ -78,10 +78,6 @@ const Portfolio = () => {
               <Gallery3D />
             </div>
 
-            {/* UI Designs Masonry Gallery */}
-            <div id="ui-designs-gallery" className="scroll-mt-20 mt-[20vh]">
-              <UIMasonryGallery />
-            </div>
 
            
 
