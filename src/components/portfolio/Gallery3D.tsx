@@ -82,7 +82,7 @@ const Gallery3D: React.FC = () => {
       </div>
 
       {/* 3-column grid, internal scroll */}
-      <div className="max-h-[65vh] overflow-y-auto pr-2 rounded-lg scrollbar-thin scrollbar-thumb-border scrollbar-track-transparent">
+      <div className="max-h-[80vh] overflow-y-auto pr-2 rounded-lg scrollbar-thin scrollbar-thumb-border scrollbar-track-transparent">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
           {previewImages.map((img, i) => (
             <button
@@ -93,7 +93,7 @@ const Gallery3D: React.FC = () => {
               <img
                 src={img.src}
                 alt={img.alt}
-                className="w-full h-auto object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+                className="w-full h-auto object-contain transition-transform duration-500 group-hover:scale-[1.03]"
                 loading="lazy"
               />
               <div className="absolute inset-0 bg-background/0 group-hover:bg-background/40 transition-colors duration-300 flex items-end">
@@ -108,7 +108,7 @@ const Gallery3D: React.FC = () => {
 
       {/* macOS-style Lightbox */}
       <Dialog open={selectedIndex !== null} onOpenChange={(open) => !open && setSelectedIndex(null)}>
-        <DialogContent className="max-w-[95vw] w-auto max-h-[95vh] p-0 border-border/30 bg-background/95 backdrop-blur-xl overflow-hidden flex flex-col gap-0 rounded-xl">
+        <DialogContent className="max-w-[95vw] w-auto h-[90vh] p-0 border-border/30 bg-background/95 backdrop-blur-xl overflow-hidden flex flex-col gap-0 rounded-xl">
           <DialogTitle className="sr-only">
             {selectedIndex !== null ? previewImages[selectedIndex].alt : "Image preview"}
           </DialogTitle>
@@ -128,7 +128,7 @@ const Gallery3D: React.FC = () => {
               <img
                 src={previewImages[selectedIndex].src}
                 alt={previewImages[selectedIndex].alt}
-                className="max-h-[65vh] max-w-full object-contain rounded-lg select-none"
+                className="h-[65vh] max-w-full object-contain rounded-lg select-none"
                 draggable={false}
               />
             )}
