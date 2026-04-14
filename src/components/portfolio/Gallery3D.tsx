@@ -15,6 +15,11 @@ import uiLaptopMockup from "@/assets/ui-laptop-mockup.png";
 import uiMusicController from "@/assets/ui-music-controller.png";
 import uiReviewsSection from "@/assets/ui-reviews-section.png";
 import uiTimelineVision from "@/assets/ui-timeline-vision.png";
+import galleryUpload1 from "@/assets/gallery-upload-1.png";
+import galleryUpload2 from "@/assets/gallery-upload-2.png";
+import galleryUpload3 from "@/assets/gallery-upload-3.png";
+import galleryUpload4 from "@/assets/gallery-upload-4.png";
+import galleryUpload5 from "@/assets/gallery-upload-5.png";
 
 const previewImages = [
   { src: lunaAiHero, alt: "Luna AI Hero" },
@@ -29,6 +34,11 @@ const previewImages = [
   { src: uiMusicController, alt: "Music Controller" },
   { src: uiReviewsSection, alt: "Reviews Section" },
   { src: uiTimelineVision, alt: "Timeline Vision" },
+  { src: galleryUpload1, alt: "Portfolio Design 1" },
+  { src: galleryUpload2, alt: "Portfolio Design 2" },
+  { src: galleryUpload3, alt: "Portfolio Design 3" },
+  { src: galleryUpload4, alt: "Index Page Design" },
+  { src: galleryUpload5, alt: "Future Songs Layout" },
 ];
 
 const Gallery3D: React.FC = () => {
