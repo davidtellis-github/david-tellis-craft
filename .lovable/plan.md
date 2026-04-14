@@ -1,33 +1,39 @@
 
 
-## Dedicated Gallery Page with Scroll-Triggered Navigation
+## Gallery Image Preview Modal (macOS-style)
 
-**What it does:** When users scroll into the gallery section on the homepage, an animated transition navigates them to a new `/gallery` page. That page shows all UI images in a 4-column grid with a minimal top nav (logo + back button).
+### Changes to `src/components/portfolio/Gallery3D.tsx`
 
-### Plan
+**1. Make image containers hug content**
+- Remove fixed height container (`h-[60vh]`), keep the scrollable grid but let cards naturally size to their images
 
-**1. Create `/gallery` page — `src/pages/GalleryPage.tsx`**
-- Top nav bar: logo (left) + "Back to Home" link (right), fixed, minimal, matching existing theme
-- 4-column grid on `lg+` (`grid-cols-1 sm:grid-cols-2 lg:grid-cols-4`), small gap
-- Merge all images from `Gallery3D` (4 items) and `UIMasonryGallery` (12 items) into one unified array
-- Each card: rounded, hover scale, click opens lightbox Dialog
-- Entry animation: staggered fade-in on mount
+**2. Add macOS-style lightbox modal**
+- On image click, open a `Dialog` (full-screen overlay, dark backdrop)
+- Modal layout:
+  - **Top area**: Large preview of selected image, centered, with max-height constraint
+  - **Navigation arrows**: Left/right chevron buttons overlaid on the preview (like macOS Quick Look)
+  - **Bottom strip**: Horizontal scrollable thumbnail strip showing all images, with the active one highlighted (border/ring)
+- Clicking a thumbnail or arrow navigates to that image
+- Keyboard support: `ArrowLeft`/`ArrowRight` to navigate, `Escape` to close
+- Active thumbnail auto-scrolls into view using `scrollIntoView`
 
-**2. Add scroll-triggered navigation in `Gallery3D.tsx`**
-- Use Intersection Observer on the gallery section
-- When the section enters viewport (e.g. 30% visible), trigger a scale-up + fade-out CSS animation (~500ms) on the gallery container
-- After animation completes, programmatically navigate to `/gallery` using `useNavigate()`
-- Add a flag so it only triggers once per session (sessionStorage) to avoid re-triggering on back navigation
+**3. State management**
+- `selectedIndex: number | null` — null = modal closed, number = which image is shown
+- Navigation wraps around (last → first, first → last)
 
-**3. Register the route in `App.tsx`**
-- Add `<Route path="/gallery" element={<GalleryPage />} />`
-
-**4. Remove `UIMasonryGallery` from `Portfolio.tsx`**
-- Since all images move to the dedicated gallery page
+### Visual structure
+```text
+┌─────────────────────────────────┐
+│           ✕ (close)             │
+│                                 │
+│   ◀   [  Large Preview  ]   ▶  │
+│                                 │
+│  ┌──┐ ┌──┐ ┌▓▓┐ ┌──┐ ┌──┐     │
+│  │  │ │  │ │▓▓│ │  │ │  │ ··→  │
+│  └──┘ └──┘ └▓▓┘ └──┘ └──┘     │
+└─────────────────────────────────┘
+```
 
 ### Files to change
-- `src/pages/GalleryPage.tsx` — new file (gallery grid + top nav)
-- `src/components/portfolio/Gallery3D.tsx` — add scroll-triggered navigation animation
-- `src/App.tsx` — add `/gallery` route
-- `src/pages/Portfolio.tsx` — remove UIMasonryGallery section
+- `src/components/portfolio/Gallery3D.tsx` — add Dialog modal with preview + thumbnail strip + keyboard nav
 
