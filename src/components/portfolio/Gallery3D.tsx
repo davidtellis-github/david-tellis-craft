@@ -91,9 +91,10 @@ const Gallery3D: React.FC = () => {
         </button>
       </div>
 
-      {/* 3-column grid, internal scroll */}
-      <div className="columns-1 sm:columns-2 lg:columns-3 gap-3">
-        {previewImages.map((img, i) => (
+      {/* 3-column grid, fixed preview */}
+      <div className="relative max-h-[70vh] overflow-hidden">
+        <div className="columns-1 sm:columns-2 lg:columns-3 gap-3">
+          {previewImages.slice(0, 9).map((img, i) => (
           <button
             key={i}
             onClick={() => setSelectedIndex(i)}
