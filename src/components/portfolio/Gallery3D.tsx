@@ -20,6 +20,9 @@ import galleryUpload2 from "@/assets/gallery-upload-2.png";
 import galleryUpload3 from "@/assets/gallery-upload-3.png";
 import galleryUpload4 from "@/assets/gallery-upload-4.png";
 import galleryUpload5 from "@/assets/gallery-upload-5.png";
+import galleryUpload6 from "@/assets/gallery-upload-6.jpg";
+import galleryUpload7 from "@/assets/gallery-upload-7.jpg";
+import galleryUpload8 from "@/assets/gallery-upload-8.jpg";
 
 const previewImages = [
   { src: lunaAiHero, alt: "Luna AI Hero" },
