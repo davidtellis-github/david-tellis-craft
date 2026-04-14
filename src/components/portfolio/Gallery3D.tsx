@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useState, useEffect, useRef, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, ChevronLeft, ChevronRight } from "lucide-react";
+import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
 
 import galleryDjController from "@/assets/gallery-dj-controller.png";
 import gallerySynthUI from "@/assets/gallery-synth-ui.png";
@@ -32,6 +33,32 @@ const previewImages = [
 
 const Gallery3D: React.FC = () => {
   const navigate = useNavigate();
+  const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
+  const thumbnailStripRef = useRef<HTMLDivElement>(null);
+  const thumbnailRefs = useRef<(HTMLButtonElement | null)[]>([]);
+
+  const goTo = useCallback((index: number) => {
+    const wrapped = (index + previewImages.length) % previewImages.length;
+    setSelectedIndex(wrapped);
+  }, []);
+
+  // Keyboard navigation
+  useEffect(() => {
+    if (selectedIndex === null) return;
+    const handler = (e: KeyboardEvent) => {
+      if (e.key === "ArrowLeft") goTo(selectedIndex - 1);
+      else if (e.key === "ArrowRight") goTo(selectedIndex + 1);
+    };
+    window.addEventListener("keydown", handler);
+    return () => window.removeEventListener("keydown", handler);
+  }, [selectedIndex, goTo]);
+
+  // Auto-scroll active thumbnail into view
+  useEffect(() => {
+    if (selectedIndex === null) return;
+    const thumb = thumbnailRefs.current[selectedIndex];
+    thumb?.scrollIntoView({ behavior: "smooth", block: "nearest", inline: "center" });
+  }, [selectedIndex]);
 
   return (
     <section id="gallery" className="py-[12vh] lg:py-[15vh]">
@@ -54,13 +81,14 @@ const Gallery3D: React.FC = () => {
         </button>
       </div>
 
-      {/* Scrollable 3-column grid */}
-      <div className="h-[60vh] overflow-y-auto pr-2 rounded-lg scrollbar-thin scrollbar-thumb-border scrollbar-track-transparent">
+      {/* 3-column grid, internal scroll */}
+      <div className="max-h-[65vh] overflow-y-auto pr-2 rounded-lg scrollbar-thin scrollbar-thumb-border scrollbar-track-transparent">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
           {previewImages.map((img, i) => (
-            <div
+            <button
               key={i}
-              className="relative overflow-hidden rounded-lg bg-muted/30 border border-border/20 hover:border-border/60 transition-all duration-300 group"
+              onClick={() => setSelectedIndex(i)}
+              className="relative overflow-hidden rounded-lg bg-muted/30 border border-border/20 hover:border-border/60 transition-all duration-300 group interactive text-left"
             >
               <img
                 src={img.src}
@@ -73,10 +101,76 @@ const Gallery3D: React.FC = () => {
                   {img.alt}
                 </span>
               </div>
-            </div>
+            </button>
           ))}
         </div>
       </div>
+
+      {/* macOS-style Lightbox */}
+      <Dialog open={selectedIndex !== null} onOpenChange={(open) => !open && setSelectedIndex(null)}>
+        <DialogContent className="max-w-[95vw] w-auto max-h-[95vh] p-0 border-border/30 bg-background/95 backdrop-blur-xl overflow-hidden flex flex-col gap-0 rounded-xl">
+          <DialogTitle className="sr-only">
+            {selectedIndex !== null ? previewImages[selectedIndex].alt : "Image preview"}
+          </DialogTitle>
+
+          {/* Main preview area */}
+          <div className="relative flex items-center justify-center flex-1 min-h-0 px-4 pt-10 pb-4">
+            {/* Left arrow */}
+            <button
+              onClick={() => goTo((selectedIndex ?? 0) - 1)}
+              className="absolute left-3 top-1/2 -translate-y-1/2 z-10 w-9 h-9 rounded-full bg-muted/60 hover:bg-muted flex items-center justify-center transition-colors interactive"
+            >
+              <ChevronLeft className="w-5 h-5 text-foreground" />
+            </button>
+
+            {/* Image */}
+            {selectedIndex !== null && (
+              <img
+                src={previewImages[selectedIndex].src}
+                alt={previewImages[selectedIndex].alt}
+                className="max-h-[65vh] max-w-full object-contain rounded-lg select-none"
+                draggable={false}
+              />
+            )}
+
+            {/* Right arrow */}
+            <button
+              onClick={() => goTo((selectedIndex ?? 0) + 1)}
+              className="absolute right-3 top-1/2 -translate-y-1/2 z-10 w-9 h-9 rounded-full bg-muted/60 hover:bg-muted flex items-center justify-center transition-colors interactive"
+            >
+              <ChevronRight className="w-5 h-5 text-foreground" />
+            </button>
+          </div>
+
+          {/* Thumbnail strip */}
+          <div className="border-t border-border/20 bg-muted/20 px-4 py-3">
+            <div
+              ref={thumbnailStripRef}
+              className="flex gap-2 overflow-x-auto scrollbar-thin scrollbar-thumb-border scrollbar-track-transparent pb-1"
+            >
+              {previewImages.map((img, i) => (
+                <button
+                  key={i}
+                  ref={(el) => { thumbnailRefs.current[i] = el; }}
+                  onClick={() => setSelectedIndex(i)}
+                  className={`flex-shrink-0 w-16 h-16 rounded-md overflow-hidden border-2 transition-all duration-200 interactive ${
+                    i === selectedIndex
+                      ? "border-primary ring-1 ring-primary/40 scale-105"
+                      : "border-transparent opacity-50 hover:opacity-80"
+                  }`}
+                >
+                  <img
+                    src={img.src}
+                    alt={img.alt}
+                    className="w-full h-full object-cover"
+                    draggable={false}
+                  />
+                </button>
+              ))}
+            </div>
+          </div>
+        </DialogContent>
+      </Dialog>
     </section>
   );
 };
