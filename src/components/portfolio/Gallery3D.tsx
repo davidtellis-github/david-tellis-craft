@@ -82,28 +82,26 @@ const Gallery3D: React.FC = () => {
       </div>
 
       {/* 3-column grid, internal scroll */}
-      <div className="max-h-[80vh] overflow-y-auto pr-2 rounded-lg scrollbar-thin scrollbar-thumb-border scrollbar-track-transparent">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 items-start">
-          {previewImages.map((img, i) => (
-            <button
-              key={i}
-              onClick={() => setSelectedIndex(i)}
-              className="relative overflow-hidden rounded-lg bg-muted/30 border border-border/20 hover:border-border/60 transition-all duration-300 group interactive text-left"
-            >
-              <img
-                src={img.src}
-                alt={img.alt}
-                className="w-full h-auto object-contain transition-transform duration-500 group-hover:scale-[1.03]"
-                loading="lazy"
-              />
-              <div className="absolute inset-0 bg-background/0 group-hover:bg-background/40 transition-colors duration-300 flex items-end">
-                <span className="px-4 py-3 text-sm font-medium text-foreground opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                  {img.alt}
-                </span>
-              </div>
-            </button>
-          ))}
-        </div>
+      <div className="columns-1 sm:columns-2 lg:columns-3 gap-3">
+        {previewImages.map((img, i) => (
+          <button
+            key={i}
+            onClick={() => setSelectedIndex(i)}
+            className="relative overflow-hidden rounded-xl bg-muted/30 border border-border/20 hover:border-border/60 transition-all duration-300 group interactive text-left break-inside-avoid mb-3 w-full"
+          >
+            <img
+              src={img.src}
+              alt={img.alt}
+              className="w-full h-auto object-contain transition-transform duration-500 group-hover:scale-[1.03]"
+              loading="lazy"
+            />
+            <div className="absolute inset-0 bg-background/0 group-hover:bg-background/40 transition-colors duration-300 flex items-end">
+              <span className="px-4 py-3 text-sm font-medium text-foreground opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                {img.alt}
+              </span>
+            </div>
+          </button>
+        ))}
       </div>
 
       {/* macOS-style Lightbox */}
