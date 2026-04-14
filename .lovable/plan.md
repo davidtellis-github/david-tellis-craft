@@ -1,17 +1,17 @@
 
 
-## Masonry-Style Gallery Layout
+## Gallery Section — Single View, No Scroll
 
-The reference image shows a Pinterest/Dribbble-style masonry layout where images have varying heights and pack tightly together without uniform row heights. The current CSS Grid with `items-start` still leaves column gaps because it uses row-based alignment.
+**Problem:** The gallery section currently shows all 17 images in a scrollable container, making it too long. The user wants a fixed-height, non-scrollable preview that encourages clicking "View all."
 
 ### Changes to `src/components/portfolio/Gallery3D.tsx`
 
-**Replace CSS Grid with CSS Columns (masonry effect)**
-- Switch from `grid grid-cols-3` to `columns-1 sm:columns-2 lg:columns-3 gap-3`
-- Each image card uses `break-inside-avoid mb-3` to prevent splitting across columns
-- This creates a true masonry layout where images pack vertically with no wasted space, matching the reference image's staggered look
-- Cards get slightly rounded corners (`rounded-xl`) with subtle border and hover effects to match the reference's card-like presentation
+- Remove `overflow-y-auto` and `max-h-[80vh]` from the masonry container
+- Wrap the masonry grid in a fixed-height container (`max-h-[70vh] overflow-hidden`) so it shows only what fits in one screen
+- Add a gradient fade at the bottom to hint there's more content
+- The "View all" button already exists — no changes needed there
+- Optionally limit `previewImages` to ~8–10 items on the homepage to reduce DOM size
 
 ### Files to change
-- `src/components/portfolio/Gallery3D.tsx` — swap grid container to CSS columns layout
+- `src/components/portfolio/Gallery3D.tsx`
 
