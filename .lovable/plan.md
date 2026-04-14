@@ -1,10 +1,17 @@
 
 
-## Make Grid Images Hug Their Height
+## Masonry-Style Gallery Layout
 
-**Problem:** CSS Grid's default `align-items: stretch` forces all cards in a row to the same height, adding empty space below shorter images.
+The reference image shows a Pinterest/Dribbble-style masonry layout where images have varying heights and pack tightly together without uniform row heights. The current CSS Grid with `items-start` still leaves column gaps because it uses row-based alignment.
 
-**Fix in `src/components/portfolio/Gallery3D.tsx`:**
-- Add `items-start` to the grid container so each card only takes the height its image needs
-- This single class change ensures each card hugs its image's natural height
+### Changes to `src/components/portfolio/Gallery3D.tsx`
+
+**Replace CSS Grid with CSS Columns (masonry effect)**
+- Switch from `grid grid-cols-3` to `columns-1 sm:columns-2 lg:columns-3 gap-3`
+- Each image card uses `break-inside-avoid mb-3` to prevent splitting across columns
+- This creates a true masonry layout where images pack vertically with no wasted space, matching the reference image's staggered look
+- Cards get slightly rounded corners (`rounded-xl`) with subtle border and hover effects to match the reference's card-like presentation
+
+### Files to change
+- `src/components/portfolio/Gallery3D.tsx` — swap grid container to CSS columns layout
 
