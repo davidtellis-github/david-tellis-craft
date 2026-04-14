@@ -42,6 +42,9 @@ const previewImages = [
   { src: galleryUpload3, alt: "Portfolio Design 3" },
   { src: galleryUpload4, alt: "Index Page Design" },
   { src: galleryUpload5, alt: "Future Songs Layout" },
+  { src: galleryUpload6, alt: "VYBE Landing Page" },
+  { src: galleryUpload7, alt: "Portfolio Dashboard" },
+  { src: galleryUpload8, alt: "Portfolio Dashboard Alt" },
 ];
 
 const Gallery3D: React.FC = () => {
