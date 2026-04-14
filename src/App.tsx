@@ -7,6 +7,7 @@ import Portfolio from "./pages/Portfolio";
 import WorkCaseStudy from "./pages/WorkCaseStudy";
 import ProjectDetails from "./pages/ProjectDetails";
 import NotFound from "./pages/NotFound";
+import GalleryPage from "./pages/GalleryPage";
 import SplashScreen from "@/components/portfolio/SplashScreen";
 import HandGestureManager from "@/components/portfolio/HandGestureManager";
 
@@ -20,6 +21,7 @@ const App = () => (
       <Routes>
         <Route path="/" element={<Index />} />
         <Route path="/portfolio" element={<Portfolio />} />
+        <Route path="/gallery" element={<GalleryPage />} />
         {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
         <Route path="/work/:slug" element={<WorkCaseStudy />} />
         <Route path="/project/:slug" element={<ProjectDetails />} />
