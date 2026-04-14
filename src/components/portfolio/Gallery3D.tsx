@@ -1,95 +1,81 @@
-import React, { useRef, useEffect, useState } from "react";
+import React from "react";
 import { useNavigate } from "react-router-dom";
+import { ArrowRight } from "lucide-react";
 
-// Import a few preview images for the teaser grid
 import galleryDjController from "@/assets/gallery-dj-controller.png";
 import gallerySynthUI from "@/assets/gallery-synth-ui.png";
 import galleryKeysAngled from "@/assets/gallery-keys-angled.png";
 import lunaAiHero from "@/assets/luna-ai-hero.png";
 import uiDroneServices from "@/assets/ui-drone-services.png";
 import uiFinopsDashboard from "@/assets/ui-finops-dashboard.png";
+import uiFuturecraftOnboarding from "@/assets/ui-futurecraft-onboarding.png";
+import uiFuturecraftSignup from "@/assets/ui-futurecraft-signup.png";
+import uiLaptopMockup from "@/assets/ui-laptop-mockup.png";
+import uiMusicController from "@/assets/ui-music-controller.png";
+import uiReviewsSection from "@/assets/ui-reviews-section.png";
+import uiTimelineVision from "@/assets/ui-timeline-vision.png";
 
 const previewImages = [
-  lunaAiHero,
-  galleryDjController,
-  gallerySynthUI,
-  galleryKeysAngled,
-  uiDroneServices,
-  uiFinopsDashboard,
+  { src: lunaAiHero, alt: "Luna AI Hero" },
+  { src: galleryDjController, alt: "DJ Controller" },
+  { src: gallerySynthUI, alt: "Synth UI" },
+  { src: galleryKeysAngled, alt: "Keys Angled" },
+  { src: uiDroneServices, alt: "Drone Services" },
+  { src: uiFinopsDashboard, alt: "FinOps Dashboard" },
+  { src: uiFuturecraftOnboarding, alt: "Futurecraft Onboarding" },
+  { src: uiFuturecraftSignup, alt: "Futurecraft Signup" },
+  { src: uiLaptopMockup, alt: "Laptop Mockup" },
+  { src: uiMusicController, alt: "Music Controller" },
+  { src: uiReviewsSection, alt: "Reviews Section" },
+  { src: uiTimelineVision, alt: "Timeline Vision" },
 ];
 
 const Gallery3D: React.FC = () => {
-  const sectionRef = useRef<HTMLDivElement>(null);
   const navigate = useNavigate();
-  const [isTransitioning, setIsTransitioning] = useState(false);
-
-  useEffect(() => {
-    const section = sectionRef.current;
-    if (!section) return;
-
-    const alreadyNavigated = sessionStorage.getItem("gallery-navigated");
-    if (alreadyNavigated) return;
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        if (entries[0].isIntersecting && !isTransitioning) {
-          sessionStorage.setItem("gallery-navigated", "true");
-          setIsTransitioning(true);
-          setTimeout(() => {
-            navigate("/gallery");
-          }, 600);
-        }
-      },
-      { threshold: 0.3 }
-    );
-
-    observer.observe(section);
-    return () => observer.disconnect();
-  }, [navigate, isTransitioning]);
 
   return (
-    <section
-      ref={sectionRef}
-      id="gallery"
-      className={`py-[12vh] lg:py-[15vh] transition-all duration-[600ms] ease-in-out
-        ${isTransitioning ? "scale-105 opacity-0" : "scale-100 opacity-100"}`}
-    >
+    <section id="gallery" className="py-[12vh] lg:py-[15vh]">
       {/* Section Header */}
-      <div className="mb-10 lg:mb-14">
-        <h2 className="text-[clamp(24px,4vw,40px)] font-medium text-foreground mb-3">
-          Gallery
-        </h2>
-        <p className="text-muted-foreground text-[clamp(14px,1.4vw,18px)] max-w-xl">
-          A collection of UI designs, 3D recreations, and visual explorations.
-        </p>
+      <div className="mb-10 lg:mb-14 flex items-end justify-between">
+        <div>
+          <h2 className="text-[clamp(24px,4vw,40px)] font-medium text-foreground mb-3">
+            Gallery
+          </h2>
+          <p className="text-muted-foreground text-[clamp(14px,1.4vw,18px)] max-w-xl">
+            A collection of UI designs, 3D recreations, and visual explorations.
+          </p>
+        </div>
+        <button
+          onClick={() => navigate("/gallery")}
+          className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors group interactive"
+        >
+          View all
+          <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+        </button>
       </div>
 
-      {/* Preview Grid — 3x2 teaser */}
-      <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
-        {previewImages.map((src, i) => (
-          <div
-            key={i}
-            className="relative overflow-hidden rounded-lg bg-muted/30 border border-border/20 aspect-[4/3]"
-          >
-            <img
-              src={src}
-              alt={`Gallery preview ${i + 1}`}
-              className="w-full h-full object-cover"
-              loading="lazy"
-            />
-            {/* Fade overlay on last row to hint "more" */}
-            {i >= 3 && (
-              <div className="absolute inset-0 bg-gradient-to-t from-background/60 to-transparent" />
-            )}
-          </div>
-        ))}
-      </div>
-
-      {/* "View All" hint */}
-      <div className="mt-6 text-center">
-        <span className="text-sm text-muted-foreground animate-pulse">
-          Scroll to explore gallery →
-        </span>
+      {/* Scrollable 3-column grid */}
+      <div className="h-[60vh] overflow-y-auto pr-2 rounded-lg scrollbar-thin scrollbar-thumb-border scrollbar-track-transparent">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+          {previewImages.map((img, i) => (
+            <div
+              key={i}
+              className="relative overflow-hidden rounded-lg bg-muted/30 border border-border/20 hover:border-border/60 transition-all duration-300 group"
+            >
+              <img
+                src={img.src}
+                alt={img.alt}
+                className="w-full h-auto object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+                loading="lazy"
+              />
+              <div className="absolute inset-0 bg-background/0 group-hover:bg-background/40 transition-colors duration-300 flex items-end">
+                <span className="px-4 py-3 text-sm font-medium text-foreground opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                  {img.alt}
+                </span>
+              </div>
+            </div>
+          ))}
+        </div>
       </div>
     </section>
   );
