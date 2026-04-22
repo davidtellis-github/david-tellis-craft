@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState, useCallback } from "react";
 import { Link } from "react-router-dom";
 import { useProjects } from "@/hooks/useProjects";
+import { useSanityProjectFeaturedImages } from "@/hooks/useSanityProjectFeaturedImages";
 
 const WorkGrid: React.FC = () => {
   const [expandedProjects, setExpandedProjects] = useState<Set<number>>(new Set());
@@ -9,6 +10,7 @@ const WorkGrid: React.FC = () => {
 
   // Take only the first 4 projects for the work grid
   const displayProjects = projects.slice(0, 4);
+  const { byId: sanityFeaturedById } = useSanityProjectFeaturedImages(displayProjects.map((p) => p.slug));
 
   // Memoized intersection observer callback
   const handleIntersection = useCallback((entries: IntersectionObserverEntry[]) => {
@@ -124,10 +126,14 @@ const WorkGrid: React.FC = () => {
     <section id="work" className="min-h-screen flex flex-col justify-center py-20">
       <div className="">
         {/* Projects List */}
-        <div className="space-y-8">
+        <div className="space-y-14 md:space-y-16">
           {displayProjects.map((project, index) => {
             const isExpanded = expandedProjects.has(index);
-            const featuredAsset = project.assets.find(asset => asset.is_featured);
+            const featuredAsset =
+              project.assets.find((asset) => /featured/i.test(asset.file_name ?? asset.file_path ?? "")) ||
+              project.assets.find((asset) => asset.is_featured) ||
+              project.assets[0];
+            const sanityFeaturedUrl = sanityFeaturedById[project.slug];
             
             return (
             <div 
@@ -137,6 +143,51 @@ const WorkGrid: React.FC = () => {
                 className="transition-all duration-500"
               >
                 <Link to={`/project/${project.slug}`} className="block group cursor-pointer interactive" aria-label={`View case study: ${project.title}`}>
+                  {/* Title + description (outside thumbnail) */}
+                  <div className="mb-5 md:mb-6 flex items-end justify-between gap-6">
+                    <div className="min-w-0">
+                      <h3 className="text-2xl md:text-4xl lg:text-5xl font-medium tracking-tight text-foreground">
+                        {project.title}
+                      </h3>
+                    {project.description && (
+                      <p className="mt-3 text-sm md:text-base text-muted-foreground max-w-3xl leading-relaxed overflow-hidden [display:-webkit-box] [-webkit-line-clamp:2] [-webkit-box-orient:vertical]">
+                        {project.description}
+                      </p>
+                    )}
+                      <div className="flex flex-wrap gap-2 mt-4">
+                        {project.role_title?.split('/').map((role, i) => (
+                          <span
+                            key={i}
+                            className="text-xs md:text-sm text-foreground/80 bg-muted/60 backdrop-blur-sm px-3 py-1 rounded-full border border-border/40"
+                          >
+                            {role.trim()}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+
+                    {/* Arrow CTA (bottom-right of header) */}
+                    <div className="w-10 h-10 md:w-12 md:h-12 flex-shrink-0 flex items-center justify-center bg-muted/70 backdrop-blur-sm text-foreground rounded-full group-hover:bg-foreground group-hover:text-background group-hover:scale-110 transition-all duration-300 border border-border/40">
+                      <svg
+                        width="24"
+                        height="24"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                        className="w-5 h-5"
+                        aria-hidden="true"
+                      >
+                        <path
+                          d="M7 17L17 7M17 7H7M17 7V17"
+                          stroke="currentColor"
+                          strokeWidth="2"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        />
+                      </svg>
+                    </div>
+                  </div>
+
                   {/* Image with Gradient Overlay */}
                   <div className={`relative overflow-hidden rounded-2xl transition-all duration-700 ${
                     isExpanded 
@@ -153,6 +204,13 @@ const WorkGrid: React.FC = () => {
                         allowFullScreen
                         title={`${project.title} video preview`}
                       ></iframe>
+                    ) : sanityFeaturedUrl ? (
+                      <img
+                        src={sanityFeaturedUrl}
+                        alt={`${project.title} featured preview`}
+                        className="w-full h-auto block rounded-2xl"
+                        loading="lazy"
+                      />
                     ) : featuredAsset && featuredAsset.asset_type === 'image' ? (
                       <img 
                         src={featuredAsset.file_path} 
@@ -166,33 +224,7 @@ const WorkGrid: React.FC = () => {
                     )}
 
                     {/* Gradient Overlay */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
-
-                    {/* Overlay Content: Title, Subtitle, Role, CTA */}
-                    <div className="absolute inset-x-0 bottom-0 p-6 md:p-10 flex items-end justify-between">
-                      <div className="flex flex-col gap-1">
-                        <h3 className="text-xl md:text-3xl lg:text-4xl font-medium tracking-tight text-white">
-                          {project.title}
-                        </h3>
-                        <p className="text-sm md:text-base text-white/70 max-w-xl leading-snug">
-                          {project.subtitle}
-                        </p>
-                        <div className="flex flex-wrap gap-2 mt-2">
-                          {project.role_title?.split('/').map((role, i) => (
-                            <span key={i} className="text-xs md:text-sm text-white/80 bg-white/15 backdrop-blur-sm px-3 py-1 rounded-full">
-                              {role.trim()}
-                            </span>
-                          ))}
-                        </div>
-                      </div>
-
-                      {/* Arrow CTA */}
-                      <div className="w-10 h-10 md:w-12 md:h-12 flex-shrink-0 flex items-center justify-center bg-white/20 backdrop-blur-sm text-white rounded-full group-hover:bg-white group-hover:text-black group-hover:scale-110 transition-all duration-300">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-5 h-5">
-                          <path d="M7 17L17 7M17 7H7M17 7V17" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                        </svg>
-                      </div>
-                    </div>
+                    <div className="absolute inset-0 bg-gradient-to-t from-background/10 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                   </div>
                 </Link>
               </div>
@@ -201,26 +233,32 @@ const WorkGrid: React.FC = () => {
         </div>
         
         {/* View All Work CTA */}
-        <div className="border-t border-border pt-12 mt-12">
-        <Link to="/portfolio" className="group interactive" aria-label="View all work">
-          <div className="bg-foreground rounded-lg p-8 group hover:bg-foreground/90 transition-colors duration-300">
-            <div className="flex items-center justify-between w-full">
-              <div>
-                <h3 className="text-3xl lg:text-4xl font-medium  tracking-relaxed mb-2 text-background">
-                  View All Work
-                </h3>
-               
-              </div>
-              
-              
-                <div className="w-12 h-12 flex items-center justify-center text-background group-hover:translate-x-2 group-hover:scale-110 transition-all duration-300 bg-background/10 rounded-full">
-                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-6 h-6">
-                    <path d="M7 17L17 7M17 7H7M17 7V17" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                  </svg>
-                </div>
-              
-            </div>
-          </div>
+        <div className="border-t border-border pt-10 mt-12 flex justify-end">
+          <Link
+            to="/portfolio"
+            className="group interactive inline-flex items-center gap-3 rounded-full bg-foreground text-background px-5 py-3 text-sm md:text-base hover:bg-foreground/90 transition-colors"
+            aria-label="View all work"
+          >
+            <span className="font-medium">View all work</span>
+            <span className="w-9 h-9 flex items-center justify-center bg-background/10 rounded-full group-hover:translate-x-1 group-hover:scale-110 transition-all duration-300">
+              <svg
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+                className="w-5 h-5"
+                aria-hidden="true"
+              >
+                <path
+                  d="M7 17L17 7M17 7H7M17 7V17"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
+            </span>
           </Link>
         </div>
         

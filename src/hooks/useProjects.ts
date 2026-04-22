@@ -176,7 +176,7 @@ export const useProjects = () => {
             mime_type: 'image/jpeg',
             alt_text: `${project.title} mockup ${i + 1}`,
             caption: null,
-            is_featured: i === 0,
+            is_featured: /featured/i.test(imgPath) || i === 0,
             sort_order: i
           }))
         };

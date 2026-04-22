@@ -1,8 +1,19 @@
 import React, { useRef, useEffect, useState, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
-import { Hands, Results, NormalizedLandmarkList } from "@mediapipe/hands";
+import type { Results, NormalizedLandmarkList } from "@mediapipe/hands";
 import { motion, AnimatePresence, useMotionValue, useSpring } from "framer-motion";
 import { useMagneticSnap } from "@/hooks/useMagneticSnap";
+
+type MediaPipeHandsInstance = {
+  setOptions(options: Record<string, unknown>): void;
+  onResults(cb: (results: Results) => void): void;
+  send(input: { image: HTMLCanvasElement | HTMLVideoElement }): Promise<void>;
+  close(): void;
+};
+
+type MediaPipeHandsCtor = new (config: {
+  locateFile: (file: string) => string;
+}) => MediaPipeHandsInstance;
 
 interface HandState {
   cursorX: number;
@@ -84,7 +95,75 @@ const getGestureInitMessage = (error: unknown) => {
     if (error.name === "OverconstrainedError") return "Camera unavailable";
   }
 
+  if (error instanceof Error) {
+    if (error.message.includes("MediaPipe Hands script not loaded")) {
+      return "Model script blocked";
+    }
+  }
+
   return "Failed to initialize";
+};
+
+const MEDIAPIPE_HANDS_VERSION = "0.4.1675469240";
+
+const getHandsCtor = (): MediaPipeHandsCtor | null => {
+  const g = globalThis as unknown as {
+    Hands?: unknown;
+  };
+
+  const maybe = g.Hands;
+  if (typeof maybe === "function") return maybe as MediaPipeHandsCtor;
+
+  if (maybe && typeof (maybe as { Hands?: unknown }).Hands === "function") {
+    return (maybe as { Hands: MediaPipeHandsCtor }).Hands;
+  }
+
+  if (maybe && typeof (maybe as { default?: unknown }).default === "function") {
+    return (maybe as { default: MediaPipeHandsCtor }).default;
+  }
+
+  if (
+    maybe &&
+    typeof (maybe as { default?: { Hands?: unknown } }).default?.Hands === "function"
+  ) {
+    return (maybe as { default: { Hands: MediaPipeHandsCtor } }).default.Hands;
+  }
+
+  return null;
+};
+
+const ensureHandsScriptLoaded = async (): Promise<void> => {
+  if (getHandsCtor()) return;
+
+  await new Promise<void>((resolve, reject) => {
+    const existing = document.querySelector<HTMLScriptElement>(
+      'script[src*="@mediapipe/hands"][src$="hands.js"]'
+    );
+    if (existing) {
+      // If the script already ran but Hands isn't available, don't hang waiting for `load`.
+      if (getHandsCtor()) {
+        resolve();
+        return;
+      }
+      existing.addEventListener("load", () => resolve(), { once: true });
+      existing.addEventListener("error", () => reject(new Error("MediaPipe Hands script failed to load")), {
+        once: true,
+      });
+      return;
+    }
+
+    const s = document.createElement("script");
+    s.src = `https://cdn.jsdelivr.net/npm/@mediapipe/hands@${MEDIAPIPE_HANDS_VERSION}/hands.js`;
+    s.crossOrigin = "anonymous";
+    s.async = true;
+    s.onload = () => resolve();
+    s.onerror = () => reject(new Error("MediaPipe Hands script failed to load"));
+    document.head.appendChild(s);
+  });
+
+  if (!getHandsCtor()) {
+    throw new Error("MediaPipe Hands script not loaded");
+  }
 };
 
 const getCameraStream = async (): Promise<MediaStream> => {
@@ -138,7 +217,7 @@ const HandGestureManager: React.FC = () => {
   const navigate = useNavigate();
   const videoRef = useRef<HTMLVideoElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const handsRef = useRef<Hands | null>(null);
+  const handsRef = useRef<MediaPipeHandsInstance | null>(null);
   const animFrameRef = useRef<number>(0);
   const streamRef = useRef<MediaStream | null>(null);
 
@@ -447,16 +526,22 @@ const HandGestureManager: React.FC = () => {
     let cancelled = false;
 
     const init = async () => {
-      let hands: Hands | null = null;
+      let hands: MediaPipeHandsInstance | null = null;
       let stream: MediaStream | null = null;
 
       try {
         setLoadingStatus("Loading hand model…");
 
         const modelPromise = (async () => {
-          const nextHands = new Hands({
+          await ensureHandsScriptLoaded();
+          const HandsCtor = getHandsCtor();
+          if (!HandsCtor) {
+            throw new Error("MediaPipe Hands script not loaded");
+          }
+
+          const nextHands = new HandsCtor({
             locateFile: (file) =>
-              `https://cdn.jsdelivr.net/npm/@mediapipe/hands/${file}`,
+              `https://cdn.jsdelivr.net/npm/@mediapipe/hands@${MEDIAPIPE_HANDS_VERSION}/${file}`,
           });
           nextHands.setOptions({
             maxNumHands: 2,

@@ -2,60 +2,91 @@ import React, { useState, useEffect, useRef, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import { ArrowRight, ChevronLeft, ChevronRight } from "lucide-react";
 import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
+import { sanity } from "@/integrations/sanity/client";
+import { urlFor } from "@/integrations/sanity/image";
 
-import galleryDjController from "@/assets/gallery-dj-controller.png";
-import gallerySynthUI from "@/assets/gallery-synth-ui.png";
-import galleryKeysAngled from "@/assets/gallery-keys-angled.png";
-import lunaAiHero from "@/assets/luna-ai-hero.png";
-import uiDroneServices from "@/assets/ui-drone-services.png";
-import uiFinopsDashboard from "@/assets/ui-finops-dashboard.png";
-import uiFuturecraftOnboarding from "@/assets/ui-futurecraft-onboarding.png";
-import uiFuturecraftSignup from "@/assets/ui-futurecraft-signup.png";
-import uiLaptopMockup from "@/assets/ui-laptop-mockup.png";
-import uiMusicController from "@/assets/ui-music-controller.png";
-import uiReviewsSection from "@/assets/ui-reviews-section.png";
-import uiTimelineVision from "@/assets/ui-timeline-vision.png";
-import galleryUpload1 from "@/assets/gallery-upload-1.png";
-import galleryUpload2 from "@/assets/gallery-upload-2.png";
-import galleryUpload3 from "@/assets/gallery-upload-3.png";
-import galleryUpload4 from "@/assets/gallery-upload-4.png";
-import galleryUpload5 from "@/assets/gallery-upload-5.png";
-import galleryUpload6 from "@/assets/gallery-upload-6.jpg";
-import galleryUpload7 from "@/assets/gallery-upload-7.jpg";
-import galleryUpload8 from "@/assets/gallery-upload-8.jpg";
+interface GalleryItem {
+  src: string;
+  alt: string;
+}
 
-const previewImages = [
-  { src: lunaAiHero, alt: "Luna AI Hero" },
-  { src: galleryDjController, alt: "DJ Controller" },
-  { src: gallerySynthUI, alt: "Synth UI" },
-  { src: galleryKeysAngled, alt: "Keys Angled" },
-  { src: uiDroneServices, alt: "Drone Services" },
-  { src: uiFinopsDashboard, alt: "FinOps Dashboard" },
-  { src: uiFuturecraftOnboarding, alt: "Futurecraft Onboarding" },
-  { src: uiFuturecraftSignup, alt: "Futurecraft Signup" },
-  { src: uiLaptopMockup, alt: "Laptop Mockup" },
-  { src: uiMusicController, alt: "Music Controller" },
-  { src: uiReviewsSection, alt: "Reviews Section" },
-  { src: uiTimelineVision, alt: "Timeline Vision" },
-  { src: galleryUpload1, alt: "Portfolio Design 1" },
-  { src: galleryUpload2, alt: "Portfolio Design 2" },
-  { src: galleryUpload3, alt: "Portfolio Design 3" },
-  { src: galleryUpload4, alt: "Index Page Design" },
-  { src: galleryUpload5, alt: "Future Songs Layout" },
-  { src: galleryUpload6, alt: "VYBE Landing Page" },
-  { src: galleryUpload7, alt: "Portfolio Dashboard" },
-  { src: galleryUpload8, alt: "Portfolio Dashboard Alt" },
+const HOME_GALLERY_TITLES = [
+  "gallery dj controller",
+  "gallery keys angled",
+  "ui wedding planner",
+  "gallery synth ui", 
+  "ui music controller",
+  
+  
+  // keep a few more after the requested order
+  "gallery synth ui",
+  "luna ai hero",
+  "ui drone services",
+  "turbocloud dashboard mockup",
 ];
+
+const SKELETON_COUNT = 9;
+const skeletonHeights = [190, 260, 220, 300, 210, 280, 240, 320, 200];
 
 const Gallery3D: React.FC = () => {
   const navigate = useNavigate();
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
+  const [images, setImages] = useState<GalleryItem[]>([]);
+  const [loading, setLoading] = useState(true);
   const thumbnailStripRef = useRef<HTMLDivElement>(null);
   const thumbnailRefs = useRef<(HTMLButtonElement | null)[]>([]);
 
   const goTo = useCallback((index: number) => {
-    const wrapped = (index + previewImages.length) % previewImages.length;
+    if (images.length === 0) return;
+    const wrapped = (index + images.length) % images.length;
     setSelectedIndex(wrapped);
+  }, [images.length]);
+
+  useEffect(() => {
+    let cancelled = false;
+
+    const load = async () => {
+      try {
+        setLoading(true);
+        const docs = await sanity.fetch<Array<{ _id: string; title?: string; image?: unknown }>>(
+          `*[_type == "galleryImage" && defined(image.asset)]{
+            _id,
+            title,
+            image
+          }`
+        );
+
+        const wanted = HOME_GALLERY_TITLES.map((t) => t.trim().toLowerCase()).filter(Boolean);
+        const byTitle = new Map(
+          docs
+            .filter((d) => d.image)
+            .map((d) => [(d.title || "").trim().toLowerCase(), d] as const)
+        );
+
+        const selectedDocs = wanted.map((t) => byTitle.get(t)).filter(Boolean) as Array<{
+          _id: string;
+          title?: string;
+          image?: unknown;
+        }>;
+
+        const fromSanity: GalleryItem[] = selectedDocs.map((d) => ({
+          src: urlFor(d.image as never).width(1200).quality(80).auto("format").url(),
+          alt: d.title || "Gallery image",
+        }));
+
+        if (!cancelled) setImages(fromSanity);
+      } catch (err) {
+        console.error("Sanity home gallery fetch failed:", err);
+        if (!cancelled) setImages([]);
+      } finally {
+        if (!cancelled) setLoading(false);
+      }
+    };
+
+    load();
+    return () => {
+      cancelled = true;
+    };
   }, []);
 
   // Keyboard navigation
@@ -99,26 +130,38 @@ const Gallery3D: React.FC = () => {
 
       {/* 3-column grid, fixed preview */}
       <div className="relative max-h-[70vh] overflow-hidden">
-        <div className="columns-1 sm:columns-2 lg:columns-3 gap-3">
-          {previewImages.slice(0, 9).map((img, i) => (
-          <button
-            key={i}
-            onClick={() => setSelectedIndex(i)}
-            className="relative overflow-hidden rounded-xl bg-muted/30 border border-border/20 hover:border-border/60 transition-all duration-300 group interactive text-left break-inside-avoid mb-3 w-full"
-          >
-            <img
-              src={img.src}
-              alt={img.alt}
-              className="w-full h-auto object-contain transition-transform duration-500 group-hover:scale-[1.03]"
-              loading="lazy"
-            />
-            <div className="absolute inset-0 bg-background/0 group-hover:bg-background/40 transition-colors duration-300 flex items-end">
-              <span className="px-4 py-3 text-sm font-medium text-foreground opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                {img.alt}
-              </span>
-            </div>
-          </button>
-        ))}
+        <div className="columns-1 sm:columns-2 gap-3">
+          {loading &&
+            Array.from({ length: SKELETON_COUNT }).map((_, i) => (
+              <div
+                key={`skeleton-${i}`}
+                className="relative overflow-hidden rounded-xl bg-muted/30 border border-border/20 break-inside-avoid mb-3 w-full"
+                style={{ height: skeletonHeights[i % skeletonHeights.length], animationDuration: "2.8s" }}
+              >
+                <div className="absolute inset-0 animate-pulse bg-gradient-to-b from-muted/40 via-muted/20 to-muted/40" />
+              </div>
+            ))}
+
+          {!loading &&
+            images.map((img, i) => (
+              <button
+                key={img.src}
+                onClick={() => setSelectedIndex(i)}
+                className="relative overflow-hidden rounded-xl bg-muted/30 border border-border/20 hover:border-border/60 transition-all duration-300 group interactive text-left break-inside-avoid mb-3 w-full"
+              >
+                <img
+                  src={img.src}
+                  alt={img.alt}
+                  className="w-full h-auto object-contain transition-transform duration-500 group-hover:scale-[1.03]"
+                  loading="lazy"
+                />
+                <div className="absolute inset-0 bg-background/0 group-hover:bg-background/40 transition-colors duration-300 flex items-end">
+                  <span className="px-4 py-3 text-sm font-medium text-foreground opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    {img.alt}
+                  </span>
+                </div>
+              </button>
+            ))}
         </div>
         <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-background to-transparent pointer-events-none" />
       </div>
@@ -127,7 +170,7 @@ const Gallery3D: React.FC = () => {
       <Dialog open={selectedIndex !== null} onOpenChange={(open) => !open && setSelectedIndex(null)}>
         <DialogContent className="max-w-[95vw] w-auto h-[90vh] p-0 border-border/30 bg-background/95 backdrop-blur-xl overflow-hidden flex flex-col gap-0 rounded-xl">
           <DialogTitle className="sr-only">
-            {selectedIndex !== null ? previewImages[selectedIndex].alt : "Image preview"}
+            {selectedIndex !== null ? images[selectedIndex]?.alt : "Image preview"}
           </DialogTitle>
 
           {/* Main preview area */}
@@ -143,8 +186,8 @@ const Gallery3D: React.FC = () => {
             {/* Image */}
             {selectedIndex !== null && (
               <img
-                src={previewImages[selectedIndex].src}
-                alt={previewImages[selectedIndex].alt}
+                src={images[selectedIndex].src}
+                alt={images[selectedIndex].alt}
                 className="h-[65vh] max-w-full object-contain rounded-lg select-none"
                 draggable={false}
               />
@@ -165,9 +208,9 @@ const Gallery3D: React.FC = () => {
               ref={thumbnailStripRef}
               className="flex gap-2 overflow-x-auto scrollbar-thin scrollbar-thumb-border scrollbar-track-transparent pb-1"
             >
-              {previewImages.map((img, i) => (
+              {images.map((img, i) => (
                 <button
-                  key={i}
+                  key={img.src}
                   ref={(el) => { thumbnailRefs.current[i] = el; }}
                   onClick={() => setSelectedIndex(i)}
                   className={`flex-shrink-0 w-16 h-16 rounded-md overflow-hidden border-2 transition-all duration-200 interactive ${
