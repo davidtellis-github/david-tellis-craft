@@ -25,10 +25,12 @@ export const useSanityProjectFeaturedImages = (projectIds: string[]) => {
   const [byId, setById] = useState<Record<string, string>>({});
   const [loading, setLoading] = useState(false);
 
-  const ids = useMemo(
-    () => Array.from(new Set(projectIds.filter(Boolean))).sort((a, b) => a.localeCompare(b)),
-    [projectIds]
-  );
+  const idsKey = useMemo(() => {
+    const ids = Array.from(new Set(projectIds.filter(Boolean))).sort((a, b) => a.localeCompare(b));
+    return ids.join("|");
+  }, [projectIds]);
+
+  const ids = useMemo(() => (idsKey ? idsKey.split("|") : []), [idsKey]);
 
   useEffect(() => {
     let cancelled = false;
@@ -81,7 +83,7 @@ export const useSanityProjectFeaturedImages = (projectIds: string[]) => {
     return () => {
       cancelled = true;
     };
-  }, [ids]);
+  }, [idsKey, ids]);
 
   return { byId, loading };
 };

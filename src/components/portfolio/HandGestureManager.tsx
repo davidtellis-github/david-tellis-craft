@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import type { Results, NormalizedLandmarkList } from "@mediapipe/hands";
 import { motion, AnimatePresence, useMotionValue, useSpring } from "framer-motion";
 import { useMagneticSnap } from "@/hooks/useMagneticSnap";
+import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 
 type MediaPipeHandsInstance = {
   setOptions(options: Record<string, unknown>): void;
@@ -33,8 +34,12 @@ const MIN_LERP = 0.15;
 const MAX_LERP = 0.45;
 const MIN_HAND_CONFIDENCE = 0.7;
 const MAX_HAND_Z_DEPTH = 0.1;
+const ACTIVE_ZONE_MIN = 0.2;
+const ACTIVE_ZONE_MAX = 0.8;
+const CURSOR_EMA_ALPHA = 0.25;
 
 const lerp = (a: number, b: number, t: number) => a + (b - a) * t;
+const clamp = (v: number, min: number, max: number) => Math.min(max, Math.max(min, v));
 
 const euclideanDist = (
   a: { x: number; y: number; z: number },
@@ -83,9 +88,22 @@ const isOpenPalm = (landmarks: NormalizedLandmarkList): boolean => {
   return indexOut && middleOut && ringOut && pinkyOut;
 };
 
+/** Returns true if only the pinky finger is extended (back gesture). */
+const isPinkyBackPose = (landmarks: NormalizedLandmarkList): boolean => {
+  const isExtended = (tipIdx: number, pipIdx: number) => landmarks[tipIdx].y < landmarks[pipIdx].y;
+
+  const indexCurled = !isExtended(8, 6);
+  const middleCurled = !isExtended(12, 10);
+  const ringCurled = !isExtended(16, 14);
+  const pinkyOut = isExtended(20, 18);
+
+  // Require at least 3 curled + pinky out to avoid accidental triggers.
+  const curledCount = [indexCurled, middleCurled, ringCurled].filter(Boolean).length;
+  return pinkyOut && curledCount >= 3;
+};
+
 const OPEN_PALM_HOLD_MS = 1000;
-const SWIPE_VELOCITY_THRESHOLD = 0.15; // normalized x units per frame
-const SWIPE_COOLDOWN_MS = 1500;
+const PINKY_BACK_COOLDOWN_MS = 1500;
 
 const getGestureInitMessage = (error: unknown) => {
   if (error instanceof DOMException) {
@@ -226,18 +244,16 @@ const HandGestureManager: React.FC = () => {
   const [cameraReady, setCameraReady] = useState(false);
   const [modelLoaded, setModelLoaded] = useState(false);
   const [loadingStatus, setLoadingStatus] = useState<string>("");
-  const [showOnboarding, setShowOnboarding] = useState(false);
   const [showTopZone, setShowTopZone] = useState(false);
   const [showBottomZone, setShowBottomZone] = useState(false);
   const [showScrollZones, setShowScrollZones] = useState(false);
   const [cursorMode, setCursorMode] = useState<"point" | "pinch">("point");
   const [isPulsing, setIsPulsing] = useState(false);
   const [gestureToast, setGestureToast] = useState<string | null>(null);
-  const [onboardingDismissed, setOnboardingDismissed] = useState(
-    () => sessionStorage.getItem("gestureOnboardingSeen") === "true"
-  );
+  const [helpOpen, setHelpOpen] = useState(() => sessionStorage.getItem("gestureHelpOpen") === "true");
+  const helpAutoShownRef = useRef(false);
 
-  const { findSnapTarget, isSnappingRef, clearHover } = useMagneticSnap();
+  const { findSnapTarget, snapTargetRef, isSnappingRef, clearHover } = useMagneticSnap();
 
   // Framer Motion values for GPU-accelerated cursor
   const cursorX = useMotionValue(window.innerWidth / 2);
@@ -258,17 +274,80 @@ const HandGestureManager: React.FC = () => {
   const prevTargetRef = useRef({ x: window.innerWidth / 2, y: window.innerHeight / 2 });
   const pinchTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const pinchClickFiredRef = useRef(false);
+  const pinchLockRef = useRef<{ x: number; y: number; el: Element | null } | null>(null);
+  const emaRef = useRef<{ x: number; y: number } | null>(null);
   const prevScreenYRef = useRef<number | null>(null);
   const lastDetectionTimeRef = useRef<number>(0);
   const openPalmTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
-  const prevIndexXRef = useRef<number | null>(null);
-  const lastSwipeTimeRef = useRef<number>(0);
+  const lastBackTimeRef = useRef<number>(0);
   const SCROLL_SPEED_MIN = 4;
   const SCROLL_SPEED_MAX = 28;
   const SCROLL_ZONE_THRESHOLD = 0.50;
 
+  const mapHandToScreen = useCallback((rawX: number, rawY: number) => {
+    const w = window.innerWidth;
+    const h = window.innerHeight;
+
+    // Active Zone (center 60%): clamp to [0.2..0.8]
+    const xIn = clamp(rawX, ACTIVE_ZONE_MIN, ACTIVE_ZONE_MAX);
+    const yIn = clamp(rawY, ACTIVE_ZONE_MIN, ACTIVE_ZONE_MAX);
+
+    // Map [0.2..0.8] -> [0..1] with linear interpolation math
+    const nx = (xIn - ACTIVE_ZONE_MIN) / (ACTIVE_ZONE_MAX - ACTIVE_ZONE_MIN);
+    const ny = (yIn - ACTIVE_ZONE_MIN) / (ACTIVE_ZONE_MAX - ACTIVE_ZONE_MIN);
+
+    // Map [0..1] -> pixels
+    const targetX = clamp(lerp(0, w, nx), 0, w);
+    const targetY = clamp(lerp(0, h, ny), 0, h);
+
+    // EMA smoothing
+    const a = clamp(CURSOR_EMA_ALPHA, 0, 1);
+    const prev = emaRef.current ?? { x: targetX, y: targetY };
+    const smoothed = {
+      x: prev.x + a * (targetX - prev.x),
+      y: prev.y + a * (targetY - prev.y),
+    };
+
+    emaRef.current = smoothed;
+    return smoothed;
+  }, []);
+
+  useEffect(() => {
+    sessionStorage.setItem("gestureHelpOpen", helpOpen ? "true" : "false");
+  }, [helpOpen]);
+
+  useEffect(() => {
+    if (!enabled) {
+      helpAutoShownRef.current = false;
+      return;
+    }
+
+    if (helpAutoShownRef.current) return;
+    helpAutoShownRef.current = true;
+
+    const hasSeen = sessionStorage.getItem("gestureHelpSeen") === "true";
+    if (!hasSeen) {
+      setHelpOpen(true);
+      sessionStorage.setItem("gestureHelpSeen", "true");
+      sessionStorage.setItem("gestureHelpOpen", "true");
+    }
+  }, [enabled]);
+
   const onResults = useCallback((results: Results) => {
     const state = stateRef.current;
+
+    const cancelPinch = () => {
+      if (state.isPinching) {
+        state.isPinching = false;
+        pinchLockRef.current = null;
+        setCursorMode("point");
+      }
+      if (pinchTimerRef.current) {
+        clearTimeout(pinchTimerRef.current);
+        pinchTimerRef.current = null;
+      }
+      pinchClickFiredRef.current = false;
+    };
 
     if (results.multiHandLandmarks && results.multiHandLandmarks.length > 0) {
       // === Hand Filtering ===
@@ -290,6 +369,8 @@ const HandGestureManager: React.FC = () => {
 
       if (validHands.length === 0) {
         state.landmarks = null;
+        cancelPinch();
+        emaRef.current = null;
         return;
       }
 
@@ -305,12 +386,14 @@ const HandGestureManager: React.FC = () => {
       // === Pointing Pose Filter ===
       const thumbTip = landmarks[4];
       const indexTip = landmarks[8];
-      const dist = euclideanDist(thumbTip, indexTip);
-      const isPinchGesture = dist < PINCH_END_THRESHOLD;
+      const pinchDist = euclideanDist(thumbTip, indexTip);
+      const isPinchGesture = pinchDist < PINCH_END_THRESHOLD;
       const palmOpen = isOpenPalm(landmarks);
 
       // === Open Palm Hold → Navigate Home ===
       if (palmOpen && !isPinchGesture) {
+        cancelPinch();
+        emaRef.current = null;
         if (!openPalmTimerRef.current) {
           openPalmTimerRef.current = setTimeout(() => {
             setGestureToast("🏠 Going Home");
@@ -320,7 +403,6 @@ const HandGestureManager: React.FC = () => {
           }, OPEN_PALM_HOLD_MS);
         }
         prevScreenYRef.current = null;
-        prevIndexXRef.current = null;
         clearHover();
         return;
       } else {
@@ -331,21 +413,17 @@ const HandGestureManager: React.FC = () => {
         }
       }
 
-      // === Swipe Right → Go Back (only in pointing pose) ===
-      if (isPointingPose(landmarks) && !isPinchGesture) {
+      // === Pinky Up → Go Back ===
+      if (!isPinchGesture && isPinkyBackPose(landmarks)) {
         const now = Date.now();
-        if (prevIndexXRef.current !== null && now - lastSwipeTimeRef.current > SWIPE_COOLDOWN_MS) {
-          const deltaX = prevIndexXRef.current - indexTip.x;
-          if (deltaX > SWIPE_VELOCITY_THRESHOLD) {
-            lastSwipeTimeRef.current = now;
-            setGestureToast("👈 Going Back");
-            setTimeout(() => setGestureToast(null), 1200);
-            window.history.back();
-            prevIndexXRef.current = null;
-            return;
-          }
+        if (now - lastBackTimeRef.current > PINKY_BACK_COOLDOWN_MS) {
+          lastBackTimeRef.current = now;
+          setGestureToast("👈 Going Back");
+          setTimeout(() => setGestureToast(null), 1200);
+          clearHover();
+          window.history.back();
+          return;
         }
-        prevIndexXRef.current = indexTip.x;
       }
 
       // === Two-Finger Scroll Mode ===
@@ -356,6 +434,8 @@ const HandGestureManager: React.FC = () => {
       }
 
       if (twoFinger && !isPinchGesture) {
+        cancelPinch();
+        emaRef.current = null;
         // Use average Y of index + middle fingertips to determine scroll direction
         const avgFingerY = (landmarks[8].y + landmarks[12].y) / 2;
         
@@ -377,8 +457,9 @@ const HandGestureManager: React.FC = () => {
         }
         
         // Still update cursor position for visual feedback
-        const screenX = (1 - indexTip.x) * window.innerWidth;
-        const screenY = indexTip.y * window.innerHeight;
+        const mapped = mapHandToScreen(1 - indexTip.x, indexTip.y);
+        const screenX = mapped.x;
+        const screenY = mapped.y;
         targetRef.current.x = screenX;
         targetRef.current.y = screenY;
         prevScreenYRef.current = null;
@@ -387,16 +468,18 @@ const HandGestureManager: React.FC = () => {
 
       // === Single Index Finger: Static cursor for select/click (NO scrolling) ===
       if (!isPointingPose(landmarks) && !isPinchGesture) {
+        cancelPinch();
+        emaRef.current = null;
         prevScreenYRef.current = null;
-        prevIndexXRef.current = null;
         setShowTopZone(false);
         setShowBottomZone(false);
         clearHover();
         return;
       }
 
-      const screenX = (1 - indexTip.x) * window.innerWidth;
-      const screenY = indexTip.y * window.innerHeight;
+      const mapped = mapHandToScreen(1 - indexTip.x, indexTip.y);
+      const screenX = mapped.x;
+      const screenY = mapped.y;
 
       // === Active Zone (Top 10%) for pinch-to-top ===
       const inTopZone = indexTip.y < 0.1;
@@ -406,13 +489,7 @@ const HandGestureManager: React.FC = () => {
         if (!twoFinger) setShowTopZone(inTopZone);
       }
 
-      // Update target position (cursor follows finger, no scrolling)
-      targetRef.current.x = screenX;
-      targetRef.current.y = screenY;
-      prevScreenYRef.current = screenY;
-
       // Pinch detection (for click only)
-      const pinchDist = euclideanDist(thumbTip, indexTip);
       const wasPinching = state.isPinching;
 
       if (!wasPinching && pinchDist < PINCH_START_THRESHOLD) {
@@ -425,22 +502,31 @@ const HandGestureManager: React.FC = () => {
           return;
         }
 
+        const snap = snapTargetRef.current;
+        const lockX = snap?.x ?? state.cursorX;
+        const lockY = snap?.y ?? state.cursorY;
+        pinchLockRef.current = {
+          x: lockX,
+          y: lockY,
+          el: snap?.element ?? document.elementFromPoint(lockX, lockY),
+        };
+        targetRef.current.x = lockX;
+        targetRef.current.y = lockY;
+        prevTargetRef.current.x = lockX;
+        prevTargetRef.current.y = lockY;
+
         pinchClickFiredRef.current = false;
 
         pinchTimerRef.current = setTimeout(() => {
           if (!pinchClickFiredRef.current) {
             pinchClickFiredRef.current = true;
             const s = stateRef.current;
-            const el = document.elementFromPoint(s.cursorX, s.cursorY);
+            const locked = pinchLockRef.current;
+            const clickX = locked?.x ?? s.cursorX;
+            const clickY = locked?.y ?? s.cursorY;
+            const el = locked?.el ?? document.elementFromPoint(clickX, clickY);
             if (el) {
-              el.dispatchEvent(
-                new MouseEvent("click", {
-                  bubbles: true,
-                  cancelable: true,
-                  clientX: s.cursorX,
-                  clientY: s.cursorY,
-                })
-              );
+              dispatchGestureClick(el, clickX, clickY);
               setIsPulsing(true);
               setTimeout(() => setIsPulsing(false), 400);
             }
@@ -449,21 +535,32 @@ const HandGestureManager: React.FC = () => {
       } else if (wasPinching && pinchDist > PINCH_END_THRESHOLD) {
         state.isPinching = false;
         setCursorMode("point");
+        pinchLockRef.current = null;
         if (pinchTimerRef.current) {
           clearTimeout(pinchTimerRef.current);
           pinchTimerRef.current = null;
         }
       }
+
+      // Update target position (cursor follows finger, no scrolling).
+      // When pinching, lock the cursor to prevent "jumping" while selecting.
+      if (!state.isPinching) {
+        targetRef.current.x = screenX;
+        targetRef.current.y = screenY;
+        prevScreenYRef.current = screenY;
+      }
     } else {
       state.landmarks = null;
       prevScreenYRef.current = null;
       clearHover();
+      cancelPinch();
+      emaRef.current = null;
     }
 
     if (showDebug && canvasRef.current && state.landmarks) {
       drawDebugSkeleton(canvasRef.current, state.landmarks);
     }
-  }, [showDebug, clearHover, navigate]);
+  }, [showDebug, clearHover, navigate, snapTargetRef, mapHandToScreen]);
 
   // Animation loop with velocity-adaptive lerp + magnetic snapping
   const animationLoop = useCallback(() => {
@@ -518,6 +615,13 @@ const HandGestureManager: React.FC = () => {
         handsRef.current = null;
       }
       cancelAnimationFrame(animFrameRef.current);
+      pinchLockRef.current = null;
+      stateRef.current.isPinching = false;
+      emaRef.current = null;
+      if (pinchTimerRef.current) {
+        clearTimeout(pinchTimerRef.current);
+        pinchTimerRef.current = null;
+      }
       setCameraReady(false);
       setModelLoaded(false);
       return;
@@ -586,9 +690,6 @@ const HandGestureManager: React.FC = () => {
 
         setCameraReady(true);
         setLoadingStatus("");
-        if (!onboardingDismissed) {
-          setShowOnboarding(true);
-        }
         animFrameRef.current = requestAnimationFrame(animationLoop);
         detectLoop();
       } catch (err) {
@@ -616,6 +717,47 @@ const HandGestureManager: React.FC = () => {
       ? "hsl(var(--primary))"
       : "hsl(var(--foreground) / 0.3)";
 
+  const pinchHoldSeconds = Math.max(0.2, Math.round((PINCH_CLICK_HOLD_MS / 1000) * 10) / 10);
+  const pinchHoldLabel = `~${pinchHoldSeconds}s`;
+
+  const dispatchGestureClick = (el: Element, clientX: number, clientY: number) => {
+    const common = {
+      bubbles: true,
+      cancelable: true,
+      clientX,
+      clientY,
+    };
+
+    // Many UI libs (including Radix Dialog) rely on pointerdown/mousedown for outside-click dismissal.
+    // Dispatch a realistic sequence so pinch behaves like a normal click.
+    if (typeof PointerEvent === "function") {
+      el.dispatchEvent(
+        new PointerEvent("pointerdown", {
+          ...common,
+          pointerId: 1,
+          pointerType: "mouse",
+          isPrimary: true,
+          button: 0,
+          buttons: 1,
+        })
+      );
+      el.dispatchEvent(
+        new PointerEvent("pointerup", {
+          ...common,
+          pointerId: 1,
+          pointerType: "mouse",
+          isPrimary: true,
+          button: 0,
+          buttons: 0,
+        })
+      );
+    }
+
+    el.dispatchEvent(new MouseEvent("mousedown", { ...common, button: 0, buttons: 1 }));
+    el.dispatchEvent(new MouseEvent("mouseup", { ...common, button: 0, buttons: 0 }));
+    el.dispatchEvent(new MouseEvent("click", { ...common, button: 0 }));
+  };
+
   return (
     <>
       <video
@@ -634,7 +776,7 @@ const HandGestureManager: React.FC = () => {
             initial={{ opacity: 0, scale: 0 }}
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 0 }}
-            className="fixed top-0 left-0 z-[9999] pointer-events-none"
+            className="fixed top-0 left-0 z-[10001] pointer-events-none"
             style={{
               x: springX,
               y: springY,
@@ -750,89 +892,75 @@ const HandGestureManager: React.FC = () => {
         )}
       </AnimatePresence>
 
-      {/* Onboarding Tooltip */}
-      <AnimatePresence>
-        {showOnboarding && enabled && cameraReady && (
-          <motion.div
-            initial={{ opacity: 0, y: 10, scale: 0.95 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: 10, scale: 0.95 }}
-            transition={{ type: "spring", damping: 20, stiffness: 300 }}
-            className="fixed bottom-16 right-4 z-[9998] w-64 rounded-xl border border-border/50 bg-card/95 backdrop-blur-xl shadow-2xl p-4"
-          >
-            <button
-              onClick={() => {
-                setShowOnboarding(false);
-                setOnboardingDismissed(true);
-                sessionStorage.setItem("gestureOnboardingSeen", "true");
-              }}
-              className="absolute top-2 right-2 text-muted-foreground hover:text-foreground transition-colors text-xs"
-            >
-              ✕
-            </button>
-            <p className="text-xs font-semibold text-foreground mb-3 tracking-wider uppercase">
-              Hand Gestures
-            </p>
-            <div className="space-y-2.5">
-              <div className="flex items-start gap-2.5">
-                <span className="text-base mt-0.5">☝️</span>
-                <div>
-                  <p className="text-[11px] font-medium text-foreground">Point to Select</p>
-                  <p className="text-[10px] text-muted-foreground leading-relaxed">
-                    Index finger moves cursor — screen stays still for precise selection.
-                  </p>
-                </div>
-              </div>
-              <div className="flex items-start gap-2.5">
-                <span className="text-base mt-0.5">✌️</span>
-                <div>
-                  <p className="text-[11px] font-medium text-foreground">Two Fingers to Scroll</p>
-                  <p className="text-[10px] text-muted-foreground leading-relaxed">
-                    Raise index + middle finger. Move to top/bottom zone to scroll.
-                  </p>
-                </div>
-              </div>
-              <div className="flex items-start gap-2.5">
-                <span className="text-base mt-0.5">👌</span>
-                <div>
-                  <p className="text-[11px] font-medium text-foreground">Pinch &amp; Hold to Click</p>
-                  <p className="text-[10px] text-muted-foreground leading-relaxed">
-                    Hold a pinch still for 1 second to click the element under the cursor.
-                  </p>
-                </div>
-              </div>
-              <div className="flex items-start gap-2.5">
-                <span className="text-base mt-0.5">🖐️</span>
-                <div>
-                  <p className="text-[11px] font-medium text-foreground">Open Palm → Home</p>
-                  <p className="text-[10px] text-muted-foreground leading-relaxed">
-                    Hold all 5 fingers open for 1 second to go home.
-                  </p>
-                </div>
-              </div>
-              <div className="flex items-start gap-2.5">
-                <span className="text-base mt-0.5">👉</span>
-                <div>
-                  <p className="text-[11px] font-medium text-foreground">Swipe Right → Back</p>
-                  <p className="text-[10px] text-muted-foreground leading-relaxed">
-                    Quickly swipe your hand right while pointing to go back.
-                  </p>
-                </div>
+      {/* Gesture Instructions Modal (center) */}
+      <Dialog open={enabled && helpOpen} onOpenChange={(open) => setHelpOpen(open)}>
+        <DialogContent className="max-w-lg w-[92vw]">
+          <DialogHeader>
+            <DialogTitle>Hand gestures</DialogTitle>
+            <DialogDescription>
+              Pinch outside this modal to dismiss. Tap the info button next to the toggle to reopen.
+            </DialogDescription>
+          </DialogHeader>
+
+          <div className="mt-4 space-y-3">
+            <div className="flex items-start gap-3">
+              <span className="text-lg">☝️</span>
+              <div>
+                <p className="text-sm font-medium text-foreground">Point (hover)</p>
+                <p className="text-xs text-muted-foreground leading-relaxed">
+                  Move the cursor and hover to activate UI (tabs, buttons).
+                </p>
               </div>
             </div>
+            <div className="flex items-start gap-3">
+              <span className="text-lg">👌</span>
+              <div>
+                <p className="text-sm font-medium text-foreground">Pinch hold (click)</p>
+                <p className="text-xs text-muted-foreground leading-relaxed">
+                  Hold {pinchHoldLabel} to click the highlighted target.
+                </p>
+              </div>
+            </div>
+            <div className="flex items-start gap-3">
+              <span className="text-lg">✌️</span>
+              <div>
+                <p className="text-sm font-medium text-foreground">Two fingers (scroll)</p>
+                <p className="text-xs text-muted-foreground leading-relaxed">
+                  Raise index + middle; move toward top/bottom edge to scroll.
+                </p>
+              </div>
+            </div>
+            <div className="flex items-start gap-3">
+              <span className="text-lg">🖐️</span>
+              <div>
+                <p className="text-sm font-medium text-foreground">Open palm (home)</p>
+                <p className="text-xs text-muted-foreground leading-relaxed">
+                  Hold open palm for 1s to go home.
+                </p>
+              </div>
+            </div>
+            <div className="flex items-start gap-3">
+              <span className="text-lg">🤙</span>
+              <div>
+                <p className="text-sm font-medium text-foreground">Pinky up (back)</p>
+                <p className="text-xs text-muted-foreground leading-relaxed">
+                  Raise your pinky finger to go back.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div className="mt-5 flex justify-end">
             <button
-              onClick={() => {
-                setShowOnboarding(false);
-                setOnboardingDismissed(true);
-                sessionStorage.setItem("gestureOnboardingSeen", "true");
-              }}
-              className="mt-3 w-full text-[10px] tracking-wider uppercase font-medium py-1.5 rounded-lg bg-primary text-primary-foreground hover:opacity-90 transition-opacity"
+              type="button"
+              onClick={() => setHelpOpen(false)}
+              className="rounded-full bg-foreground text-background px-4 py-2 text-xs tracking-wider uppercase hover:bg-foreground/90 transition-colors interactive"
             >
               Got it
             </button>
-          </motion.div>
-        )}
-      </AnimatePresence>
+          </div>
+        </DialogContent>
+      </Dialog>
 
       {/* Toggle UI */}
       <motion.div
@@ -843,10 +971,13 @@ const HandGestureManager: React.FC = () => {
       >
         {enabled && (
           <button
-            onClick={() => setShowDebug((p) => !p)}
-            className="text-[10px] tracking-wider uppercase text-muted-foreground hover:text-foreground transition-colors mr-1"
+            type="button"
+            onClick={() => setHelpOpen(true)}
+            className="w-6 h-6 rounded-full border border-border/50 bg-background/20 hover:bg-background/30 transition-colors text-[10px] text-muted-foreground hover:text-foreground flex items-center justify-center interactive"
+            aria-label="Show gesture instructions"
+            title="Info"
           >
-            {showDebug ? "Hide" : "Debug"}
+            i
           </button>
         )}
         <div

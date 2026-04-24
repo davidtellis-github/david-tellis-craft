@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { ArrowLeft, ChevronLeft, ChevronRight } from "lucide-react";
 import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
 import { sanity } from "@/integrations/sanity/client";
@@ -10,8 +10,13 @@ interface GalleryItem {
   alt: string;
 }
 
+type GalleryNavState = {
+  from?: string;
+};
+
 const SKELETON_COUNT = 20;
 const MIN_SKELETON_MS = 900;
+const PAGE_SIZE = 36;
 const skeletonHeights = [
   180, 260, 220, 300, 210,
   280, 240, 320, 200, 270,
@@ -20,10 +25,15 @@ const skeletonHeights = [
 ];
 
 const GalleryPage: React.FC = () => {
+  const navigate = useNavigate();
+  const location = useLocation();
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
   const [mounted, setMounted] = useState(false);
   const [images, setImages] = useState<GalleryItem[]>([]);
   const [loading, setLoading] = useState(true);
+  const [loadingMore, setLoadingMore] = useState(false);
+  const [hasMore, setHasMore] = useState(true);
+  const [page, setPage] = useState(0);
   const [loadError, setLoadError] = useState<string | null>(null);
 
   const thumbnailStripRef = React.useRef<HTMLDivElement>(null);
@@ -48,11 +58,12 @@ const GalleryPage: React.FC = () => {
         setLoadError(null);
 
         const docs = await sanity.fetch<Array<{ _id: string; title?: string; image?: unknown }>>(
-          `*[_type == "galleryImage" && defined(image.asset)] | order(_createdAt desc) {
+          `*[_type == "galleryImage" && defined(image.asset)] | order(_createdAt desc)[$start...$end] {
             _id,
             title,
             image
-          }`
+          }`,
+          { start: 0, end: PAGE_SIZE }
         );
 
         const fromSanity: GalleryItem[] = docs.map((d) => ({
@@ -60,7 +71,11 @@ const GalleryPage: React.FC = () => {
           alt: d.title || "Gallery image",
         }));
 
-        if (!cancelled) setImages(fromSanity);
+        if (!cancelled) {
+          setImages(fromSanity);
+          setHasMore(docs.length === PAGE_SIZE);
+          setPage(1);
+        }
       } catch (err) {
         // Most common cause in the browser is missing CORS origins in Sanity project settings.
         // Logging here helps debug "TypeError: Failed to fetch" cases.
@@ -84,6 +99,46 @@ const GalleryPage: React.FC = () => {
       cancelled = true;
     };
   }, []);
+
+  const loadMore = async () => {
+    if (loadingMore || loading || !hasMore) return;
+    setLoadingMore(true);
+    setLoadError(null);
+
+    const start = page * PAGE_SIZE;
+    const end = start + PAGE_SIZE;
+
+    try {
+      const docs = await sanity.fetch<Array<{ _id: string; title?: string; image?: unknown }>>(
+        `*[_type == "galleryImage" && defined(image.asset)] | order(_createdAt desc)[$start...$end] {
+          _id,
+          title,
+          image
+        }`,
+        { start, end }
+      );
+
+      const next: GalleryItem[] = docs.map((d) => ({
+        src: urlFor(d.image as never).width(1600).quality(80).auto("format").url(),
+        alt: d.title || "Gallery image",
+      }));
+
+      setImages((prev) => {
+        // De-dupe by src to avoid accidental duplicates.
+        const seen = new Set(prev.map((p) => p.src));
+        const appended = next.filter((n) => !seen.has(n.src));
+        return prev.concat(appended);
+      });
+
+      setHasMore(docs.length === PAGE_SIZE);
+      setPage((p) => p + 1);
+    } catch (err) {
+      console.error("Sanity gallery fetch (load more) failed:", err);
+      setLoadError(err instanceof Error ? err.message : "Failed to load more images");
+    } finally {
+      setLoadingMore(false);
+    }
+  };
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -115,6 +170,24 @@ const GalleryPage: React.FC = () => {
     });
   }, [selectedIndex]);
 
+  const backTo = (() => {
+    const from = (location.state as GalleryNavState | null)?.from;
+    if (typeof from === "string" && from.startsWith("/")) return from;
+    return null;
+  })();
+
+  const handleBack = () => {
+    if (backTo) {
+      navigate(backTo);
+      return;
+    }
+    if (window.history.length > 1) {
+      navigate(-1);
+      return;
+    }
+    navigate("/");
+  };
+
   return (
     <div className="min-h-screen bg-background text-foreground">
       <nav className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-md border-b border-border/30">
@@ -122,13 +195,14 @@ const GalleryPage: React.FC = () => {
           <Link to="/" className="text-xl font-bold tracking-tight text-foreground hover:text-primary transition-colors">
             DT
           </Link>
-          <Link
-            to="/portfolio"
+          <button
+            type="button"
+            onClick={handleBack}
             className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors interactive"
           >
             <ArrowLeft className="w-4 h-4" />
             Back
-          </Link>
+          </button>
         </div>
       </nav>
 
@@ -198,6 +272,19 @@ const GalleryPage: React.FC = () => {
             </div>
           ))}
         </div>
+
+        {!loading && !loadError && hasMore && (
+          <div className="mt-10 flex justify-center">
+            <button
+              type="button"
+              onClick={loadMore}
+              disabled={loadingMore}
+              className="inline-flex items-center justify-center rounded-full bg-foreground text-background px-5 py-3 text-sm md:text-base hover:bg-foreground/90 transition-colors disabled:opacity-50 disabled:cursor-not-allowed interactive"
+            >
+              {loadingMore ? "Loading…" : "Load more"}
+            </button>
+          </div>
+        )}
       </main>
 
       <Dialog open={selectedIndex !== null} onOpenChange={(open) => !open && setSelectedIndex(null)}>

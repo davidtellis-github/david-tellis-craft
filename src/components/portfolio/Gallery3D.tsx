@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef, useCallback } from "react";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { ArrowRight, ChevronLeft, ChevronRight } from "lucide-react";
 import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
 import { sanity } from "@/integrations/sanity/client";
@@ -30,6 +30,7 @@ const skeletonHeights = [190, 260, 220, 300, 210, 280, 240, 320, 200];
 
 const Gallery3D: React.FC = () => {
   const navigate = useNavigate();
+  const location = useLocation();
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
   const [images, setImages] = useState<GalleryItem[]>([]);
   const [loading, setLoading] = useState(true);
@@ -120,7 +121,11 @@ const Gallery3D: React.FC = () => {
           </p>
         </div>
         <button
-          onClick={() => navigate("/gallery")}
+          onClick={() =>
+            navigate("/gallery", {
+              state: { from: `${location.pathname}${location.search}${location.hash}` },
+            })
+          }
           className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors group interactive"
         >
           View all

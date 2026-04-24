@@ -8,13 +8,13 @@ interface ResumeModalProps {
 }
 
 const ResumeModal: React.FC<ResumeModalProps> = ({ children }) => {
-  const resumePdf = "/lovable-uploads/David_Tellis_Resume.pdf";
+  const resumePdf = "/lovable-uploads/david_23_4.pdf";
   
   const handleDownload = () => {
     // Create a download link for the resume
     const link = document.createElement('a');
     link.href = resumePdf;
-    link.download = 'David_Tellis_Resume.pdf';
+    link.download = 'david_23_4.pdf';
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
