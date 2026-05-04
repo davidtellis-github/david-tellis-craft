@@ -12,7 +12,7 @@ const tabsData: {
 }, {
   key: "recruiters",
   label: "Recruiters",
-  headline: "Over 2 years of experience designing products, strategy, visuals and making human interaction pleasant."
+  headline: "Over 3 years of experience designing products, strategy, visuals and making human interaction pleasant."
 }, {
   key: "directors",
   label: "Design Directors",
