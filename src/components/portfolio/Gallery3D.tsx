@@ -113,7 +113,7 @@ const Gallery3D: React.FC = () => {
       {/* Section Header */}
       <div className="mb-10 lg:mb-14 flex items-end justify-between">
         <div>
-          <h2 className="text-[clamp(24px,4vw,40px)] font-medium text-foreground mb-3">
+          <h2 className="text-[clamp(24px,4vw,40px)] font-medium tracking-tight text-foreground mb-3">
             Gallery
           </h2>
           <p className="text-muted-foreground text-[clamp(14px,1.4vw,18px)] max-w-xl">

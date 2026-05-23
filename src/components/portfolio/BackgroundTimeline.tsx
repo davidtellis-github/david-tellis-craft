@@ -57,21 +57,21 @@ const roles = [
     title: "Product Designer",
     time: "2024-Now",
     location: "Bengaluru",
-    notes: "Designed multiple Product for various Startus and Clients",
+    notes: "Lead product designer embedded across venture portfolio companies (TurboCloud, Ideabaaz, Wedding Verse). Architecting end-to-end user experiences, building cohesive 100+ component design systems",
   },
   {
     company: "Freelance",
-    title: "UI Designer",
+    title: "Full-Stack Designer",
     time: "2024",
     location: "Remote",
-    notes: "Helped clients launch their Idea from 0 to 1 ",
+    notes: "I partner directly with early-stage brands or startups to handle their entire creative scope from day one. I take care of everything, from building the initial visual identity and media assets (like logos, Branding, landing pages) and designing the actual product interfaces. My focus is on making sure a company’s story reads beautifully on a marketing page, while their product remains highly logical, intuitive, and scalable",
   },
    {
     company: "Marketing Agency",
-    title: "Wordpress Designer",
+    title: "Website Designer/Developer",
     time: "2023",
     location: "Remote",
-    notes: "Partnering with teams to design clear, scalable product experiences.",
+    notes: "Led the responsive web layouts and front-end interface strategy for diverse B2B and e-commerce clients. I managed a multidisciplinary team of 6 across design and marketing to keep operations smooth and execution high.",
   },
 ];
 

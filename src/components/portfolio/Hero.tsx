@@ -5,14 +5,10 @@ const tabsData: {
   key: string;
   label: string;
   headline: React.ReactNode;
-}[] = [{
-  key: "anyone",
-  label: "For anyone",
-  headline: "Hey there, I design digital experiences that work beautifully and make sense."
-}, {
+}[] = [ {
   key: "recruiters",
   label: "Recruiters",
-  headline: "Over 3 years of experience designing products, strategy, visuals and making human interaction pleasant."
+  headline: "Hey, I'm David. I have 3 years of experience designing products, strategising, visuals and making human interaction pleasant."
 }, {
   key: "directors",
   label: "Design Directors",
@@ -20,7 +16,7 @@ const tabsData: {
 }, {
   key: "designers",
   label: "Product Designers",
-  headline: "Curious to new trends and best practices, always in the state of learning. Lately improving my documentation."
+  headline: "I do care about the final screens but more about the ten decisions that got it there "
 }, {
   key: "pms",
   label: "Product Managers",

@@ -14,6 +14,7 @@ const MobileHeader: React.FC = () => {
 
   const sections = [
     { id: "intro", label: "Intro" },
+    { id: "gallery", label: "Gallery" },
     { id: "work", label: "Work" },
     { id: "values", label: "Values" },
     { id: "background", label: "Background" },

@@ -123,6 +123,37 @@ All colors are in HSL.
 [style*="font-size: 15px"] {
   letter-spacing: 0.1em;
 }
+
+/* Standardize letter-spacing for common Tailwind text sizes */
+.text-base,
+.text-lg {
+  letter-spacing: 0.02em;
+}
+
+.text-xl,
+.text-2xl,
+.text-3xl,
+.text-4xl {
+  letter-spacing: 0;
+}
+
+.text-5xl,
+.text-6xl,
+.text-7xl,
+.text-8xl {
+  letter-spacing: -0.02em;
+}
+
+/* Ensure heading elements use a tighter base tracking for consistency */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  letter-spacing: -0.02em;
+}
+
 /* ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', 'Apple Color Emoji', 'Segoe UI Emoji */
 
 /* Gesture hover: magnetic snap visual feedback */
