@@ -3,6 +3,8 @@ import weddingverseFeatured from '@/assets/weddingverse-featured.png';
 import ideabaazFeatured from '@/assets/ideabaaz-featured.png';
 import futurcraftFeatured from '@/assets/futurcraft-featured.png';
 import turbocloudFeatured from '@/assets/turbocloud-featured.png';
+import vybeDashboardAdmin from '@/assets/vybe-dashboard-admin.png';
+import vybePortfolioOverview from '@/assets/vybe-portfolio-overview.png';
 
 // Wedding Verse UI screens
 import weddingVerseHome from '@/assets/wedding-verse-home.png';
@@ -63,6 +65,8 @@ export const imageAssets: Record<string, string> = {
   'ideabaaz-featured.png': ideabaazFeatured,
   'futurcraft-featured.png': futurcraftFeatured,
   'turbocloud-featured.png': turbocloudFeatured,
+  'vybe-dashboard-admin.png': vybeDashboardAdmin,
+  'vybe-portfolio-overview.png': vybePortfolioOverview,
   'wedding-verse-design-system-1.png': designSystem1,
   'wedding-verse-design-system-2.png': designSystem2,
   'wedding-verse-design-system-3.png': designSystem3,

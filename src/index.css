@@ -102,7 +102,8 @@ All colors are in HSL.
 
   body {
     @apply bg-background text-foreground;
-    font-family: 'Urbanist', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif;
+    font-family: 'Figtree', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif;
+    letter-spacing: normal;
   }
 
   .scrollbar-hide::-webkit-scrollbar {
@@ -114,35 +115,8 @@ All colors are in HSL.
   }
 }
 
-/* Add tracking to small text for better readability */
-.text-xs,
-.text-sm,
-[style*="font-size: 12px"],
-[style*="font-size: 13px"],
-[style*="font-size: 14px"],
-[style*="font-size: 15px"] {
-  letter-spacing: 0.1em;
-}
-
-/* Standardize letter-spacing for common Tailwind text sizes */
-.text-base,
-.text-lg {
-  letter-spacing: 0.02em;
-}
-
-.text-xl,
-.text-2xl,
-.text-3xl,
-.text-4xl {
-  letter-spacing: 0;
-}
-
-.text-5xl,
-.text-6xl,
-.text-7xl,
-.text-8xl {
-  letter-spacing: -0.02em;
-}
+/* All Figtree (body/non-heading) text shares one uniform kerning value,
+   set on body above and inherited here — no more per-size tiering. */
 
 /* Ensure heading elements use a tighter base tracking for consistency */
 h1,
@@ -152,6 +126,7 @@ h4,
 h5,
 h6 {
   letter-spacing: -0.02em;
+  font-family: 'Urbanist', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif;
 }
 
 /* ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', 'Apple Color Emoji', 'Segoe UI Emoji */

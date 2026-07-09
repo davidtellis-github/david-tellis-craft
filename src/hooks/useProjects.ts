@@ -102,8 +102,9 @@ export const useProjects = () => {
     try {
       setLoading(true);
       
-      // Define custom project order - Ideabaaz as 2nd
+      // Define custom project order - Vybe (latest) first, Ideabaaz as 3rd
       const projectOrder = [
+        'vybe',
         'wedding-verse',
         'ideabaaz',
         'futurcraft-ai',

@@ -40,7 +40,7 @@ export const FuturcraftCaseStudy: React.FC<FuturcraftCaseStudyProps> = ({ projec
         className={`py-[10vh] transition-all duration-1000 ${heroAnim.isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}
       >
         <span className="text-xs uppercase tracking-[0.2em] text-muted-foreground font-medium">
-          Case study · Q4 2024 – Q2 2025
+          MarTech · Q4 2024 – Q2 2025
         </span>
         <h1 className="text-5xl md:text-6xl lg:text-7xl font-light tracking-tight leading-[1.1] mt-6 mb-6">
           {project.title}

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useParams, Link, useNavigate } from "react-router-dom";
 import { ArrowLeft, Play, ExternalLink, Figma, Smartphone, CheckCircle2, AlertCircle } from "lucide-react";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
-import ProjectNav from "@/components/portfolio/ProjectNav";
+import ProjectNav, { ProjectNavSection } from "@/components/portfolio/ProjectNav";
 import { projectsData } from "@/data/projectData";
 
 
@@ -10,6 +10,7 @@ import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 import { MetricsHighlight } from "@/components/portfolio/MetricsHighlight";
 import { IdeabaazCaseStudy } from "@/components/portfolio/IdeabaazCaseStudy";
 import { FuturcraftCaseStudy } from "@/components/portfolio/FuturcraftCaseStudy";
+import { VybeCaseStudy } from "@/components/portfolio/VybeCaseStudy";
 // Import mockup images
 import weddingverseFeatured from "@/assets/weddingverse-featured.png";
 import ideabaazFeatured from "@/assets/ideabaaz-featured.png";
@@ -120,6 +121,17 @@ const mockupImageMap: Record<string, string> = {
 };
 
 
+const vybeNavSections: ProjectNavSection[] = [
+  { id: "overview", label: "Overview" },
+  { id: "role", label: "Role" },
+  { id: "challenge", label: "Challenge & Solution" },
+  { id: "feature-highlights", label: "Feature Highlights" },
+  { id: "how-i-worked", label: "How I Worked" },
+  { id: "design-decisions", label: "Key Design Decisions" },
+  { id: "current-state", label: "Current State" },
+  { id: "screens", label: "Screens" },
+];
+
 const ProjectDetails: React.FC = () => {
   const { slug } = useParams();
   const navigate = useNavigate();
@@ -189,12 +201,12 @@ const ProjectDetails: React.FC = () => {
       <main className="w-[98vw] mx-auto px-4 md:px-6">
         {/* Main layout with ProjectNav + content */}
         <div className="flex gap-[4vw] lg:gap-[15%]">
-          <ProjectNav />
+          <ProjectNav sections={project.id === "vybe" ? vybeNavSections : undefined} />
 
           <section className="flex-col flex-1 min-w-0 py-[20vh] mx-0 flex items-start justify-start gap-0">
             {/* Hero Section with embedded metrics */}
-            <section ref={heroAnim.ref} id="overview" className="">
-              {project.id !== "futurcraft-ai" && (
+            <section ref={heroAnim.ref} id={project.id === "vybe" ? undefined : "overview"} className="">
+              {project.id !== "futurcraft-ai" && project.id !== "vybe" && (
                 <div className="mb-20 space-y-8">
                   <div className="space-y-6">
                     <h1 className="text-5xl md:text-6xl lg:text-7xl font-light tracking-tight leading-[1.1]">
@@ -214,7 +226,7 @@ const ProjectDetails: React.FC = () => {
               )}
 
               {/* Hero Image or Video Section */}
-              {project.id !== "futurcraft-ai" && (
+              {project.id !== "futurcraft-ai" && project.id !== "vybe" && (
                 project.videoUrl ? (
                   <div className="relative aspect-video rounded-lg overflow-hidden mb-20">
                     <iframe
@@ -294,6 +306,8 @@ const ProjectDetails: React.FC = () => {
               <IdeabaazCaseStudy project={project} />
             ) : project.id === "futurcraft-ai" ? (
               <FuturcraftCaseStudy project={project} />
+            ) : project.id === "vybe" ? (
+              <VybeCaseStudy project={project} />
             ) : (
               <>
                 {/* My Role - Enhanced for wedding-verse */}

@@ -8,7 +8,7 @@ const tabsData: {
 }[] = [ {
   key: "recruiters",
   label: "Recruiters",
-  headline: "Hey, I'm David. I have 3 years of experience designing products, strategising, visuals and making human interaction pleasant."
+  headline: "Hey, I'm David. I have over 3 years of experience designing products, visuals and making human interaction pleasant."
 }, {
   key: "directors",
   label: "Design Directors",
@@ -16,7 +16,7 @@ const tabsData: {
 }, {
   key: "designers",
   label: "Product Designers",
-  headline: "I do care about the final screens but more about the ten decisions that got it there "
+  headline: "I do care about the final screens but more about the ten decisions that got it there. "
 }, {
   key: "pms",
   label: "Product Managers",

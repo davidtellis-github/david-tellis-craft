@@ -587,6 +587,63 @@ export const projectsData: Record<string, ProjectData> = {
     }
   },
 
+  "vybe": {
+    id: "vybe",
+    title: "Vybe",
+    subtitle: "Turning land into a legible, monetizable asset — AI-analyzed, strategy-mapped, execution-ready.",
+    description: "A platform giving land investors expert-level visibility into land they've never stood on, and structured execution once they decide to act. AI-ranked development strategies, verified execution partners, and transparent chain of custody from analysis to build.",
+    category: "product",
+    year: "2026",
+    services: "Product Design, AI Workflows",
+
+    mockupImages: ['vybe-portfolio-overview.png'],
+
+    role: {
+      title: "Product Designer (AI workflows)",
+      duration: "Q1 2026 – Q2 2026 (3 months)",
+      team: "David Tellis · Jabastin (2-person team)",
+      tools: ["Figma", "Figma Make", "Google AI Studio"]
+    },
+
+    context: {
+      problem: "Land is an illegible asset class. Verification is fragmented across brokers, lawyers, and surveyors, and even a simple purchase decision can take months of manual coordination before an investor has a clear picture of what a plot of land is actually worth or capable of.",
+      objective: "Design a platform where an investor gets expert-level visibility into land they've never stood on, and structured execution once they decide to act.",
+      audience: "Land and property investors evaluating unfamiliar plots, and the execution partners (architects, contractors, legal counsel) who carry out the resulting work"
+    },
+
+    features: [
+      {
+        title: "Property intake & mapping",
+        description: "Address entry pairs a text field with an interactive map pin and optional manual lat/long, so users aren't forced to be precise typists.",
+        icon: "📍"
+      },
+      {
+        title: "HABU strategy engine",
+        description: "AI-ranked development strategies shown as scannable comparison cards — ROI, capital required, timeline, risk level — with full analysis one click away.",
+        icon: "📊"
+      },
+      {
+        title: "Portfolio & execution tracking",
+        description: "Every property carries a visible status and, once in execution, a named chain of custody — project manager, architect, legal counsel, contractor.",
+        icon: "🗂️"
+      }
+    ],
+
+    process: [
+      { step: "Entry", description: "Investor enters the platform and starts a new property case.", icon: "🚪" },
+      { step: "Onboarding & KYC", description: "Identity and investor verification before any property work begins.", icon: "🪪" },
+      { step: "Property Intake & Document Auto-fill", description: "Map-first location capture, with supporting documents auto-filling structured fields.", icon: "📄" },
+      { step: "HABU Report", description: "AI generates ranked highest-and-best-use strategies for the property.", icon: "🤖" },
+      { step: "Execution Handoff", description: "Chosen strategy transitions to a named team of execution partners.", icon: "🤝" }
+    ],
+
+    outcomes: [],
+
+    reflection: "",
+
+    links: {}
+  },
+
   "turbocloud": {
     id: "turbocloud",
     title: "Turbocloud",

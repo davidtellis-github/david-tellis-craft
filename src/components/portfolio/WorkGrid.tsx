@@ -8,8 +8,8 @@ const WorkGrid: React.FC = () => {
   const projectRefs = useRef<(HTMLDivElement | null)[]>([]);
   const { projects, loading, error } = useProjects();
 
-  // Take only the first 4 projects for the work grid
-  const displayProjects = projects.slice(0, 4);
+  // Take only the first 5 projects for the work grid
+  const displayProjects = projects.slice(0, 5);
   const { byId: sanityFeaturedById } = useSanityProjectFeaturedImages(displayProjects.map((p) => p.slug));
 
   // Memoized intersection observer callback

@@ -96,27 +96,11 @@ const ValuesSection: React.FC = () => (
     {/* Bottom Right: Paragraph */}
     <div className="flex justify-start items-start ">
       <p className="max-w-full text-md font-light leading-[1.4] tracking-loose text-foreground text-left">
-      For me, design is about bringing clarity to ideas. It’s taking scattered thoughts and shaping them into something that feels natural and purposeful. Good design doesn’t need attention; it simply works and lets people focus on what matters.
-
-I value clarity over cleverness and purpose over decoration. Every element, from layout to microinteraction, should have intent. I like creating products that feel simple to use, even when there is a lot of depth behind them.
-
-My process starts with curiosity and understanding. I listen, question, and think before I design. I focus on how something will be used, not just how it looks.
-
-I enjoy working with people who care about what they build. I welcome feedback that challenges me and collaboration that strengthens ideas.
-
-In the end, I want my designs to feel honest, thoughtful, and lasting. The kind that quietly improves someone’s day without asking for attention.
-      </p>
+      For me, design is really about clarity — taking scattered, half-formed ideas and shaping them into something that feels obvious in hindsight. I care more about clarity than cleverness, and about purpose than decoration. The best design doesn't ask for attention; it just works, and quietly gets out of the way so people can get on with what they came to do. That instinct comes from watching how people actually behave — where they hesitate, what they reach for, what makes something feel effortless. So I start every project by listening and understanding before I touch a screen. I want to know how a thing will be used, not just how it looks. And I do my best work alongside people who care about what they're building — the ones who'll challenge an idea and make it stronger. In the end, I want the things I design to feel honest, considered, and built to last: the kind that make someone's day a little better without ever announcing themselves.</p>
     </div>
     <div className="flex justify-start items-start ">
       <p className="grid grid-cols-1 max-w-full text-md font-light leading-[1.4] tracking-loose text-foreground text-left">
-      I started exploring design through small experiments and self-taught projects, which slowly turned into a career that blends art, structure, and problem-solving. That mix of creativity and logic still drives everything I do.
-
-My work ethic is simple: stay honest, stay curious, and finish what you start. I believe in putting thought behind every decision, no matter how small, and I try to keep my process transparent and collaborative. I don’t like rushing for the sake of output; I like building things that last and make sense.
-
-Outside of design, I spend time sketching, observing people, collecting visuals, and learning how different forms of art connect with emotion and behavior. These habits keep my perspective fresh and remind me why I love creating in the first place.
-
-Right now, I’m looking for opportunities that let me grow as a designer while working on products that have meaning and craft behind them. I want to keep learning, keep experimenting, and work with teams that value design as a shared responsibility, not just a department.      
-      
+      I came to design sideways — through small experiments and self-taught projects that slowly grew into a career blending art, structure, and problem-solving. That mix of creativity and logic is still what pulls me in. My approach is simple: stay honest, stay curious, and finish what I start. I like putting real thought behind every decision, however small, and I work at keeping my process open — making my reasoning something a teammate can actually follow, not just something that makes sense inside my own head. I'd rather build something that lasts and holds together than rush to have something to show. A lot of that comes from life outside of work: I sketch, I watch how people move through the world, I collect visuals, and I'm endlessly curious about how art shapes what we feel and do. Those habits keep my eye fresh and remind me why I started. Right now, I'm looking for work that lets me grow while building products with real meaning and craft behind them — with teams who treat design as a shared responsibility, not a department.
     </p></div>
   </section>
   

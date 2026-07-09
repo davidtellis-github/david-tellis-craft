@@ -2,7 +2,12 @@ import React, { useEffect, useState } from "react";
 import { ArrowLeft } from "lucide-react";
 import { Link } from "react-router-dom";
 
-const sections = [
+export interface ProjectNavSection {
+  id: string;
+  label: string;
+}
+
+const defaultSections: ProjectNavSection[] = [
   { id: "overview", label: "Overview" },
   { id: "role", label: "Role" },
   { id: "challenge", label: "Challenge & Solution" },
@@ -11,13 +16,17 @@ const sections = [
   { id: "design-evolution", label: "Design Evolution" },
 ];
 
-const ProjectNav: React.FC = () => {
-  const [activeSection, setActiveSection] = useState<string>("overview");
+interface ProjectNavProps {
+  sections?: ProjectNavSection[];
+}
+
+const ProjectNav: React.FC<ProjectNavProps> = ({ sections = defaultSections }) => {
+  const [activeSection, setActiveSection] = useState<string>(sections[0]?.id ?? "overview");
 
   // --- SCROLL SPY LOGIC ---
   useEffect(() => {
     const handleScroll = () => {
-      let current = "overview";
+      let current = sections[0]?.id ?? "overview";
 
       for (const s of sections) {
         const el = document.getElementById(s.id);
@@ -37,7 +46,7 @@ const ProjectNav: React.FC = () => {
     handleScroll();
 
     return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  }, [sections]);
 
   // --- HANDLE MENU CLICK ---
   const handleClick = (id: string) => (e: React.MouseEvent) => {
