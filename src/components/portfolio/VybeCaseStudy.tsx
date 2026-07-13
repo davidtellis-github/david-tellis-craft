@@ -1,379 +1,225 @@
 import React from "react";
-import { CheckCircle2, Download, Circle, HelpCircle } from "lucide-react";
+import { Download } from "lucide-react";
 import { projectsData } from "@/data/projectData";
-import { useScrollAnimation } from "@/hooks/useScrollAnimation";
+import { CaseStudyHeader, ChapterMarker, LabelRow, Divider, ScreenshotBlock, NextProjectCard } from "./CaseStudyKit";
 
-import vybePortfolioOverview from "@/assets/vybe-portfolio-overview.png";
+import vybeLandingHero from "@/assets/vybe-landing-hero.png";
+import vybeFlowDiagram from "@/assets/vybe-flow-diagram.png";
 import vybeHabuReport from "@/assets/vybe-habu-report.png";
+import vybeExecutionTimeline from "@/assets/vybe-execution-timeline.png";
+import vybePortfolioOverview from "@/assets/vybe-portfolio-overview.png";
 import vybePropertyList from "@/assets/vybe-property-list.png";
 import vybeNewPropertyLocation from "@/assets/vybe-new-property-location.png";
-import vybeNewPropertyDocuments from "@/assets/vybe-new-property-documents.png";
-import vybeExecutionTimeline from "@/assets/vybe-execution-timeline.png";
 
 interface VybeCaseStudyProps {
   project: typeof projectsData["vybe"];
 }
 
 export const VybeCaseStudy: React.FC<VybeCaseStudyProps> = ({ project }) => {
-  const heroAnim = useScrollAnimation();
-  const metaAnim = useScrollAnimation();
-  const challengeAnim = useScrollAnimation();
-  const featuresAnim = useScrollAnimation();
-  const processAnim = useScrollAnimation();
-  const decisionsAnim = useScrollAnimation();
-  const currentStateAnim = useScrollAnimation();
-  const learnedAnim = useScrollAnimation();
-  const downloadAnim = useScrollAnimation();
-  const screensAnim = useScrollAnimation();
-  const tagsAnim = useScrollAnimation();
-
   return (
-    <>
-      {/* SECTION — Overview: Eyebrow + Title + Subtitle */}
-      <section
-        ref={heroAnim.ref}
-        id="overview"
-        className={`py-[10vh] transition-all duration-1000 ${heroAnim.isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}
-      >
-        <span className="text-xs uppercase tracking-[0.2em] text-muted-foreground font-medium">
-          Pre-Real Estate · Q1 2026 – Q2 2026
-        </span>
-        <h1 className="text-5xl md:text-6xl lg:text-7xl font-light tracking-tight leading-[1.1] mt-6 mb-6">
-          {project.title}
-        </h1>
-        <p className="text-xl md:text-2xl font-light leading-relaxed max-w-3xl text-muted-foreground">
-          {project.subtitle}
-        </p>
-        <div className="relative rounded-2xl overflow-hidden shadow-2xl shadow-background/20 mt-12">
-          <img
-            src={vybePortfolioOverview}
-            alt="Vybe admin dashboard overview"
-            className="w-full h-auto object-cover"
-          />
-        </div>
-      </section>
+    <div className="min-h-screen bg-background text-foreground">
+      <CaseStudyHeader />
 
-      {/* SECTION — Role: Meta strip */}
-      <section
-        ref={metaAnim.ref}
-        id="role"
-        className={`py-8 border-t border-b border-border/20 transition-all duration-1000 ${metaAnim.isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}
-      >
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-          <div>
-            <p className="text-xs uppercase tracking-[0.15em] text-muted-foreground mb-1 font-medium">Role</p>
-            <p className="text-sm font-light">{project.role.title}</p>
-          </div>
-          <div>
-            <p className="text-xs uppercase tracking-[0.15em] text-muted-foreground mb-1 font-medium">Duration</p>
-            <p className="text-sm font-light">{project.role.duration}</p>
-          </div>
-          <div>
-            <p className="text-xs uppercase tracking-[0.15em] text-muted-foreground mb-1 font-medium">Team</p>
-            <p className="text-sm font-light">{project.role.team}</p>
-          </div>
-          <div>
-            <p className="text-xs uppercase tracking-[0.15em] text-muted-foreground mb-1 font-medium">Tools</p>
-            <p className="text-sm font-light">{project.role.tools.join(" • ")}</p>
-          </div>
-        </div>
-      </section>
+      <main className="max-w-5xl mx-auto px-6 md:px-8 py-[12vh]">
+        {/* HERO */}
+        <section>
+          <p className="text-xs uppercase tracking-[0.18em] text-primary font-medium mb-6">Case study</p>
+          <h1 className="text-6xl md:text-7xl font-light mb-3">{project.title}</h1>
+          <p className="text-lg md:text-xl text-muted-foreground font-light mb-6">AI Land Intelligence Platform</p>
+          <p className="text-base md:text-lg text-muted-foreground font-light leading-relaxed max-w-xl mb-10">
+            Turning land into a legible, monetizable asset — AI-analyzed, strategy-mapped, execution-ready.
+          </p>
 
-      {/* SECTION — Challenge & Solution */}
-      <section
-        ref={challengeAnim.ref}
-        id="challenge"
-        className={`py-[10vh] transition-all duration-1000 ${challengeAnim.isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}
-      >
-        <span className="text-xs uppercase tracking-[0.2em] text-red-400 font-medium">The problem</span>
-        <p className="text-lg font-light leading-relaxed max-w-3xl mt-8 mb-8">
-          {project.context.problem}
-        </p>
-        <p className="text-base font-light leading-relaxed max-w-3xl text-muted-foreground">
-          My brief: {project.context.objective}
-        </p>
-      </section>
-
-      {/* SECTION — Feature Highlights (condensed, no numbering) */}
-      <section
-        ref={featuresAnim.ref}
-        id="feature-highlights"
-        className={`py-[10vh] transition-all duration-1000 ${featuresAnim.isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}
-      >
-        <h2 className="text-3xl md:text-4xl font-light mb-4">Feature Highlights</h2>
-        <p className="text-base text-muted-foreground font-light leading-relaxed mb-16 max-w-2xl">
-          Three capabilities that carry the product's core promise: legibility first, execution second.
-        </p>
-
-        <div className="space-y-16">
-          {/* Property intake & mapping */}
-          <div>
-            <h3 className="text-xl font-medium mb-3">Property intake & mapping</h3>
-            <p className="text-base text-muted-foreground leading-[1.8] font-light max-w-3xl mb-6">
-              Address entry pairs a text field with an interactive map pin and optional manual lat/long, so users
-              aren't forced to be precise typists.
-            </p>
-            <div className="rounded-2xl overflow-hidden border border-border/20">
-              <img
-                src={vybeNewPropertyLocation}
-                alt="New Property Case — Location step with address field and interactive map pin"
-                className="w-full h-auto object-cover"
-              />
-            </div>
+          <div className="rounded-2xl bg-muted/10 border border-border/20 p-3 md:p-5 mb-10">
+            <img
+              src={vybeLandingHero}
+              alt="Vybe marketing landing page — Monetize Land With Precise Strategy & Execution"
+              className="w-full h-auto rounded-lg"
+            />
           </div>
 
-          {/* HABU strategy engine */}
-          <div>
-            <h3 className="text-xl font-medium mb-3">HABU strategy engine</h3>
-            <p className="text-base text-muted-foreground leading-[1.8] font-light max-w-3xl mb-6">
-              The core differentiator: AI-ranked development strategies shown as scannable comparison cards — ROI,
-              capital required, timeline, risk level — with full analysis one click away via "View Details," not a
-              dense report dump.
-            </p>
-            <div className="rounded-2xl overflow-hidden border border-border/20">
-              <img
-                src={vybeHabuReport}
-                alt="HABU Report — ranked strategy comparison cards showing ROI, capital, timeline, and risk"
-                className="w-full h-auto object-cover"
-              />
-            </div>
-          </div>
-
-          {/* Portfolio & execution tracking */}
-          <div>
-            <h3 className="text-xl font-medium mb-3">Portfolio & execution tracking</h3>
-            <p className="text-base text-muted-foreground leading-[1.8] font-light max-w-3xl mb-6">
-              Every property carries a visible status (Analysing, HABU Report Ready, In Execution) and, once in
-              execution, a named chain of custody — project manager, architect, legal counsel, contractor — so
-              nothing is a black box.
-            </p>
-            <div className="rounded-2xl overflow-hidden border border-border/20">
-              <img
-                src={vybeExecutionTimeline}
-                alt="Property execution timeline showing phase progress and named chain of custody"
-                className="w-full h-auto object-cover"
-              />
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* SECTION — How I Worked */}
-      <section
-        ref={processAnim.ref}
-        id="how-i-worked"
-        className={`py-[10vh] transition-all duration-1000 ${processAnim.isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}
-      >
-        <h2 className="text-3xl md:text-4xl font-light mb-12">How I Worked</h2>
-        <div className="grid md:grid-cols-3 lg:grid-cols-5 gap-6">
-          {project.process.map((phase, index) => (
-            <div key={index} className="flex items-start gap-4">
-              <div className="flex-shrink-0 w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-sm font-medium text-primary">
-                {String(index + 1).padStart(2, "0")}
-              </div>
-              <div>
-                <h4 className="text-base font-medium mb-2">{phase.step}</h4>
-                <p className="text-sm text-muted-foreground font-light leading-[1.7]">{phase.description}</p>
-              </div>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* SECTION — Key design decisions */}
-      <section
-        ref={decisionsAnim.ref}
-        id="design-decisions"
-        className={`py-[10vh] transition-all duration-1000 ${decisionsAnim.isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}
-      >
-        <h2 className="text-3xl md:text-4xl font-light mb-12">Key design decisions</h2>
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {[
-            {
-              title: "Progressive disclosure in the HABU report",
-              body: "Ranked strategy cards stay scannable; full analysis is one click away via \"View Details,\" never forced on the user upfront.",
-            },
-            {
-              title: "Map-first location capture",
-              body: "A text field paired with an interactive map pin means users aren't forced to be precise typists to identify a plot.",
-            },
-            {
-              title: "Status-driven property list",
-              body: "Every property shows a plain-language status — Analysing, HABU Report Ready, In Execution — so portfolio state is legible at a glance.",
-            },
-            {
-              title: "Visible chain of custody",
-              body: "Once a property enters execution, the named project manager, architect, legal counsel, and contractor are always on screen. Nothing is a black box.",
-            },
-          ].map((d, i) => (
-            <div key={i} className="bg-muted/10 rounded-2xl p-6 border border-border/20">
-              <h3 className="text-base font-medium mb-3">{d.title}</h3>
-              <p className="text-sm text-muted-foreground leading-[1.8] font-light">{d.body}</p>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* SECTION — Current State (renamed from Outcomes; pre-launch, no shipped metrics) */}
-      <section
-        ref={currentStateAnim.ref}
-        id="current-state"
-        className={`py-[10vh] transition-all duration-1000 ${currentStateAnim.isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}
-      >
-        <h2 className="text-3xl md:text-4xl font-light mb-4">Current State</h2>
-        <p className="text-base text-muted-foreground font-light leading-relaxed mb-12 max-w-2xl">
-          Vybe is pre-launch, so this isn't an outcomes list — it's an honest read on where the design stands.
-        </p>
-
-        <div className="grid md:grid-cols-2 gap-10 mb-10">
-          <div>
-            <p className="text-xs uppercase tracking-[0.15em] text-green-400 mb-4 font-medium">
-              Designed &amp; handed off
-            </p>
-            <ul className="space-y-3">
-              {[
-                "Property intake and map-first location capture flow",
-                "HABU strategy engine — comparison cards and detail view",
-                "Property list with status-driven states",
-                "Execution chain of custody view",
-              ].map((item, i) => (
-                <li key={i} className="flex items-start gap-3">
-                  <CheckCircle2 className="w-5 h-5 text-green-400 flex-shrink-0 mt-0.5" />
-                  <p className="text-sm text-muted-foreground font-light leading-relaxed">{item}</p>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          <div>
-            <p className="text-xs uppercase tracking-[0.15em] text-amber-400 mb-4 font-medium">In progress</p>
-            <ul className="space-y-3">
-              {[
-                "Onboarding & KYC flow refinement",
-                "Document auto-fill accuracy tuning against real registry documents",
-              ].map((item, i) => (
-                <li key={i} className="flex items-start gap-3">
-                  <Circle className="w-5 h-5 text-amber-400 flex-shrink-0 mt-0.5" />
-                  <p className="text-sm text-muted-foreground font-light leading-relaxed">{item}</p>
-                </li>
-              ))}
-            </ul>
-          </div>
-        </div>
-
-        <div className="border-l-4 border-primary/40 pl-6 py-3 bg-muted/10 rounded-r-xl max-w-3xl">
-          <div className="flex items-start gap-3">
-            <HelpCircle className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" />
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
             <div>
-              <p className="text-xs uppercase tracking-[0.15em] text-muted-foreground mb-2 font-medium">
-                Open product question
-              </p>
-              <p className="text-base font-light leading-relaxed text-muted-foreground">
-                How much of the execution handoff should stay inside Vybe versus route investors to partners' own
-                systems once a chain of custody is assigned — still unresolved.
-              </p>
+              <p className="text-xs uppercase tracking-[0.15em] text-primary font-medium mb-2">Role</p>
+              <p className="text-sm font-light leading-relaxed">{project.role.title}</p>
+            </div>
+            <div>
+              <p className="text-xs uppercase tracking-[0.15em] text-primary font-medium mb-2">Duration</p>
+              <p className="text-sm font-light leading-relaxed">3 months</p>
+            </div>
+            <div>
+              <p className="text-xs uppercase tracking-[0.15em] text-primary font-medium mb-2">Team</p>
+              <p className="text-sm font-light leading-relaxed">David Tellis · Jabastin</p>
+            </div>
+            <div>
+              <p className="text-xs uppercase tracking-[0.15em] text-primary font-medium mb-2">Tools</p>
+              <p className="text-sm font-light leading-relaxed">Figma · Figma Make · Google AI Studio</p>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* SECTION — What I learned (left empty, for author to fill) */}
-      <section
-        ref={learnedAnim.ref}
-        id="learned"
-        className={`py-[10vh] transition-all duration-1000 ${learnedAnim.isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}
-      >
-        <h2 className="text-3xl md:text-4xl font-light mb-10">What I learned</h2>
-        <p className="text-base text-muted-foreground font-light leading-relaxed max-w-3xl italic">
-          — reflection pending —
-        </p>
-      </section>
+        <Divider />
 
-      {/* SECTION — Download CTA (immediately before Selected Screens) */}
-      <section
-        ref={downloadAnim.ref}
-        id="download"
-        className={`py-[6vh] transition-all duration-1000 ${downloadAnim.isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}
-      >
-        <div className="bg-muted/10 border border-border/20 rounded-2xl p-8 md:p-10 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
-          <p className="text-lg font-light">Want the full breakdown? Download the one-page PPT.</p>
+        {/* OVERVIEW / MY ROLE / STATUS */}
+        <section>
+          <LabelRow label="Overview">
+            Land is one of the hardest assets to trust from a distance. Owners — especially those living outside
+            the country — often can't tell if their title is clean, what the land is legally allowed to become, or
+            whether the person advising them locally is reliable. We set out to replace that uncertainty with a
+            single system: upload documents, get a clear read on the asset, see what it could become, and hand
+            execution to vetted partners.
+          </LabelRow>
+          <Divider />
+          <LabelRow label="My Role">
+            Product Designer (AI workflows). I designed the core investor-facing flows — intake, document review,
+            the HABU strategy engine — and worked with one collaborator across a 3-month, 2-person build.
+          </LabelRow>
+          <Divider />
+          <LabelRow label="Status">
+            Pre-launch. Core flows are designed and in front-end build. No users have touched this yet, so nothing
+            in this case study is a shipped result — only a decision, and the reasoning behind it.
+          </LabelRow>
+        </section>
+
+        <Divider />
+
+        {/* CHAPTER: DISCOVERY */}
+        <section className="pt-10">
+          <ChapterMarker eyebrow="Discovery" headline="Land You Can't See Is Land You Can't Trust" />
+          <LabelRow label="What owners are dealing with">
+            Multi-crore land, zero local visibility. Verifying a title today means chasing lawyers, surveyors, and
+            brokers by hand, over months.
+          </LabelRow>
+          <LabelRow label="What I was actually designing for">
+            Not a listings site — a trust problem. The product had to make someone feel like they suddenly had an
+            expert standing on land they'd never seen.
+          </LabelRow>
+        </section>
+
+        <Divider />
+
+        {/* CHAPTER: DESIGNING THE SYSTEM */}
+        <section className="pt-10">
+          <ChapterMarker eyebrow="Designing the system" headline="Four People, One Shared Truth" />
+          <LabelRow label="Intent before documents">
+            Onboarding opens with strategy questions, not uploads. Documents are the highest-trust-cost step, so
+            they come after the product has already shown it understands the user.
+          </LabelRow>
+          <LabelRow label="A queue, not a marketplace">
+            For providers claiming cases, I treated it as a race-condition problem first, a UI problem second.
+            First-come-first-serve had to feel instant and unambiguous — a provider opening an already-claimed
+            case is a trust failure, not a bug.
+          </LabelRow>
+          <LabelRow label="Show the report, hide the density">
+            The HABU strategy engine returns three ranked options as scannable cards — ROI, capital, timeline,
+            risk — with full depth one click away. Legal metadata stays in accordions so the main view never
+            overwhelms.
+          </LabelRow>
+          <LabelRow label="Name the humans, not just the bar">
+            Once a case is in execution, the detail view names the actual project manager, architect, and legal
+            counsel assigned — not an abstract percentage.
+          </LabelRow>
+
+          <ScreenshotBlock
+            src={vybeFlowDiagram}
+            alt="The actual end-to-end flow mapped for Vybe, from landing page through execution"
+            caption="The actual flow I mapped, end to end"
+          />
+
+          <ScreenshotBlock
+            src={vybeHabuReport}
+            alt="HABU Report — ranked strategy options as scannable comparison cards"
+            caption="HABU report — ranked options as scannable cards"
+            explanation="Three investment paths, side by side, each with ROI, capital required, timeline, and a risk badge. Depth is one click away — the default view stays scannable."
+          />
+
+          <ScreenshotBlock
+            src={vybeExecutionTimeline}
+            alt="Execution detail view naming the project manager, architect, and legal counsel"
+            caption="Execution detail — named people, not just a percentage"
+            explanation="Project manager, architect, and legal counsel are named and status-tracked once a case moves into execution."
+          />
+        </section>
+
+        <Divider />
+
+        {/* CHAPTER: WHERE IT STANDS */}
+        <section className="pt-10">
+          <ChapterMarker eyebrow="Where it stands" headline="No Results Yet — Just the Reasoning" />
+          <p className="text-base text-muted-foreground font-light leading-relaxed mb-2">
+            Unlike a shipped product, there's no before/after here. What I can show is what's built, what's not,
+            and what's still unresolved.
+          </p>
+          <Divider />
+          <LabelRow label="Built" dot>
+            Onboarding, document intake, portfolio dashboard, HABU report, provider claim flow
+          </LabelRow>
+          <LabelRow label="In progress" dot>
+            Mobile web, the case-status engine
+          </LabelRow>
+          <LabelRow label="Unresolved" dot>
+            Whether investors and providers message directly, or route everything through a relationship manager
+          </LabelRow>
+        </section>
+
+        <Divider />
+
+        {/* CHAPTER: REFLECTION */}
+        <section className="pt-10">
+          <ChapterMarker eyebrow="Reflection" headline="What I'd Watch For Next" />
+          <LabelRow label="Untested assumptions are still assumptions">
+            Every decision here is my best read of the trust problem, not a validated one. The first thing I'd
+            want post-launch is real usage data on the HABU report — it's the riskiest surface in the product.
+          </LabelRow>
+          <LabelRow label="Four personas is a tax on simplicity">
+            Every screen had to answer: does this still make sense for a relationship manager, not just an
+            investor? That constraint slowed me down more than any technical one.
+          </LabelRow>
+        </section>
+
+        <Divider />
+
+        {/* SELECTED SCREENS */}
+        <section className="pt-10">
+          <ChapterMarker eyebrow="Selected screens" headline="A Look at the Delivered Screens" />
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {[
+              { src: vybePortfolioOverview, alt: "Portfolio Overview screen", caption: "Portfolio Overview" },
+              { src: vybePropertyList, alt: "My Properties screen", caption: "My Properties" },
+              { src: vybeNewPropertyLocation, alt: "New Property Case screen", caption: "New Property Case" },
+            ].map((screen) => (
+              <div key={screen.caption}>
+                <div className="rounded-2xl bg-muted/10 border border-border/20 p-3 md:p-5">
+                  <img src={screen.src} alt={screen.alt} className="w-full h-auto rounded-lg" />
+                </div>
+                <p className="text-sm font-medium text-primary mt-3">{screen.caption}</p>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        <Divider />
+
+        {/* CLOSING */}
+        <section className="pt-10 pb-20">
+          <h2 className="text-3xl md:text-4xl font-light mb-4">Thanks for reading.</h2>
+          <p className="text-base text-muted-foreground font-light leading-relaxed mb-8 max-w-lg">
+            Want to see the other project, or the flows in more depth? Happy to walk through it.
+          </p>
           <a
-            href="/vybe-case-study.pptx"
+            href="/vybe-case-study.pdf"
             download
-            className="inline-flex items-center gap-2 bg-foreground text-background px-6 py-3 rounded-full hover:bg-foreground/90 transition-colors flex-shrink-0"
+            className="inline-flex items-center gap-2 bg-foreground text-background px-6 py-3 rounded-full hover:bg-foreground/90 transition-colors"
           >
             <Download className="w-4 h-4" />
-            Download the case study (PPT)
+            Download the case study (PDF)
           </a>
-        </div>
-      </section>
+        </section>
 
-      {/* SECTION — Selected screens */}
-      <section
-        ref={screensAnim.ref}
-        id="screens"
-        className={`py-[10vh] transition-all duration-1000 ${screensAnim.isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}
-      >
-        <h2 className="text-3xl md:text-4xl font-light mb-4">Selected screens</h2>
-        <p className="text-base text-muted-foreground font-light leading-relaxed mb-12 max-w-2xl">
-          A look at the product — key screens from the design in progress.
-        </p>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <div className="rounded-2xl overflow-hidden border border-border/20 shadow-lg shadow-background/20 group">
-            <img
-              src={vybePortfolioOverview}
-              alt="Vybe — portfolio overview dashboard"
-              className="w-full h-auto object-cover transition-transform duration-500 group-hover:scale-[1.02]"
-            />
-          </div>
-          <div className="rounded-2xl overflow-hidden border border-border/20 shadow-lg shadow-background/20 group">
-            <img
-              src={vybePropertyList}
-              alt="Vybe — property list with status-driven states"
-              className="w-full h-auto object-cover transition-transform duration-500 group-hover:scale-[1.02]"
-            />
-          </div>
-          <div className="rounded-2xl overflow-hidden border border-border/20 shadow-lg shadow-background/20 group">
-            <img
-              src={vybeHabuReport}
-              alt="Vybe — HABU Report strategy comparison"
-              className="w-full h-auto object-cover transition-transform duration-500 group-hover:scale-[1.02]"
-            />
-          </div>
-          <div className="rounded-2xl overflow-hidden border border-border/20 shadow-lg shadow-background/20 group">
-            <img
-              src={vybeNewPropertyDocuments}
-              alt="Vybe — New Property Case document upload step"
-              className="w-full h-auto object-cover transition-transform duration-500 group-hover:scale-[1.02]"
-            />
-          </div>
-        </div>
-      </section>
+        <Divider />
 
-      {/* SECTION — Tags */}
-      <section
-        ref={tagsAnim.ref}
-        id="tags"
-        className={`py-[10vh] border-t border-border/20 transition-all duration-1000 ${tagsAnim.isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}
-      >
-        <div className="flex flex-wrap gap-3">
-          {[
-            "AI/ML product design",
-            "0→1 product",
-            "Property intelligence",
-            "Multi-persona systems",
-            "Design systems",
-            "Cross-functional",
-          ].map((tag) => (
-            <span
-              key={tag}
-              className="inline-flex px-4 py-1.5 rounded-full bg-muted/20 border border-border/20 text-sm text-muted-foreground"
-            >
-              {tag}
-            </span>
-          ))}
-        </div>
-      </section>
-    </>
+        <NextProjectCard currentId={project.id} />
+      </main>
+    </div>
   );
 };

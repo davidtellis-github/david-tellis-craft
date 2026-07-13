@@ -1,357 +1,224 @@
 import React, { useState } from "react";
-import { Figma, Play, Users, TrendingUp, Target, Lightbulb, Award, CheckCircle2 } from "lucide-react";
+import { Figma, Play } from "lucide-react";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 import { projectsData } from "@/data/projectData";
-import { useScrollAnimation } from "@/hooks/useScrollAnimation";
+import { CaseStudyHeader, ChapterMarker, LabelRow, Divider, ScreenshotBlock, NextProjectCard } from "./CaseStudyKit";
 
-// Import Ideabaaz images
-import ideabaazFeatured from '@/assets/ideabaaz-featured.png';
-import ideabaazLaptopMockup from '@/assets/ideabaaz-laptop-mockup.png';
-import ideabaazDashboard from '@/assets/ideabaaz-dashboard.png';
-import ideabaazDocuments from '@/assets/ideabaaz-documents.png';
-import ideabaazMentorProfile from '@/assets/ideabaaz-mentor-profile.png';
-import ideabaazStartupTeam from '@/assets/ideabaaz-startup-team.png';
-import ideabaazStartupPitch from '@/assets/ideabaaz-startup-pitch.png';
+import ideabaazFeatured from "@/assets/ideabaaz-featured.png";
+import ideabaazDashboard from "@/assets/ideabaaz-dashboard.png";
+import ideabaazStartupTeam from "@/assets/ideabaaz-startup-team.png";
+import ideabaazMentorProfile from "@/assets/ideabaaz-mentor-profile.png";
+import ideabaazDocuments from "@/assets/ideabaaz-documents.png";
+import ideabaazStartupPitch from "@/assets/ideabaaz-startup-pitch.png";
 
 interface IdeabaazCaseStudyProps {
-  project: typeof projectsData['ideabaaz'];
+  project: typeof projectsData["ideabaaz"];
 }
 
 export const IdeabaazCaseStudy: React.FC<IdeabaazCaseStudyProps> = ({ project }) => {
   const [prototypeOpen, setPrototypeOpen] = useState(false);
-  
-  const contextAnim = useScrollAnimation();
-  const frictionAnim = useScrollAnimation();
-  const strategyAnim = useScrollAnimation();
-  const cockpitAnim = useScrollAnimation();
-  const titansAnim = useScrollAnimation();
-  const impactAnim = useScrollAnimation();
-
   const caseStudy = project.caseStudy;
 
   if (!caseStudy) return null;
 
   return (
-    <>
-      {/* 01. THE CONTEXT (THE HOOK) */}
-      <section 
-        ref={contextAnim.ref} 
-        id="context" 
-        className={`min-h-screen flex flex-col justify-center py-[15vh] transition-all duration-1000 ${contextAnim.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
-      >
-        <div className="mb-8">
-          <span className="text-xs uppercase tracking-[0.2em] text-primary font-medium">01. The Context</span>
-        </div>
-        
-        <h2 className="text-3xl md:text-5xl lg:text-6xl font-light mb-12 leading-tight max-w-4xl">
-          {caseStudy.theContext.hook}
-        </h2>
-        
-        <p className="text-lg md:text-xl text-muted-foreground font-light leading-relaxed max-w-3xl mb-16">
-          {caseStudy.theContext.intro}
-        </p>
+    <div className="min-h-screen bg-background text-foreground">
+      <CaseStudyHeader />
 
-        {/* Role Info */}
-        <div className="flex flex-wrap gap-6 mb-16">
-          <div className="bg-muted/20 rounded-full px-6 py-3 border border-border/20">
-            <span className="text-sm font-medium">Contributions</span>
+      <main className="max-w-5xl mx-auto px-6 md:px-8 py-[12vh]">
+        {/* HERO */}
+        <section>
+          <p className="text-xs uppercase tracking-[0.18em] text-primary font-medium mb-6">Case study</p>
+          <h1 className="text-6xl md:text-7xl font-light mb-3">{project.title}</h1>
+          <p className="text-lg md:text-xl text-muted-foreground font-light mb-6">Startup Ecosystem Platform</p>
+          <p className="text-base md:text-lg text-muted-foreground font-light leading-relaxed max-w-xl mb-10">
+            {project.subtitle}
+          </p>
+
+          <div className="rounded-2xl bg-muted/10 border border-border/20 p-3 md:p-5 mb-10">
+            <img
+              src={ideabaazFeatured}
+              alt="Ideabaaz landing page on laptop mockup showing Watch Only on Zee5 banner"
+              className="w-full h-auto rounded-lg"
+            />
           </div>
-          <div className="bg-muted/20 rounded-full px-6 py-3 border border-border/20">
-            <span className="text-sm text-muted-foreground">{project.role.duration}</span>
-          </div>
-        </div>
 
-        {/* Hero Image - Landing Page */}
-        <div className="relative rounded-2xl overflow-hidden shadow-2xl shadow-background/20">
-          <div className="absolute top-4 left-4 z-10 bg-background/80 backdrop-blur-sm px-4 py-2 rounded-full">
-            <span className="text-xs font-medium text-primary">Landing Page • "Watch Only on Zee5"</span>
-          </div>
-          <img 
-            src={ideabaazFeatured} 
-            alt="Ideabaaz landing page on laptop mockup showing Watch Only on Zee5 banner" 
-            className="w-full h-auto object-cover"
-          />
-        </div>
-      </section>
-
-      {/* 02. THE PROBLEM (THE FRICTION) */}
-      <section 
-        ref={frictionAnim.ref} 
-        id="friction" 
-        className={`min-h-screen flex flex-col justify-start py-[15vh] transition-all duration-1000 ${frictionAnim.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
-      >
-        <div className="mb-8">
-          <span className="text-xs uppercase tracking-[0.2em] text-red-400 font-medium">02. The Friction</span>
-        </div>
-        
-        <h2 className="text-3xl md:text-4xl lg:text-5xl font-light mb-8 leading-tight">
-          {caseStudy.theFriction.headline}
-        </h2>
-        
-        <p className="text-lg text-muted-foreground font-light leading-relaxed max-w-3xl mb-12">
-          {caseStudy.theFriction.intro}
-        </p>
-
-        {/* Design Challenge Box */}
-        <div className="bg-gradient-to-br from-red-500/10 to-red-600/5 border border-red-500/20 rounded-2xl p-8 mb-12 max-w-3xl">
-          <div className="flex items-start gap-4">
-            <Target className="w-6 h-6 text-red-400 flex-shrink-0 mt-1" />
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
             <div>
-              <p className="text-sm uppercase tracking-wider text-red-400 mb-3 font-medium">The Design Challenge</p>
-              <p className="text-xl font-light leading-relaxed">
-                {caseStudy.theFriction.designChallenge}
-              </p>
+              <p className="text-xs uppercase tracking-[0.15em] text-primary font-medium mb-2">Role</p>
+              <p className="text-sm font-light leading-relaxed">{project.role.title}</p>
+            </div>
+            <div>
+              <p className="text-xs uppercase tracking-[0.15em] text-primary font-medium mb-2">Duration</p>
+              <p className="text-sm font-light leading-relaxed">{project.role.duration}</p>
+            </div>
+            <div>
+              <p className="text-xs uppercase tracking-[0.15em] text-primary font-medium mb-2">Team</p>
+              <p className="text-sm font-light leading-relaxed">{project.role.team}</p>
+            </div>
+            <div>
+              <p className="text-xs uppercase tracking-[0.15em] text-primary font-medium mb-2">Tools</p>
+              <p className="text-sm font-light leading-relaxed">{project.role.tools.join(" • ")}</p>
             </div>
           </div>
-        </div>
+        </section>
 
-        {/* Three Masters */}
-        <div className="grid md:grid-cols-3 gap-6">
-          {caseStudy.theFriction.personas.map((persona, index) => (
-            <div 
-              key={persona.type}
-              className="bg-muted/10 rounded-xl p-6 border border-border/20 hover:border-primary/30 transition-colors"
-            >
-              <div className="flex items-center gap-3 mb-4">
-                <div className={`w-10 h-10 rounded-full flex items-center justify-center ${
-                  index === 0 ? 'bg-blue-500/20 text-blue-400' :
-                  index === 1 ? 'bg-green-500/20 text-green-400' :
-                  'bg-amber-500/20 text-amber-400'
-                }`}>
-                  {index === 0 ? <Users className="w-5 h-5" /> :
-                   index === 1 ? <TrendingUp className="w-5 h-5" /> :
-                   <Award className="w-5 h-5" />}
+        <Divider />
+
+        {/* OVERVIEW / MY ROLE / STATUS */}
+        <section>
+          <LabelRow label="Overview">{caseStudy.theContext.intro}</LabelRow>
+          <Divider />
+          <LabelRow label="My Role">
+            Product Designer & Interaction Designer. I led platform strategy and UI across four distinct
+            audiences — founders, investors, mentors, and partners — from ecosystem mapping through high-fidelity
+            production, working alongside Turbostart, House of Cheer, and the ZeeTV/Zee5 team.
+          </LabelRow>
+          <Divider />
+          <LabelRow label="Status">
+            Live and ongoing since Q1 2024. Unlike a pre-launch concept, this platform carries real traffic tied to
+            a national TV audience — new seasons and partners continue to be added on the same architecture.
+          </LabelRow>
+        </section>
+
+        <Divider />
+
+        {/* CHAPTER: DISCOVERY */}
+        <section className="pt-10">
+          <ChapterMarker eyebrow="Discovery" headline={caseStudy.theFriction.headline} />
+          <LabelRow label="What everyone was dealing with">{caseStudy.theFriction.intro}</LabelRow>
+          <LabelRow label="What I was actually designing for">
+            {caseStudy.theFriction.designChallenge} Not a set of separate pages — a trust and clarity problem across
+            three completely different audiences on one pane of glass.
+          </LabelRow>
+        </section>
+
+        <Divider />
+
+        {/* CHAPTER: DESIGNING THE SYSTEM */}
+        <section className="pt-10">
+          <ChapterMarker eyebrow="Designing the system" headline={caseStudy.theCockpit.headline} />
+          <LabelRow label="For founders">{caseStudy.theStrategy.approaches[0]?.approach}</LabelRow>
+          <LabelRow label="For investors">{caseStudy.theStrategy.approaches[1]?.approach}</LabelRow>
+          <LabelRow label={caseStudy.theCockpit.features[0]?.title}>
+            {caseStudy.theCockpit.features[0]?.description}
+          </LabelRow>
+          <LabelRow label={caseStudy.theCockpit.features[1]?.title}>
+            {caseStudy.theCockpit.features[1]?.description}
+          </LabelRow>
+          <LabelRow label="Visual language">{caseStudy.theCockpit.keyDesignMove}</LabelRow>
+          <LabelRow label="Meet the Titans">{caseStudy.theTitans.intro}</LabelRow>
+          <LabelRow label="User journey">
+            Pre-register → profile setup → discovery → dashboard access — the same funnel for every persona, just
+            with different content behind each step.
+          </LabelRow>
+
+          <ScreenshotBlock
+            src={ideabaazDocuments}
+            alt="Ideabaaz Dashboard showing Explore Services and Investors"
+            caption="Founder dashboard — the command center"
+            explanation={caseStudy.theCockpit.intro}
+          />
+
+          <ScreenshotBlock
+            src={ideabaazStartupTeam}
+            alt="Ideabaaz Team & Vision Profile showing startup team and vision details"
+            caption="Team & vision profile — the founder's full story in one view"
+          />
+
+          <ScreenshotBlock
+            src={ideabaazMentorProfile}
+            alt="Ideabaaz Mentor Profile showing celebrity investor cards"
+            caption='Mentors — "Titans" profile cards'
+          />
+        </section>
+
+        <Divider />
+
+        {/* CHAPTER: WHERE IT STANDS */}
+        <section className="pt-10">
+          <ChapterMarker eyebrow="Where it stands" headline={caseStudy.theImpact.headline} />
+          <p className="text-base text-muted-foreground font-light leading-relaxed mb-2">
+            Unlike Vybe, this one has shipped and carries real audience traffic — so what follows is what the
+            platform has actually delivered, not just what it was designed to do.
+          </p>
+          <Divider />
+          <LabelRow label="Scale" dot>
+            {caseStudy.theImpact.outcomes[0]}
+          </LabelRow>
+          <LabelRow label="Unified ecosystem" dot>
+            {caseStudy.theImpact.outcomes[1]}
+          </LabelRow>
+          <LabelRow label="Scalable architecture" dot>
+            {caseStudy.theImpact.outcomes[2]}
+          </LabelRow>
+        </section>
+
+        <Divider />
+
+        {/* CHAPTER: REFLECTION */}
+        <section className="pt-10">
+          <ChapterMarker eyebrow="Reflection" headline="Two Things I'd Carry Forward" />
+          <LabelRow label="Trust must be designed, not assumed">
+            Marketplace ecosystems succeed only when trust is designed into the product, not assumed to exist
+            between strangers meeting through a TV platform.
+          </LabelRow>
+          <LabelRow label="Multi-role platforms punish complexity">
+            Founders, investors, mentors, and partners each needed a completely different lens on the same system.
+            Ruthless prioritization — saying no to edge cases — was the only way to keep four personas legible in
+            one product.
+          </LabelRow>
+        </section>
+
+        <Divider />
+
+        {/* SELECTED SCREENS */}
+        <section className="pt-10">
+          <ChapterMarker eyebrow="Selected screens" headline="A Look at the Delivered Screens" />
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {[
+              { src: ideabaazDashboard, alt: "Startup Documents upload screen", caption: "Document Management" },
+              { src: ideabaazStartupPitch, alt: "Pitch Details screen", caption: "Pitch Details" },
+            ].map((screen) => (
+              <div key={screen.caption}>
+                <div className="rounded-2xl bg-muted/10 border border-border/20 p-3 md:p-5">
+                  <img src={screen.src} alt={screen.alt} className="w-full h-auto rounded-lg" />
                 </div>
-                <span className="font-medium">{persona.type}</span>
+                <p className="text-sm font-medium text-primary mt-3">{screen.caption}</p>
               </div>
-              <p className="text-sm text-muted-foreground leading-relaxed">{persona.need}</p>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* 03. THE STRATEGY (THE FIX) */}
-      <section 
-        ref={strategyAnim.ref} 
-        id="strategy" 
-        className={`min-h-screen flex flex-col justify-start py-[15vh] transition-all duration-1000 ${strategyAnim.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
-      >
-        <div className="mb-8">
-          <span className="text-xs uppercase tracking-[0.2em] text-primary font-medium">03. The Strategy</span>
-        </div>
-        
-        <h2 className="text-3xl md:text-4xl lg:text-5xl font-light mb-8 leading-tight">
-          {caseStudy.theStrategy.headline}
-        </h2>
-        
-        <p className="text-lg text-muted-foreground font-light leading-relaxed max-w-3xl mb-16">
-          {caseStudy.theStrategy.intro}
-        </p>
-
-        {/* Strategy Approaches */}
-        <div className="grid md:grid-cols-2 gap-8 mb-16">
-          {caseStudy.theStrategy.approaches.map((approach, index) => (
-            <div 
-              key={approach.persona}
-              className="bg-gradient-to-br from-primary/5 to-primary/10 rounded-2xl p-8 border border-primary/20"
-            >
-              <div className="flex items-center gap-3 mb-4">
-                <Lightbulb className="w-5 h-5 text-primary" />
-                <span className="text-sm font-medium text-primary">{approach.persona}</span>
-              </div>
-              <p className="text-base leading-relaxed font-light">
-                {approach.approach}
-              </p>
-            </div>
-          ))}
-        </div>
-
-        {/* Flowchart placeholder - User Journey */}
-        <div className="bg-muted/10 rounded-2xl p-8 border border-border/20">
-          <p className="text-sm uppercase tracking-wider text-muted-foreground mb-4 font-medium">User Journey</p>
-          <div className="flex flex-wrap items-center gap-4 text-sm">
-            <span className="bg-background px-4 py-2 rounded-full border border-border/30">Pre-Register</span>
-            <span className="text-muted-foreground">→</span>
-            <span className="bg-background px-4 py-2 rounded-full border border-border/30">Profile Setup</span>
-            <span className="text-muted-foreground">→</span>
-            <span className="bg-background px-4 py-2 rounded-full border border-border/30">Discovery</span>
-            <span className="text-muted-foreground">→</span>
-            <span className="bg-primary/20 px-4 py-2 rounded-full border border-primary/30 text-primary">Dashboard Access</span>
+            ))}
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* 04. THE SOLUTION: THE "COCKPIT" DASHBOARD */}
-      <section 
-        ref={cockpitAnim.ref} 
-        id="cockpit" 
-        className={`min-h-screen flex flex-col justify-start py-[15vh] transition-all duration-1000 ${cockpitAnim.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
-      >
-        <div className="mb-8">
-          <span className="text-xs uppercase tracking-[0.2em] text-primary font-medium">04. The Solution</span>
-        </div>
-        
-        <h2 className="text-3xl md:text-4xl lg:text-5xl font-light mb-4 leading-tight">
-          The "Cockpit" Dashboard
-        </h2>
-        
-        <p className="text-lg text-muted-foreground font-light leading-relaxed max-w-3xl mb-12">
-          {caseStudy.theCockpit.intro}
-        </p>
+        <Divider />
 
-        {/* Feature Cards */}
-        <div className="grid md:grid-cols-2 gap-8 mb-12">
-          {caseStudy.theCockpit.features.map((feature) => (
-            <div 
-              key={feature.title}
-              className="bg-muted/10 rounded-2xl p-8 border border-border/20"
-            >
-              <h3 className="text-xl font-medium mb-4">{feature.title}</h3>
-              <p className="text-base text-muted-foreground leading-relaxed font-light">
-                {feature.description}
-              </p>
-            </div>
-          ))}
-        </div>
-
-        {/* Key Design Move */}
-        <div className="bg-gradient-to-r from-orange-500/10 via-orange-400/5 to-transparent rounded-2xl p-8 border-l-4 border-orange-500 mb-12">
-          <p className="text-sm uppercase tracking-wider text-orange-400 mb-3 font-medium flex items-center gap-2">
-            <CheckCircle2 className="w-4 h-4" /> Key Design Move
+        {/* CLOSING */}
+        <section className="pt-10 pb-20">
+          <h2 className="text-3xl md:text-4xl font-light mb-4">Thanks for reading.</h2>
+          <p className="text-base text-muted-foreground font-light leading-relaxed mb-8 max-w-lg">
+            Want to see the other project, or the flows in more depth? Happy to walk through it.
           </p>
-          <p className="text-base leading-relaxed font-light">
-            {caseStudy.theCockpit.keyDesignMove}
-          </p>
-        </div>
-
-        {/* Dashboard Screenshot */}
-        <div className="relative rounded-2xl overflow-hidden shadow-2xl shadow-background/20">
-          <div className="absolute top-4 left-4 z-10 bg-background/80 backdrop-blur-sm px-4 py-2 rounded-full">
-            <span className="text-xs font-medium text-primary">Dashboard • "Explore Services" & "Upcoming Tasks"</span>
-          </div>
-          <img 
-            src={ideabaazDashboard} 
-            alt="Ideabaaz Dashboard showing Explore Services and Upcoming Tasks widgets" 
-            className="w-full h-auto object-cover"
-          />
-        </div>
-
-        {/* Additional Dashboard Screens */}
-        <div className="grid md:grid-cols-2 gap-6 mt-8">
-          <div className="relative rounded-xl overflow-hidden border border-border/20">
-            <div className="absolute top-3 left-3 z-10 bg-blue-500/80 backdrop-blur-sm px-3 py-1 rounded-full">
-              <span className="text-xs font-medium text-white">Founders</span>
-            </div>
-            <img src={ideabaazDocuments} alt="Document Management" className="w-full h-auto" />
-            <div className="p-4 bg-background/80 backdrop-blur-sm">
-              <h4 className="font-medium text-sm">Document Management</h4>
-              <p className="text-xs text-muted-foreground">Pitch decks, financials, legal documents</p>
-            </div>
-          </div>
-          <div className="relative rounded-xl overflow-hidden border border-border/20">
-            <div className="absolute top-3 left-3 z-10 bg-blue-500/80 backdrop-blur-sm px-3 py-1 rounded-full">
-              <span className="text-xs font-medium text-white">Founders</span>
-            </div>
-            <img src={ideabaazStartupTeam} alt="Team & Vision Profile" className="w-full h-auto" />
-            <div className="p-4 bg-background/80 backdrop-blur-sm">
-              <h4 className="font-medium text-sm">Team & Vision Profile</h4>
-              <p className="text-xs text-muted-foreground">Comprehensive startup showcasing</p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* 05. FEATURE SPOTLIGHT: THE "TITAN" CONNECTION */}
-      <section 
-        ref={titansAnim.ref} 
-        id="titans" 
-        className={`min-h-[80vh] flex flex-col justify-start py-[15vh] transition-all duration-1000 ${titansAnim.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
-      >
-        <div className="mb-8">
-          <span className="text-xs uppercase tracking-[0.2em] text-purple-400 font-medium">05. Feature Spotlight</span>
-        </div>
-        
-        <h2 className="text-3xl md:text-4xl lg:text-5xl font-light mb-8 leading-tight">
-          {caseStudy.theTitans.headline}
-        </h2>
-        
-        <p className="text-lg text-muted-foreground font-light leading-relaxed max-w-3xl mb-12">
-          {caseStudy.theTitans.intro}
-        </p>
-
-        {/* Mentor Profile Screenshot */}
-        <div className="relative rounded-2xl overflow-hidden shadow-2xl shadow-background/20 max-w-4xl">
-          <div className="absolute top-4 left-4 z-10 bg-purple-500/80 backdrop-blur-sm px-4 py-2 rounded-full">
-            <span className="text-xs font-medium text-white">Mentors • "Titans" Profile Cards</span>
-          </div>
-          <img 
-            src={ideabaazMentorProfile} 
-            alt="Ideabaaz Mentor Profile showing celebrity investor cards" 
-            className="w-full h-auto object-cover"
-          />
-        </div>
-      </section>
-
-      {/* 06. THE IMPACT (THE RECEIPT) */}
-      <section 
-        ref={impactAnim.ref} 
-        id="impact" 
-        className={`min-h-screen flex flex-col justify-start py-[15vh] transition-all duration-1000 ${impactAnim.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
-      >
-        <div className="mb-8">
-          <span className="text-xs uppercase tracking-[0.2em] text-green-400 font-medium">06. The Impact</span>
-        </div>
-        
-        <h2 className="text-3xl md:text-4xl lg:text-5xl font-light mb-12 leading-tight">
-          {caseStudy.theImpact.headline}
-        </h2>
-
-        {/* Outcomes */}
-        <div className="space-y-6 mb-16">
-          {caseStudy.theImpact.outcomes.map((outcome, index) => (
-            <div 
-              key={index}
-              className="flex items-start gap-4 bg-gradient-to-r from-green-500/10 to-transparent rounded-xl p-6 border-l-4 border-green-500"
-            >
-              <CheckCircle2 className="w-6 h-6 text-green-400 flex-shrink-0" />
-              <p className="text-base leading-relaxed font-light">{outcome}</p>
-            </div>
-          ))}
-        </div>
-
-        {/* Prototype CTA */}
-        <div className="text-center py-12 border-t border-border/20">
-          <p className="text-muted-foreground mb-6">Experience the full platform design</p>
-          <button 
+          <button
             onClick={() => setPrototypeOpen(true)}
-            className="inline-flex items-center gap-3 bg-primary/10 hover:bg-primary/20 border border-primary/20 px-8 py-4 rounded-full transition-colors"
+            className="inline-flex items-center gap-3 bg-foreground text-background px-6 py-3 rounded-full hover:bg-foreground/90 transition-colors"
           >
-            <Figma className="w-5 h-5 text-primary" />
-            <span className="font-medium">Explore Interactive Prototype</span>
-            <Play className="w-4 h-4 text-muted-foreground" />
+            <Figma className="w-4 h-4" />
+            Explore the interactive prototype
+            <Play className="w-4 h-4" />
           </button>
-        </div>
+        </section>
 
-        {/* Mobile/Lifestyle Shot */}
-        <div className="relative rounded-2xl overflow-hidden shadow-xl shadow-background/20 max-w-2xl mx-auto">
-          <img 
-            src={ideabaazStartupPitch} 
-            alt="Ideabaaz Pitch Details screen" 
-            className="w-full h-auto object-cover"
-          />
-        </div>
-      </section>
+        <Divider />
+
+        <NextProjectCard currentId={project.id} />
+      </main>
 
       {/* Prototype Modal */}
       <Dialog open={prototypeOpen} onOpenChange={setPrototypeOpen}>
         <DialogContent className="max-w-[95vw] w-full h-[90vh] p-0 bg-background border-border/50 overflow-hidden flex flex-col">
           <DialogHeader className="px-4 sm:px-6 py-4 border-b border-border/50 bg-background flex-shrink-0">
-            <DialogTitle className="text-foreground font-medium text-lg">
-              Ideabaaz — Interactive Prototype
-            </DialogTitle>
-            <DialogDescription className="text-muted-foreground text-sm">
-              Explore the full platform experience
-            </DialogDescription>
+            <DialogTitle className="text-foreground font-medium text-lg">Ideabaaz — Interactive Prototype</DialogTitle>
+            <DialogDescription className="text-muted-foreground text-sm">Explore the full platform experience</DialogDescription>
           </DialogHeader>
           <div className="flex-1 w-full bg-muted/20">
             <iframe
@@ -363,6 +230,6 @@ export const IdeabaazCaseStudy: React.FC<IdeabaazCaseStudyProps> = ({ project })
           </div>
         </DialogContent>
       </Dialog>
-    </>
+    </div>
   );
 };
