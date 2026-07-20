@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useProjects } from "@/hooks/useProjects";
+import { useSanityProjectFeaturedImages } from "@/hooks/useSanityProjectFeaturedImages";
 
 interface ProjectTimelineProps {
   activeCategory: string;
@@ -8,14 +9,17 @@ interface ProjectTimelineProps {
   hoveredCategory?: string | null;
 }
 
-const ProjectTimeline: React.FC<ProjectTimelineProps> = ({ 
-  activeCategory, 
+const ProjectTimeline: React.FC<ProjectTimelineProps> = ({
+  activeCategory,
   onProjectHover,
   hoveredCategory
 }) => {
   const [hoveredProject, setHoveredProject] = useState<string | null>(null);
   const navigate = useNavigate();
   const { projects, loading, error } = useProjects();
+  // Same resolution order as the homepage WorkGrid: a curated Sanity
+  // thumbnail first, falling back to the static featured asset.
+  const { byId: sanityFeaturedById } = useSanityProjectFeaturedImages(projects.map((p) => p.slug));
 
   if (loading) {
     return (
@@ -69,34 +73,40 @@ const ProjectTimeline: React.FC<ProjectTimelineProps> = ({
     <div className="w-full">
       <div className="space-y-8">
         {displayedProjects.map((project, index) => {
-          const isHighlighted = hoveredProject === project.id || 
+          const isHighlighted = hoveredProject === project.id ||
             (hoveredCategory && (hoveredCategory === "all" || project.category?.slug === hoveredCategory)) ||
             activeCategory === project.category?.slug;
-          
+
+          const featuredAsset =
+            project.assets.find((asset) => /featured/i.test(asset.file_name ?? asset.file_path ?? "")) ||
+            project.assets.find((asset) => asset.is_featured) ||
+            project.assets[0];
+          const previewSrc = sanityFeaturedById[project.slug] || featuredAsset?.file_path;
+
           return (
-            <div 
+            <div
               key={project.id}
-              className={`border-t border-border pt-8 first:border-t-0 first:pt-0 transition-all duration-500 cursor-pointer interactive ${
+              className={`group border-t border-border pt-8 first:border-t-0 first:pt-0 transition-all duration-500 cursor-pointer interactive ${
                 isHighlighted ? 'opacity-100' : 'opacity-50 hover:opacity-75'
               }`}
               onMouseEnter={() => handleProjectHover(project.id)}
               onMouseLeave={() => handleProjectHover(null)}
               onClick={() => handleProjectClick(project.slug)}
             >
-              {/* Title Row - Full Width */}
-              <div className="flex items-center justify-between w-full ">
+              {/* Header: Title Row - Full Width, same as before */}
+              <div className="flex items-center justify-between w-full">
                 <div className="flex items-center gap-8">
                   {/* Number */}
                   <div className="text-2xl font-medium text-muted-foreground">
                     {String(index + 1).padStart(2, '0')}
                   </div>
-                  
+
                   {/* Title */}
                   <h3 className="text-2xl lg:text-3xl font-medium uppercase tracking-tight">
                     {project.title}
                   </h3>
                 </div>
-                
+
                 {/* Services */}
                 <div className="text-right">
                   <span className="text-muted-foreground">
@@ -111,6 +121,19 @@ const ProjectTimeline: React.FC<ProjectTimelineProps> = ({
                   {project.year}
                 </span>
               </div>
+
+              {/* Preview image - below the header, same treatment as the homepage WorkGrid */}
+              {previewSrc && (
+                <div className="relative overflow-hidden rounded-2xl mt-8">
+                  <img
+                    src={previewSrc}
+                    alt={`${project.title} preview`}
+                    className="w-full h-auto block rounded-2xl"
+                    loading="lazy"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-background/10 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                </div>
+              )}
             </div>
           );
         })}

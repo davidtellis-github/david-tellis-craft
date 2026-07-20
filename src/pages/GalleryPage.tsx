@@ -1,17 +1,43 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { ArrowLeft, ChevronLeft, ChevronRight } from "lucide-react";
 import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
+import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { sanity } from "@/integrations/sanity/client";
 import { urlFor } from "@/integrations/sanity/image";
 
+// Fixed set of tabs the gallery can be filtered into. "All" is the
+// unfiltered view; the other three are the buckets every image resolves to.
+const CATEGORY_TABS = ["All", "Websites", "Designs", "Dashboard"] as const;
+type CategoryTab = (typeof CATEGORY_TABS)[number];
+type GalleryCategory = Exclude<CategoryTab, "All">;
+
 interface GalleryItem {
+  id: string;
   src: string;
   alt: string;
+  category: GalleryCategory;
 }
 
 type GalleryNavState = {
   from?: string;
+};
+
+// Sanity's `category` field defaults to "Archived" and isn't curated per
+// image yet, so it's only trusted when someone has actually set it to one
+// of our three buckets. Otherwise we infer the category from the image
+// title/filename, which already encodes which project + screen type it is
+// (e.g. "turbocloud dashboard main", "wedding verse featured").
+const classifyCategory = (title: string, sanityCategory?: string): GalleryCategory => {
+  const normalized = sanityCategory?.trim();
+  if (normalized && (CATEGORY_TABS as readonly string[]).includes(normalized) && normalized !== "All") {
+    return normalized as GalleryCategory;
+  }
+
+  const t = title.toLowerCase();
+  if (/dashboard|analytics|monitoring|finops|\bstats\b/.test(t)) return "Dashboard";
+  if (/featured|laptop mockup|\bhome\b|welcome|landing|\bhero\b/.test(t)) return "Websites";
+  return "Designs";
 };
 
 const SKELETON_COUNT = 20;
@@ -35,17 +61,28 @@ const GalleryPage: React.FC = () => {
   const [hasMore, setHasMore] = useState(true);
   const [page, setPage] = useState(0);
   const [loadError, setLoadError] = useState<string | null>(null);
+  const [activeCategory, setActiveCategory] = useState<CategoryTab>("All");
 
   const thumbnailStripRef = React.useRef<HTMLDivElement>(null);
   const thumbnailRefs = React.useRef<(HTMLButtonElement | null)[]>([]);
 
+  const filteredImages = useMemo(
+    () => (activeCategory === "All" ? images : images.filter((img) => img.category === activeCategory)),
+    [images, activeCategory]
+  );
+
+  const handleCategoryChange = (category: CategoryTab) => {
+    setActiveCategory(category);
+    setSelectedIndex(null);
+  };
+
   const goTo = React.useCallback(
     (index: number) => {
-      if (images.length === 0) return;
-      const wrapped = (index + images.length) % images.length;
+      if (filteredImages.length === 0) return;
+      const wrapped = (index + filteredImages.length) % filteredImages.length;
       setSelectedIndex(wrapped);
     },
-    [images.length]
+    [filteredImages.length]
   );
 
   useEffect(() => {
@@ -57,18 +94,21 @@ const GalleryPage: React.FC = () => {
         setLoading(true);
         setLoadError(null);
 
-        const docs = await sanity.fetch<Array<{ _id: string; title?: string; image?: unknown }>>(
+        const docs = await sanity.fetch<Array<{ _id: string; title?: string; category?: string; image?: unknown }>>(
           `*[_type == "galleryImage" && defined(image.asset)] | order(_createdAt desc)[$start...$end] {
             _id,
             title,
+            category,
             image
           }`,
           { start: 0, end: PAGE_SIZE }
         );
 
         const fromSanity: GalleryItem[] = docs.map((d) => ({
+          id: d._id,
           src: urlFor(d.image as never).width(1600).quality(80).auto("format").url(),
           alt: d.title || "Gallery image",
+          category: classifyCategory(d.title || "", d.category),
         }));
 
         if (!cancelled) {
@@ -109,18 +149,21 @@ const GalleryPage: React.FC = () => {
     const end = start + PAGE_SIZE;
 
     try {
-      const docs = await sanity.fetch<Array<{ _id: string; title?: string; image?: unknown }>>(
+      const docs = await sanity.fetch<Array<{ _id: string; title?: string; category?: string; image?: unknown }>>(
         `*[_type == "galleryImage" && defined(image.asset)] | order(_createdAt desc)[$start...$end] {
           _id,
           title,
+          category,
           image
         }`,
         { start, end }
       );
 
       const next: GalleryItem[] = docs.map((d) => ({
+        id: d._id,
         src: urlFor(d.image as never).width(1600).quality(80).auto("format").url(),
         alt: d.title || "Gallery image",
+        category: classifyCategory(d.title || "", d.category),
       }));
 
       setImages((prev) => {
@@ -148,8 +191,8 @@ const GalleryPage: React.FC = () => {
 
   useEffect(() => {
     if (selectedIndex === null) return;
-    if (selectedIndex >= images.length) setSelectedIndex(null);
-  }, [images.length, selectedIndex]);
+    if (selectedIndex >= filteredImages.length) setSelectedIndex(null);
+  }, [filteredImages.length, selectedIndex]);
 
   useEffect(() => {
     if (selectedIndex === null) return;
@@ -207,7 +250,7 @@ const GalleryPage: React.FC = () => {
       </nav>
 
       <main className="pt-24 pb-16 px-4 sm:px-6 lg:px-8 max-w-[98vw] mx-auto">
-        <div className="mb-10">
+        <div className="mb-8">
           <h1 className="text-[clamp(28px,4vw,44px)] font-medium tracking-tight text-foreground mb-3">
             Gallery
           </h1>
@@ -215,6 +258,31 @@ const GalleryPage: React.FC = () => {
             A complete collection of UI designs, 3D recreations, and visual explorations.
           </p>
         </div>
+
+        {!loading && !loadError && images.length > 0 && (
+          <Tabs value={activeCategory} onValueChange={(v) => handleCategoryChange(v as CategoryTab)} className="mb-8">
+            <TabsList
+              className="
+                h-auto p-0 bg-transparent border-0
+                flex flex-nowrap overflow-x-auto gap-6
+                justify-start
+                text-[clamp(12px,1.6vmin,16px)]
+                tracking-loose font-light text-muted-foreground
+                scrollbar-hide
+              "
+            >
+              {CATEGORY_TABS.map((tab) => (
+                <TabsTrigger
+                  key={tab}
+                  value={tab}
+                  className="interactive px-0 py-1.5 bg-transparent data-[state=active]:text-foreground data-[state=active]:shadow-none rounded-none text-[clamp(12px,1.6vmin,16px)] font-light transition-colors"
+                >
+                  {tab}
+                </TabsTrigger>
+              ))}
+            </TabsList>
+          </Tabs>
+        )}
 
         {loading && <div className="text-sm text-muted-foreground">Loading gallery…</div>}
 
@@ -229,7 +297,11 @@ const GalleryPage: React.FC = () => {
           <div className="text-sm text-muted-foreground">No images found in Sanity.</div>
         )}
 
-        <div className="columns-1 sm:columns-2 lg:columns-3 xl:columns-4 gap-3 space-y-3">
+        {!loading && !loadError && images.length > 0 && filteredImages.length === 0 && (
+          <div className="text-sm text-muted-foreground">No images in "{activeCategory}" yet.</div>
+        )}
+
+        <div className="columns-1 sm:columns-2 lg:columns-3 gap-3 space-y-3">
           {loading &&
             Array.from({ length: SKELETON_COUNT }).map((_, index) => (
               <div
@@ -247,9 +319,9 @@ const GalleryPage: React.FC = () => {
                 </div>
               </div>
             ))}
-          {images.map((image, index) => (
+          {filteredImages.map((image, index) => (
             <div
-              key={image.src}
+              key={image.id}
               className={`break-inside-avoid cursor-pointer group interactive transition-all duration-500 ${
                 mounted ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
               }`}
@@ -290,22 +362,22 @@ const GalleryPage: React.FC = () => {
       <Dialog open={selectedIndex !== null} onOpenChange={(open) => !open && setSelectedIndex(null)}>
         <DialogContent className="max-w-[95vw] w-auto h-[90vh] p-0 border-border/30 bg-background/95 backdrop-blur-xl overflow-hidden flex flex-col gap-0 rounded-xl">
           <DialogTitle className="sr-only">
-            {selectedIndex !== null ? images[selectedIndex]?.alt : "Image preview"}
+            {selectedIndex !== null ? filteredImages[selectedIndex]?.alt : "Image preview"}
           </DialogTitle>
 
           <div className="relative flex items-center justify-center flex-1 min-h-0 px-4 pt-10 pb-4">
             <button
               onClick={() => goTo((selectedIndex ?? 0) - 1)}
               className="absolute left-3 top-1/2 -translate-y-1/2 z-10 w-9 h-9 rounded-full bg-muted/60 hover:bg-muted flex items-center justify-center transition-colors interactive"
-              disabled={images.length === 0}
+              disabled={filteredImages.length === 0}
             >
               <ChevronLeft className="w-5 h-5 text-foreground" />
             </button>
 
-            {selectedIndex !== null && images[selectedIndex] && (
+            {selectedIndex !== null && filteredImages[selectedIndex] && (
               <img
-                src={images[selectedIndex].src}
-                alt={images[selectedIndex].alt}
+                src={filteredImages[selectedIndex].src}
+                alt={filteredImages[selectedIndex].alt}
                 className="h-[65vh] max-w-full object-contain rounded-lg select-none"
                 draggable={false}
               />
@@ -314,7 +386,7 @@ const GalleryPage: React.FC = () => {
             <button
               onClick={() => goTo((selectedIndex ?? 0) + 1)}
               className="absolute right-3 top-1/2 -translate-y-1/2 z-10 w-9 h-9 rounded-full bg-muted/60 hover:bg-muted flex items-center justify-center transition-colors interactive"
-              disabled={images.length === 0}
+              disabled={filteredImages.length === 0}
             >
               <ChevronRight className="w-5 h-5 text-foreground" />
             </button>
@@ -325,9 +397,9 @@ const GalleryPage: React.FC = () => {
               ref={thumbnailStripRef}
               className="flex gap-2 overflow-x-auto scrollbar-thin scrollbar-thumb-border scrollbar-track-transparent pb-1"
             >
-              {images.map((img, i) => (
+              {filteredImages.map((img, i) => (
                 <button
-                  key={img.src}
+                  key={img.id}
                   ref={(el) => {
                     thumbnailRefs.current[i] = el;
                   }}

@@ -8,7 +8,7 @@ const tabsData: {
 }[] = [ {
   key: "recruiters",
   label: "Recruiters",
-  headline: "Hey, I'm David. I have over 3 years of experience designing products, visuals and making human interaction pleasant."
+  headline: "Hey, I'm David. I am a multidiciplinary designer, but mostly I design digital products."
 }, {
   key: "directors",
   label: "Design Directors",
