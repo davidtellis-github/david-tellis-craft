@@ -24,6 +24,8 @@ export default {
         urbanist: ['Urbanist', 'sans-serif'],
       },
       colors: {
+        // Warm off-white used in place of pure #ffffff everywhere.
+        white: "#FFFDF6",
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",

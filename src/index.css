@@ -8,13 +8,13 @@ All colors are in HSL.
 
 @layer base {
   :root {
-    --background: 0 0% 100%;      /* white */
+    --background: 47 100% 98%;    /* #FFFDF6 */
     --foreground: 0 0% 70%;       /* gray */
 
-    --card: 0 0% 100%;
+    --card: 47 100% 98%;          /* #FFFDF6 */
     --card-foreground: 222 84% 5%;
 
-    --popover: 0 0% 100%;
+    --popover: 47 100% 98%;       /* #FFFDF6 */
     --popover-foreground: 222 84% 5%;
 
     --primary: 222 47% 11%;
@@ -50,28 +50,28 @@ All colors are in HSL.
 
   .dark {
     --background: 0 0% 0%;       /* #090909 */
-    --foreground: 0 0% 100%;        /* #e5e5e5 */
+    --foreground: 47 100% 98%;      /* #FFFDF6 */
 
     --card: 0 0% 7%;               /* #121212 */
-    --card-foreground: 0 0% 100%;   /* #e5e5e5 */
+    --card-foreground: 47 100% 98%; /* #FFFDF6 */
 
     --popover: 0 0% 7%;            /* #121212 */
-    --popover-foreground: 0 0% 100%; /* #e5e5e5 */
+    --popover-foreground: 47 100% 98%; /* #FFFDF6 */
 
     --primary: 0 0% 95%;           /* #f2f2f2 */
     --primary-foreground: 0 0% 7%; /* #121212 */
 
     --secondary: 0 0% 15%;         /* #262626 */
-    --secondary-foreground: 0 0% 100%; /* #e5e5e5 */
+    --secondary-foreground: 47 100% 98%; /* #FFFDF6 */
 
     --muted: 0 0% 25%;             /* #696969 */
     --muted-foreground: 0 0% 50%;  /* #bfbfbf */
 
     --accent: 0 0% 20%;            /* #333333 */
-    --accent-foreground: 0 0% 100%; /* #f2f2f2 */
+    --accent-foreground: 47 100% 98%; /* #FFFDF6 */
 
     --destructive: 0 63% 45%;      /* #992f2f */
-    --destructive-foreground: 0 0% 100%; /* #fafafa */
+    --destructive-foreground: 47 100% 98%; /* #FFFDF6 */
 
     --border: 0 0% 20%;            /* #333333 */
     --input: 0 0% 20%;             /* #333333 */
