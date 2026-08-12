@@ -9,6 +9,14 @@ interface ProjectTimelineProps {
   hoveredCategory?: string | null;
 }
 
+// LIVE reads as more prominent (solid chip) than the two unshipped-work
+// statuses, which stay as a quieter outline overlay.
+const statusBadgeClasses: Record<string, string> = {
+  LIVE: "bg-foreground text-background border-transparent",
+  "CASE STUDY": "bg-background/70 text-foreground border-border/50 backdrop-blur-sm",
+  SYSTEM: "bg-background/70 text-foreground border-border/50 backdrop-blur-sm",
+};
+
 const ProjectTimeline: React.FC<ProjectTimelineProps> = ({
   activeCategory,
   onProjectHover,
@@ -24,14 +32,11 @@ const ProjectTimeline: React.FC<ProjectTimelineProps> = ({
   if (loading) {
     return (
       <div className="w-full">
-        <div className="space-y-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-12">
           {[...Array(6)].map((_, index) => (
-            <div key={index} className="border-t border-border pt-8 first:border-t-0 first:pt-0">
+            <div key={index}>
               <div className="flex items-center justify-between w-full">
-                <div className="flex items-center gap-8">
-                  <div className="w-8 h-8 bg-muted rounded animate-pulse"></div>
-                  <div className="w-48 h-8 bg-muted rounded animate-pulse"></div>
-                </div>
+                <div className="w-48 h-8 bg-muted rounded animate-pulse"></div>
                 <div className="w-32 h-6 bg-muted rounded animate-pulse"></div>
               </div>
             </div>
@@ -71,8 +76,8 @@ const ProjectTimeline: React.FC<ProjectTimelineProps> = ({
 
   return (
     <div className="w-full">
-      <div className="space-y-8">
-        {displayedProjects.map((project, index) => {
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-12 lg:gap-y-16">
+        {displayedProjects.map((project) => {
           const isHighlighted = hoveredProject === project.id ||
             (hoveredCategory && (hoveredCategory === "all" || project.category?.slug === hoveredCategory)) ||
             activeCategory === project.category?.slug;
@@ -86,26 +91,19 @@ const ProjectTimeline: React.FC<ProjectTimelineProps> = ({
           return (
             <div
               key={project.id}
-              className={`group border-t border-border pt-8 first:border-t-0 first:pt-0 transition-all duration-500 cursor-pointer interactive ${
+              className={`group transition-all duration-500 cursor-pointer interactive ${
                 isHighlighted ? 'opacity-100' : 'opacity-50 hover:opacity-75'
               }`}
               onMouseEnter={() => handleProjectHover(project.id)}
               onMouseLeave={() => handleProjectHover(null)}
               onClick={() => handleProjectClick(project.slug)}
             >
-              {/* Header: Title Row - Full Width, same as before */}
-              <div className="flex items-center justify-between w-full">
-                <div className="flex items-center gap-8">
-                  {/* Number */}
-                  <div className="text-2xl font-medium text-muted-foreground">
-                    {String(index + 1).padStart(2, '0')}
-                  </div>
-
-                  {/* Title */}
-                  <h3 className="text-2xl lg:text-3xl font-medium uppercase tracking-tight">
-                    {project.title}
-                  </h3>
-                </div>
+              {/* Header: Title Row */}
+              <div className="flex flex-wrap items-center justify-between gap-x-4 gap-y-1 w-full">
+                {/* Title */}
+                <h3 className="text-xl lg:text-2xl font-medium uppercase tracking-tight">
+                  {project.title}
+                </h3>
 
                 {/* Services */}
                 <div className="text-right">
@@ -115,25 +113,43 @@ const ProjectTimeline: React.FC<ProjectTimelineProps> = ({
                 </div>
               </div>
 
-              {/* Year */}
-              <div className="mt-4 ml-16">
-                <span className="text-sm text-muted-foreground">
-                  {project.year}
-                </span>
-              </div>
+              {/* Role + Year */}
+              {(project.card_role || project.year) && (
+                <p className="mt-2 text-xs text-muted-foreground">
+                  {project.card_role && project.year
+                    ? `${project.card_role} • ${project.year}`
+                    : project.card_role || project.year}
+                </p>
+              )}
 
               {/* Preview image - below the header, same treatment as the homepage WorkGrid */}
-              {previewSrc && (
-                <div className="relative overflow-hidden rounded-2xl mt-8">
-                  <img
-                    src={previewSrc}
-                    alt={`${project.title} preview`}
-                    className="w-full h-auto block rounded-2xl"
-                    loading="lazy"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-background/10 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                </div>
-              )}
+              <div className="relative overflow-hidden mt-6">
+                {project.card_status && (
+                  <span
+                    className={`absolute top-3 right-3 z-10 inline-flex items-center px-2.5 py-1 text-[10px] font-medium uppercase tracking-wider border ${
+                      statusBadgeClasses[project.card_status]
+                    }`}
+                  >
+                    {project.card_status}
+                  </span>
+                )}
+
+                {previewSrc ? (
+                  <>
+                    <img
+                      src={previewSrc}
+                      alt={`${project.title} preview`}
+                      className="w-full h-auto block"
+                      loading="lazy"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-background/10 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                  </>
+                ) : (
+                  <div className="w-full aspect-[4/3] flex items-center justify-center bg-muted/20 border border-border/20">
+                    <span className="text-sm text-muted-foreground">Preview coming soon</span>
+                  </div>
+                )}
+              </div>
             </div>
           );
         })}

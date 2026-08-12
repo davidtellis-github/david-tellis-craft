@@ -18,6 +18,18 @@ export const project = defineType({
       options: { hotspot: true },
     }),
     defineField({
+      name: "heroVideo",
+      title: "Hero Video",
+      type: "file",
+      options: { accept: "video/*" },
+    }),
+    defineField({
+      name: "landingPageVideo",
+      title: "Landing Page Video",
+      type: "file",
+      options: { accept: "video/*" },
+    }),
+    defineField({
       name: "sections",
       title: "Sections",
       type: "array",

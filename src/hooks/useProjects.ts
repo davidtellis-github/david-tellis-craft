@@ -15,6 +15,8 @@ export interface Project {
   } | null;
   year: string | null;
   services: string | null;
+  card_status: "LIVE" | "CASE STUDY" | "SYSTEM" | null;
+  card_role: string | null;
   role_title: string | null;
   role_duration: string | null;
   role_team: string | null;
@@ -102,17 +104,17 @@ export const useProjects = () => {
     try {
       setLoading(true);
       
-      // Define custom project order - Vybe (latest) first, Ideabaaz as 3rd
+      // Recruiter-facing order: newest year first, per the explicit
+      // ordering given for the portfolio grid (not a generic date sort).
       const projectOrder = [
-        'vybe',
-        'wedding-verse',
-        'ideabaaz',
+        'bam',
         'futurcraft-ai',
-        'turbocloud',
-        'health-project',
+        'ideabaaz',
+        'vybe',
         'boston-financial',
-        'fitness-app',
-        'verasap'
+        'health-project',
+        'turbocloud',
+        'wedding-verse'
       ];
       
       // Transform static project data in custom order
@@ -133,6 +135,8 @@ export const useProjects = () => {
           },
           year: project.year,
           services: project.services,
+          card_status: project.cardMeta?.status ?? null,
+          card_role: project.cardMeta?.role ?? null,
           role_title: project.role.title,
           role_duration: project.role.duration,
           role_team: project.role.team,
@@ -250,6 +254,8 @@ export const useProject = (slug: string) => {
           },
           year: projectData.year,
           services: projectData.services,
+          card_status: projectData.cardMeta?.status ?? null,
+          card_role: projectData.cardMeta?.role ?? null,
           role_title: projectData.role.title,
           role_duration: projectData.role.duration,
           role_team: projectData.role.team,

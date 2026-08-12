@@ -111,7 +111,7 @@ const Gallery3D: React.FC = () => {
   return (
     <section id="gallery" className="py-[12vh] lg:py-[15vh]">
       {/* Section Header */}
-      <div className="mb-10 lg:mb-14 flex items-end justify-between">
+      <div className="mb-10 lg:mb-14 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
         <div>
           <h2 className="text-[clamp(24px,4vw,40px)] font-medium tracking-tight text-foreground mb-3">
             Gallery
@@ -140,7 +140,7 @@ const Gallery3D: React.FC = () => {
             Array.from({ length: SKELETON_COUNT }).map((_, i) => (
               <div
                 key={`skeleton-${i}`}
-                className="relative overflow-hidden rounded-xl bg-muted/30 border border-border/20 break-inside-avoid mb-3 w-full"
+                className="relative overflow-hidden bg-muted/30 border border-border/20 break-inside-avoid mb-3 w-full"
                 style={{ height: skeletonHeights[i % skeletonHeights.length], animationDuration: "2.8s" }}
               >
                 <div className="absolute inset-0 animate-pulse bg-gradient-to-b from-muted/40 via-muted/20 to-muted/40" />
@@ -152,7 +152,7 @@ const Gallery3D: React.FC = () => {
               <button
                 key={img.src}
                 onClick={() => setSelectedIndex(i)}
-                className="relative overflow-hidden rounded-xl bg-muted/30 border border-border/20 hover:border-border/60 transition-all duration-300 group interactive text-left break-inside-avoid mb-3 w-full"
+                className="relative overflow-hidden bg-muted/30 border border-border/20 hover:border-border/60 transition-all duration-300 group interactive text-left break-inside-avoid mb-3 w-full"
               >
                 <img
                   src={img.src}
@@ -193,7 +193,7 @@ const Gallery3D: React.FC = () => {
               <img
                 src={images[selectedIndex].src}
                 alt={images[selectedIndex].alt}
-                className="h-[65vh] max-w-full object-contain rounded-lg select-none"
+                className="h-[65vh] max-w-full object-contain select-none"
                 draggable={false}
               />
             )}
@@ -218,7 +218,7 @@ const Gallery3D: React.FC = () => {
                   key={img.src}
                   ref={(el) => { thumbnailRefs.current[i] = el; }}
                   onClick={() => setSelectedIndex(i)}
-                  className={`flex-shrink-0 w-16 h-16 rounded-md overflow-hidden border-2 transition-all duration-200 interactive ${
+                  className={`flex-shrink-0 w-16 h-16 overflow-hidden border-2 transition-all duration-200 interactive ${
                     i === selectedIndex
                       ? "border-primary ring-1 ring-primary/40 scale-105"
                       : "border-transparent opacity-50 hover:opacity-80"

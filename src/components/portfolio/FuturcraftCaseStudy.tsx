@@ -27,7 +27,7 @@ const Section: React.FC<{ label: string; note?: string; children: React.ReactNod
 // Edge-to-edge screenshot with a caption bar — used for the numbered
 // screen walkthroughs.
 const ScreenFrame: React.FC<{ src: string; alt: string; caption: string }> = ({ src, alt, caption }) => (
-  <div className="rounded-xl overflow-hidden border border-border/20 mt-6">
+  <div className="overflow-hidden border border-border/20 mt-6">
     <img src={src} alt={alt} className="w-full h-auto" />
     <div className="p-3 border-t border-border/20 text-xs text-muted-foreground">{caption}</div>
   </div>
@@ -46,14 +46,14 @@ export const FuturcraftCaseStudy: React.FC<FuturcraftCaseStudyProps> = ({ projec
           <p className="text-xs uppercase tracking-[0.18em] text-primary font-medium mb-6">
             Case study · Q4 2024 – Q2 2025
           </p>
-          <h1 className="text-6xl md:text-7xl font-light mb-3">{project.title}</h1>
+          <h1 className="font-figtree text-6xl md:text-7xl font-light mb-3">{project.title}</h1>
           <p className="text-lg md:text-xl text-muted-foreground font-light leading-relaxed max-w-xl mb-10">
             An AI platform for content creators that generates on-brand output — without losing control of the
             brand.
           </p>
 
-          <div className="rounded-2xl bg-muted/10 border border-border/20 p-3 md:p-5 mb-10">
-            <img src={futurcraftFeatured} alt="Futurcraft AI platform overview" className="w-full h-auto rounded-lg" />
+          <div className="bg-muted/10 border border-border/20 p-3 md:p-5 mb-10">
+            <img src={futurcraftFeatured} alt="Futurcraft AI platform overview" className="w-full h-auto" />
           </div>
 
           <div className="grid grid-cols-4 gap-6 border-t border-b border-border/20 py-6">
@@ -95,7 +95,7 @@ export const FuturcraftCaseStudy: React.FC<FuturcraftCaseStudyProps> = ({ projec
 
         {/* THE PROBLEM */}
         <Section label="The problem" note="AI tools were part of the workflow. They were also breaking it.">
-          <h2 className="text-3xl md:text-4xl font-light mb-4">
+          <h2 className="font-figtree text-3xl md:text-4xl font-light mb-4">
             AI tools were making brand consistency worse, not better.
           </h2>
           <p className="text-base text-muted-foreground font-light leading-relaxed mb-6">
@@ -131,7 +131,7 @@ export const FuturcraftCaseStudy: React.FC<FuturcraftCaseStudyProps> = ({ projec
 
         {/* 01 — ONBOARDING */}
         <Section label="01 — Onboarding" note="The first thing a user does is teach the platform their brand.">
-          <h2 className="text-3xl md:text-4xl font-light mb-4">Teaching the AI your brand.</h2>
+          <h2 className="font-figtree text-3xl md:text-4xl font-light mb-4">Teaching the AI your brand.</h2>
           <p className="text-base text-muted-foreground font-light leading-relaxed">
             The entry point needed to feel like the start of something considered — not just another SaaS tool.
             Clean, minimal, with the brand's identity as the centrepiece from the first screen.
@@ -147,7 +147,7 @@ export const FuturcraftCaseStudy: React.FC<FuturcraftCaseStudyProps> = ({ projec
 
         {/* 02 — CREATE */}
         <Section label="02 — Create" note="One brief. Blog, post, or script.">
-          <h2 className="text-3xl md:text-4xl font-light mb-4">One brief. Every format.</h2>
+          <h2 className="font-figtree text-3xl md:text-4xl font-light mb-4">One brief. Every format.</h2>
           <p className="text-base text-muted-foreground font-light leading-relaxed">
             A single brief drives every content type — the user picks a format, describes the idea, and the AI
             generates within the brand constraints defined during onboarding. No separate tools or workflows per
@@ -168,7 +168,7 @@ export const FuturcraftCaseStudy: React.FC<FuturcraftCaseStudyProps> = ({ projec
 
         {/* 03 — POSTS */}
         <Section label="03 — Posts" note="One topic → every platform. Automatically adapted.">
-          <h2 className="text-3xl md:text-4xl font-light mb-4">One topic. Every platform.</h2>
+          <h2 className="font-figtree text-3xl md:text-4xl font-light mb-4">One topic. Every platform.</h2>
           <p className="text-base text-muted-foreground font-light leading-relaxed">
             Once a topic is defined, Futurcraft generates platform-specific variants — blog, LinkedIn, X, Instagram
             caption — without the user re-writing the brief for each one. Tone and length adapt per platform, but
@@ -188,7 +188,7 @@ export const FuturcraftCaseStudy: React.FC<FuturcraftCaseStudyProps> = ({ projec
           label="04 — Blog editor"
           note="Write long-form, repurpose to any format without leaving the editor."
         >
-          <h2 className="text-3xl md:text-4xl font-light mb-4">Write once. Repurpose instantly.</h2>
+          <h2 className="font-figtree text-3xl md:text-4xl font-light mb-4">Write once. Repurpose instantly.</h2>
           <p className="text-base text-muted-foreground font-light leading-relaxed">
             The blog editor pairs long-form writing with a live SEO score, then lets a writer repurpose that same
             post into a social caption, a script outline, or a shorter blog variant — all from a single
@@ -204,7 +204,7 @@ export const FuturcraftCaseStudy: React.FC<FuturcraftCaseStudyProps> = ({ projec
 
         {/* HOW I WORKED */}
         <Section label="How I worked" note="5 phases across 16 weeks.">
-          <h2 className="text-3xl md:text-4xl font-light mb-6">5 phases, 16 weeks.</h2>
+          <h2 className="font-figtree text-3xl md:text-4xl font-light mb-6">5 phases, 16 weeks.</h2>
           <div>
             {[
               { num: "01", step: "Discovery", description: "AI capability research & user needs analysis" },
@@ -230,7 +230,7 @@ export const FuturcraftCaseStudy: React.FC<FuturcraftCaseStudyProps> = ({ projec
 
         {/* OUTCOMES */}
         <Section label="Outcomes" note="Results from the first two weeks of beta.">
-          <h2 className="text-3xl md:text-4xl font-light mb-6">Results that came back from beta.</h2>
+          <h2 className="font-figtree text-3xl md:text-4xl font-light mb-6">Results that came back from beta.</h2>
           <div>
             {[
               "300+ waitlist signups in the first 2 weeks after the beta landing page launched — no paid acquisition.",
@@ -251,7 +251,7 @@ export const FuturcraftCaseStudy: React.FC<FuturcraftCaseStudyProps> = ({ projec
 
         {/* REFLECTION */}
         <Section label="Reflection">
-          <h2 className="text-3xl md:text-4xl font-light mb-6">What I learned.</h2>
+          <h2 className="font-figtree text-3xl md:text-4xl font-light mb-6">What I learned.</h2>
           <p className="text-base text-muted-foreground font-light leading-relaxed mb-6">
             <strong className="text-foreground font-medium">Users didn't need the AI to be smarter</strong> — they
             needed to feel like they were still the author. Every design decision that gave users visible control

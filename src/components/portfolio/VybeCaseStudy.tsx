@@ -24,17 +24,17 @@ export const VybeCaseStudy: React.FC<VybeCaseStudyProps> = ({ project }) => {
         {/* HERO */}
         <section>
           <p className="text-xs uppercase tracking-[0.18em] text-primary font-medium mb-6">Case study</p>
-          <h1 className="text-6xl md:text-7xl font-light mb-3">{project.title}</h1>
+          <h1 className="font-figtree text-6xl md:text-7xl font-light mb-3">{project.title}</h1>
           <p className="text-lg md:text-xl text-muted-foreground font-light mb-6">AI Land Intelligence Platform</p>
           <p className="text-base md:text-lg text-muted-foreground font-light leading-relaxed max-w-xl mb-10">
             Turning land into a legible, monetizable asset — AI-analyzed, strategy-mapped, execution-ready.
           </p>
 
-          <div className="rounded-2xl bg-muted/10 border border-border/20 p-3 md:p-5 mb-10">
+          <div className="bg-muted/10 border border-border/20 p-3 md:p-5 mb-10">
             <img
               src={vybeLandingHero}
               alt="Vybe marketing landing page — Monetize Land With Precise Strategy & Execution"
-              className="w-full h-auto rounded-lg"
+              className="w-full h-auto"
             />
           </div>
 
@@ -85,7 +85,7 @@ export const VybeCaseStudy: React.FC<VybeCaseStudyProps> = ({ project }) => {
 
         {/* CHAPTER: DISCOVERY */}
         <section className="pt-10">
-          <ChapterMarker eyebrow="Discovery" headline="Land You Can't See Is Land You Can't Trust" />
+          <ChapterMarker eyebrow="Discovery" headline="Land you can't see is land you can't trust" />
           <LabelRow label="What owners are dealing with">
             Multi-crore land, zero local visibility. Verifying a title today means chasing lawyers, surveyors, and
             brokers by hand, over months.
@@ -100,7 +100,7 @@ export const VybeCaseStudy: React.FC<VybeCaseStudyProps> = ({ project }) => {
 
         {/* CHAPTER: DESIGNING THE SYSTEM */}
         <section className="pt-10">
-          <ChapterMarker eyebrow="Designing the system" headline="Four People, One Shared Truth" />
+          <ChapterMarker eyebrow="Designing the system" headline="Four people, one shared truth" />
           <LabelRow label="Intent before documents">
             Onboarding opens with strategy questions, not uploads. Documents are the highest-trust-cost step, so
             they come after the product has already shown it understands the user.
@@ -145,7 +145,7 @@ export const VybeCaseStudy: React.FC<VybeCaseStudyProps> = ({ project }) => {
 
         {/* CHAPTER: WHERE IT STANDS */}
         <section className="pt-10">
-          <ChapterMarker eyebrow="Where it stands" headline="No Results Yet — Just the Reasoning" />
+          <ChapterMarker eyebrow="Where it stands" headline="No results yet — just the reasoning" />
           <p className="text-base text-muted-foreground font-light leading-relaxed mb-2">
             Unlike a shipped product, there's no before/after here. What I can show is what's built, what's not,
             and what's still unresolved.
@@ -166,7 +166,7 @@ export const VybeCaseStudy: React.FC<VybeCaseStudyProps> = ({ project }) => {
 
         {/* CHAPTER: REFLECTION */}
         <section className="pt-10">
-          <ChapterMarker eyebrow="Reflection" headline="What I'd Watch For Next" />
+          <ChapterMarker eyebrow="Reflection" headline="What I'd watch for next" />
           <LabelRow label="Untested assumptions are still assumptions">
             Every decision here is my best read of the trust problem, not a validated one. The first thing I'd
             want post-launch is real usage data on the HABU report — it's the riskiest surface in the product.
@@ -181,7 +181,7 @@ export const VybeCaseStudy: React.FC<VybeCaseStudyProps> = ({ project }) => {
 
         {/* SELECTED SCREENS */}
         <section className="pt-10">
-          <ChapterMarker eyebrow="Selected screens" headline="A Look at the Delivered Screens" />
+          <ChapterMarker eyebrow="Selected screens" headline="A look at the delivered screens" />
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {[
               { src: vybePortfolioOverview, alt: "Portfolio Overview screen", caption: "Portfolio Overview" },
@@ -189,8 +189,8 @@ export const VybeCaseStudy: React.FC<VybeCaseStudyProps> = ({ project }) => {
               { src: vybeNewPropertyLocation, alt: "New Property Case screen", caption: "New Property Case" },
             ].map((screen) => (
               <div key={screen.caption}>
-                <div className="rounded-2xl bg-muted/10 border border-border/20 p-3 md:p-5">
-                  <img src={screen.src} alt={screen.alt} className="w-full h-auto rounded-lg" />
+                <div className="bg-muted/10 border border-border/20 p-3 md:p-5">
+                  <img src={screen.src} alt={screen.alt} className="w-full h-auto" />
                 </div>
                 <p className="text-sm font-medium text-primary mt-3">{screen.caption}</p>
               </div>
@@ -202,7 +202,7 @@ export const VybeCaseStudy: React.FC<VybeCaseStudyProps> = ({ project }) => {
 
         {/* CLOSING */}
         <section className="pt-10 pb-20">
-          <h2 className="text-3xl md:text-4xl font-light mb-4">Thanks for reading.</h2>
+          <h2 className="font-figtree text-3xl md:text-4xl font-light mb-4">Thanks for reading.</h2>
           <p className="text-base text-muted-foreground font-light leading-relaxed mb-8 max-w-lg">
             Want to see the other project, or the flows in more depth? Happy to walk through it.
           </p>

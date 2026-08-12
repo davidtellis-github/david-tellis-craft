@@ -72,18 +72,18 @@ export const DefaultCaseStudy: React.FC<DefaultCaseStudyProps> = ({ project }) =
         {/* HERO */}
         <section>
           <p className="text-xs uppercase tracking-[0.18em] text-primary font-medium mb-6">Case study</p>
-          <h1 className="text-6xl md:text-7xl font-light mb-3">{project.title}</h1>
+          <h1 className="font-figtree text-6xl md:text-7xl font-light mb-3">{project.title}</h1>
           <p className="text-lg md:text-xl text-muted-foreground font-light mb-6">{project.subtitle}</p>
           <p className="text-base md:text-lg text-muted-foreground font-light leading-relaxed max-w-xl mb-10">
             {project.description}
           </p>
 
           {heroImage && (
-            <div className="rounded-2xl bg-muted/10 border border-border/20 p-3 md:p-5 mb-10">
+            <div className="bg-muted/10 border border-border/20 p-3 md:p-5 mb-10">
               <img
                 src={heroImage}
                 alt={`${project.title} overview`}
-                className="w-full h-auto rounded-lg"
+                className="w-full h-auto"
               />
             </div>
           )}
@@ -121,7 +121,7 @@ export const DefaultCaseStudy: React.FC<DefaultCaseStudyProps> = ({ project }) =
         {project.features.length > 0 && (
           <>
             <section className="pt-10">
-              <ChapterMarker eyebrow="Core features" headline="What I Designed" />
+              <ChapterMarker eyebrow="Core features" headline="What I designed" />
               {project.features.map((feature) => (
                 <LabelRow key={feature.title} label={feature.title} dot>
                   {feature.description}
@@ -136,7 +136,7 @@ export const DefaultCaseStudy: React.FC<DefaultCaseStudyProps> = ({ project }) =
         {project.process.length > 0 && (
           <>
             <section className="pt-10">
-              <ChapterMarker eyebrow="How I worked" headline="Process, Start to Finish" />
+              <ChapterMarker eyebrow="How I worked" headline="Process, start to finish" />
               {project.process.map((phase) => (
                 <LabelRow key={phase.step} label={phase.step}>
                   {phase.description}
@@ -151,7 +151,7 @@ export const DefaultCaseStudy: React.FC<DefaultCaseStudyProps> = ({ project }) =
         {project.designSystem && (
           <>
             <section className="pt-10">
-              <ChapterMarker eyebrow="Design system" headline="Built to Scale" />
+              <ChapterMarker eyebrow="Design system" headline="Built to scale" />
               {project.designSystem.goals.map((goal, i) => (
                 <LabelRow key={i} label={i === 0 ? "Goals" : ""} dot>
                   {goal}
@@ -172,7 +172,7 @@ export const DefaultCaseStudy: React.FC<DefaultCaseStudyProps> = ({ project }) =
               )}
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-8">
                 {project.designSystem.images.map((img, i) => (
-                  <div key={i} className="rounded-xl overflow-hidden bg-muted/20 border border-border/20">
+                  <div key={i} className="overflow-hidden bg-muted/20 border border-border/20">
                     <img src={resolveImage(img)} alt={`Design system ${i + 1}`} className="w-full h-auto object-cover" />
                   </div>
                 ))}
@@ -186,7 +186,7 @@ export const DefaultCaseStudy: React.FC<DefaultCaseStudyProps> = ({ project }) =
         {(project.iterations || project.videoUrl) && (
           <>
             <section className="pt-10">
-              <ChapterMarker eyebrow="Design evolution" headline="Iterations & Walkthrough" />
+              <ChapterMarker eyebrow="Design evolution" headline="Iterations & walkthrough" />
 
               {project.iterations && (
                 <div className="mb-16">
@@ -213,7 +213,7 @@ export const DefaultCaseStudy: React.FC<DefaultCaseStudyProps> = ({ project }) =
                   <div className="columns-1 sm:columns-2 gap-4 space-y-4 mt-6">
                     {project.iterations.images.map((img, i) => (
                       <div key={i} className="break-inside-avoid">
-                        <div className="rounded-xl overflow-hidden bg-muted/20 border border-border/20">
+                        <div className="overflow-hidden bg-muted/20 border border-border/20">
                           <img src={resolveImage(img)} alt={`Iteration ${i + 1}`} className="w-full h-auto object-cover" />
                         </div>
                       </div>
@@ -260,7 +260,7 @@ export const DefaultCaseStudy: React.FC<DefaultCaseStudyProps> = ({ project }) =
         {project.reflection && (
           <>
             <section className="pt-10">
-              <ChapterMarker eyebrow="Reflection" headline="What I'd Carry Forward" />
+              <ChapterMarker eyebrow="Reflection" headline="What I'd carry forward" />
               <p className="text-base text-muted-foreground font-light leading-relaxed">{project.reflection}</p>
             </section>
             <Divider />
@@ -271,12 +271,12 @@ export const DefaultCaseStudy: React.FC<DefaultCaseStudyProps> = ({ project }) =
         {selectedScreens.length > 0 && (
           <>
             <section className="pt-10">
-              <ChapterMarker eyebrow="Selected screens" headline="A Look at the Delivered Screens" />
+              <ChapterMarker eyebrow="Selected screens" headline="A look at the delivered screens" />
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 {selectedScreens.map((img, i) => (
                   <div key={i}>
-                    <div className="rounded-2xl bg-muted/10 border border-border/20 p-3 md:p-5">
-                      <img src={resolveImage(img)} alt={`${project.title} screen ${i + 1}`} className="w-full h-auto rounded-lg" />
+                    <div className="bg-muted/10 border border-border/20 p-3 md:p-5">
+                      <img src={resolveImage(img)} alt={`${project.title} screen ${i + 1}`} className="w-full h-auto" />
                     </div>
                   </div>
                 ))}
@@ -288,7 +288,7 @@ export const DefaultCaseStudy: React.FC<DefaultCaseStudyProps> = ({ project }) =
 
         {/* CLOSING */}
         <section className="pt-10 pb-20">
-          <h2 className="text-3xl md:text-4xl font-light mb-4">Thanks for reading.</h2>
+          <h2 className="font-figtree text-3xl md:text-4xl font-light mb-4">Thanks for reading.</h2>
           <p className="text-base text-muted-foreground font-light leading-relaxed mb-8 max-w-lg">
             Want to see another project, or this one in more depth? Happy to walk through it.
           </p>

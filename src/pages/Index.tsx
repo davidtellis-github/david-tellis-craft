@@ -53,8 +53,8 @@ const Index = () => {
             style={{ transitionDelay: '400ms' }}
           >
             <Hero />
-            <Gallery3D />
             <WorkGrid />
+            <Gallery3D />
             <ValuesSection />
             <BackgroundTimeline />
             <Testimonials />

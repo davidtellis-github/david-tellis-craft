@@ -312,7 +312,7 @@ const GalleryPage: React.FC = () => {
                 style={{ transitionDelay: mounted ? `${Math.min(index * 25, 600)}ms` : "0ms" }}
               >
                 <div
-                  className="relative overflow-hidden rounded-lg bg-muted/30 border border-border/20"
+                  className="relative overflow-hidden bg-muted/30 border border-border/20"
                   style={{ height: skeletonHeights[index % skeletonHeights.length], animationDuration: "2.8s" }}
                 >
                   <div className="absolute inset-0 animate-pulse bg-gradient-to-b from-muted/40 via-muted/20 to-muted/40" />
@@ -328,7 +328,7 @@ const GalleryPage: React.FC = () => {
               style={{ transitionDelay: mounted ? `${Math.min(index * 30, 600)}ms` : "0ms" }}
               onClick={() => setSelectedIndex(index)}
             >
-              <div className="relative overflow-hidden rounded-lg bg-muted/30 border border-border/20 hover:border-border/60 transition-all duration-300 hover:shadow-lg">
+              <div className="relative overflow-hidden bg-muted/30 border border-border/20 hover:border-border/60 transition-all duration-300 hover:shadow-lg">
                 <img
                   src={image.src}
                   alt={image.alt}
@@ -378,7 +378,7 @@ const GalleryPage: React.FC = () => {
               <img
                 src={filteredImages[selectedIndex].src}
                 alt={filteredImages[selectedIndex].alt}
-                className="h-[65vh] max-w-full object-contain rounded-lg select-none"
+                className="h-[65vh] max-w-full object-contain select-none"
                 draggable={false}
               />
             )}
@@ -404,7 +404,7 @@ const GalleryPage: React.FC = () => {
                     thumbnailRefs.current[i] = el;
                   }}
                   onClick={() => setSelectedIndex(i)}
-                  className={`flex-shrink-0 w-16 h-16 rounded-md overflow-hidden border-2 transition-all duration-200 interactive ${
+                  className={`flex-shrink-0 w-16 h-16 overflow-hidden border-2 transition-all duration-200 interactive ${
                     i === selectedIndex
                       ? "border-primary ring-1 ring-primary/40 scale-105"
                       : "border-transparent opacity-50 hover:opacity-80"

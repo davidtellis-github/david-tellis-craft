@@ -29,17 +29,17 @@ export const IdeabaazCaseStudy: React.FC<IdeabaazCaseStudyProps> = ({ project })
         {/* HERO */}
         <section>
           <p className="text-xs uppercase tracking-[0.18em] text-primary font-medium mb-6">Case study</p>
-          <h1 className="text-6xl md:text-7xl font-light mb-3">{project.title}</h1>
+          <h1 className="font-figtree text-6xl md:text-7xl font-light mb-3">{project.title}</h1>
           <p className="text-lg md:text-xl text-muted-foreground font-light mb-6">Startup Ecosystem Platform</p>
           <p className="text-base md:text-lg text-muted-foreground font-light leading-relaxed max-w-xl mb-10">
             {project.subtitle}
           </p>
 
-          <div className="rounded-2xl bg-muted/10 border border-border/20 p-3 md:p-5 mb-10">
+          <div className="bg-muted/10 border border-border/20 p-3 md:p-5 mb-10">
             <img
               src={ideabaazFeatured}
               alt="Ideabaaz landing page on laptop mockup showing Watch Only on Zee5 banner"
-              className="w-full h-auto rounded-lg"
+              className="w-full h-auto"
             />
           </div>
 
@@ -158,7 +158,7 @@ export const IdeabaazCaseStudy: React.FC<IdeabaazCaseStudyProps> = ({ project })
 
         {/* CHAPTER: REFLECTION */}
         <section className="pt-10">
-          <ChapterMarker eyebrow="Reflection" headline="Two Things I'd Carry Forward" />
+          <ChapterMarker eyebrow="Reflection" headline="Two things I'd carry forward" />
           <LabelRow label="Trust must be designed, not assumed">
             Marketplace ecosystems succeed only when trust is designed into the product, not assumed to exist
             between strangers meeting through a TV platform.
@@ -174,15 +174,15 @@ export const IdeabaazCaseStudy: React.FC<IdeabaazCaseStudyProps> = ({ project })
 
         {/* SELECTED SCREENS */}
         <section className="pt-10">
-          <ChapterMarker eyebrow="Selected screens" headline="A Look at the Delivered Screens" />
+          <ChapterMarker eyebrow="Selected screens" headline="A look at the delivered screens" />
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {[
               { src: ideabaazDashboard, alt: "Startup Documents upload screen", caption: "Document Management" },
               { src: ideabaazStartupPitch, alt: "Pitch Details screen", caption: "Pitch Details" },
             ].map((screen) => (
               <div key={screen.caption}>
-                <div className="rounded-2xl bg-muted/10 border border-border/20 p-3 md:p-5">
-                  <img src={screen.src} alt={screen.alt} className="w-full h-auto rounded-lg" />
+                <div className="bg-muted/10 border border-border/20 p-3 md:p-5">
+                  <img src={screen.src} alt={screen.alt} className="w-full h-auto" />
                 </div>
                 <p className="text-sm font-medium text-primary mt-3">{screen.caption}</p>
               </div>
@@ -194,7 +194,7 @@ export const IdeabaazCaseStudy: React.FC<IdeabaazCaseStudyProps> = ({ project })
 
         {/* CLOSING */}
         <section className="pt-10 pb-20">
-          <h2 className="text-3xl md:text-4xl font-light mb-4">Thanks for reading.</h2>
+          <h2 className="font-figtree text-3xl md:text-4xl font-light mb-4">Thanks for reading.</h2>
           <p className="text-base text-muted-foreground font-light leading-relaxed mb-8 max-w-lg">
             Want to see the other project, or the flows in more depth? Happy to walk through it.
           </p>

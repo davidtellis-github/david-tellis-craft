@@ -56,7 +56,7 @@ export const CaseStudyHeader: React.FC = () => {
 export const ChapterMarker: React.FC<{ eyebrow: string; headline: string }> = ({ eyebrow, headline }) => (
   <div className="mb-10 md:mb-14">
     <p className="text-xs uppercase tracking-[0.18em] text-primary font-medium mb-4">{eyebrow}</p>
-    <h2 className="text-3xl md:text-5xl font-light leading-[1.15]">{headline}</h2>
+    <h2 className="font-figtree text-3xl md:text-5xl font-light leading-[1.15]">{headline}</h2>
   </div>
 );
 
@@ -85,8 +85,8 @@ export const ScreenshotBlock: React.FC<{
   explanation?: string;
 }> = ({ src, alt, caption, explanation }) => (
   <div className="my-6">
-    <div className="rounded-2xl bg-muted/10 border border-border/20 p-4 md:p-7">
-      <img src={src} alt={alt} className="w-full h-auto rounded-lg" />
+    <div className="bg-muted/10 border border-border/20 p-4 md:p-7">
+      <img src={src} alt={alt} className="w-full h-auto" />
     </div>
     <p className="text-sm font-medium text-primary mt-4">{caption}</p>
     {explanation && (
@@ -132,6 +132,7 @@ const projectOrder = [
   "turbocloud",
   "health-project",
   "boston-financial",
+  "bam",
 ];
 
 const featuredImageByProjectId: Record<string, string> = {
@@ -163,16 +164,22 @@ export const NextProjectCard: React.FC<{ currentId: string }> = ({ currentId }) 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
         {upNext.map((next) => (
           <Link key={next.id} to={`/project/${next.id}`} className="group block">
-            <div className="rounded-2xl overflow-hidden bg-muted/10 border border-border/20 mb-4">
-              <img
-                src={featuredImageByProjectId[next.id]}
-                alt={`${next.title} preview`}
-                className="w-full h-auto object-cover transition-transform duration-500 group-hover:scale-[1.03]"
-              />
+            <div className="overflow-hidden bg-muted/10 border border-border/20 mb-4">
+              {featuredImageByProjectId[next.id] ? (
+                <img
+                  src={featuredImageByProjectId[next.id]}
+                  alt={`${next.title} preview`}
+                  className="w-full h-auto object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+                />
+              ) : (
+                <div className="w-full aspect-[4/3] flex items-center justify-center">
+                  <span className="text-sm text-muted-foreground">Preview coming soon</span>
+                </div>
+              )}
             </div>
             <div className="flex items-center justify-between gap-4">
               <div>
-                <h3 className="text-xl md:text-2xl font-light group-hover:text-primary transition-colors">
+                <h3 className="font-figtree text-xl md:text-2xl font-light group-hover:text-primary transition-colors">
                   {next.title}
                 </h3>
                 <p className="text-sm text-muted-foreground font-light mt-1">{next.subtitle}</p>

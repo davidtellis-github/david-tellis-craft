@@ -5,6 +5,7 @@ import { projectsData } from "@/data/projectData";
 import { IdeabaazCaseStudy } from "@/components/portfolio/IdeabaazCaseStudy";
 import { FuturcraftCaseStudy } from "@/components/portfolio/FuturcraftCaseStudy";
 import { VybeCaseStudy } from "@/components/portfolio/VybeCaseStudy";
+import { BamCaseStudy } from "@/components/portfolio/BamCaseStudy";
 import { DefaultCaseStudy } from "@/components/portfolio/DefaultCaseStudy";
 
 const ProjectDetails: React.FC = () => {
@@ -55,6 +56,8 @@ const ProjectDetails: React.FC = () => {
   switch (project.id) {
     case "vybe":
       return <VybeCaseStudy project={project} />;
+    case "bam":
+      return <BamCaseStudy project={project} />;
     case "ideabaaz":
       return <IdeabaazCaseStudy project={project} />;
     case "futurcraft-ai":

@@ -53,7 +53,7 @@ export const UIGallery: React.FC<UIGalleryProps> = ({
             className="break-inside-avoid mb-3 group cursor-pointer"
             onClick={() => setSelectedImage(asset.image_url)}
           >
-            <div className="relative overflow-hidden rounded-lg">
+            <div className="relative overflow-hidden">
               <img
                 src={asset.image_url}
                 alt={asset.title || `${projectTitle} UI ${index + 1}`}
@@ -80,7 +80,7 @@ export const UIGallery: React.FC<UIGalleryProps> = ({
           <img
             src={selectedImage || ''}
             alt="UI Design Detail"
-            className="w-full h-auto rounded-lg"
+            className="w-full h-auto"
           />
         </DialogContent>
       </Dialog>

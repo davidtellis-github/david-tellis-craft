@@ -8,8 +8,12 @@ const WorkGrid: React.FC = () => {
   const projectRefs = useRef<(HTMLDivElement | null)[]>([]);
   const { projects, loading, error } = useProjects();
 
-  // Take only the first 5 projects for the work grid
-  const displayProjects = projects.slice(0, 5);
+  // Curated home page teaser — deliberately its own order/selection,
+  // decoupled from the /portfolio grid's full project order.
+  const homeGridSlugs = ["bam", "futurcraft-ai", "ideabaaz", "vybe", "wedding-verse"];
+  const displayProjects = homeGridSlugs
+    .map((slug) => projects.find((p) => p.slug === slug))
+    .filter((p): p is (typeof projects)[number] => Boolean(p));
   const { byId: sanityFeaturedById } = useSanityProjectFeaturedImages(displayProjects.map((p) => p.slug));
 
   // Memoized intersection observer callback
@@ -189,7 +193,7 @@ const WorkGrid: React.FC = () => {
                   </div>
 
                   {/* Image with Gradient Overlay */}
-                  <div className={`relative overflow-hidden rounded-2xl transition-all duration-700 ${
+                  <div className={`relative overflow-hidden transition-all duration-700 ${
                     isExpanded 
                       ? 'opacity-100 translate-y-0' 
                       : 'opacity-0 translate-y-8'
@@ -208,14 +212,14 @@ const WorkGrid: React.FC = () => {
                       <img
                         src={sanityFeaturedUrl}
                         alt={`${project.title} featured preview`}
-                        className="w-full h-auto block rounded-2xl"
+                        className="w-full h-auto block"
                         loading="lazy"
                       />
                     ) : featuredAsset && featuredAsset.asset_type === 'image' ? (
                       <img 
                         src={featuredAsset.file_path} 
                         alt={featuredAsset.alt_text || `${project.title} preview`}
-                        className="w-full h-auto block rounded-2xl"
+                        className="w-full h-auto block"
                       />
                     ) : (
                       <div className="w-full h-full absolute inset-0 bg-muted flex items-center justify-center">

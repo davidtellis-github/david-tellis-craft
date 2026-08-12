@@ -6,7 +6,14 @@ export interface ProjectData {
   category: string;
   year: string;
   services: string;
-  
+
+  // Recruiter-facing metadata surfaced on the portfolio grid card: a status
+  // badge and a compact "role • year" line under the project title.
+  cardMeta?: {
+    status: "LIVE" | "CASE STUDY" | "SYSTEM";
+    role: string;
+  };
+
   role: {
     title: string;
     duration: string;
@@ -116,6 +123,7 @@ export const projectsData: Record<string, ProjectData> = {
     category: "product",
     year: "2024",
     services: "Product Design and Strategy",
+    cardMeta: { status: "CASE STUDY", role: "Lead Designer" },
     
     mockupImages: ['weddingverse-featured.png', 'wedding-verse-context.jpg', 'wedding-verse-role.jpg'],
     
@@ -330,8 +338,9 @@ export const projectsData: Record<string, ProjectData> = {
     subtitle: "Building the Digital Green Room for India's Next Unicorns.",
     description: "Product Designer & Interaction Designer for the official digital partner of ZeeTV & Zee5's startup reality revolution.",
     category: "concepts",
-    year: "Q1 2024 (Ongoing)",
+    year: "2025",
     services: "Product Design and Strategy",
+    cardMeta: { status: "SYSTEM", role: "Lead Designer" },
     
     mockupImages: ['ideabaaz-featured.png', 'ideabaaz-laptop-mockup.png'],
     
@@ -352,7 +361,7 @@ export const projectsData: Record<string, ProjectData> = {
 
       // 02. The Problem (The Friction)
       theFriction: {
-        headline: "The \"Scavenger Hunt\" Issue",
+        headline: "The \"scavenger hunt\" issue",
         intro: "The Indian startup ecosystem is fragmented. Founders are running around trying to find capital, mentors are hidden behind gatekeepers, and service providers (legal, tech, branding) are scattered.",
         designChallenge: "How do we build a Single Pane of Glass that serves three distinct masters without looking cluttered?",
         personas: [
@@ -374,7 +383,7 @@ export const projectsData: Record<string, ProjectData> = {
 
       // 04. The Solution: The "Cockpit" Dashboard
       theCockpit: {
-        headline: "Designing the Founder's Command Center",
+        headline: "Designing the founder's command center",
         intro: "The dashboard had to be the hero. A founder logs in and needs to see their entire universe at a glance.",
         features: [
           { 
@@ -397,7 +406,7 @@ export const projectsData: Record<string, ProjectData> = {
 
       // 06. The Impact (The Receipt)
       theImpact: {
-        headline: "Ready for Primetime",
+        headline: "Ready for primetime",
         outcomes: [
           "Successfully delivered a platform that handles the traffic of a national TV audience.",
           "Unified Ecosystem: Successfully merged Funding, Mentorship, and Services into one URL.",
@@ -507,6 +516,7 @@ export const projectsData: Record<string, ProjectData> = {
     category: "product",
     year: "2025",
     services: "Design and UX",
+    cardMeta: { status: "CASE STUDY", role: "Lead Designer + Research" },
     
     mockupImages: [
       'futurcraft-featured.png',
@@ -593,8 +603,9 @@ export const projectsData: Record<string, ProjectData> = {
     subtitle: "Turning land into a legible, monetizable asset — AI-analyzed, strategy-mapped, execution-ready.",
     description: "A platform giving land investors expert-level visibility into land they've never stood on, and structured execution once they decide to act. AI-ranked development strategies, verified execution partners, and transparent chain of custody from analysis to build.",
     category: "product",
-    year: "2026",
+    year: "2024",
     services: "Product Design, AI Workflows",
+    cardMeta: { status: "LIVE", role: "Co-designer" },
 
     mockupImages: ['vybe-portfolio-overview.png'],
 
@@ -644,14 +655,49 @@ export const projectsData: Record<string, ProjectData> = {
     links: {}
   },
 
+  "bam": {
+    id: "bam",
+    title: "BAM",
+    subtitle: "Event marketplace — redesigning onboarding for dual personas.",
+    description: "Cutting a 12-field signup down to 3 fields and splitting onboarding by persona, so users reach value before being asked for anything else.",
+    category: "product",
+    year: "2025",
+    services: "Product Design, UX Research",
+    cardMeta: { status: "CASE STUDY", role: "Product Designer" },
+
+    role: {
+      title: "Product Designer",
+      duration: "Nov 2025 – Feb 2026",
+      team: "David Tellis",
+      tools: ["Figma", "User interviews"]
+    },
+
+    context: {
+      problem: "Stakeholders had pushed for comprehensive profile collection at signup — intent, experience level, event preferences, rates, availability — a full 12-field form before users ever reached the value page.",
+      objective: "Cut onboarding down to what's essential at entry, and move the rest of the data collection downstream without losing it.",
+      audience: "Event organizers and talent (performers, vendors) using the BAM marketplace"
+    },
+
+    features: [],
+
+    process: [],
+
+    outcomes: [],
+
+    reflection: "The bigger lesson here wasn't about form design. It was about separating what stakeholders need (complete data) from when it serves them (not at entry). Saying no to length isn't rejecting requirements; it's reordering them. One unresolved question: we optimized for speed to value, but I haven't validated whether the persona split actually improves matching quality downstream. That's the next validation gate.",
+
+    links: {}
+  },
+
   "turbocloud": {
     id: "turbocloud",
     title: "Turbocloud",
     subtitle: "FinOps platform for cloud cost optimization",
     description: "Enterprise FinOps solution that provides real-time cloud cost visibility, automated optimization recommendations, and collaborative budget management for engineering and finance teams.",
     category: "product",
-    year: "2025",
+    year: "2024",
     services: "Dashboard, UX",
+    cardMeta: { status: "CASE STUDY", role: "Lead Designer" },
     
     role: {
       title: "Lead UX Designer",
@@ -732,6 +778,7 @@ export const projectsData: Record<string, ProjectData> = {
     category: "product",
     year: "2024",
     services: "Design, UX",
+    cardMeta: { status: "LIVE", role: "Product Designer" },
     
     mockupImages: [],
     
@@ -800,6 +847,7 @@ export const projectsData: Record<string, ProjectData> = {
     category: "concepts",
     year: "2024",
     services: "Workflow UX, Design",
+    cardMeta: { status: "CASE STUDY", role: "Design + Strategy" },
     
     mockupImages: ['boston-financial-1.png', 'boston-financial-2.png'],
     
