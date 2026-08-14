@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState, useCallback } from "react";
 import { Link } from "react-router-dom";
 import { useProjects } from "@/hooks/useProjects";
 import { useSanityProjectFeaturedImages } from "@/hooks/useSanityProjectFeaturedImages";
+import { useSanityProjectHeroVideos } from "@/hooks/useSanityProjectHeroVideos";
 
 const WorkGrid: React.FC = () => {
   const [expandedProjects, setExpandedProjects] = useState<Set<number>>(new Set());
@@ -15,6 +16,7 @@ const WorkGrid: React.FC = () => {
     .map((slug) => projects.find((p) => p.slug === slug))
     .filter((p): p is (typeof projects)[number] => Boolean(p));
   const { byId: sanityFeaturedById } = useSanityProjectFeaturedImages(displayProjects.map((p) => p.slug));
+  const { byId: sanityHeroVideoById } = useSanityProjectHeroVideos(displayProjects.map((p) => p.slug));
 
   // Memoized intersection observer callback
   const handleIntersection = useCallback((entries: IntersectionObserverEntry[]) => {
@@ -138,7 +140,8 @@ const WorkGrid: React.FC = () => {
               project.assets.find((asset) => asset.is_featured) ||
               project.assets[0];
             const sanityFeaturedUrl = sanityFeaturedById[project.slug];
-            
+            const heroVideoUrl = sanityHeroVideoById[project.slug];
+
             return (
             <div 
                 key={project.id} 
@@ -199,7 +202,16 @@ const WorkGrid: React.FC = () => {
                       : 'opacity-0 translate-y-8'
                   }`}>
                     {/* Featured Asset */}
-                    {featuredAsset && featuredAsset.asset_type === 'video' ? (
+                    {heroVideoUrl ? (
+                      <video
+                        src={heroVideoUrl}
+                        autoPlay
+                        muted
+                        loop
+                        playsInline
+                        className="w-full h-auto block"
+                      />
+                    ) : featuredAsset && featuredAsset.asset_type === 'video' ? (
                       <iframe
                         src={featuredAsset.file_path}
                         className="w-full h-full absolute inset-0 pointer-events-none"

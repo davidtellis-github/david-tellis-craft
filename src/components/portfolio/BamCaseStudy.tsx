@@ -93,7 +93,6 @@ export const BamCaseStudy: React.FC<BamCaseStudyProps> = ({ project }) => {
   const { heroVideo: heroVideoUrl, landingPageVideo: landingPageVideoUrl } = useProjectVideos(project.id);
   const sectionImages = useProjectSectionImages(project.id);
   const [onboardingImage, profileImage] = sectionImages["Onboarding"] ?? [];
-  const [landingPageImage] = sectionImages["Landing Page"] ?? [];
 
   return (
     <div className="min-h-screen bg-background text-foreground">
@@ -218,29 +217,28 @@ export const BamCaseStudy: React.FC<BamCaseStudyProps> = ({ project }) => {
         <Divider />
 
         {/* LANDING PAGE */}
-        {(landingPageVideoUrl || landingPageImage) && (
-          <>
-            <section className="pt-10">
-              <ChapterMarker eyebrow="Landing page" headline="One fork, two landing pages" />
+        <>
+          <section className="pt-10">
+            <ChapterMarker eyebrow="Landing page" headline="One fork, two landing pages" />
 
-              {landingPageVideoUrl && (
-                <div className="bg-muted/10 border border-border/20 p-3 md:p-5 mb-6">
-                  <video src={landingPageVideoUrl} controls playsInline className="w-full h-auto" />
-                </div>
-              )}
+            {landingPageVideoUrl && (
+              <div className="bg-muted/10 border border-border/20 p-3 md:p-5 mb-6">
+                <video src={landingPageVideoUrl} controls playsInline className="w-full h-auto" />
+              </div>
+            )}
 
-              {landingPageImage && (
-                <ScreenshotBlock
-                  src={landingPageImage}
-                  alt="BAM marketing landing page"
-                  caption="The public-facing landing page"
-                />
-              )}
-            </section>
+            <a
+              href="https://bam-web-nine.vercel.app/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 bg-foreground text-background px-6 py-3 hover:bg-foreground/90 transition-colors"
+            >
+              View live prototype
+            </a>
+          </section>
 
-            <Divider />
-          </>
-        )}
+          <Divider />
+        </>
 
         {/* WHY THIS APPROACH */}
         <section className="pt-10">

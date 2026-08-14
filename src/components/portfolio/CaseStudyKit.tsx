@@ -104,19 +104,19 @@ export const MetaGrid: React.FC<{
 }> = ({ role, duration, team, tools }) => (
   <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
     <div>
-      <p className="text-xs uppercase tracking-[0.15em] text-primary font-medium mb-2">Role</p>
+      <p className="text-xs uppercase tracking-[0.18em] text-primary font-medium mb-2">Role</p>
       <p className="text-sm font-light leading-relaxed">{role}</p>
     </div>
     <div>
-      <p className="text-xs uppercase tracking-[0.15em] text-primary font-medium mb-2">Duration</p>
+      <p className="text-xs uppercase tracking-[0.18em] text-primary font-medium mb-2">Duration</p>
       <p className="text-sm font-light leading-relaxed">{duration}</p>
     </div>
     <div>
-      <p className="text-xs uppercase tracking-[0.15em] text-primary font-medium mb-2">Team</p>
+      <p className="text-xs uppercase tracking-[0.18em] text-primary font-medium mb-2">Team</p>
       <p className="text-sm font-light leading-relaxed">{team}</p>
     </div>
     <div>
-      <p className="text-xs uppercase tracking-[0.15em] text-primary font-medium mb-2">Tools</p>
+      <p className="text-xs uppercase tracking-[0.18em] text-primary font-medium mb-2">Tools</p>
       <p className="text-sm font-light leading-relaxed">{tools}</p>
     </div>
   </div>

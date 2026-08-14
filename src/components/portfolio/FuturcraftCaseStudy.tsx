@@ -1,6 +1,6 @@
 import React from "react";
 import { projectsData } from "@/data/projectData";
-import { CaseStudyHeader, NextProjectCard } from "./CaseStudyKit";
+import { CaseStudyHeader, MetaGrid, NextProjectCard } from "./CaseStudyKit";
 
 import futurcraftFeatured from "@/assets/futurcraft-featured.png";
 import futurcraftSignup from "@/assets/ui-futurecraft-signup.png";
@@ -17,7 +17,7 @@ interface FuturcraftCaseStudyProps {
 const Section: React.FC<{ label: string; note?: string; children: React.ReactNode }> = ({ label, note, children }) => (
   <section className="grid grid-cols-[180px_1fr] gap-12 items-start">
     <div>
-      <p className="text-[11px] tracking-[0.1em] uppercase text-muted-foreground">{label}</p>
+      <p className="text-xs uppercase tracking-[0.18em] text-primary font-medium">{label}</p>
       {note && <p className="text-sm text-muted-foreground mt-2 leading-relaxed">{note}</p>}
     </div>
     <div>{children}</div>
@@ -33,7 +33,7 @@ const ScreenFrame: React.FC<{ src: string; alt: string; caption: string }> = ({ 
   </div>
 );
 
-const HrBreak: React.FC = () => <hr className="border-t border-border/10 my-16" />;
+const HrBreak: React.FC = () => <hr className="border-t border-border/10 my-8" />;
 
 export const FuturcraftCaseStudy: React.FC<FuturcraftCaseStudyProps> = ({ project }) => {
   return (
@@ -56,23 +56,13 @@ export const FuturcraftCaseStudy: React.FC<FuturcraftCaseStudyProps> = ({ projec
             <img src={futurcraftFeatured} alt="Futurcraft AI platform overview" className="w-full h-auto" />
           </div>
 
-          <div className="grid grid-cols-4 gap-6 border-t border-b border-border/20 py-6">
-            <div>
-              <p className="text-[11px] tracking-[0.1em] uppercase text-muted-foreground mb-2">Role</p>
-              <p className="text-sm text-foreground">{project.role.title}</p>
-            </div>
-            <div>
-              <p className="text-[11px] tracking-[0.1em] uppercase text-muted-foreground mb-2">Duration</p>
-              <p className="text-sm text-foreground">{project.role.duration}</p>
-            </div>
-            <div>
-              <p className="text-[11px] tracking-[0.1em] uppercase text-muted-foreground mb-2">Team</p>
-              <p className="text-sm text-foreground">{project.role.team}</p>
-            </div>
-            <div>
-              <p className="text-[11px] tracking-[0.1em] uppercase text-muted-foreground mb-2">Tools</p>
-              <p className="text-sm text-foreground">{project.role.tools.join(" • ")}</p>
-            </div>
+          <div className="border-t border-b border-border/20 py-6">
+            <MetaGrid
+              role={project.role.title}
+              duration={project.role.duration}
+              team={project.role.team}
+              tools={project.role.tools.join(" • ")}
+            />
           </div>
         </section>
 
@@ -95,7 +85,7 @@ export const FuturcraftCaseStudy: React.FC<FuturcraftCaseStudyProps> = ({ projec
 
         {/* THE PROBLEM */}
         <Section label="The problem" note="AI tools were part of the workflow. They were also breaking it.">
-          <h2 className="font-figtree text-3xl md:text-4xl font-light mb-4">
+          <h2 className="font-figtree text-3xl md:text-5xl font-light leading-[1.15] mb-6 md:mb-10">
             AI tools were making brand consistency worse, not better.
           </h2>
           <p className="text-base text-muted-foreground font-light leading-relaxed mb-6">
@@ -131,7 +121,7 @@ export const FuturcraftCaseStudy: React.FC<FuturcraftCaseStudyProps> = ({ projec
 
         {/* 01 — ONBOARDING */}
         <Section label="01 — Onboarding" note="The first thing a user does is teach the platform their brand.">
-          <h2 className="font-figtree text-3xl md:text-4xl font-light mb-4">Teaching the AI your brand.</h2>
+          <h2 className="font-figtree text-3xl md:text-5xl font-light leading-[1.15] mb-6 md:mb-10">Teaching the AI your brand.</h2>
           <p className="text-base text-muted-foreground font-light leading-relaxed">
             The entry point needed to feel like the start of something considered — not just another SaaS tool.
             Clean, minimal, with the brand's identity as the centrepiece from the first screen.
@@ -147,7 +137,7 @@ export const FuturcraftCaseStudy: React.FC<FuturcraftCaseStudyProps> = ({ projec
 
         {/* 02 — CREATE */}
         <Section label="02 — Create" note="One brief. Blog, post, or script.">
-          <h2 className="font-figtree text-3xl md:text-4xl font-light mb-4">One brief. Every format.</h2>
+          <h2 className="font-figtree text-3xl md:text-5xl font-light leading-[1.15] mb-6 md:mb-10">One brief. Every format.</h2>
           <p className="text-base text-muted-foreground font-light leading-relaxed">
             A single brief drives every content type — the user picks a format, describes the idea, and the AI
             generates within the brand constraints defined during onboarding. No separate tools or workflows per
@@ -168,7 +158,7 @@ export const FuturcraftCaseStudy: React.FC<FuturcraftCaseStudyProps> = ({ projec
 
         {/* 03 — POSTS */}
         <Section label="03 — Posts" note="One topic → every platform. Automatically adapted.">
-          <h2 className="font-figtree text-3xl md:text-4xl font-light mb-4">One topic. Every platform.</h2>
+          <h2 className="font-figtree text-3xl md:text-5xl font-light leading-[1.15] mb-6 md:mb-10">One topic. Every platform.</h2>
           <p className="text-base text-muted-foreground font-light leading-relaxed">
             Once a topic is defined, Futurcraft generates platform-specific variants — blog, LinkedIn, X, Instagram
             caption — without the user re-writing the brief for each one. Tone and length adapt per platform, but
@@ -188,7 +178,7 @@ export const FuturcraftCaseStudy: React.FC<FuturcraftCaseStudyProps> = ({ projec
           label="04 — Blog editor"
           note="Write long-form, repurpose to any format without leaving the editor."
         >
-          <h2 className="font-figtree text-3xl md:text-4xl font-light mb-4">Write once. Repurpose instantly.</h2>
+          <h2 className="font-figtree text-3xl md:text-5xl font-light leading-[1.15] mb-6 md:mb-10">Write once. Repurpose instantly.</h2>
           <p className="text-base text-muted-foreground font-light leading-relaxed">
             The blog editor pairs long-form writing with a live SEO score, then lets a writer repurpose that same
             post into a social caption, a script outline, or a shorter blog variant — all from a single
@@ -204,7 +194,7 @@ export const FuturcraftCaseStudy: React.FC<FuturcraftCaseStudyProps> = ({ projec
 
         {/* HOW I WORKED */}
         <Section label="How I worked" note="5 phases across 16 weeks.">
-          <h2 className="font-figtree text-3xl md:text-4xl font-light mb-6">5 phases, 16 weeks.</h2>
+          <h2 className="font-figtree text-3xl md:text-5xl font-light leading-[1.15] mb-6 md:mb-10">5 phases, 16 weeks.</h2>
           <div>
             {[
               { num: "01", step: "Discovery", description: "AI capability research & user needs analysis" },
@@ -230,7 +220,7 @@ export const FuturcraftCaseStudy: React.FC<FuturcraftCaseStudyProps> = ({ projec
 
         {/* OUTCOMES */}
         <Section label="Outcomes" note="Results from the first two weeks of beta.">
-          <h2 className="font-figtree text-3xl md:text-4xl font-light mb-6">Results that came back from beta.</h2>
+          <h2 className="font-figtree text-3xl md:text-5xl font-light leading-[1.15] mb-6 md:mb-10">Results that came back from beta.</h2>
           <div>
             {[
               "300+ waitlist signups in the first 2 weeks after the beta landing page launched — no paid acquisition.",
@@ -251,7 +241,7 @@ export const FuturcraftCaseStudy: React.FC<FuturcraftCaseStudyProps> = ({ projec
 
         {/* REFLECTION */}
         <Section label="Reflection">
-          <h2 className="font-figtree text-3xl md:text-4xl font-light mb-6">What I learned.</h2>
+          <h2 className="font-figtree text-3xl md:text-5xl font-light leading-[1.15] mb-6 md:mb-10">What I learned.</h2>
           <p className="text-base text-muted-foreground font-light leading-relaxed mb-6">
             <strong className="text-foreground font-medium">Users didn't need the AI to be smarter</strong> — they
             needed to feel like they were still the author. Every design decision that gave users visible control

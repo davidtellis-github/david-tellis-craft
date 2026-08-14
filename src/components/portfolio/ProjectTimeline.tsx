@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useProjects } from "@/hooks/useProjects";
 import { useSanityProjectFeaturedImages } from "@/hooks/useSanityProjectFeaturedImages";
+import { useSanityProjectHeroVideos } from "@/hooks/useSanityProjectHeroVideos";
 
 interface ProjectTimelineProps {
   activeCategory: string;
@@ -28,6 +29,7 @@ const ProjectTimeline: React.FC<ProjectTimelineProps> = ({
   // Same resolution order as the homepage WorkGrid: a curated Sanity
   // thumbnail first, falling back to the static featured asset.
   const { byId: sanityFeaturedById } = useSanityProjectFeaturedImages(projects.map((p) => p.slug));
+  const { byId: sanityHeroVideoById } = useSanityProjectHeroVideos(projects.map((p) => p.slug));
 
   if (loading) {
     return (
@@ -87,6 +89,7 @@ const ProjectTimeline: React.FC<ProjectTimelineProps> = ({
             project.assets.find((asset) => asset.is_featured) ||
             project.assets[0];
           const previewSrc = sanityFeaturedById[project.slug] || featuredAsset?.file_path;
+          const heroVideoUrl = sanityHeroVideoById[project.slug];
 
           return (
             <div
@@ -107,7 +110,7 @@ const ProjectTimeline: React.FC<ProjectTimelineProps> = ({
 
                 {/* Services */}
                 <div className="text-right">
-                  <span className="text-muted-foreground">
+                  <span className="text-sm text-muted-foreground">
                     {project.services}
                   </span>
                 </div>
@@ -134,7 +137,19 @@ const ProjectTimeline: React.FC<ProjectTimelineProps> = ({
                   </span>
                 )}
 
-                {previewSrc ? (
+                {heroVideoUrl ? (
+                  <>
+                    <video
+                      src={heroVideoUrl}
+                      autoPlay
+                      muted
+                      loop
+                      playsInline
+                      className="w-full h-auto block"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-background/10 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                  </>
+                ) : previewSrc ? (
                   <>
                     <img
                       src={previewSrc}
