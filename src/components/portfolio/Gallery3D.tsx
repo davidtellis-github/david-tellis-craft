@@ -4,25 +4,61 @@ import { ArrowRight, ChevronLeft, ChevronRight } from "lucide-react";
 import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
 import { sanity } from "@/integrations/sanity/client";
 import { urlFor } from "@/integrations/sanity/image";
+import godgodoLogo from "@/assets/Godgodo logo.mp4";
 
 interface GalleryItem {
   src: string;
   alt: string;
 }
 
+/** Plays while in view, pauses when scrolled away. Muted + loop so autoplay is allowed. */
+const ScrollAutoplayVideo: React.FC<{ src: string; className?: string }> = ({ src, className }) => {
+  const ref = useRef<HTMLVideoElement>(null);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const io = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) el.play().catch(() => {});
+        else el.pause();
+      },
+      { threshold: 0.35 }
+    );
+    io.observe(el);
+    return () => io.disconnect();
+  }, []);
+
+  return (
+    <video
+      ref={ref}
+      src={src}
+      className={className}
+      muted
+      loop
+      playsInline
+      preload="metadata"
+    />
+  );
+};
+
 const HOME_GALLERY_TITLES = [
   "gallery dj controller",
   "gallery keys angled",
   "ui wedding planner",
-  "gallery synth ui", 
   "ui music controller",
-  
-  
+
   // keep a few more after the requested order
-  "gallery synth ui",
-  "luna ai hero",
   "ui drone services",
   "turbocloud dashboard mockup",
+];
+
+// LinkedIn post embeds shown in place of the first N gallery tiles.
+// Index maps 1:1 to the resolved `images` order.
+const HOME_GALLERY_EMBEDS = [
+  "https://www.linkedin.com/embed/feed/update/urn:li:ugcPost:7404574960276467712?compact=1&autoplay=1",
+  "https://www.linkedin.com/embed/feed/update/urn:li:ugcPost:7308363594520281090?compact=1&autoplay=1",
+  "https://www.linkedin.com/embed/feed/update/urn:li:ugcPost:7309618165242597377?compact=1&autoplay=1",
 ];
 
 const SKELETON_COUNT = 9;
@@ -148,25 +184,54 @@ const Gallery3D: React.FC = () => {
             ))}
 
           {!loading &&
-            images.map((img, i) => (
-              <button
-                key={img.src}
-                onClick={() => setSelectedIndex(i)}
-                className="relative overflow-hidden bg-muted/30 border border-border/20 hover:border-border/60 transition-all duration-300 group interactive text-left break-inside-avoid mb-3 w-full"
-              >
-                <img
-                  src={img.src}
-                  alt={img.alt}
-                  className="w-full h-auto object-contain transition-transform duration-500 group-hover:scale-[1.03]"
-                  loading="lazy"
-                />
-                <div className="absolute inset-0 bg-background/0 group-hover:bg-background/40 transition-colors duration-300 flex items-end">
-                  <span className="px-4 py-3 text-sm font-medium text-foreground opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                    {img.alt}
-                  </span>
-                </div>
-              </button>
-            ))}
+            images.map((img, i) => {
+              const embedUrl = HOME_GALLERY_EMBEDS[i];
+              if (embedUrl) {
+                return (
+                  <div
+                    key={embedUrl}
+                    className="relative overflow-hidden bg-muted/30 border border-border/20 break-inside-avoid mb-3 w-full"
+                  >
+                    <iframe
+                      src={embedUrl}
+                      title="LinkedIn post"
+                      className="w-full h-[399px] border-0"
+                      loading="lazy"
+                      scrolling="no"
+                    />
+                  </div>
+                );
+              }
+              if (i === HOME_GALLERY_EMBEDS.length) {
+                return (
+                  <div
+                    key="godgodo-video"
+                    className="relative overflow-hidden bg-muted/30 border border-border/20 break-inside-avoid mb-3 w-full"
+                  >
+                    <ScrollAutoplayVideo src={godgodoLogo} className="w-full h-auto object-cover" />
+                  </div>
+                );
+              }
+              return (
+                <button
+                  key={img.src}
+                  onClick={() => setSelectedIndex(i)}
+                  className="relative overflow-hidden bg-muted/30 border border-border/20 hover:border-border/60 transition-all duration-300 group interactive text-left break-inside-avoid mb-3 w-full"
+                >
+                  <img
+                    src={img.src}
+                    alt={img.alt}
+                    className="w-full h-auto object-contain transition-transform duration-500 group-hover:scale-[1.03]"
+                    loading="lazy"
+                  />
+                  <div className="absolute inset-0 bg-background/0 group-hover:bg-background/40 transition-colors duration-300 flex items-end">
+                    <span className="px-4 py-3 text-sm font-medium text-foreground opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                      {img.alt}
+                    </span>
+                  </div>
+                </button>
+              );
+            })}
         </div>
         <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-background to-transparent pointer-events-none" />
       </div>

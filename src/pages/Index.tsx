@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import AmbientSpotlight from "@/components/portfolio/AmbientSpotlight";
 import SideNav from "@/components/portfolio/SideNav";
 import MobileHeader from "@/components/portfolio/MobileHeader";
 import Hero from "@/components/portfolio/Hero";
@@ -31,7 +30,6 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-background text-foreground">
-      <AmbientSpotlight />
       <MobileHeader />
       
       

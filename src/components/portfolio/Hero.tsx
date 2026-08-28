@@ -8,19 +8,15 @@ const tabsData: {
 }[] = [ {
   key: "recruiters",
   label: "Recruiters",
-  headline: "Hey, I'm David. I am a multidiciplinary designer, but mostly I design digital products."
-}, {
-  key: "directors",
-  label: "Design Directors",
-  headline: "I love solving problems with design keeping it consistent and caring about my craft like an artist."
+  headline: <>I'm <span style={{ color: "#FF481E" }}>David</span>.<br></br> I design across product, design, and development to make digital experiences easier to use.</>
 }, {
   key: "designers",
   label: "Product Designers",
-  headline: "I do care about the final screens but more about the ten decisions that got it there. "
+  headline: "I care about the final screens. But mostly, I care about why they ended up looking like that. "
 }, {
   key: "pms",
-  label: "Product Managers",
-  headline: "I understand development, and I get what needs to be built, why it matters. I bridge between vision, design, and dev."
+  label: "Founders",
+  headline: "I design products by figuring out what actually needs solving."
 }, {
   key: "engineers",
   label: "Engineers",
