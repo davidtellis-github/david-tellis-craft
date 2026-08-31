@@ -8,7 +8,7 @@ const tabsData: {
 }[] = [ {
   key: "recruiters",
   label: "Recruiters",
-  headline: <>I'm <span style={{ color: "#FF481E" }}>David</span>.<br></br> I design across product, design, and development to make digital experiences easier to use.</>
+  headline: <>I'm David Tellis <br></br><span style={{ color: "#b8b9ab" }}>I design and build digital products, from early ideas to the details that bring them to life</span></>
 }, {
   key: "designers",
   label: "Product Designers",
@@ -64,7 +64,7 @@ const Hero: React.FC = () => {
         <div className="mt-4 lg:mt-0">
           {tabsData.map(t => (
             <TabsContent key={t.key} value={t.key} className="focus:outline-none">
-              <h1 className="text-[clamp(2.5rem,6vw,9rem)] font-medium tracking-tight leading-[1.1] text-foreground max-w-[18ch]">
+              <h1 className="text-[clamp(2.2rem,5.4vw,8rem)] font-medium tracking-tight leading-[1.1] text-foreground max-w-[18ch]">
                 {t.headline}
               </h1>
             </TabsContent>

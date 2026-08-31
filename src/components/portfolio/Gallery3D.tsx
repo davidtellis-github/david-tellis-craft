@@ -47,10 +47,6 @@ const HOME_GALLERY_TITLES = [
   "gallery keys angled",
   "ui wedding planner",
   "ui music controller",
-
-  // keep a few more after the requested order
-  "ui drone services",
-  "turbocloud dashboard mockup",
 ];
 
 // LinkedIn post embeds shown in place of the first N gallery tiles.
@@ -169,8 +165,8 @@ const Gallery3D: React.FC = () => {
         </button>
       </div>
 
-      {/* 3-column grid, fixed preview */}
-      <div className="relative max-h-[70vh] overflow-hidden">
+      {/* 3-column grid */}
+      <div className="relative">
         <div className="columns-1 sm:columns-2 gap-3">
           {loading &&
             Array.from({ length: SKELETON_COUNT }).map((_, i) => (
@@ -233,7 +229,6 @@ const Gallery3D: React.FC = () => {
               );
             })}
         </div>
-        <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-background to-transparent pointer-events-none" />
       </div>
 
       {/* macOS-style Lightbox */}
