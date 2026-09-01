@@ -12,15 +12,15 @@ const tabsData: {
 }, {
   key: "designers",
   label: "Product Designers",
-  headline: "I care about the final screens. But mostly, I care about why they ended up looking like that. "
+  headline: <span style={{ color: "#b8b9ab" }}>"I care about the final screens. But mostly, I care about why they ended up looking like that. "</span>
 }, {
   key: "pms",
   label: "Founders",
-  headline: "I design products by figuring out what actually needs solving."
+  headline: <span style={{ color: "#b8b9ab" }}>"I design products by figuring out what actually needs solving."</span>
 }, {
   key: "engineers",
   label: "Engineers",
-  headline: "I've studied computers and practicing design, so I get both worlds."
+  headline: <span style={{ color: "#b8b9ab" }}>"I've studied computers and practicing design, so I get both worlds."</span>
 }];
 
 const Hero: React.FC = () => {
